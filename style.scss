@@ -620,7 +620,7 @@ ul.til-lists .tag {
     li {
       display: inline;
       padding: 6px;
-      color: $mainPurple;
+      color: #999999;
     }
   }
 }
@@ -651,9 +651,10 @@ ul.til-lists .tag {
   position: fixed;
   bottom: 165px;
   right: auto;
-  margin-left: 760px;
+  margin-left: 780px;
   z-index: 0;
   font-size: 18px;
+  border-radius: 15px;
   border: none;
   outline: none;
   cursor: pointer;
@@ -661,8 +662,8 @@ ul.til-lists .tag {
 }
 #btn_img {
   display: block;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 }
 // .post-header {
 //   background-position: center;
