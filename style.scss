@@ -309,6 +309,12 @@ nav {
     display: inline;
   }
 }
+.projects {
+  &:hover {
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+  }
+}
 .posts > .post:hover {
   opacity: 0.5;
 }
@@ -350,6 +356,7 @@ nav {
   a {
     text-decoration: none;
   }
+
   .entry {
     font-family: $Spoqa;
     font-size: 16px;
@@ -551,20 +558,36 @@ ul.til-lists .tag {
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   padding: 0;
   margin: 2em 0.5em 0;
-
+  .mainImage {
+    margin-bottom: 25px;
+  }
   .listTitle {
     font-size: 20px;
     font-weight: bold;
     margin: 0px 0px 1em;
   }
+  .project_title {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 1em 1em 1em 0px;
+  }
   .listEntry {
     font-size: 16px;
+  }
+  .project_entry {
+    font-size: 16px;
+    color: $darkGray;
+    margin-top: 6px;
   }
   .date {
     padding: 1.2em 0 2em;
     color: $gray;
   }
-
+  .title_line {
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+  }
   .tag {
     display: inline;
     font-weight: 500;
@@ -585,10 +608,41 @@ ul.til-lists .tag {
       border-radius: 5px;
     }
   }
+  .projects_tags {
+    padding: 0;
+    display: inline;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    li:before {
+      content: " ";
+    }
+    li {
+      display: inline;
+      padding: 6px;
+      color: $mainPurple;
+    }
+  }
 }
 
 .post-lists > .post-list:last-child {
   border-bottom: none;
+}
+.post-lists > .post-list.projects {
+  padding: 40px;
+  margin-bottom: 2.5em;
+  box-shadow: 0 10px 15px #999;
+  border-radius: 10px;
+}
+
+.title {
+  color: $darkGray;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 30px;
+  font-family: $Spoqa;
+  margin-bottom: 50px;
+  margin-left: 10px;
 }
 
 #myBtn {
