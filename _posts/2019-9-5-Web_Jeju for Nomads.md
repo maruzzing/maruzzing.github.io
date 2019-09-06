@@ -41,6 +41,8 @@ mainImage: /images/jeju-demo.png
     <img  class='stack_logo' src="/images/stack_logo_rn.png" alt="React" /></a>
     <a href='https://redux.js.org/' target='_blank'>
     <img class='stack_logo' src="/images/stack_logo_redux.png" alt="Redux" /></a>
+    <a href='https://www.styled-components.com/' target='_blank'>
+    <img class='stack_logo' src="/images/stack_logo_styledComp.png" alt="StyledComponent" /></a>
     <a href='https://nodejs.org/en/' target='_blank'>
     <img class='stack_logo' src="/images/stack_logo_node.png" alt="nodeJs" /></a>
     <a href='https://expressjs.com/' target='_blank'>
@@ -119,3 +121,27 @@ coming soon 😎<br><br>
 - 필터링
 
 <br>
+
+## 관련 포스트
+
+**Front-end**
+
+- [Styled Components 적용하기](/study/react/Styled-Components-적용하기/)
+- [리액트에서 구글맵 연동하기](/study/react/리액트에서-구글맵-연동하기/)
+- [리액트로 이미지 업로더 구현하기](/study/react/리액트로-이미지-업로더-구현하기/)
+- [이미지 업로드 전 미리보기](/study/react/이미지-업로드-전-미리보기/)
+- [구글맵 infowindow에 컴포넌트 띄우기](/study/react/구글맵-infowindow에-컴포넌트-띄우기/)
+- [FileReader를 활용하여 file을 DataUrl로 읽기](/study/react/FileReader를-활용하여-file을-DataUrl로-읽기/)
+
+**Back-end**
+
+- [multer 사용하여 이미지 업로드 구현하기](/study/nodejs/multer-사용하여-이미지-업로드-구현하기/)
+- [multer-s3를 이용하여 AWS S3 이미지 업로드하기](/study/nodejs/multer-s3를-이용하여-AWS-S3-이미지-업로드하기/)
+
+**DevOps**
+
+- [EC2(아마존 리눅스)에 서버와 DB(mysql) 배포하기[1]](</study/etc/EC2(아마존-리눅스)에-서버와-DB(mysql)-배포하기-1/>)
+- [EC2(아마존 리눅스)에 서버와 DB(mysql) 배포하기[2]](</study/etc/EC2(아마존-리눅스)에-서버와-DB(mysql)-배포하기-2/>)
+- [EC2(아마존 리눅스)에 서버와 DB(mysql) 배포하기[3]](</study/etc/EC2(아마존-리눅스)에-서버와-DB(mysql)-배포하기-3/>)
+- [AWS CodeDeploy 사용하여 배포 자동화 하기](/study/etc/AWS-CodeDeploy-사용하여-배포-자동화-하기/)
+- [CLI 커맨드로 리액트 앱 AWS S3에 배포하기](/study/etc/CLI-커맨드로-리액트-앱-AWS-S3에-배포하기/)
