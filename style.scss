@@ -469,6 +469,16 @@ nav {
     padding: 1.5em 2em;
     background-color: $bgGray;
   }
+  .innerBoxOutlined {
+    line-height: 1.7;
+    font-size: 17px;
+    margin: 1.8em 0em;
+    margin-left: 0px;
+    padding-left: 0px;
+    padding: 2em 2em;
+    border: 1px solid $lightGray;
+    border-radius: 1em;
+  }
   img {
     margin: 1em 0 0.9em;
   }
@@ -645,25 +655,38 @@ ul.til-lists .tag {
   margin-bottom: 40px;
   margin-left: 10px;
 }
-span {
-  .title {
-    min-width: 120px;
-  }
+img.stack_logo {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  width: 35px;
+  margin-right: 10px;
+}
+tr.row {
+  vertical-align: baseline;
 }
 .project_detail {
   font-family: $Spoqa;
   font-size: 18px;
-
-  padding: 8px 0px;
+  background: none;
+  margin: 0 1em;
+  border: none;
+  td {
+    vertical-align: top;
+  }
   .title {
     font-weight: 550;
     color: $darkGray;
     min-width: 120px;
   }
   .content {
+    line-height: 1.4;
     margin-left: 10px;
-    font-weight: 300;
+    font-weight: 350;
     color: #333333;
+  }
+  p.subdetail {
+    font-size: 14px;
   }
 }
 #myBtn {
@@ -685,6 +708,7 @@ span {
   width: 30px;
   height: 30px;
 }
+
 // .post-header {
 //   background-position: center;
 //   background-repeat: no-repeat;

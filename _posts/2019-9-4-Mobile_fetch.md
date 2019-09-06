@@ -9,15 +9,47 @@ excerpt: 해외에서 구할 수 있는 상품을 여행자를 통해 직구할 
 mainImage: /images/fetch-demo2.png
 ---
 
+![Fetch Main](/images/fetch-main.png "Fetch Main")
+
 ![Fetch Demo](/images/fetch-demo.png "Fetch Demo")
 
-<div class='innerBox'>
-<div class='project_detail'>
-<span class='project_detail title'>Period</span><span class='project_detail content'>2019년 5월 27일 ~ 6월 19일 (약 3주)</span></div>
-<div class='project_detail'><span class='project_detail title'>Team</span><span class='project_detail content'>프론트엔드 2명, 백엔드 2명 (총 4명)</span></div>
-<div class='project_detail'><span class='project_detail title'>Platform</span><span class='project_detail content'>iOS 모바일 어플리케이션</span></div><div class='project_detail'><span class='project_detail title'>Role</span><span class='project_detail content'>iOS 모바일 어플리케이션</span></div></div>
+<div class='innerBoxOutlined'>
+<table class='project_detail'>
+  <tr class='project_detail row'>
+    <td class='project_detail title'>Period</td>
+    <td class='project_detail content'>2019년 5월 27일 ~ 6월 19일 (약 3주)</td>
+  </tr>
+  <tr class='project_detail row'>
+    <td class='project_detail title'>Team</td>
+    <td class='project_detail content'>프론트엔드 2명, 백엔드 2명 (총 4명)</td>
+  </tr>
+  <tr class='project_detail row'>
+    <td class='project_detail title'>Platform</td>
+    <td class='project_detail content'>iOS 모바일 어플리케이션</td>
+  </tr>
+  <tr class='project_detail row'>
+    <td class='project_detail title'>Role</td>
+    <td class='project_detail content'>React Native 프론트엔드 개발
+    <br>- 효과적인 상태관리를 위해 Redux 사용<br>
+- SendBird 활용, 실시간 채팅 구현<br>
+- Firebase Cloud Messaging 활용, 푸시알람 구현<br>
+- local 및 소셜 회원가입, 로그인 구현<br>
+</td>
+  </tr>
+  <tr class='project_detail row'>
+    <td class='project_detail title'>Tech Stack</td>
+    <td class='project_detail content'>
+    <img  class='stack_logo' src="/images/stack_logo_rn.png" alt="React Native" />
+    <img class='stack_logo' src="/images/stack_logo_redux.png" alt="Redux" />
+    <img class='stack_logo' src="/images/stack_logo_SendBird.png" alt="SendBird" />
+    <img class='stack_logo' src="/images/stack_logo_fcm.png" alt="Firebase Cloud Message(FCM)"/>
+</td>
+  </tr>
+</table>
+</div>
 
 <div style='display: flex; justify-content: center'>
-<img src="/images/fetch-demo-gif1.gif" alt="fetch-demo-gif" width="250em" height='500em' style='border-radius:30px; margin:30px' />
-<img src="/images/fetch-demo-gif2.gif" alt="fetch-demo-gif" width="250em" height='500em' style='border-radius:30px; margin:30px' />
+<img src="/images/fetch-demo-gif3.gif" alt="fetch-demo-gif" width="200em" height='400em' style='border-radius:30px; margin:15px' />
+<img src="/images/fetch-demo-gif1.gif" alt="fetch-demo-gif" width="200em" height='400em' style='border-radius:30px; margin:15px' />
+<img src="/images/fetch-demo-gif2.gif" alt="fetch-demo-gif" width="200em" height='400em' style='border-radius:30px; margin:15px' />
 </div>
