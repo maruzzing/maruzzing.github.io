@@ -709,7 +709,17 @@ tr.row {
   width: 30px;
   height: 30px;
 }
-
+.movie_btn {
+  padding: 10px 30px;
+  background-color: #5bb487;
+  border-radius: 30px;
+  a {
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+  }
+}
 // .post-header {
 //   background-position: center;
 //   background-repeat: no-repeat;
