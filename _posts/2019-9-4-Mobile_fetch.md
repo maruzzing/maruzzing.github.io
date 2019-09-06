@@ -11,7 +11,7 @@ mainImage: /images/fetch-demo2.png
 
 ![Fetch Main](/images/fetch-main.png "Fetch Main")
 
-![Fetch Demo](/images/fetch-demo.png "Fetch Demo")
+<!-- ![Fetch Demo](/images/fetch-demo.png "Fetch Demo") -->
 
 <div class='innerBoxOutlined'>
 <table class='project_detail'>
@@ -39,10 +39,14 @@ mainImage: /images/fetch-demo2.png
   <tr class='project_detail row'>
     <td class='project_detail title'>Tech Stack</td>
     <td class='project_detail content'>
-    <img  class='stack_logo' src="/images/stack_logo_rn.png" alt="React Native" />
-    <img class='stack_logo' src="/images/stack_logo_redux.png" alt="Redux" />
-    <img class='stack_logo' src="/images/stack_logo_SendBird.png" alt="SendBird" />
-    <img class='stack_logo' src="/images/stack_logo_fcm.png" alt="Firebase Cloud Message(FCM)"/>
+    <a href='https://facebook.github.io/react-native/' target='_blank'>
+    <img  class='stack_logo' src="/images/stack_logo_rn.png" alt="React Native" /></a>
+    <a href='https://redux.js.org/' target='_blank'>
+    <img class='stack_logo' src="/images/stack_logo_redux.png" alt="Redux" /></a>
+    <a href='https://sendbird.com' target='_blank'>
+    <img class='stack_logo' src="/images/stack_logo_SendBird.png" alt="SendBird" /></a>
+    <a href='https://firebase.google.com/docs/cloud-messaging' target='_blank'>
+    <img class='stack_logo' src="/images/stack_logo_fcm.png" alt="Firebase Cloud Message(FCM)"/></a>
 </td>
   </tr>
 </table>
