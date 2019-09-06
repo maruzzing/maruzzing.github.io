@@ -108,7 +108,7 @@ mainImage: /images/fetch-demo2.png
 <img class='simulImg' src="/images/fetch-demo-gif8_no_frame.gif" alt="fetch-demo-gif" width="250em" style='border-bottom-right-radius:27px; border-bottom-left-radius:27px; margin:15px' />
 </div>
 
-<br><br>
+<br>
 
 ## Review
 
