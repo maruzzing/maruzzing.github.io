@@ -70,11 +70,21 @@ coming soon 😎<br><br>
 
 ### 구글맵 기반의 정보 제공
 
-<img class='simulImg' src="/images/jeju-demo-gif2.gif" alt="jeju-demo-gif"  />
+[Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/tutorial)를 사용하여 구글지도를 기반으로 data를 보여주는 방식을 택했다.
+
+카페 콘텐츠 등록을 할 때, 구글 지도 검색을 통해 'placeId'와 '좌표'를 DB에 저장했다. 이 때 저장한 '좌표' 정보로 정보 리스트를 지도 위의 위치 아이콘으로 렌더하고, 특정 좌표의 아이콘을 선택하면 'palceId'로 운영시간, 주소, 리뷰 등 추가적인 정보를 불러오는 방식으로 구현했다.
+
+<img class='simulImg' src="/images/jeju-demo-gif2.gif" alt="jeju-demo-gif"  /><br>
+
+또한, 프리뷰에서 모든 정보를 불러오는 것이 아니라, 'see more'를 클릭했을 때 상세 이미지와 코멘트 등 추가 정보를 서버에 요청해 불필요한 API 요청을 줄였다.
 
 <img class='simulImg' src="/images/jeju-demo-gif1.gif" alt="jeju-demo-gif"  />
 
 ### admin 페이지 게시판 CRUD 구현
+
+일반적인 게시판 기능처럼 admin 페이지에서는 정보를 추가하고 수정하고 삭제할 수 있도록 CRUD를 구현했다.
+
+이 때, 이미지 업로드는 multer와 multer-s3 모듈을 사용하여 s3에 이미지를 저장하고, db에는 저장된 이미지 url만 저장하는 방식으로 구현했다.
 
 <img class='simulImg' src="/images/jeju-demo-gif4.gif" alt="jeju-demo-gif"  />
 
@@ -86,16 +96,26 @@ coming soon 😎<br><br>
 <img  src="/images/code_pipeline.png" alt="Code Pipeline" width='85%' /></div>
 <br>
 
+이번 프로젝트에서는 AWS를 좀 더 적극적으로 활용해 보았다.
+
+서버와 DB는 AWS EC2에, 클라이언트는 S3에 배포했는데,<br>
+추가적으로 서버는 AWS CodePipeline을 도입하여 깃헙의 마스터 브랜치에 코드를 푸시하거나 머지하는 이벤트가 발생하면 자동적으로 EC2에 배포될 수 있도록 했다.
+<br>
+
+클라이언트의 경우, terminal에서 CLI 커맨드 `yarn build && yarn deploy` 만으로 자동적으로 빌드된 파일이 배포될 수 있도록 했다.
+
 ## Review
+
+이번 프로젝트는 1차적으로 개발을 하고 한 달이 지나서야 배포를 위해 코드를 다시 열어보게 되었다. 하지만 보면 볼수록 코드에 마음에 들지 않는 부분이 마음에 걸려 리팩토링을 진행하게 되었다. 이 과정에서 속상하기도 하고, 그만큼 많이 배울 수 있었던 것 같다.
+
+또한, 배포를 처음부터 혼자 차근히 진행하고 '배포 자동화'를 시도해 본 과정이 너무 재미있었다. 하면 할 수록 새롭고 신기한 코딩의 세계다!
+
+버전업을 하게 된다면 콘센트가 있는 곳, 주차장이 있는 곳 등으로 필터링을 할 수 있게 하고싶다.
 
 <br>
 **다음 프로젝트 때 시도해 보고 싶은 것들**
 
-- Redux-Saga 도입
-- [Athentication flows](https://reactnavigation.org/docs/en/auth-flow.html) 재구현
-- 소셜로그인 재구현
-- 푸시알람 재구현
-- Socket.io로 실시간 통신 구현
-- android 앱 개발
+- CI 도입
+- 필터링
 
 <br>
