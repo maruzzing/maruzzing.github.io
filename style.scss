@@ -645,7 +645,27 @@ ul.til-lists .tag {
   margin-bottom: 40px;
   margin-left: 10px;
 }
+span {
+  .title {
+    min-width: 120px;
+  }
+}
+.project_detail {
+  font-family: $Spoqa;
+  font-size: 18px;
 
+  padding: 8px 0px;
+  .title {
+    font-weight: 550;
+    color: $darkGray;
+    min-width: 120px;
+  }
+  .content {
+    margin-left: 10px;
+    font-weight: 300;
+    color: #333333;
+  }
+}
 #myBtn {
   padding: 0;
   position: fixed;
