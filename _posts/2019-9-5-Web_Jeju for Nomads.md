@@ -5,9 +5,11 @@ date: 2019-09-05
 comments: true
 categories: [projects]
 tags: [ToyProject, Solo, Full-Stack]
-excerpt: 디지털 노마드를 위한 제주도 카페 정보 제공 웹페이지
+excerpt: 디지털 노마드를 위한 제주도 카페 정보 공유 웹페이지
 mainImage: /images/jeju-demo.png
 ---
+
+![Jeju for Nomads Main](/images/jeju_for_nomad_theme.png "Jeju for Nomads Main")
 
 <div class='innerBoxOutlined'>
 <table class='project_detail'>
@@ -50,4 +52,50 @@ mainImage: /images/jeju-demo.png
 </td>
   </tr>
 </table>
-</div>
+</div><br>
+
+## Overview
+
+평소에도 노트북 들고 카페에서 자주 작업을 하는데 제주도 한달 살기를 준비하며 '제주도 일하기 좋은 카페' 라고 검색창에 검색해 봐도 인스타 감성의 카페들만 나오고 노트북을 사용할 수 있는 환경을 갖춘 카페 정보는 많이 나오지 않았다. 제주도까지 가서 스타벅스만 전전할 순 없는 법. 제주도를 찾을 디지털 노마드들을 위한 카페 정보를 공유할 수 있는 웹사이트를 만들기로 했다.
+
+카페에 대한 기본 정보는 구글맵 API에서 제공받고, 추가적으로 와이파이, 콘센트, 주차, 화장실, 그리고 따뜻한 아메리카노 한 잔의 가격에 대한 정보와 직접 찍은 사진을 게시했다.
+
+<br>
+
+이 프로젝트는 제주를 시작으로 다른 나라, 다른 도시의 시리즈도 추가될 것이다.
+
+coming soon 😎<br><br>
+
+## Key Features
+
+### 구글맵 기반의 정보 제공
+
+<img class='simulImg' src="/images/jeju-demo-gif2.gif" alt="jeju-demo-gif"  />
+
+<img class='simulImg' src="/images/jeju-demo-gif1.gif" alt="jeju-demo-gif"  />
+
+### admin 페이지 게시판 CRUD 구현
+
+<img class='simulImg' src="/images/jeju-demo-gif4.gif" alt="jeju-demo-gif"  />
+
+<img class='simulImg' src="/images/jeju-demo-gif3.gif" alt="jeju-demo-gif"  />
+
+### AWS CodePipeline을 활용한 배포자동화 구축
+
+<div style='display: flex; justify-content: center;'>
+<img  src="/images/code_pipeline.png" alt="Code Pipeline" width='85%' /></div>
+<br>
+
+## Review
+
+<br>
+**다음 프로젝트 때 시도해 보고 싶은 것들**
+
+- Redux-Saga 도입
+- [Athentication flows](https://reactnavigation.org/docs/en/auth-flow.html) 재구현
+- 소셜로그인 재구현
+- 푸시알람 재구현
+- Socket.io로 실시간 통신 구현
+- android 앱 개발
+
+<br>
