@@ -90,7 +90,7 @@ mainImage: /images/fetch-demo2.png
 실시간 채팅 서비스 구현을 위해 socket.io로 구현을 할지, 솔루션을 사용할지 고민을 하다, 한 달이라는 짧은 개발 기간을 고려하여 SendBird라는 채팅 솔루션을 사용했다. SendBird에서 제공하는 채팅 관련 다양한 API를 사용하여 원하는 기능들을 보다 간단하게 구현하면서 전체적인 채팅 기능의 흐름이나을 경험할 수 있었을 뿐만 아니라, 비동기 처리나 Redux 등에 더 집중할 수 있었다.<br>
 
 <div class='simulContainer'>
-<img class='simulImg' src="/images/fetch-demo-gif7_no_frame.gif" alt="fetch-demo-gif" width="500em" style= 'border-radius: 30px;' />
+<img src="/images/fetch-demo-gif7_no_bg.gif" alt="fetch-demo-gif" width="500em" style= 'border-radius: 30px;' />
 </div>
 
 <br>
