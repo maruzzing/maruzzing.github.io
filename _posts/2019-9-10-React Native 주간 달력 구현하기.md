@@ -1,7 +1,7 @@
 ---
 layout: post
 title: React Native 주간 달력 구현하기
-date: 2019-09-09
+date: 2019-09-10
 comments: true
 categories: [Study, rnative]
 tags: [React Native, Date, Calendar]
