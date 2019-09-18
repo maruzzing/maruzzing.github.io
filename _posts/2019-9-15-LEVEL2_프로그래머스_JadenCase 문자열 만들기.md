@@ -27,3 +27,8 @@ function solution(s) {
   return str;
 }
 ```
+
+<br>
+<span class="reference">문제바로가기</span>
+
+[JadenCase 문자열 만들기](https://programmers.co.kr/learn/courses/30/lessons/12951)
