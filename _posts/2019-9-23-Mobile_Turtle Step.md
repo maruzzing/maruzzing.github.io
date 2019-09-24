@@ -35,6 +35,7 @@ mainImage: /images/turtle-step-main.png
 - python-shell 모듈 활용, python 코드 연동<br>
 - 관계형 DB, MySQL 사용 DB 구축<br>
 - HTTPS 통신환경 구축<br>
+- 제플린을 이용한 디자이너와 협업<br>
 </td>
   </tr>
   <tr class='project_detail row'>
@@ -131,7 +132,7 @@ mainImage: /images/turtle-step-main.png
 
 ## Review
 
-테스트 플라이트로 테스트를 해보고 있는데 아직 부족한 부분이 많은 것 같아 실제로 출시 하기까진 시간이 조금 더 걸릴 것 같다. 하지만 이번 프로젝트를 하면서 제플린도 써보고, 다양한 시도를 많이 해봐서 배운점이 많았다. react native를 사용했음에도 iso 개발에만 집중해 android 쪽은 소홀했던 것이 가장 아쉽지만 계속 다듬어 가야 겠다.
+테스트 플라이트로 테스트를 해보고 있는데 아직 부족한 부분이 많은 것 같아 실제로 출시 하기까진 시간이 조금 더 걸릴 것 같다. 하지만 이번 프로젝트를 하면서 제플린으로 디자이너와 협업도 해보고, 다양한 시도를 많이 해봐서 배운점이 많았다. react native를 사용했음에도 iso 개발에만 집중해 android 쪽은 소홀했던 것이 가장 아쉽지만 계속 다듬어 가야 겠다.
 
 <br>
 
