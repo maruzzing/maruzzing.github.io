@@ -150,6 +150,7 @@ mainImage: /images/turtle-step-main.png
 - [React Native 커스텀 Tab Bar 만들기](/study/rnative/React-Native-커스텀-Tab-Bar-만들기/)
 - [React Native 주간 달력 구현하기](/study/rnative/React-Native-주간-달력-구현하기/)
 - [주차 구하기](/study/javascript/주차-구하기/)
+- [KeyboardAvoidingView 적용하기](/study/rnative/KeyboardAvoidingView-적용하기/)
 
 **Back-end**
 
