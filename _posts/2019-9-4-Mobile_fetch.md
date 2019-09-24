@@ -45,7 +45,7 @@ mainImage: /images/fetch-demo2.png
     <a href='https://redux.js.org/' target='_blank'>
     <img class='stack_logo' src="/images/stack_logo_redux.png" alt="Redux" /></a>
     <a href='https://sendbird.com' target='_blank'>
-    <img class='stack_logo' src="/images/stack_logo_SendBird.png" alt="SendBird" /></a>
+    <img class='stack_logo' src="/images/stack_logo_sendbird.png" alt="SendBird" /></a>
     <a href='https://firebase.google.com/docs/cloud-messaging' target='_blank'>
     <img class='stack_logo' src="/images/stack_logo_fcm.png" alt="Firebase Cloud Message(FCM)"/></a>
 </td>
