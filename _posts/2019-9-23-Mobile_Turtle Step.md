@@ -9,7 +9,7 @@ excerpt: 시각화된 목표 달성률을 볼 수 있는 투두 앱
 mainImage: /images/turtle-step-main.png
 ---
 
-![Turtle Step Main](/images/turtle-step-main.png "Turtle Step Main")
+![Turtle Step Title](/images/turtle_step_title.png "Turtle Step Title")
 
 <div class='innerBoxOutlined'>
 <table class='project_detail'>
@@ -119,6 +119,14 @@ mainImage: /images/turtle-step-main.png
 
 <div class='simulContainer'>
 <img src="/images/turtle-demo-gif8.gif" alt="turtle-demo-gif8" width="250em" style= 'border-bottom-right-radius: 28px; border-bottom-left-radius: 28px;' />
+</div>
+
+### Lottie를 활용한 애니메이션 렌더링
+
+모바일이나 웹페이지에 애니메이션을 구현하기 위해서 gif를 사용해 왔는데, gif는 용량이 무겁고, 해상도 대응이 어렵다는 단점이 있기 때문에, 요즘 gif의 훌륭한 대체재로 [Lottie](https://github.com/react-native-community/lottie-react-native)라는 라이브러리가 주목받고 있다고 하여 이번 프로젝트에서 사용해 보았다.
+
+<div class='simulContainer'>
+<img src="/images/turtle-demo-gif9.gif" alt="turtle-demo-gif9" width="250em" />
 </div>
 
 ## Review
