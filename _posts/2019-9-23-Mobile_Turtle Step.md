@@ -127,7 +127,8 @@ mainImage: /images/turtle-step-main.png
 모바일이나 웹페이지에 애니메이션을 구현하기 위해서 gif를 사용해 왔는데, gif는 용량이 무겁고, 해상도 대응이 어렵다는 단점이 있기 때문에, 요즘 gif의 훌륭한 대체재로 [Lottie](https://github.com/react-native-community/lottie-react-native)라는 라이브러리가 주목받고 있다고 하여 이번 프로젝트에서 사용해 보았다.
 
 <div class='simulContainer'>
-<img src="/images/turtle-demo-gif9.gif" alt="turtle-demo-gif9" width="250em" />
+<img src="/images/turtle-demo-gif9.gif" alt="turtle-demo-gif9" width="250em" style= 'margin-right:35px;'/>
+<img src="/images/react-native-webview-lottie2.gif" alt="react-native-webview-lottie2" width="250em" style= 'border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; margin-left:35px;' />
 </div>
 
 ## Review
@@ -153,6 +154,7 @@ mainImage: /images/turtle-step-main.png
 - [주차 구하기](/study/javascript/주차-구하기/)
 - [KeyboardAvoidingView 적용하기](/study/rnative/KeyboardAvoidingView-적용하기/)
 - [메일발송기능 적용하기](/study/rnative/메일발송기능-적용하기/)
+- [webView 내부에 Lottie로 애니 구현하기](/study/rnative/webView-내부에-Lottie로-애니-구현하기/)
 
 **Back-end**
 
