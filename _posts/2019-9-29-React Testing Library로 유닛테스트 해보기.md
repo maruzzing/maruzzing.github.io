@@ -65,7 +65,7 @@ const Form = ({ onSubmit }) => {
             onChange={({ target: { value } }) => setName(value)}
           />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" disabled={!name} />
       </form>
     </div>
   );
@@ -73,7 +73,7 @@ const Form = ({ onSubmit }) => {
 export default Form;
 ```
 
-`Form` 컴포넌트가 위와 같을 때, 뷰가 제대로 그려졌는지 확인하기 위해서 아래와 같은 테스트 코드를 작성할 수 있다. test 화면에 초록불이 켜졌을 때의 희열이란 🤠
+`Form` 컴포넌트가 위와 같을 때, 뷰가 제대로 그려졌는지 확인하기 위해서 아래와 같은 테스트 코드를 작성할 수 있다.
 
 ```react
 // src/Form.test.js
@@ -84,21 +84,62 @@ import Form from "./Form";
 describe("<Form />", () => {
   it("renders input", () => {
     const { getByLabelText, getByText, getByTestId } = render(<Form />);
-    const label = getByLabelText("Name:");
+    const name = getByLabelText("Name:");
     const input = getByTestId("nameInput");
     const button = getByText("Submit");
-    expect(label).toBeInTheDocument();
+    expect(name).toBeInTheDocument();
     expect(input).toBeInTheDocument();
     expect(button).toBeInTheDocument();
   });
 });
-
 ```
 
 ### 동적 테스트 코트 작성
 
+이제 액션이 일어났을 때의 테스트를 작성해 보자. [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events)로 액션을 실행할 수 있는데 `fireEvent(node: HTMLElement, event: Event)` 형태와 `fireEvent[eventName](node: HTMLElement, eventProperties: Object)` 형태로 사용할 수 있다.
+
+아무것도 입력하지 않았을 때는 submit 버튼이 disabled였다가, name이 입력되면 enabled로 바뀌는 테스트 코드는 아래와 같이 작성할 수 있다.
+
+```react
+// src/Form.test.js
+...
+import { render, fireEvent } from "@testing-library/react";
+...
+
+describe("<Form />", () => {
+...
+  it("enables button when name entered", () => {
+    const { getByLabelText, getByText } = render(<Form />);
+    const name = getByLabelText("Name:");
+    const button = getByText("Submit");
+    expect(button).toBeDisabled();
+    fireEvent.change(name, { target: { value: "maruzzing" } });
+    expect(button).toBeEnabled();
+  });
+});
+```
+
+그리고 submit을 눌렀을 때 `onSubmit` 함수가 실행되는 것을 확인하는 코드는 아래와 같이 작성할 수 있다.
+
+```react
+// src/Form.test.js
+...
+
+describe("<Form />", () => {
+...
+  it("submits form when buttion is clicked", () => {
+    const onSubmit = jest.fn();
+    const { getByLabelText, getByText } = render(<Form onSubmit={onSubmit} />);
+    const name = getByLabelText("Name:");
+    const button = getByText("Submit");
+    fireEvent.change(name, { target: { value: "maruzzing" } });
+    fireEvent.click(button);
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+});
+```
+
+완전신기 !! 테스트에 초록불이 켜졌을 때의 희열이란 !!! 🤩
+조금 더 복잡한 컴포넌트의 test도 해 봐야 겠다!!
+
 <iframe src="https://codesandbox.io/embed/quizzical-khayyam-m9hnw?fontsize=14" title="react-test-library-ex" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-
-<span class="reference">참고자료</span>
-
-- [React Testing Library 사용법](https://www.daleseo.com/react-testing-library/)
