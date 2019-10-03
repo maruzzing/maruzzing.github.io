@@ -4,7 +4,7 @@ title: StopWatch 예제 TypeScript로 리팩토링 해보기
 date: 2019-10-03
 comments: true
 categories: [Study, react]
-tags: [Tutorial, TypeScript, Unit Test]
+tags: [Tutorial, TypeScript]
 excerpt: TypeScript와 Unit Test 공부를 위해 React로 간단한 StopWatch를 만들고 TypeScript로 리팩토링 해봤다. 👩‍💻
 ---
 
