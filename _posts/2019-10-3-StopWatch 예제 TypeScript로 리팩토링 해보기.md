@@ -1,6 +1,6 @@
 ---
 layout: post
-title: StopWatch 예제 TypeScript로 만들어 보기
+title: StopWatch 예제 TypeScript로 리팩토링 해보기
 date: 2019-10-03
 comments: true
 categories: [Study, react]
