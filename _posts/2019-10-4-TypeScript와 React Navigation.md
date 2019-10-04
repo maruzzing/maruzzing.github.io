@@ -103,6 +103,8 @@ class AuthLoadingScreen extends React.Component<NavigationInjectedProps> {
 export default withNavigation(AuthLoadingScreen);
 ```
 
+### Params 타입화 하기
+
 혹은 타입화된 Params 사용을 위해 `Navigation` 타입을 정의해서 사용하는 방법도 있다. 이때 React Navigation의 `NavigationScreenProp`과 `NavigationState` 는 타입정의에 쓸 수 있다.
 
 ```typescript
