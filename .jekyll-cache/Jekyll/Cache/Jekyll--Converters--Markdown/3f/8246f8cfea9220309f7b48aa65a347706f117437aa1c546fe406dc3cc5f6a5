@@ -1,0 +1,54 @@
+I"�<h3 id="문제">문제</h3>
+
+<p>Each number key on a standard phone keypad has a set of Latin letters written on it as well: http://en.wikipedia.org/wiki/File:Telephone-keypad2.svg</p>
+
+<p>Businesses often try to come up with clever ways to spell out their phone number in advertisements to make it more memorable. But there are a lot of combinations!
+Write a function that takes up to four digits of a phone number, and
+returns a list of all of the words that can be written on the phone with that number. (You should return all permutations, not only English words.)</p>
+
+<p><strong>Example</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">telephoneWords</span><span class="p">(</span><span class="dl">'</span><span class="s1">2745</span><span class="dl">'</span><span class="p">);</span>
+<span class="o">=&gt;</span> <span class="p">[</span><span class="dl">'</span><span class="s1">APGJ</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">APGK</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">APGL</span><span class="dl">'</span><span class="p">,</span> <span class="p">...,</span> <span class="c1">// many many more of these 'CSIL']</span>
+</code></pre></div></div>
+
+<p><strong>Tips</strong></p>
+
+<ul>
+  <li>Phone numbers are strings! (A phone number can start with a zero.)</li>
+  <li>The digits 0 and 1 do not have letters associated with them, so they should be left as numbers.</li>
+  <li>Don’t return every combination of those digits in any order, just the order given.</li>
+</ul>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">phoneDigitsToLetters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">0</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ABC</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">3</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DEF</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">4</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GHI</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">5</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JKL</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">6</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MNO</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">7</span><span class="p">:</span> <span class="dl">"</span><span class="s2">PQRS</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">8</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TUV</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">9</span><span class="p">:</span> <span class="dl">"</span><span class="s2">WXYZ</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">telephoneWords</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">digitString</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">wordsArr</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">const</span> <span class="nx">addDigitLetter</span> <span class="o">=</span> <span class="p">(</span><span class="nx">letter</span><span class="p">,</span> <span class="nx">digit</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">letter</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">digitString</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">wordsArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">letter</span><span class="p">);</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">let</span> <span class="nx">digitLetter</span> <span class="o">=</span> <span class="nx">phoneDigitsToLetters</span><span class="p">[</span><span class="nx">digitString</span><span class="p">[</span><span class="nx">digit</span><span class="p">]];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">digitLetter</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">addDigitLetter</span><span class="p">(</span><span class="nx">letter</span> <span class="o">+</span> <span class="nx">digitLetter</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">digit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nx">addDigitLetter</span><span class="p">(</span><span class="dl">""</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">wordsArr</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

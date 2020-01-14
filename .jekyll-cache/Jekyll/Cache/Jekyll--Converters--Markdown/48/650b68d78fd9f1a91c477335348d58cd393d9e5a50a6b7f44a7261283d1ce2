@@ -1,0 +1,41 @@
+I"�<p>지난 7월에 만들었던 프로젝트를 리팩토링 중인데, 지금 보니 좀 더 깔끔하게 react의 특성을 살려 구현할 수 있었던 코드들이 있다. 그 중 하나가 이전에 포스팅했던 <a href="/study/react/이미지-업로드-전-미리보기/">이미지 업로드 전 미리보기</a>이다. 이전 코드에서는 dom을 건드려서 미리보기를 구현했는데, dom을 건드리지 않고도 충분히 구현할 수 있다.</p>
+
+<p>아래와 같이 input file을 통해 파일이 선택되면, <code class="highlighter-rouge">setFile</code> 함수를 실행하는데, 이 함수는 선택된 파일들을 state에 저장할 뿐만 아니라, <code class="highlighter-rouge">fileReader</code>로 선택된 파일들을 DataUrl로 읽어 <code class="highlighter-rouge">filesInUrl</code> state에 저장한다. 서버에 업로드 할때는 <code class="highlighter-rouge">files</code> state에 저장된 내용을 전송하고, 미리보기는 <code class="highlighter-rouge">filesInUrl</code> state로 렌더한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">fileReader</span> <span class="o">=</span> <span class="nx">file</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+      <span class="nx">fileReader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">fileReader</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+      <span class="nx">fileReader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">makeFilesToUrls</span> <span class="o">=</span> <span class="nx">files</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">promises</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">files</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">files</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">image_url</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">promises</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">files</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">promises</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">fileReader</span><span class="p">(</span><span class="nx">files</span><span class="p">[</span><span class="nx">i</span><span class="p">]));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">promises</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">values</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">values</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">setFile</span> <span class="o">=</span> <span class="k">async</span> <span class="nx">uploadedFiles</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">newFileUrls</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">makeFilesToUrls</span><span class="p">(</span><span class="nx">uploadedFiles</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="nx">prevState</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">files</span><span class="p">,</span> <span class="nx">filesInUrl</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">prevState</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">newFiles</span> <span class="o">=</span> <span class="nx">files</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">uploadedFiles</span><span class="p">));</span>
+      <span class="kd">const</span> <span class="nx">newState</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">prevState</span><span class="p">,</span>
+        <span class="na">files</span><span class="p">:</span> <span class="nx">newFiles</span><span class="p">,</span>
+        <span class="na">filesInUrl</span><span class="p">:</span> <span class="nx">filesInUrl</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">newFileUrls</span><span class="p">)</span>
+      <span class="p">};</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">newState</span> <span class="p">};</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+</code></pre></div></div>
+:ET

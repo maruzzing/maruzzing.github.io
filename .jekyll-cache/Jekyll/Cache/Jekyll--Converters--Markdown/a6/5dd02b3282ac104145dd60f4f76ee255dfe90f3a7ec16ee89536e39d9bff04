@@ -1,0 +1,53 @@
+I"�<p>처음 리액트 네이티브로 개발을 하고 디바이스로 테스트 할 때 가장 당황했던 것이 바로 키보드에 관한 것이었다. 시뮬레이터로 뷰를 보면서 개발할 때 하드웨어 키보드를 쓰다 보니 실제 모바일 기기에서 키보드가 올라왔을 때의 상황을 인지하지 못한 것이다. 그렇게 아무런 조치도 해주지 않으면 아래와 같이 키보드가 뷰를 가려버린다. 🤔</p>
+
+<div class="simulContainer">
+<img src="/images/turtle-demo-gif10.gif" alt="turtle-demo-gif10" width="250em" style="border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" />
+</div>
+
+<p>이 문제를 간단히 해결할 수 있는 방법으로 리액트 네이티브에서 제공하는 <a href="https://facebook.github.io/react-native/docs/keyboardavoidingview#docsNav">KeyboardAvoidingView</a> API를 적용하는 것이다.
+<code class="highlighter-rouge">View</code>로 감쌌던 컴포넌트를 <code class="highlighter-rouge">KeyboardAvoidingView</code>로 감싸주고, 몇 가지 props를 넘겨주면 끝!</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">KeyboardAvoidingView</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">&lt;</span><span class="nc">KeyboardAvoidingView</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="si">}</span> <span class="na">behavior=</span><span class="s2">"padding"</span> <span class="nt">enabled</span><span class="p">&gt;</span>
+  ...
+<span class="p">&lt;/</span><span class="nc">KeyboardAvoidingView</span><span class="p">&gt;;</span>
+</code></pre></div></div>
+
+<p>하지만 <code class="highlighter-rouge">ScrollView</code> 내에선 작동하지 않는 단점이 있다. 이 때 사용할 수 있는 것이 <a href="https://github.com/APSL/react-native-keyboard-aware-scroll-view">react native keyboard aware scroll view</a>이다. 이 또한, <code class="highlighter-rouge">ScrollView</code>로 감쌌던 컴포넌트를 <code class="highlighter-rouge">KeyboardAwareScrollView</code>로 감싸주고, 몇 가지 props를 넘겨주면 되는데, 포커스 된 <code class="highlighter-rouge">TextInput</code>에 까지 스크롤 하기 위해 아래 코드를 추가해 주면 된다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">ReactNative</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">KeyboardAwareScrollView</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-keyboard-aware-scroll-view</span><span class="dl">'</span>
+
+<span class="p">...</span>
+
+<span class="nx">_scrollToInput</span> <span class="o">=</span> <span class="p">(</span><span class="nx">reactNode</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">scroll</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">scrollToFocusedInput</span><span class="p">(</span><span class="nx">reactNode</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="nx">render</span><span class="p">(){</span>
+  <span class="k">return</span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">KeyboardAwareScrollView</span>
+      <span class="na">innerRef=</span><span class="si">{</span><span class="nx">ref</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">scroll</span> <span class="o">=</span> <span class="nx">ref</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">View</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">TextInput</span>
+          <span class="na">onFocus=</span><span class="si">{</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_scrollToInput</span><span class="p">(</span><span class="nx">ReactNative</span><span class="p">.</span><span class="nx">findNodeHandle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">))</span>
+          <span class="p">}</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">KeyboardAwareScrollView</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 하면 아래와 같이 포커스 된 <code class="highlighter-rouge">TextInput</code>까지 자동으로 스크롤 되어 키보드가 <code class="highlighter-rouge">TextInput</code>을 가리지 않게 된다.</p>
+
+<div class="simulContainer">
+<img src="/images/turtle-demo-gif11.gif" alt="turtle-demo-gif11" width="250em" style="border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" />
+</div>
+:ET

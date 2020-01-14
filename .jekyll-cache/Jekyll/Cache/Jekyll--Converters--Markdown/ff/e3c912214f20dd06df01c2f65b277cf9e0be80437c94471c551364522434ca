@@ -1,0 +1,40 @@
+I"'<p>AWS 세계는 알면 알수록 신기하다. 서버 코드는 CodePipeline을 이용해서 Github master 브랜치로 푸시나 머지를 하는 순간 바로 EC2에 배포되도록 구축해 두었다. 그렇다면 S3에 배포한 리액트 앱을 더 간단하게 배포할 순 없을까 하여 시도해 본 CLI 커맨드를 활용한 배포! 이제 리액트 앱을 개발하고 터미널에서 <code class="highlighter-rouge">yarn build &amp;&amp; yarn deploy</code>를 입력하는 것만으로 간단하게 S3에 배포할 수 있다.</p>
+
+<h3 id="iam-사용자-생성">IAM 사용자 생성</h3>
+
+<p>먼저, S3 버킷에 full access 권한을 가진 IAM 사용자를 생성한다. 이 때, ‘AWS 액세스 유형’에서 <strong>‘프로그래밍 방식 액세스’</strong>를 선택해 주어야 하며, <strong>‘AmazonS3FullAccess’</strong> 정책을 연결한다. 생성된 유저의 access key는 잘 보관해 둔다.</p>
+
+<p><img src="/images/aws_iam_user_access.png" alt="aws_iam_user_access" title="aws_iam_user_access" /></p>
+
+<h3 id="aws-cli-설치-및-사용자-구성">AWS CLI 설치 및 사용자 구성</h3>
+
+<p>aws 자습서에 따라 <a href="https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/install-macos.html">AWS CLI</a>를 설치한다.</p>
+
+<p>설치가 완료되면 aws-cli에 좀 전에 생성했던 유저를 추가한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws configure <span class="nt">--profile</span> <span class="o">[</span>user_name]
+AWS Access Key ID <span class="o">[</span>None]: <span class="c"># access key</span>
+AWS Secret Access Key <span class="o">[</span>None]: <span class="c"># secret access key</span>
+Default region name <span class="o">[</span>None]: <span class="c"># 리전 네임</span>
+Default output format <span class="o">[</span>None]: json
+</code></pre></div></div>
+
+<h3 id="프로젝트-packagejson의-script-수정">프로젝트 package.json의 script 수정</h3>
+
+<p>이제 마지막 단계! 프로젝트의 package.json 파일의 script 부분에 ‘deploy’ 스크립트를 추가한다.
+bucket에 현재 프로젝트의 <code class="highlighter-rouge">build</code> 폴더의 내용을 user의 권한으로 업데이트 하는 것이다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cross-env NODE_PATH=src react-scripts start"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cross-env NODE_PATH=src react-scripts build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts test --env=jsdom"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"eject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts eject"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deploy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aws s3 sync ./build s3://[bucket_name] --profile=[user_name]"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>이제 프로젝트 디렉토리에서 아래의 커맨드를 실행하는 것만으로 배포가 가능하다!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn build <span class="o">&amp;&amp;</span> yarn deploy
+</code></pre></div></div>
+:ET

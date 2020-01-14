@@ -1,0 +1,62 @@
+I"�<h3 id="문제">문제</h3>
+
+<p>Write a stack using your preferred instantiation pattern.
+Avoid using native array methods i.e., push, pop, and length.
+Once you’re done, implement a queue using two stacks.</p>
+
+<h3 id="풀이">풀이</h3>
+
+<p><strong>Stack Class</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Stack</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">storage</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">front</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">rear</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">push</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">rear</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">rear</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="c1">// remove an item from the top of the stack</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">pop</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">front</span><span class="o">++</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">front</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">rear</span><span class="o">--</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">rear</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+  <span class="p">};</span>
+
+  <span class="c1">// return the number of items in the stack</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">rear</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">front</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><br />
+<strong>Queue Class</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Queue</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Use two `stack` instances to implement your `queue` Class</span>
+  <span class="kd">var</span> <span class="nx">inbox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stack</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">outbox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stack</span><span class="p">();</span>
+  <span class="c1">// called to add an item to the `queue`</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">enqueue</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">inbox</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="c1">// called to remove an item from the `queue`</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">dequeue</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">inbox</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">outbox</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">item</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="c1">// should return the number of items in the queue</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">inbox</span><span class="p">.</span><span class="nx">size</span><span class="p">();</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

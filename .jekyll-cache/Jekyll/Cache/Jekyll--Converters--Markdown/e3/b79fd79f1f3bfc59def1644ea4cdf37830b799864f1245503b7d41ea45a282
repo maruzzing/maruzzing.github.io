@@ -1,0 +1,43 @@
+I"<h3 id="문제">문제</h3>
+
+<p>A prime number is a whole number that has no other divisors other than itself and 1. Write a function that accepts a number and returns true if it’s a prime number, false if it’s not.</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isMultiple</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">number</span> <span class="o">%</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">primeTester</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">n</span> <span class="o">!==</span> <span class="dl">"</span><span class="s2">number</span><span class="dl">"</span> <span class="o">||</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">||</span> <span class="nx">n</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// n isn't a number or n is less than 1 or n is not an integer</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">primeNums</span> <span class="o">=</span> <span class="nx">primeSieve</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">n</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">primeNums</span><span class="p">[</span><span class="nx">primeNums</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">primeSieve</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">primeNums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>
+  <span class="kd">let</span> <span class="nx">newStart</span> <span class="o">=</span> <span class="nx">start</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">start</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">newStart</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">newStart</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">end</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">||</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">===</span> <span class="mi">3</span> <span class="o">||</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">===</span> <span class="mi">7</span> <span class="o">||</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">===</span> <span class="mi">9</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// console.log(primeNums);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isMultiple</span><span class="p">(</span><span class="nx">primeNums</span><span class="p">,</span> <span class="nx">i</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">primeNums</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">primeNums</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="nx">start</span> <span class="o">&lt;=</span> <span class="nx">e</span> <span class="o">&amp;&amp;</span> <span class="nx">end</span> <span class="o">&gt;=</span> <span class="nx">e</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

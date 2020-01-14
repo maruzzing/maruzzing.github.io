@@ -1,0 +1,160 @@
+I"Q<h2 id="익스프레스expressjs">익스프레스(Express.js)</h2>
+
+<p>익스프레스(Express.js)는 노드(NodeJS) 상에서 동작하는 웹 개발 프레임워크이다. 익스프레스의 핵심이라고 할 수 있는 미들웨어(Middleware) 덕에 가볍고 유연하게 웹을 구성할 수 있다.</p>
+
+<h2 id="미들웨어middleware">미들웨어(Middleware)</h2>
+
+<p><strong>미들웨어(Middleware)</strong>란 요청과 응답 중간에 거쳐가는 함수로, 어떠한 동작을 하거나, 오류를 걸러내기도 한다.
+<code class="highlighter-rouge">app.use()</code> 메서드를 사용하며, 인자로 미들웨어 함수를 넣으면 된다. 많이 쓰이는 미들웨어 중 <code class="highlighter-rouge">Cors</code>를 예로 들면, 아래와 같이 사용할 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">cors</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">express server listen on 3000</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>미들웨어의 경우, 동기적으로 작성 순서대로 실행되므로, 순서를 주의해서 작성해 주어야 한다.</p>
+
+<p><br /></p>
+
+<h2 id="nodejs-http-서버-vs-expressjs">Node.js http 서버 vs Express.js</h2>
+
+<p>그렇다면, Node.js 기본 모듈을 사용하는 것 보다 Express를 사용하는 것이 얼마나 효율적일까?</p>
+
+<p><code class="highlighter-rouge">/upper</code>로 온 post 요청의 body 내용을 대문자로 변환해서 응답하고, <code class="highlighter-rouge">/lower</code>로 온 post 요청의 body 내용을 소문자로 변환해서 응답하는 간단한 서버를 Node.js와 Express.js로 구현하여 비교해 보겠다.</p>
+
+<h3 id="nodejs-http-서버-구성">Node.js http 서버 구성</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ip</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">localhost</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">headers</span> <span class="o">=</span> <span class="nx">defaultCorsHeader</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">method</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">body</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+    <span class="nx">request</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="nx">chunk</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">body</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="nx">request</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">body</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">/upper</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">body</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">body</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">body</span><span class="p">));</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">method</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">OPTIONS</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello http server</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="nx">ip</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`http server listen on </span><span class="p">${</span><span class="nx">ip</span><span class="p">}</span><span class="s2">:</span><span class="p">${</span><span class="nx">PORT</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">defaultCorsHeader</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">access-control-allow-origin</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">*</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">access-control-allow-methods</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET, POST, PUT, DELETE, OPTIONS</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">access-control-allow-headers</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">content-type, accept</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">access-control-max-age</span><span class="dl">"</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="expressjs를-사용하여-서버-구성하기">Express.js를 사용하여 서버 구성하기</h3>
+
+<p><strong>1. express를 설치한다.</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>express <span class="nt">--save</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>2. express를 사용하여 5000번 포트에 서버를 연결한다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">),</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">express server listen on </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>3. 미들웨어 작성</strong></p>
+
+<p>CORS(Cross Origin Resource Sharing)를 허용하는 <a href="https://expressjs.com/en/resources/middleware/cors.html"><code class="highlighter-rouge">cors</code></a> 미들웨어와, 요청의 body 데이터를 파싱처리 해주는 <a href="https://www.npmjs.com/package/body-parser"><code class="highlighter-rouge">body-parser</code></a>를 추가한다. <code class="highlighter-rouge">body-parser</code>의 경우, 요청 header의 <code class="highlighter-rouge">Content-Type</code>에 상응하는 메서드를 사용해야하며, 그렇지 않은 경우 <code class="highlighter-rouge">req.body</code>는 빈 객체 <code class="highlighter-rouge">{}</code>로 인식된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span> <span class="p">}));</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>4. 요청별 라우팅 작성</strong></p>
+
+<p>라우팅이란, 요청 엔드포인트와 메소드 별 응답방법을 결정하는 것을 말하는데, <code class="highlighter-rouge">app.METHOD(PATH, HANDLER)</code> 구조이다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/upper</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="p">{</span> <span class="nx">body</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">;</span>
+  <span class="nx">body</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/lower</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="p">{</span> <span class="nx">body</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">;</span>
+  <span class="nx">body</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>최종 코드는 아래와 같으며, node.js 기본 모듈로 작성했을 때보다 한결 가벼워진것을 확인할 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">cors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">cors</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">body-parser</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span> <span class="p">}));</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/upper</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="p">{</span> <span class="nx">body</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">;</span>
+  <span class="nx">body</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/lower</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="p">{</span> <span class="nx">body</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">;</span>
+  <span class="nx">body</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">),</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">express server listen on </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">port</span><span class="dl">"</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+:ET

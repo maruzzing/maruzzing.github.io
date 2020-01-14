@@ -1,0 +1,175 @@
+I"v2<p>AWS EC2에 서비스를 배포 하는 것 까지 해보았으니, 이제 그 일련의 과정들에 대한 자동화에 도전! 그 첫 시도로 <strong>AWS CodeDeploy를 이용한 배포 자동화</strong>를 구축해 보겠다. AWS CodeDeploy는 특정 코드를 배포해 달라고 요청하면 사전에 정의해 놓은 설정에 따라 EC2에 배포하는 역할을 한다.</p>
+
+<p><img src="/images/code_deploy.png" alt="CodeDeploy" title="CodeDeploy" /></p>
+
+<h3 id="ec2-iam-role-생성-및-부여">EC2 IAM Role 생성 및 부여</h3>
+
+<p>먼저, EC2가 사용할 IAM 역할을 생성한다. [AWS 서비스] 개체의 [EC2] 서비스의 역할을 만들며, 권한정책으로 AmazonS3FullAccess, AWSCodeDeployFullAccess, AWSCodeDeployRole를 연결한다. 만들어진 역할은 현재 실행중인 EC2인스턴스에 부여한다.</p>
+
+<h3 id="code-deploy-agent-용-사용자-생성">Code Deploy Agent 용 사용자 생성</h3>
+
+<p>IAM 콘솔에서 그룹을 생성하고, 아래의 정책을 생성하여 연결한다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"autoscaling:*"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"codedeploy:*"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ec2:*"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lambda:*"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ecs:*"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"elasticloadbalancing:*"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:AddRoleToInstanceProfile"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:CreateInstanceProfile"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:CreateRole"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:DeleteInstanceProfile"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:DeleteRole"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:DeleteRolePolicy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetInstanceProfile"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetRole"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetRolePolicy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:ListInstanceProfilesForRole"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:ListRolePolicies"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:ListRoles"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:PassRole"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:PutRolePolicy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:RemoveRoleFromInstanceProfile"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"s3:*"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>그리고 이 그룹에 사용자를 추가하는데, [프로그래밍 방식 엑세스]를 선택해야 한다. 사용자를 생성하고 나면 <strong>AWS Access Key ID</strong>와 <strong>AWS Secret Access Key</strong>가 부여되는데, 바로 사용할것이므로 메모해 두거나 csv 파일을 다운받아 둔다.</p>
+
+<h3 id="ec2에-codedeploy-agent-설치">EC2에 CodeDeploy Agent 설치</h3>
+
+<p>EC2에 접속하여 aws-cli를 설치/업데이트 한다. AWS Linux에는 이미 설치되어 있으므로 업데이트 한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>awscli <span class="nt">--upgrade</span> <span class="nt">--user</span>
+</code></pre></div></div>
+
+<p>다음으로 aws-cli를 구성하는데, 이 때, 아까 부여받았던 <strong>AWS Access Key ID</strong>와 <strong>AWS Secret Access Key</strong>를 입력한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /home/ec2-user/
+<span class="nb">sudo </span>aws configure
+AWS Access Key ID <span class="o">[</span>None]: <span class="c"># access key</span>
+AWS Secret Access Key <span class="o">[</span>None]: <span class="c"># secret access key</span>
+Default region name <span class="o">[</span>None]: <span class="c"># 리전 네임</span>
+Default output format <span class="o">[</span>None]: json
+</code></pre></div></div>
+
+<p>이제, <a href="https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html">AWS 자습서</a>에 따라 CodeDeploy Agent를 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://bucket-name.s3.region-identifier.amazonaws.com/latest/install
+<span class="nb">chmod</span> +x ./install
+<span class="nb">sudo</span> ./install auto
+<span class="nb">sudo </span>service codedeploy-agent status <span class="c"># 실행 확인</span>
+</code></pre></div></div>
+
+<p>추가적으로 EC2가 재부팅될 경우 자동으로 CodeDeploy Agent가 실행될 수 있도록 <code class="highlighter-rouge">codedeploy-startup.sh</code> 파일을 생성해 준다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vim /etc/init.d/codedeploy-startup.sh
+</code></pre></div></div>
+
+<p>파일 내용은 아래와 같으며,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s1">'Starting codedeploy-agent'</span>
+<span class="nb">sudo </span>service codedeploy-agent restart
+</code></pre></div></div>
+
+<p>파일을 저장한 뒤 실행 권한을 추가해 준다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod</span> +x /etc/init.d/codedeploy-startup.sh
+</code></pre></div></div>
+
+<p>그리고, 배포 파일이 담길 폴더를 생성해 준다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>home/ec2-user/var/www/
+<span class="nb">mkdir </span>deploy
+</code></pre></div></div>
+
+<h3 id="프로젝트-내-appspecyml-파일-생성">프로젝트 내 appspec.yml 파일 생성</h3>
+
+<p>CodeDeploy Agent는 프로젝트의 루트 디렉토리에 있는 appspec.yml에 따라 배포를 진행하게 된다. 따라서 배포 파일을 어디에 저장할 것인지, 배포 각 단계에서 어떤 작업을 진행해야 하는지 명시 해 주어야 한다. <a href="https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/reference-appspec-file.html">참고자료</a></p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># appspec.yml</span>
+<span class="na">version</span><span class="pi">:</span> <span class="m">0.0</span>
+<span class="na">os</span><span class="pi">:</span> <span class="s">linux</span>
+<span class="na">files</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">source</span><span class="pi">:</span> <span class="s">/</span>
+    <span class="na">destination</span><span class="pi">:</span> <span class="s">/home/ec2-user/var/www/deploy/</span>
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">object</span><span class="pi">:</span> <span class="s">/</span>
+    <span class="na">pattern</span><span class="pi">:</span> <span class="s2">"</span><span class="s">**"</span>
+    <span class="na">owner</span><span class="pi">:</span> <span class="s">ec2-user</span>
+    <span class="na">group</span><span class="pi">:</span> <span class="s">ec2-user</span>
+<span class="na">hooks</span><span class="pi">:</span>
+  <span class="na">AfterInstall</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">location</span><span class="pi">:</span> <span class="s">scripts/install_dependencies</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="m">120</span>
+      <span class="na">runas</span><span class="pi">:</span> <span class="s">ec2-user</span>
+  <span class="na">ApplicationStart</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">location</span><span class="pi">:</span> <span class="s">scripts/restart_server</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="m">10</span>
+      <span class="na">runas</span><span class="pi">:</span> <span class="s">root</span>
+  <span class="na">ValidateService</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">location</span><span class="pi">:</span> <span class="s">scripts/validate_server</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="m">30</span>
+      <span class="na">runas</span><span class="pi">:</span> <span class="s">ec2-user</span>
+</code></pre></div></div>
+
+<p>script 폴더 내 각 파일은 아래와 같다.
+마지막 validate_server는 서버가 제대로 재시작 되었는지 확인하기 위해서 로컬호스트로 get요청을 보내 응답코드를 확인하는 과정이다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># scripts/install_dependencies
+echo '============================'
+echo 'Running install_dependencies'
+echo '============================'
+
+/usr/local/bin/pm2 kill
+sudo service mysqld start
+source /home/ec2-user/.bash_profile
+cd /home/ec2-user/var/www/deploy
+npm install
+
+# scripts/restart_server
+echo '======================'
+echo 'Running restart_server'
+echo '======================'
+
+NODE_ENV=production /usr/local/bin/pm2 start /home/ec2-user/var/www/lifeinjeju/app.js -i 0 --name "admin" &amp;
+
+# scripts/validate_server
+echo '======================='
+echo 'Running validate_server'
+echo '======================='
+
+result=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3001/review)
+
+echo Check http://localhost:3001/review
+echo $result
+
+if [[ "$result" =~ "200" ]]; then
+  exit 0
+else
+  exit 1
+fi
+</code></pre></div></div>
+
+<h3 id="code-deploy-생성-및-실행">Code Deploy 생성 및 실행</h3>
+
+<p>먼저, Code Deploy 용 role을 생성해 준다. [AWS 서비스] 개체의 [CodeDeploy] 서비스를 선택해 준다. 정책은 <strong>AWSCodeDeployRole</strong>을 선택한다.</p>
+
+<p>이제 CodeDeploy 콘솔에서 애플리케이션을 생성할 차례이다. 컴퓨팅 플랫폼을 <strong>EC2/온프레미스</strong>로 선택해 준다. 생성된 애플리케이션에서, 배포 그룹을 생성해 준다. 서비스 역할은 이전에 생성했던 Code Deploy 용 role을 선택하고, 배포 유형을 선택한다. 환경 구성에서 Amazon EC2 인스턴스를 선택하고, 배포 대상 인스턴스를 선택한다. 로드밸런싱은 해제한다.</p>
+
+<p>배포 그룹이 생성되면, 배포를 생성할 수 있다. 방금 전 생성했던 배포그룹을 선택해 주고, Github 코드를 사용할 것이기 때문에 개정유형은 Github으로 선택한다. 별칭을 입력하면 github에 연결할 수 있다. 리포지토리 이름은 <code class="highlighter-rouge">별칭/리포지토리 이름</code>으로 입력하고, 배포하고자하는 커밋아이디를 입력한다.</p>
+
+<p>이제 배포 만들기를 클릭하면 배포가 진행된다.</p>
+:ET

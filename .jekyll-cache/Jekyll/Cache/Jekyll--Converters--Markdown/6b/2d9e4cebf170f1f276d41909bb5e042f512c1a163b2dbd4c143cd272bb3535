@@ -1,0 +1,9 @@
+I"�<p>아마존 EC2 인스턴스는 기본적으로 UTC으로 표시된다. 이것을 KST로 변경하는 방법은 아래와 같다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo cat</span> /etc/localtime
+<span class="nb">sudo rm</span> /etc/localtime
+<span class="nb">sudo ln</span> <span class="nt">-s</span> /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+</code></pre></div></div>
+
+<p>끝!</p>
+:ET

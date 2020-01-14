@@ -1,0 +1,65 @@
+I"%"<h3 id="문제">문제</h3>
+
+<p>Create a hash table with <code class="highlighter-rouge">insert()</code>, <code class="highlighter-rouge">retrieve()</code>, and <code class="highlighter-rouge">remove()</code> methods.
+Be sure to handle hashing collisions correctly.
+Set your hash table up to double the storage limit as soon as the total number of items stored is greater than 3/4th of the number of slots in the storage array.
+Resize by half whenever utilization drops below 1/4.</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">makeHashTable</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="kd">var</span> <span class="nx">storage</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">var</span> <span class="nx">storageLimit</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">result</span><span class="p">.</span><span class="nx">insert</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">getIndexBelowMaxForKey</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">storageLimit</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">])</span> <span class="p">{</span>
+      <span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">][</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+      <span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">][</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="nx">size</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">size</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="nx">storageLimit</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">storageLimit</span> <span class="o">=</span> <span class="nx">storageLimit</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">result</span><span class="p">.</span><span class="nx">retrieve</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">getIndexBelowMaxForKey</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">storageLimit</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">])</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">][</span><span class="nx">key</span><span class="p">];</span>
+      <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="nx">result</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">getIndexBelowMaxForKey</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">storageLimit</span><span class="p">);</span>
+    <span class="k">delete</span> <span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">][</span><span class="nx">key</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">===</span> <span class="p">{})</span> <span class="p">{</span>
+      <span class="nx">size</span><span class="o">--</span><span class="p">;</span>
+      <span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">size</span> <span class="o">&lt;</span> <span class="nx">storageLimit</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">storageLimit</span> <span class="o">=</span> <span class="nx">storageLimit</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// This is a "hashing function". You don't need to worry about it, just use it</span>
+<span class="c1">// to turn any string into an integer that is well-distributed between</span>
+<span class="c1">// 0 and max - 1</span>
+<span class="kd">var</span> <span class="nx">getIndexBelowMaxForKey</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">hash</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">hash</span> <span class="o">=</span> <span class="p">(</span><span class="nx">hash</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="nx">hash</span> <span class="o">+</span> <span class="nx">str</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="nx">hash</span> <span class="o">=</span> <span class="nx">hash</span> <span class="o">&amp;</span> <span class="nx">hash</span><span class="p">;</span> <span class="c1">// Convert to 32bit integer</span>
+    <span class="nx">hash</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">hash</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">hash</span> <span class="o">%</span> <span class="nx">max</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

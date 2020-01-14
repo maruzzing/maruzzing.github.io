@@ -1,0 +1,160 @@
+I"�.<p>Javascript는 Type에 있어 매우 유연한 언어이다. React로 앱을 개발하면서 Type 체킹을 통해 많은 버그를 잡을 수 있는데, React에서 Type 체킹을 할 수 있는 방법으로는 <strong>PropTypes, Flow, Typescript</strong> 등이 있다. 이 중, 컴포넌트의 props Type을 체크할 때 사용할 수 있는 <code class="highlighter-rouge">PropTypes</code>를 알아보자.</p>
+
+<h3 id="install-and-import">install and import</h3>
+
+<p>PropTypes을 사용하기 위해서는, <a href="https://www.npmjs.com/package/prop-types"><code class="highlighter-rouge">prop-types</code></a>를 설치하고, <code class="highlighter-rouge">import</code> 해야 한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save</span> prop-types
+</code></pre></div></div>
+
+<p><br /></p>
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">PropTypes</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">prop-types</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="proptypes로-type-체크하기기초">PropTypes로 Type 체크하기(기초)</h3>
+
+<p>먼저, PropTypes는 상위 컴포넌트로 부터 전달된 <code class="highlighter-rouge">props</code>의 Type을 체크하는 것이기 때문에 하위 컴포넌트가 필요하다.
+상위 컴포넌트 <code class="highlighter-rouge">App</code>에서 하위컴포넌트 <code class="highlighter-rouge">TypeTest</code>로 props를 전달하고, 아래와 같이 <code class="highlighter-rouge">PropTypes</code>를 사용하여 Type 체크를 할 수 있다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./App.css</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">PropTypes</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">prop-types</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">TypeTest</span> <span class="o">=</span> <span class="nx">props</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">str</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">TypeTest</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">str</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span>
+<span class="p">};</span>
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">TypeTest</span> <span class="na">str=</span><span class="si">{</span><span class="dl">"</span><span class="s2">Typechecking With PropTypes</span><span class="dl">"</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>만약, <code class="highlighter-rouge">PropTypes</code> 부분에서 type을 number로 정의하면, 아래와 같은 오류가 발생한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">TypeTest</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">str</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><img src="/images/type_error.png" alt="PropTypes error" title="PropTypes error" /></p>
+
+<p><br /></p>
+
+<h3 id="proptypes로-type-체크하기응용">PropTypes로 Type 체크하기(응용)</h3>
+
+<ul>
+  <li>값을 필수적으로 가져야 한다면 Type 뒤에 <code class="highlighter-rouge">isRequired</code>를 붙여준다.</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">TypeTest</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">str</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>다양한 Type은 아래와 같이 나타낼 수 있다.</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">TypeTest</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">optionalArray</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">array</span><span class="p">,</span>
+  <span class="na">optionalBool</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">bool</span><span class="p">,</span>
+  <span class="na">optionalFunc</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">func</span><span class="p">,</span>
+  <span class="na">optionalNumber</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">,</span>
+  <span class="na">optionalObject</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">object</span><span class="p">,</span>
+  <span class="na">optionalString</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
+  <span class="na">optionalSymbol</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">symbol</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>두가지 이상의 Type 중 하나를 만족하면 될 때, <code class="highlighter-rouge">oneOfType([])</code>을 사용한다.</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">optionalStringOrNumber</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">oneOfType</span><span class="p">([</span>
+    <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
+    <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span>
+  <span class="p">]),</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>특정 Type을 가진 element들로 이루어진 배열과, 객체를 확인할 때는,</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">optionalArrayOf</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">arrayOf</span><span class="p">(</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">),</span>
+
+  <span class="nx">optionalObjectOf</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">objectOf</span><span class="p">(</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">),</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>특정 형태를 가진 객체를 확인할 때는,</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">optionalObjectWithShape</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">shape</span><span class="p">({</span>
+    <span class="na">color</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span>
+  <span class="p">}),</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>element를 props로 전달할 수도 있다.</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">TypeTest</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">children</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">isRequired</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>class의 instance를 전달할 때는,</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">TypeTest</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">optionalMessage</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">instanceOf</span><span class="p">(</span><span class="nx">Message</span><span class="p">),</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>class component 내에서 static 형태로 쓰일 수도 있다.</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">State</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+   <span class="kd">static</span> <span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">requiredNumber</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span>
+
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+:ET

@@ -1,0 +1,100 @@
+I"�<h2 id="이번주-목표">이번주 목표</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Turtle Step</strong> TestFlight test</li>
+</ul>
+
+<hr />
+
+<h2 id="-2019년-9월-23일">📅 2019년 9월 23일</h2>
+
+<h3 id="todo">Todo</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />JS 알고리즘 문제 풀기</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Turtle Step 도메인 연결 및 SSL/TLS 등록</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Turtle Step AWS 서버로 소셜로그인 구현</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Turtle Step 회원탈퇴 구현</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Turtle Step 블로그 페이지 만들기</li>
+</ul>
+
+<h3 id="aws-ssltls-등록하기">AWS SSL/TLS 등록하기</h3>
+
+<p><a href="/study/etc/AWS-SSL-TLS-등록하기/">AWS SSL/TLS 등록하기</a></p>
+
+<hr />
+
+<h2 id="-2019년-9월-24일">📅 2019년 9월 24일</h2>
+
+<h3 id="todo-1">Todo</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />JS 알고리즘 문제 풀기</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Turtle Step KeyboardAvoidingView 구현</li>
+</ul>
+
+<h3 id="keyboardavoidingview-적용하기">KeyboardAvoidingView 적용하기</h3>
+
+<p><a href="/study/rnative/KeyboardAvoidingView-적용하기/">KeyboardAvoidingView 적용하기</a></p>
+
+<hr />
+
+<h2 id="-2019년-9월-25일">📅 2019년 9월 25일</h2>
+
+<h3 id="todo-2">Todo</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />JS 알고리즘 문제 풀기</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Turtle Step TestFlight 테스트 및 수정</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Turtle Step 소셜로그인 로딩 애니메이션 구현</li>
+</ul>
+
+<h3 id="메일발송기능-적용하기">메일발송기능 적용하기</h3>
+
+<p><a href="/study/rnative/메일발송기능-적용하기/">메일발송기능 적용하기</a></p>
+
+<h3 id="webview-내부에-lottie로-애니-구현하기">webView 내부에 Lottie로 애니 구현하기</h3>
+
+<p><a href="/study/rnative/webView-내부에-Lottie로-애니-구현하기/">webView 내부에 Lottie로 애니 구현하기</a></p>
+
+<hr />
+
+<h2 id="-2019년-9월-26일">📅 2019년 9월 26일</h2>
+
+<h3 id="react에서-svg-파일-렌더하기">React에서 .svg 파일 렌더하기</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">ReactComponent</span> <span class="k">as</span> <span class="nx">MySvg</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./my-svg.svg</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">return</span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">MySvg</span> <span class="p">/&gt;</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-2019년-9월-27일">📅 2019년 9월 27일</h2>
+
+<h3 id="todo-3">Todo</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />React Hooks 공부</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />TypeScript 공부</li>
+</ul>
+
+<hr />
+
+<h2 id="-2019년-9월-29일">📅 2019년 9월 29일</h2>
+
+<h3 id="todo-4">Todo</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />요가원</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />once upon a time in hollywood 영화보기</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />TypeScript 공부</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />유닛테스트 공부</li>
+</ul>
+
+<h3 id="react-testing-library로-유닛테스트-해보기">React Testing Library로 유닛테스트 해보기</h3>
+
+<p><a href="/study/react/React-Testing-Library로-유닛테스트-해보기/">React Testing Library로 유닛테스트 해보기</a></p>
+:ET

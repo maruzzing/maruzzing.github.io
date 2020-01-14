@@ -1,0 +1,48 @@
+I"q<h3 id="문제">문제</h3>
+
+<p>Assignment: Write a function that returns true if a linked list contains a cycle, or false if it terminates somewhere</p>
+
+<p>Explanation:</p>
+
+<p>Generally, we assume that a linked list will terminate in a null next pointer, as follows:</p>
+
+<p>A -&gt; B -&gt; C -&gt; D -&gt; E -&gt; null</p>
+
+<p>A ‘cycle’ in a linked list is when traversing the list would result in visiting the same nodes over and over. This is caused by pointing a node in the list to another node that already appeared earlier in the list.</p>
+
+<p>Example code:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">nodeA</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">(</span><span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">nodeB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeA</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">(</span><span class="dl">"</span><span class="s2">B</span><span class="dl">"</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">nodeC</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeB</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">(</span><span class="dl">"</span><span class="s2">C</span><span class="dl">"</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">nodeD</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeC</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">(</span><span class="dl">"</span><span class="s2">D</span><span class="dl">"</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">nodeE</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeD</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">(</span><span class="dl">"</span><span class="s2">E</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">hasCycle</span><span class="p">(</span><span class="nx">nodeA</span><span class="p">);</span> <span class="c1">// =&gt; false</span>
+<span class="nx">nodeE</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">nodeB</span><span class="p">;</span>
+<span class="nx">hasCycle</span><span class="p">(</span><span class="nx">nodeA</span><span class="p">);</span> <span class="c1">// =&gt; true</span>
+</code></pre></div></div>
+
+<p>Constraint 1: Do this in linear time
+Constraint 2: Do this in constant space
+Constraint 3: Do not mutate the original nodes in any way</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Node</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span> <span class="na">next</span><span class="p">:</span> <span class="kc">null</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">hasCycle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">linkedList</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">values</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">linkedList</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">values</span><span class="p">[</span><span class="nx">linkedList</span><span class="p">.</span><span class="nx">value</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">values</span><span class="p">[</span><span class="nx">linkedList</span><span class="p">.</span><span class="nx">value</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">linkedList</span> <span class="o">=</span> <span class="nx">linkedList</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

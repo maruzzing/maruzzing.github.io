@@ -1,0 +1,76 @@
+I"�$<p>모바일에서 사용자에게 어떤 정보를 알려주기 위해 화면위에 잠깐 나타났다가 사라지는 것을 Toast라고 한다. 마치 토스트에서 식빵이 튀어오르는 것처럼 🍞.. Alert 대신 Toast를 써보려고 라이브러리를 설치해 봤는데 Modal 위에 Toast를 띄우려니 자꾸 Toast가 Modal 밑으로 숨어버려 그냥 만들어 보기로 했다.</p>
+
+<p>React Native의 <code class="highlighter-rouge">Modal</code> API 와 <code class="highlighter-rouge">setTimeout()</code>을 사용해 간단하게 구현할 수 있다.
+React Hooks를 사용해 <code class="highlighter-rouge">Toast</code> 컴포넌트에 전달해줄 boolean 형태의 <code class="highlighter-rouge">visible</code>과 <code class="highlighter-rouge">handlePress()</code>를 만들고, visible 상태를 변경할 trigger 버튼을 만든다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Toast</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Toast</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">visible</span><span class="p">,</span> <span class="nx">setVisible</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">handlePress</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setVisible</span><span class="p">(</span><span class="o">!</span><span class="nx">visible</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">SafeAreaView</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Toast</span> <span class="na">handlePress=</span><span class="si">{</span><span class="nx">handlePress</span><span class="si">}</span> <span class="na">visible=</span><span class="si">{</span><span class="nx">visible</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">TouchableOpacity</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="si">}</span> <span class="na">onPress=</span><span class="si">{</span><span class="nx">handlePress</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="p">&gt;</span>Want some toast?<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">TouchableOpacity</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">SafeAreaView</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>이제 Toast.js 파일에 <code class="highlighter-rouge">Modal</code>을 이용해 <code class="highlighter-rouge">Toast</code>를 만든다.<code class="highlighter-rouge">Modal</code>의 <code class="highlighter-rouge">onShow</code> 함수를 사용해
+모달이 실행되는 시점에 일정 시간 뒤 모달을 다시 닫아주는 함수를 실행하는 <code class="highlighter-rouge">setTimeout</code> 함수를 실행한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Modal</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Toast</span> <span class="o">=</span> <span class="p">({</span><span class="nx">visible</span><span class="p">,</span> <span class="nx">handlePress</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Modal</span>
+      <span class="na">animationType=</span><span class="s2">"fade"</span>
+      <span class="na">transparent=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span>
+      <span class="na">visible=</span><span class="si">{</span><span class="nx">visible</span><span class="si">}</span>
+      <span class="na">onShow=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span>
+        <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">handlePress</span><span class="p">();</span>
+        <span class="p">},</span> <span class="mi">2000</span><span class="p">)</span>
+      <span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modal</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="p">&gt;</span>2초 뒤에 사라지는 토스트<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Modal</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">modal</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">opacity</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">80%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">44</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">black</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">text</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Toast</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>시연해 보면,</p>
+
+<div class="simulContainer">
+<img src="/images/toast-gif.gif" alt="toast-gif" width="250em" />
+</div>
+
+<p>위치와 시간, 색상 등을 커스터마이징 해서 유용하게 쓸 수 있을 것 같다.</p>
+:ET

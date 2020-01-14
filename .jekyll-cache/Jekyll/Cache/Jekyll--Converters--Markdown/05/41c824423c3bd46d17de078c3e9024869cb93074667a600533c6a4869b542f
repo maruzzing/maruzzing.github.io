@@ -1,0 +1,39 @@
+I"�	<p>ios와 안드로이드를 한 번에 개발할 수 있는, React를 알면 쉽게(😉) 시작할 수 있는 <strong>React Native</strong>를 시작해 보자.</p>
+
+<p>Expo라는 플랫폼을 사용할 수 있지만, 개발을 하다보면 여러가지 한계점이 있기 때문에 <strong>React Native CLI</strong>로 시작해보겠다.</p>
+
+<h2 id="1-앱스토어에서-xcode를-설치">1. 앱스토어에서 xcode를 설치</h2>
+
+<p><img src="/images/xcode.png" alt="xcode" title="xcode" /></p>
+
+<h2 id="2-react-native-cli로-설치하기">2. React Native CLI로 설치하기</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>brew <span class="nb">install </span>watchman
+<span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">-g</span> react-native-cli <span class="c"># React Native CLI 설치</span>
+</code></pre></div></div>
+
+<p>1, 2번은 한 번 설치하고 나면 더이상 안해도 된다(당연)</p>
+
+<h2 id="3-react-native-시작하기">3. React Native 시작하기</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>react-native init &lt;project_name&gt;
+<span class="nv">$ </span><span class="nb">cd</span> &lt;project_name&gt;
+<span class="nv">$ </span>react-native run-ios <span class="c"># xcode에서 시뮬레이터가 열림</span>
+</code></pre></div></div>
+
+<p>노트북이 이륙할 것 같은 소리가 나지만, 당황하지 않고 기다리면 시뮬레이터가 열린다. 다양한 아이폰, 아이패드 사이즈로 앱 개발 상황을 확인할 수 있으며, 안드로이드는 안드로이드 스튜디오를 따로 설치해야 한다.</p>
+
+<h2 id="4-유용한-기능">4. 유용한 기능</h2>
+
+<p>시뮬레이터가 실행되고 있는 상황에서 <code class="highlighter-rouge">cmd+d</code>를 누르면 개발자 도구 창이 뜬다.</p>
+
+<p><img src="/images/rn_dev.png" alt="RN_개발자도구" title="RN_개발자도구" /></p>
+
+<p>여기서 많이 쓰이는 것이 브라우저에서 콘솔을 확인할 수 있는 <strong>Debug JS Remotely</strong>와 스타일을 확인할 수 있는 <strong>Toggle Inspector</strong>이다.</p>
+
+<hr />
+
+<p><span class="reference">참고자료</span></p>
+
+<p><a href="https://facebook.github.io/react-native/docs/getting-started">React Native 공식문서 Getting Started</a></p>
+:ET

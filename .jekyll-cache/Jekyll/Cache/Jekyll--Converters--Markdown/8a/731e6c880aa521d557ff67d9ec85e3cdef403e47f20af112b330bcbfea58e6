@@ -1,0 +1,48 @@
+I")<h3 id="문제">문제</h3>
+
+<p>In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:</p>
+
+<p>1p piece
+2p piece
+5p piece
+10p piece
+20p piece
+50p piece
+£1 (100p)
+£2 (200p)</p>
+
+<p>It is possible to make £2 in the following way:</p>
+
+<p>1 _ £1 + 1 _ 50p + 2 _ 20p + 1 _ 5p + 1 _ 2p + 3 _ 1p
+How many different ways can £2 be made using any number of coins?</p>
+
+<p>example usage of <code class="highlighter-rouge">makeChange</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// aka, there's only one way to make 1p. that's with a single 1p piece</span>
+<span class="nx">makeChange</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">===</span> <span class="mi">1</span><span class="p">;</span>
+<span class="c1">// aka, there's only two ways to make 2p. that's with two, 1p pieces or with a single 2p piece</span>
+<span class="nx">makeChange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">coins</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">makeChange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">total</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">makeSum</span> <span class="o">=</span> <span class="p">(</span><span class="nx">leftSum</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">leftSum</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">leftSum</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">makeSum</span><span class="p">(</span><span class="nx">leftSum</span><span class="p">,</span> <span class="nx">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="nx">leftSum</span> <span class="o">-=</span> <span class="nx">coins</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nx">makeSum</span><span class="p">(</span><span class="nx">total</span><span class="p">,</span> <span class="nx">coins</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

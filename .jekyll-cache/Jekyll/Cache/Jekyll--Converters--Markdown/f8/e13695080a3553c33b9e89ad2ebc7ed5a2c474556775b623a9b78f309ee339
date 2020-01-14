@@ -1,0 +1,136 @@
+I"�:<p>이전 프로젝트에서는 API 호출과 같은 비동기 처리를 위해 <a href="https://github.com/reduxjs/redux-thunk">redux-thunk 미들웨어</a>를 사용했었는데, 여기저기서 <a href="https://github.com/redux-saga/redux-saga">redux-saga</a>가 좋다, 기회가되면 한 번 써봐라고 해서 도전! 해보았다.</p>
+
+<p>redux-thunk 에서는 객체를 반환하는 액션과, 비동기 처리를 위한 함수를 반환하는 액션이 혼재되어 있어 복잡한 느낌을 준다. 하지만 redux-saga를 사용해 보니 훨씬 깔끔! 😺</p>
+
+<p>기본적으로 액션은 type과 payload를 가지는 순수 객체만을 반환하고, API 통신과 같은 비동기 프로세스는 saga 함수로 작성해 준다. 특정 saga 함수는 store를 리스닝 하고 있다가 특정 액션이 실행되면 실행된다.</p>
+
+<p><strong>서버에서 카테고리 리스트를 가지고 오는 API</strong>를 실행한다고 했을 때, 액션은 다음과 같이 정의해 줄 수 있다.</p>
+
+<h3 id="액션-정의하기">액션 정의하기</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">getCategories</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="nx">INIT_GET_CATEGORIES</span> <span class="p">};</span>
+<span class="p">};</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getCategoriesSuccess</span> <span class="o">=</span> <span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="na">type</span><span class="p">:</span> <span class="nx">GET_CATEGORIES_SUCCESS</span><span class="p">,</span>
+  <span class="na">payload</span><span class="p">:</span> <span class="nx">response</span>
+<span class="p">});</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getCategoriesFail</span> <span class="o">=</span> <span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="na">type</span><span class="p">:</span> <span class="nx">GET_CATEGORIES_FAIL</span><span class="p">,</span>
+  <span class="nx">error</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="리듀서-정의하기">리듀서 정의하기</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">INITIAL_STATE</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">categories</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">INITIAL_STATE</span><span class="p">,</span> <span class="p">{</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">error</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="na">INIT_GET_CATEGORIES</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">};</span>
+    <span class="k">case</span> <span class="na">GET_CATEGORIES_SUCCESS</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span> <span class="nx">payload</span><span class="p">.</span><span class="nx">success</span><span class="p">,</span>
+        <span class="na">categories</span><span class="p">:</span> <span class="nx">payload</span><span class="p">.</span><span class="nx">categories</span>
+      <span class="p">};</span>
+    <span class="k">case</span> <span class="na">GET_CATEGORIES_FAIL</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">error</span>
+      <span class="p">};</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>여기까지는 기존에 사용하던 리덕스와 크게 다르지 않다. 이제 saga 함수를 정의해 주어야 한다.</p>
+
+<h3 id="saga-정의하기">saga 정의하기</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">put</span><span class="p">,</span> <span class="nx">call</span><span class="p">,</span> <span class="nx">takeLatest</span><span class="p">,</span> <span class="nx">all</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux-saga/effects</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">actions</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../actions</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">makeBearerToken</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">userToken</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">userToken</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">userToken</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">makeHeaderWithToken</span> <span class="o">=</span> <span class="nx">bearerToken</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">Authorization</span><span class="p">:</span> <span class="nx">bearerToken</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">function</span><span class="o">*</span> <span class="nx">handleGetCategories</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">bearerToken</span> <span class="o">=</span> <span class="k">yield</span> <span class="nx">makeBearerToken</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">makeHeaderWithToken</span><span class="p">(</span><span class="nx">bearerToken</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">yield</span> <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span>
+    <span class="s2">`</span><span class="p">${</span><span class="nx">serverEndpoint</span><span class="p">}</span><span class="s2">:</span><span class="p">${</span><span class="nx">port</span><span class="p">}</span><span class="s2">/category`</span><span class="p">,</span>
+     <span class="nx">config</span>
+    <span class="p">);</span>
+    <span class="k">yield</span> <span class="nx">put</span><span class="p">(</span><span class="nx">actions</span><span class="p">.</span><span class="nx">getCategoriesSuccess</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">yield</span> <span class="nx">put</span><span class="p">(</span><span class="nx">actions</span><span class="p">.</span><span class="nx">getCategoriesFail</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">function</span><span class="o">*</span> <span class="nx">categorySagas</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">yield</span> <span class="nx">all</span><span class="p">([</span>
+    <span class="nx">takeLatest</span><span class="p">(</span><span class="dl">'</span><span class="s1">INIT_GET_CATEGORIES</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleGetCategories</span><span class="p">),</span>
+  <span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>마지막 줄이 중요한데, <code class="highlighter-rouge">'INIT_GET_CATEGORIES'</code>라는 액션이 실행되면, <code class="highlighter-rouge">handleGetCategories</code>를 실행하라는 것이다.</p>
+
+<p>또한, API 프로세스가 성공했을 때 이전에 정의한 <code class="highlighter-rouge">getCategoriesSuccess</code>을 호출할 수 도 있고, <code class="highlighter-rouge">yield put()</code> 내에 바로
+<code class="highlighter-rouge">{ type: 'GET_CATEGORIES_SUCCESS', payload: data }</code>를 적용해 줄 수 도 있다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">yield</span> <span class="nx">put</span><span class="p">(</span><span class="nx">actions</span><span class="p">.</span><span class="nx">getCategoriesSuccess</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="c1">//yield put({ type: 'GET_CATEGORIES_SUCCESS', payload: data });</span>
+</code></pre></div></div>
+
+<h3 id="redux-saga-연결하기">redux-saga 연결하기</h3>
+
+<p>/saga/index.js 파일에 아래와 같이 rootSaga를 정의해 주고,</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">spawn</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux-saga/effects</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">categorySagas</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./categorySagas</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span><span class="o">*</span> <span class="nx">rootSaga</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">yield</span> <span class="nx">spawn</span><span class="p">(</span><span class="nx">categorySagas</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>store.js에서 <code class="highlighter-rouge">store</code>를 생성할 때 미들웨어로 <code class="highlighter-rouge">sagaMiddleware</code>를 적용한다.
+또한, <code class="highlighter-rouge">rootSaga</code>를 <code class="highlighter-rouge">run</code> 해준다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">createStore</span><span class="p">,</span> <span class="nx">applyMiddleware</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">createSagaMiddleware</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux-saga</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux-logger</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">reducer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./reducers</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">rootSaga</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sagas</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">sagaMiddleware</span> <span class="o">=</span> <span class="nx">createSagaMiddleware</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">applyMiddleware</span><span class="p">(</span><span class="nx">sagaMiddleware</span><span class="p">,</span> <span class="nx">logger</span><span class="p">));</span>
+<span class="nx">sagaMiddleware</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">rootSaga</span><span class="p">);</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">store</span><span class="p">;</span>
+</code></pre></div></div>
+:ET

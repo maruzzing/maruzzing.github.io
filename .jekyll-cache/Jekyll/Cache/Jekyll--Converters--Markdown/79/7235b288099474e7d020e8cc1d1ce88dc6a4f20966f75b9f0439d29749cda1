@@ -1,0 +1,51 @@
+I"><h3 id="문제">문제</h3>
+
+<p>Write a function that takes a number as its argument and returns a string that represents that number’s simplified fraction.</p>
+
+<p>Example: toFraction(0.5) === ‘1/2’</p>
+
+<p>Whole numbers and mixed fractions should be returned as irregular fractions</p>
+
+<p>Example: toFraction(3.0) === ‘3/1’</p>
+
+<p>Example: toFraction(2.5) === ‘5/2’</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">toFraction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">simplifiedFraction</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">splited</span> <span class="o">=</span> <span class="nx">number</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">splited</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">simplifiedFraction</span> <span class="o">=</span> <span class="nx">number</span> <span class="o">+</span> <span class="nx">simplifiedFraction</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">simplifiedFraction</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nx">splited</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">length</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">upper</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">number</span> <span class="o">*</span> <span class="nx">bottom</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">areDividable</span> <span class="o">=</span> <span class="p">(</span><span class="nx">number1</span><span class="p">,</span> <span class="nx">number2</span><span class="p">,</span> <span class="nx">factor</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">number1</span> <span class="o">%</span> <span class="nx">factor</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">number2</span> <span class="o">%</span> <span class="nx">factor</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="kd">const</span> <span class="nx">simplify</span> <span class="o">=</span> <span class="p">(</span><span class="nx">upper</span><span class="p">,</span> <span class="nx">bottom</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+    <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nx">factors</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">f</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">areDividable</span><span class="p">(</span><span class="nx">upper</span><span class="p">,</span> <span class="nx">bottom</span><span class="p">,</span> <span class="nx">f</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">upper</span> <span class="o">=</span> <span class="nx">upper</span> <span class="o">/</span> <span class="nx">f</span><span class="p">;</span>
+        <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bottom</span> <span class="o">/</span> <span class="nx">f</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">count</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">===</span> <span class="nx">factors</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">upper</span> <span class="o">+</span> <span class="nx">simplifiedFraction</span> <span class="o">+</span> <span class="nx">bottom</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">simplify</span><span class="p">(</span><span class="nx">upper</span><span class="p">,</span> <span class="nx">bottom</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="nx">simplify</span><span class="p">(</span><span class="nx">upper</span><span class="p">,</span> <span class="nx">bottom</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

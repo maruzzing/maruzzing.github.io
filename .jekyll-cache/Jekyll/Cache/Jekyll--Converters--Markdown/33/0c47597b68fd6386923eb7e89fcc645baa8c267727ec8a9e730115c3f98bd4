@@ -1,0 +1,91 @@
+I"o(<p>리액트 네이티브의 <a href="https://facebook.github.io/react-native/docs/modal.html">Modal 컴포넌트</a>를 사용하면 간단한 팝업창을 만들 수 있다.</p>
+
+<p>먼저, Modal 컴포넌트의 <strong>주요 props</strong>에 대해 알아보자.</p>
+
+<ul>
+  <li>visible : <code class="highlighter-rouge">boolean</code> 값으로, <code class="highlighter-rouge">true</code>일 때 Modal창이 렌더 된다.</li>
+  <li>animationType : Modal창이 나타나고 사라질 때 효과로, <code class="highlighter-rouge">slide</code>, <code class="highlighter-rouge">fade</code>, <code class="highlighter-rouge">none</code>으로 설정할 수 있으며, 디폴트 값은 <code class="highlighter-rouge">none</code>이다.</li>
+  <li>transparent : <code class="highlighter-rouge">boolean</code> 값으로, <code class="highlighter-rouge">true</code>일 때 Modal이 투명한 배경에 렌더된다.</li>
+</ul>
+
+<h3 id="popup-컴포넌트-만들기">Popup 컴포넌트 만들기</h3>
+
+<p>Modal 컴포넌트의 transparent를 <code class="highlighter-rouge">true</code> 주고, Modal 컴포넌트 내부에 <code class="highlighter-rouge">backgroundColor: rgba(0,0,0,0.3)</code>를 가지는 View 컴포넌트를 만들어 주면, 반투명한 그림자를 가지는 모달을 만들 수 있다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span>
+  <span class="nx">Text</span><span class="p">,</span>
+  <span class="nx">View</span><span class="p">,</span>
+  <span class="nx">Modal</span><span class="p">,</span>
+  <span class="nx">TouchableHighlight</span><span class="p">,</span>
+  <span class="nx">StyleSheet</span><span class="p">,</span>
+  <span class="nx">Dimensions</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">Popup</span> <span class="o">=</span> <span class="nx">props</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Modal</span> <span class="na">animationType=</span><span class="s2">"slide"</span> <span class="na">transparent=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span> <span class="na">visible=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">visible</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalBackground</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modal</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Text</span><span class="p">&gt;</span>This is Popup!<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">TouchableHighlight</span> <span class="na">onPress=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">setModalVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Text</span><span class="p">&gt;</span>Close<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nc">TouchableHighlight</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Modal</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Popup</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">modalBackground</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">"</span><span class="s2">center</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">rgba(0,0,0,0.3)</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">width</span><span class="p">:</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">window</span><span class="dl">"</span><span class="p">).</span><span class="nx">width</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">window</span><span class="dl">"</span><span class="p">).</span><span class="nx">height</span>
+  <span class="p">},</span>
+  <span class="na">modal</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">"</span><span class="s2">80%</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="dl">"</span><span class="s2">20%</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="부모-컴포넌트-만들기">부모 컴포넌트 만들기</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span>
+  <span class="nx">View</span><span class="p">,</span>
+  <span class="nx">TouchableHighlight</span><span class="p">,</span>
+  <span class="nx">Text</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Popup</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Popup</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">Home</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">modalVisible</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="nx">setModalVisible</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+            <span class="na">modalVisible</span><span class="p">:</span> <span class="nx">value</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nc">View</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Popup</span> <span class="na">visible=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">modalVisible</span><span class="si">}</span> <span class="na">setModalVisible=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">setModalVisible</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TouchableHighlight</span> <span class="na">onPress=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">setModalVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Text</span><span class="p">&gt;</span>Open Popup<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">TouchableHighlight</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Home</span><span class="p">;</span>
+
+</code></pre></div></div>
+:ET

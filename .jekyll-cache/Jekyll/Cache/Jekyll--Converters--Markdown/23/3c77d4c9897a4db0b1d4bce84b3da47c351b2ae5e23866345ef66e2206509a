@@ -1,0 +1,55 @@
+I"�<p><a href="http://docs.sequelizejs.com/manual/">Sequelize</a>는 DB의 복잡한 문법을 간단하게 자바스크립트 객체 형식으로 사용할 수 있도록 해주는 ORM(Object-relational Mapping) 중 하나이다. 이번 포스트 에서는 Sequelize를 MySQL db와 연결시키는 방법을 알아보겠다. <strong>이미 db 내에 tables는 정의되어 있는 상황이다.</strong></p>
+
+<h3 id="sequelize와-필요-패키지-설치">Sequelize와 필요 패키지 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn add sequelize mysql2
+<span class="nv">$ </span>yarn global add sequelize-cli
+<span class="nv">$ </span>yarn sequelize init
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">sequelize init</code>을 하고나면 프로젝트의 루트디렉토리에 config, migrations, models, seeders 폴더가 생성된다.</p>
+
+<h3 id="configjson-파일-수정하기">config.json 파일 수정하기</h3>
+
+<p>sequelize init으로 만들어진 config.json 파일을 프로젝트 db 정보에 맞춰 수정한다.
+<code class="highlighter-rouge">"operatorsAliases": false</code>는 더이상 쓰이지 않으므로 삭제한다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"development"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">username</span><span class="p">],</span><span class="w">
+</span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">password</span><span class="p">],</span><span class="w">
+</span><span class="nl">"database"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">database</span><span class="w"> </span><span class="err">name</span><span class="p">],</span><span class="w">
+</span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">db</span><span class="w"> </span><span class="err">server</span><span class="w"> </span><span class="err">host</span><span class="p">],</span><span class="w">
+</span><span class="nl">"dialect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="mysql-연결하기">MySQL 연결하기</h3>
+
+<p>app.js 파일에 아래 코드를 추가하여 Sequelize를 통해 익스프레스와 mysql을 연결한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sequelize</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./models</span><span class="dl">"</span><span class="p">).</span><span class="nx">sequelize</span><span class="p">;</span>
+<span class="nx">sequelize</span><span class="p">.</span><span class="nx">sync</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">sync</code> 메서드를 사용하면 서버 실행 시 자동적으로 MySQL과 연동된다.</p>
+
+<h3 id="sequelize-auto를-사용하여-models-파일-만들기">sequelize-auto를 사용하여 models 파일 만들기</h3>
+
+<p>db에 스키마가 정의되어 있지 않은 상황이라면, models에 손수 정의해주어야 하는데, 이미 MySQL db에 스키마가 정의되어 있는 상황이라면 <code class="highlighter-rouge">sequelize-auto</code> 모듈을 사용하여 간단하게 models 파일을 만들 수 있다.</p>
+
+<p>먼저 <code class="highlighter-rouge">sequelize-auto</code>와 <code class="highlighter-rouge">mysql</code> 모듈을 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn global add sequelize-auto
+<span class="nv">$ </span>yarn global add mysql
+</code></pre></div></div>
+
+<p>그리고 아래 커맨드를 작성한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sequelize-auto <span class="nt">-h</span> <span class="o">[</span>host] <span class="nt">-d</span> <span class="o">[</span>database] <span class="nt">-u</span> <span class="o">[</span>username] <span class="nt">-x</span> <span class="o">[</span>password] <span class="nt">-p</span> <span class="o">[</span>port]  <span class="nt">--dialect</span> <span class="o">[</span>dialect] <span class="nt">-o</span> <span class="o">[</span>/path/to/models] <span class="nt">-C</span>
+</code></pre></div></div>
+
+<p>그럼 자동적으로 db에 정의된 스키마에 따라 models폴더 내에 파일이 생성된다!</p>
+
+<p><br /></p>
+:ET

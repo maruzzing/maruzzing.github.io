@@ -1,0 +1,91 @@
+I"�+<p>이전 포스팅에서 Express.js 환경에서 passport를 사용하여 자체회원 및 소셜회원의 회원가입과 로그인, 그리고 리액트 네이티브에서의 소셜로그인을 구현해 보았다. 이제 남은 것은 로그인 시 발급받은 토큰으로 로그인 상태를 유지하는 미들웨어를 구현하는 것이다.</p>
+
+<p>로그인 한 유저만 사용할 수 있는 기능의 경우, 클라이언트는 서버에 보내는 요청에 로그인 시 발급받은 토큰을 가지고 온다. 서버는 이 토큰의 유효성을 검사하여 요청에 대한 응답을 하게 되는데, 이 때, passport의 <code class="highlighter-rouge">JWTStrategy</code>를 사용할 수 있다.</p>
+
+<h2 id="jwt-유효성-검사-isloggedin-미들웨어-구현">JWT 유효성 검사 (IsLoggedIn 미들웨어 구현)</h2>
+
+<h3 id="passport-설치">Passport 설치</h3>
+
+<p>모든 과정의 시작단계, 패키지 설치! <code class="highlighter-rouge">JWTStrategy</code> 사용을 위해 <code class="highlighter-rouge">Jpassport-jwt</code>를 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add passport-jwt
+</code></pre></div></div>
+
+<h3 id="module-폴더-내-passportjs-작성">module 폴더 내 passport.js 작성</h3>
+
+<p>module/passport.js 파일에 토큰의 유효성을 검사하는 미들웨어를 작성한다. 설치된 패키지에서 <code class="highlighter-rouge">JWTStrategy</code>와 요청에서 토큰을 추출하는 <code class="highlighter-rouge">ExtractJWT</code> 모듈을 import 한다.</p>
+
+<p>토큰 추출과 디코딩을 위해 요청(<code class="highlighter-rouge">req</code>)에 토큰이 어떤 형식으로 전달하고 있는지와, 만들때 사용했던 secret을 <code class="highlighter-rouge">JWTStrategy</code>의 인자로 넘겨주어야 한다.
+이 프로젝트에서는 요청 헤더의 <code class="highlighter-rouge">Authorization</code>의 값으로 토큰을 <code class="highlighter-rouge">Bearer xxxxx(token)</code> 형식으로 담아서 보내기 때문에 <code class="highlighter-rouge">fromAuthHeaderAsBearerToken</code>을 사용했지만, 이 외에도 다양한 방법을 지원한다. (참고: <a href="https://github.com/mikenicholson/passport-jwt#extracting-the-jwt-from-the-request">Extracting the JWT from the request</a>)</p>
+
+<p>지난 포스트에서 토큰을 생성할 때 <code class="highlighter-rouge">{id: email or social_id}</code>를 <code class="highlighter-rouge">payload</code> 설정했으므로, 디코딩된 페이로드의 id가 서버에 존재하는 유저 id인지를 확인하는 과정을 거치면 유효성 검사가 끝난다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">passportJWT</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">passport-jwt</span><span class="dl">"</span><span class="p">),</span>
+  <span class="nx">JWTStrategy</span> <span class="o">=</span> <span class="nx">passportJWT</span><span class="p">.</span><span class="nx">Strategy</span><span class="p">,</span>
+  <span class="nx">ExtractJWT</span> <span class="o">=</span> <span class="nx">passportJWT</span><span class="p">.</span><span class="nx">ExtractJwt</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">jwtOpts</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">jwtFromRequest</span><span class="p">:</span> <span class="nx">ExtractJWT</span><span class="p">.</span><span class="nx">fromAuthHeaderAsBearerToken</span><span class="p">(),</span>
+  <span class="na">secretOrKey</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span>
+<span class="p">};</span>
+
+<span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="dl">"</span><span class="s2">jwt</span><span class="dl">"</span><span class="p">,</span>
+  <span class="k">new</span> <span class="nx">JWTStrategy</span><span class="p">(</span><span class="nx">jwtOpts</span><span class="p">,</span> <span class="p">(</span><span class="nx">jwtPayload</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Users</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+      <span class="na">where</span><span class="p">:</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nx">Op</span><span class="p">.</span><span class="nx">or</span><span class="p">]:</span> <span class="p">[{</span> <span class="na">email</span><span class="p">:</span> <span class="nx">jwtPayload</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span> <span class="p">{</span> <span class="na">social_id</span><span class="p">:</span> <span class="nx">jwtPayload</span><span class="p">.</span><span class="nx">id</span> <span class="p">}]</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+      <span class="p">});</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="isloggedin-미들웨어-작성">IsLoggedIn 미들웨어 작성</h3>
+
+<p>이제, 로그인한 유저를 판별하는 <code class="highlighter-rouge">IsLoggedIn</code> 미들웨어를 작성해 보자. module/middleware.js 라는 파일을 만들어 위에서 작성한 <code class="highlighter-rouge">JWTStrategy</code>의 콜백으로, 유효한 user라면 <code class="highlighter-rouge">req.user</code>에 user 정보를 담아 다음 미들웨어 혹은 라우터에서 사용할 수 있도록 하고, user 정보가 없다면 응답으로 에러메시지를 보낸다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">passport</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">passport</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">isLoggedIn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="dl">"</span><span class="s2">jwt</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">session</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">req</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+      <span class="nx">next</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">로그인 필요</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">})(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="appjs에서-isloggedin-미들웨어-적용">app.js에서 IsLoggedIn 미들웨어 적용</h3>
+
+<p>app.js 파일에 작성한 <code class="highlighter-rouge">IsLoggedIn</code> 미들웨어를 import 해오고, 로그인이 필요한 라우터에 적용시키면 끝!!!</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">isLoggedIn</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./module/middleware</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">"</span><span class="s2">/category</span><span class="dl">"</span><span class="p">,</span> <span class="nx">isLoggedIn</span><span class="p">,</span> <span class="nx">categoryRouter</span><span class="p">);</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p><br />
+<span class="reference">관련 post</span></p>
+
+<ul>
+  <li><a href="/study/nodejs/Passport와-JWT를-이용하여-Auth-구현하기-1/">Passport와 JWT를 이용하여 Auth 구현하기[1]</a></li>
+  <li><a href="/study/nodejs/Passport와-JWT를-이용하여-Auth-구현하기-2/">Passport와 JWT를 이용하여 Auth 구현하기[2]</a></li>
+  <li><a href="/study/rnative/Passport와-JWT를-이용하여-Auth-구현하기-3/">Passport와 JWT를 이용하여 Auth 구현하기[3]</a></li>
+</ul>
+:ET

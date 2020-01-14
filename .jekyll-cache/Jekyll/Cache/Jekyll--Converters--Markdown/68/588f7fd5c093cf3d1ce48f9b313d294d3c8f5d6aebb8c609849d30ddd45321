@@ -1,0 +1,29 @@
+I"�<h3 id="문제">문제</h3>
+
+<p>초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">prices</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">index</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+        <span class="n">price_array</span> <span class="o">=</span> <span class="n">prices</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">less_than</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">price</span><span class="p">,</span> <span class="n">price_array</span><span class="p">))</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">less_than</span> <span class="o">==</span> <span class="p">[]):</span>
+            <span class="n">answer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">first_index</span> <span class="o">=</span> <span class="n">price_array</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">less_than</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">answer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">answer</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<div class="innerBox">이 문제는 효율성에서 통과하지 못했다. Stack을 사용해서 다시 풀어봐야 겠다!</div>
+
+<p><br />
+<span class="reference">문제바로가기</span></p>
+
+<p><a href="https://programmers.co.kr/learn/courses/30/lessons/42584">주식가격</a></p>
+:ET

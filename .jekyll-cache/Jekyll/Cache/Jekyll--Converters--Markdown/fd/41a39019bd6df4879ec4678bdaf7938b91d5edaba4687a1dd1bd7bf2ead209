@@ -1,0 +1,67 @@
+I"h"<p>이미지 업로드는 보통 <code class="highlighter-rouge">multipart/form-data</code> 타입으로 전송되는데, express는 이 타입의 data를 직접 처리하는 기능을 제공하지 않기 때문에 multipart 처리용 모듈을 사용해야 한다. 대표적인 것이 <a href="https://github.com/expressjs/multer/blob/master/README.md"><strong>Multer</strong></a>이다.</p>
+
+<p>대부분의 경우, 이미지는 직접적으로 db에 저장하지 않고, <strong>server에 저장하고 저장 경로만 db에 저장</strong>한다. 예제에서는 루트 디렉토리의 uploads 폴더에 저장하겠다.</p>
+
+<h3 id="multer-모듈-설치하기">Multer 모듈 설치하기</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add multer
+</code></pre></div></div>
+
+<h3 id="파일명과-저장경로를-정의하는-미들웨어를-만드는-객체-생성하기">파일명과 저장경로를 정의하는 미들웨어를 만드는 객체 생성하기</h3>
+
+<p><code class="highlighter-rouge">multer.diskStorage()</code>를 이용하여 파일명과 저장경로를 설정하는 객체를 만든다. 이 객체는 이후 multer 미들웨어를 생상하는 객체가 된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">multer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">multer</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">upload</span> <span class="o">=</span> <span class="nx">multer</span><span class="p">({</span>
+  <span class="na">storage</span><span class="p">:</span> <span class="nx">multer</span><span class="p">.</span><span class="nx">diskStorage</span><span class="p">({</span>
+    <span class="nx">destination</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="dl">"</span><span class="s2">uploads/</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//cb 콜백함수를 통해 전송된 파일을 'uploads' 폴더에 저장</span>
+    <span class="p">},</span>
+    <span class="nx">filename</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">ext</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">extname</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">originalname</span><span class="p">);</span> <span class="c1">//파일 확장자</span>
+      <span class="nx">cb</span><span class="p">(</span>
+        <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">originalname</span><span class="p">,</span> <span class="nx">ext</span><span class="p">)</span> <span class="o">+</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">valueOf</span><span class="p">()</span> <span class="o">+</span> <span class="nx">ext</span>
+      <span class="p">);</span> <span class="c1">// cb 콜백함수를 통해 전송된 파일 이름 설정(파일명 + 업로드시간 + 확장자)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="multer-미들웨어-작성하기">Multer 미들웨어 작성하기</h3>
+
+<p>upload는 미들웨어를 만드는 여러가지 메서드를 가지고 있는데, 그 종류는 아래와 같다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">.single(filename)</code> : body의 정보 중, <code class="highlighter-rouge">filename</code>으로 전송된 하나의 파일만 <code class="highlighter-rouge">req.file</code>로, 나머지 정보는 ㅍreq.body`로 접근할 수있게 함.</li>
+  <li><code class="highlighter-rouge">.array(filename, [, maxCount])</code> : 모두 동일한 이름으로 된 1개 이상의 파일을 array로 받아 <code class="highlighter-rouge">req.files</code>로, 나머지 정보는 <code class="highlighter-rouge">req.body</code>로 접근할 수있게 함.</li>
+  <li><code class="highlighter-rouge">.fields(fields)</code> : 다른 이름(<code class="highlighter-rouge">fields</code>)의 파일들을 받아 <code class="highlighter-rouge">req.files</code>로, 나머지 정보는 <code class="highlighter-rouge">req.body</code>로 접근할 수있게 함. <code class="highlighter-rouge">fields</code>는 아래와 같이 전송되어야 함.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">avatar</span><span class="dl">"</span><span class="p">,</span> <span class="na">maxCount</span><span class="p">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gallery</span><span class="dl">"</span><span class="p">,</span> <span class="na">maxCount</span><span class="p">:</span> <span class="mi">8</span> <span class="p">}];</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">.none()</code>: text만 전송되어야 하며, file이 전송되었을 시, error를 표출함.</li>
+</ul>
+
+<p><br /></p>
+
+<p><code class="highlighter-rouge">uploadImage</code>라는 이름으로 <code class="highlighter-rouge">/post</code> url에 하나의 이미지 파일을 전송한 경우, 아래와 같이 작성할 수 있다. 실행이 되고 나면, uploads 폴더에 이미지가 저장된 것을 확인할 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/post</span><span class="dl">"</span><span class="p">,</span> <span class="nx">upload</span><span class="p">.</span><span class="nx">single</span><span class="p">(</span><span class="dl">"</span><span class="s2">uploadedImage</span><span class="dl">"</span><span class="p">),</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">file ::: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">file</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">body ::: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">201</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><span class="reference">관련 post</span></p>
+
+<p><a href="/study/nodejs/multer-사용하여-이미지-업로드-구현하기">multer 사용하여 이미지 업로드 구현하기</a></p>
+:ET

@@ -1,0 +1,23 @@
+I"E	<p>CRA로 만든 프로젝트에서는 프로젝트 전체에서 접근할 수 있는 <strong>환경변수(Environment Variables)</strong>를 루트 디렉토리의 <code class="highlighter-rouge">.env</code> 파일에 정의하여 사용할 수 있다.</p>
+
+<p><code class="highlighter-rouge">NODE_ENV</code>는 이미 정의가 되어있으며, 이를 활용하여 빌드 환경에 따라 변수 값을 다르게 줄 수 있다.</p>
+
+<p>또한, <code class="highlighter-rouge">REACT_APP_</code>로 시작하는 변수를 설정할 수 있으며, 이 변수들은 <code class="highlighter-rouge">process.env</code>에 존재하므로,<code class="highlighter-rouge">.env</code> 파일에 <code class="highlighter-rouge">REACT_APP_SERVER_ENDPOINT</code>를 정의했다면, <code class="highlighter-rouge">process.env.REACT_APP_SERVER_ENDPOINT</code> 로 접근할 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">serverEndpoint</span> <span class="o">=</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">development</span><span class="dl">"</span>
+    <span class="p">?</span> <span class="dl">"</span><span class="s2">http://localhost</span><span class="dl">"</span>
+    <span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_SERVER_ENDPOINT</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>참고사항</strong></p>
+
+<ul>
+  <li>새로운 환경변수를 정의했거나, 수정했다면 development server를 재시작해야 업데이트된 변수를 확인할 수 있다.</li>
+  <li><code class="highlighter-rouge">NODE_ENV</code>는 <code class="highlighter-rouge">npm start</code>로 서버 시작 시 <strong>development</strong>로, <code class="highlighter-rouge">npm test</code>일 때 <strong>test</strong>로, <code class="highlighter-rouge">npm build</code>일 때 <strong>production</strong>으로 설정된다.</li>
+</ul>
+
+<p><br /></p>
+:ET

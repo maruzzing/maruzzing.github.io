@@ -1,0 +1,25 @@
+I"�	<h3 id="문제">문제</h3>
+
+<p>Implement the function asyncMap:</p>
+
+<p>asyncMap has two parameters, an array of asynchronous functions (tasks) and a callback.
+Each of the tasks takes a separate callback and invokes that callback when complete.</p>
+
+<p>The callback passed to asyncMap is then performed on the results of the callbacks of the tasks.</p>
+
+<p>The order of these results should be the same as the order of the tasks.
+It is important to note that this is not the order in which the tasks return, but the order in which they are passed to asyncMap.
+Once all the callbacks of the tasks are returned, asyncMap should invoke the callback on the results array.</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">asyncMap</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">promises</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">tasks</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">tasks</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="nx">promises</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">promise</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">promises</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

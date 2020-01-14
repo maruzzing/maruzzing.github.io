@@ -1,0 +1,120 @@
+I"�A<p>이미지를 업로드하기 전에 어떤 이미지를 선택했는지 미리 보여주고, 대표이미지를 설정하거나, 필요없는 파일은 삭제하도록 하는 기능이 필요하다. 이번 포스트에서는 미리보기 기능을 구현하는 방법을 알아보겠다.</p>
+
+<p>이미지 디스플레이는 <code class="highlighter-rouge">&lt;img&gt;</code> 태그로 하는데, 이를 위해서는 이미지에 대한 파일 경로(url)이 필요하며, 이는 <code class="highlighter-rouge">FileReader</code> 객체를 활용해서 구현할 수 있다.</p>
+
+<h3 id="파일선택-input-만들기">파일선택 input 만들기</h3>
+
+<p><a href="/study/react/리액트로-이미지-업로더-구현하기/">리액트로 이미지 업로더 구현하기</a>에서 사용한 <code class="highlighter-rouge">&lt;inupt type="file"&gt;</code>을 이용하여, 기본 파일선택 틀을 만든다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">selectedFiles</span><span class="p">:</span> <span class="kc">null</span> <span class="p">};</span>
+  <span class="nx">fileChangedHandler</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">selectedFiles</span><span class="p">:</span> <span class="nx">files</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span> <span class="na">marginTop</span><span class="p">:</span> <span class="dl">"</span><span class="s2">100px</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type=</span><span class="s2">"file"</span> <span class="nt">multiple</span> <span class="na">onChange=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">fileChangedHandler</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="componentdidupdate를-이용하여-renderpreview-트리거-만들기">componentDidUpdate를 이용하여 renderPreview() 트리거 만들기</h3>
+
+<p>선택된 파일이 바뀔 때 마다(state가 변경될 때마다) 프리뷰를 다시 그릴 수 있도록 하기 위해서 React Life Cycle의 <code class="highlighter-rouge">componentDidUpdate</code> 메서드를 사용한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentDidUpdate</span> <span class="o">=</span> <span class="nx">prevState</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">prevState</span><span class="p">.</span><span class="nx">selectedFiles</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">selectedFiles</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">renderPreviews</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="renderpreview-함수-작성">renderPreview() 함수 작성</h3>
+
+<p>먼저, preview 이미지의 parent node를 만들어 주는데 여기에 ‘preview-container’라는 <code class="highlighter-rouge">id</code>를 부여하여 돔에 접근할 수 있도록 한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span> <span class="na">marginTop</span><span class="p">:</span> <span class="dl">"</span><span class="s2">100px</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type=</span><span class="s2">"file"</span> <span class="nt">multiple</span> <span class="na">onChange=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">fileChangedHandler</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id=</span><span class="s2">"preview-container"</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">document.createElement("img")</code>로 이미지 태그를 만들고, “preview-container” <code class="highlighter-rouge">div</code>에 자식노드로 추가해준다.
+<code class="highlighter-rouge">img</code> 태그에 <code class="highlighter-rouge">src</code> 속성을 주어야 하는데, 이는 <code class="highlighter-rouge">FileReader</code>의 <code class="highlighter-rouge">readAsDataURL</code> 메서드를 이용한다. <code class="highlighter-rouge">readAsDataURL</code> 메서드의 실행결과는 <code class="highlighter-rouge">FileReader</code>의 <code class="highlighter-rouge">result</code> 프로퍼티에서 확인할 수 있는데, 이는 메서드가 완전히 실행되고 나서야 확인할 수 있으므로, <code class="highlighter-rouge">FileReader</code>에 <code class="highlighter-rouge">onload</code> 이벤트핸들러를 부여하여 메서드가 실행되고 나면, <code class="highlighter-rouge">img</code> 태그의 <code class="highlighter-rouge">src</code>에 <code class="highlighter-rouge">FileReader</code>의 <code class="highlighter-rouge">result</code>를 부여하라. 라고 정의하면 된다. 코드로 나타내면,</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">renderPreviews</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">selectedFiles</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">previewContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">preview-container</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">selectedFiles</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">preview</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nx">preview</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`preview_</span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+      <span class="nx">previewContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">preview</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">preview</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+      <span class="p">};</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">selectedFiles</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+</code></pre></div></div>
+
+<p><br />
+최종 코드는 아래와 같다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">selectedFiles</span><span class="p">:</span> <span class="kc">null</span> <span class="p">};</span>
+  <span class="nx">componentDidUpdate</span> <span class="o">=</span> <span class="nx">prevState</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">prevState</span><span class="p">.</span><span class="nx">selectedFiles</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">selectedFiles</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">renderPreviews</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">renderPreviews</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">selectedFiles</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">previewContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">preview-container</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">selectedFiles</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">preview</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nx">preview</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">`preview_</span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+      <span class="nx">previewContainer</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">preview</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">preview</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+      <span class="p">};</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">selectedFiles</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nx">fileChangedHandler</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">selectedFiles</span><span class="p">:</span> <span class="nx">files</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span> <span class="na">marginTop</span><span class="p">:</span> <span class="dl">"</span><span class="s2">100px</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type=</span><span class="s2">"file"</span> <span class="nt">multiple</span> <span class="na">onChange=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">fileChangedHandler</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id=</span><span class="s2">"preview-container"</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p><span class="reference">관련 post</span></p>
+
+<p><a href="/study/react/리액트로-이미지-업로더-구현하기/">리액트로 이미지 업로더 구현하기</a></p>
+:ET

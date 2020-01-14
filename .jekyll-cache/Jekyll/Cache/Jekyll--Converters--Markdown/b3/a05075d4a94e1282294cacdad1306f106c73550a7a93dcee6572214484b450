@@ -1,0 +1,79 @@
+I"�)<h3 id="문제">문제</h3>
+
+<p>Write a function that rotates a NxN matrix 90 degrees.</p>
+
+<p>A matrix, also called a 2-D array, is simply an array of arrays of values.</p>
+
+<p>Example 1x1 matrix:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[[</span><span class="mi">1</span><span class="p">]];</span>
+</code></pre></div></div>
+
+<p>Example 2x2 matrix:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]];</span>
+</code></pre></div></div>
+
+<p>Important note:
+In mathematics, and generally in CS, matrices are identified as m-by-n, where m is the number of <em>rows</em> and n is the number of <em>columns</em>. So an [i][j] address in a matrix will be i places down, and j places over. This usually matches the way arrays are addressed in code, but keep in mind that it differs from use in geometry and computer graphics, where coordinates of the form (x,y) are usually x units over, and y units down.</p>
+
+<p>Example rotation of a 4x4 matrix:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">matrix</span> <span class="o">=</span> <span class="p">[</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">B</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">],</span>
+<span class="p">[</span><span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">E</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">G</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">];</span>
+<span class="nx">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// 1</span>
+<span class="nx">matrix</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// 'F'</span>
+
+<span class="kd">var</span> <span class="nx">rotatedMatrix</span> <span class="o">=</span> <span class="nx">rotateMatrix</span><span class="p">(</span><span class="nx">matrix</span><span class="p">);</span> <span class="c1">// Rotate 90 degrees clockwise</span>
+<span class="nx">rotatedMatrix</span> <span class="nx">is</span><span class="p">:</span>
+<span class="p">[</span> <span class="p">[</span><span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="p">[</span><span class="dl">'</span><span class="s1">E</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+<span class="p">[</span><span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">B</span><span class="dl">'</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+<span class="p">[</span><span class="dl">'</span><span class="s1">G</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="nx">rotatedMatrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// 'D'</span>
+<span class="nx">rotatedMatrix</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// 8</span>
+</code></pre></div></div>
+
+<p>Extra credit:</p>
+
+<ul>
+  <li>Make your function operate on rectangular matrices (MxN rather than NxN).</li>
+  <li>Make your function accept a parameter for the direction of rotation (1 = clockwise, -1 = counterclockwise)</li>
+</ul>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">rotateMatrix</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">matrix</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">originHeight</span> <span class="o">=</span> <span class="nx">matrix</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="nx">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="o">!</span><span class="nx">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">originHeight</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">matrix</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">originWidth</span> <span class="o">=</span> <span class="nx">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span>
+
+  <span class="kd">let</span> <span class="nx">rotated</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">originWidth</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">originWidth</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">rotated</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">originHeight</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">originHeight</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">originWidth</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">firstIndex</span><span class="p">,</span> <span class="nx">secondIndex</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">firstIndex</span> <span class="o">=</span> <span class="nx">originHeight</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="nx">j</span><span class="p">;</span>
+        <span class="nx">secondIndex</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">firstIndex</span> <span class="o">=</span> <span class="nx">j</span><span class="p">;</span>
+        <span class="nx">secondIndex</span> <span class="o">=</span> <span class="nx">originHeight</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">rotated</span><span class="p">[</span><span class="nx">firstIndex</span><span class="p">][</span><span class="nx">secondIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">matrix</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">j</span><span class="p">];</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">rotated</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

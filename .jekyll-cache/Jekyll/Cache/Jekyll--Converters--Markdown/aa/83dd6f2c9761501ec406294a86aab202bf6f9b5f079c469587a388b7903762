@@ -1,0 +1,60 @@
+I"�<p>월간 달력이 아닌, 주간달력(아래 사진과 같은)을 구현해야 하는데 캘린더 라이브러리는 거의 월간단력을 지원해주고 있었다. 그래서 기초부터 만들어 본 주간달력!</p>
+
+<div style="display: flex; justify-content: center; margin:10px 0">
+<img src="/images/calendar_week_view.png" alt="calendar_week_view" width="400em" />
+</div>
+
+<h3 id="오늘을-기준으로-일주일-치-date-객체로-이루어-진-배열을-생성-state에-저장">오늘을 기준으로 일주일 치 Date 객체로 이루어 진 배열을 생성, state에 저장</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Calendar</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">componentDidMount</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+    <span class="kd">let</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">(),</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">(),</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getDate</span><span class="p">());</span>
+    <span class="kd">let</span> <span class="nx">week</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">makeWeekArr</span><span class="p">(</span><span class="nx">date</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="nx">date</span><span class="p">,</span> <span class="nx">week</span>
+    <span class="p">})</span>
+  <span class="p">};</span>
+
+    <span class="nx">makeWeekArr</span> <span class="o">=</span> <span class="nx">date</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">day</span> <span class="o">=</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>
+    <span class="kd">let</span> <span class="nx">week</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">newDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">()</span> <span class="o">+</span> <span class="mi">86400000</span> <span class="o">*</span> <span class="p">(</span><span class="nx">i</span> <span class="o">-</span> <span class="nx">day</span><span class="p">));</span>
+      <span class="nx">week</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">i</span><span class="p">,</span> <span class="nx">newDate</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">week</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="전주-다음주-버튼-실행-시-새로운-week-배열-만들기">전주, 다음주 버튼 실행 시 새로운 week 배열 만들기</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">onPressArrowLeft</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">date</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">()</span> <span class="o">-</span> <span class="mi">86400000</span> <span class="o">*</span> <span class="mi">7</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">newWeek</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">makeWeekArr</span><span class="p">(</span><span class="nx">newDate</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="na">date</span><span class="p">:</span> <span class="nx">newDate</span><span class="p">,</span> <span class="na">week</span><span class="p">:</span> <span class="nx">newWeek</span>
+    <span class="p">})</span>
+  <span class="p">};</span>
+
+  <span class="nx">onPressArrowRight</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">date</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">()</span> <span class="o">+</span> <span class="mi">86400000</span> <span class="o">*</span> <span class="mi">7</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">newWeek</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">makeWeekArr</span><span class="p">(</span><span class="nx">newDate</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="na">date</span><span class="p">:</span> <span class="nx">newDate</span><span class="p">,</span> <span class="na">week</span><span class="p">:</span> <span class="nx">newWeek</span>
+    <span class="p">})</span>
+  <span class="p">};</span>
+</code></pre></div></div>
+
+<p><br />
+여기까지 하고 하나의 date 컴포넌트를 생성하여 week 배열을 매핑해주면 된다.</p>
+
+<div class="simulContainer">
+<img class="simulImg" src="/images/calendar_gif.gif" alt="fetch-demo-gif" width="350em" style="margin-right:30px;" />
+</div>
+:ET

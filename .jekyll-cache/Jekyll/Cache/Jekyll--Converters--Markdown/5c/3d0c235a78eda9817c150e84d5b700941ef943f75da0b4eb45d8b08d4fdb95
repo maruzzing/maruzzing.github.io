@@ -1,0 +1,31 @@
+I"<h3 id="문제">문제</h3>
+
+<p>Write a function <code class="highlighter-rouge">f(a, b)</code> which takes two strings as arguments and returns a string containing the characters found in both strings (without duplication), in the order that they appeared in <code class="highlighter-rouge">a</code>. Remember to skip spaces and characters you have already encountered!</p>
+
+<p>Example: commonCharacters(‘acexivou’, ‘aegihobu’)
+Returns: ‘aeiou’</p>
+
+<p>Extra credit: Extend your function to handle more than two input strings.</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">commonCharacters</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">string1</span><span class="p">,</span> <span class="nx">string2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">commonCharacterString</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">isIncluded</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">args</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isIncluded</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nx">i</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">commonCharacterString</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nx">i</span><span class="p">]))</span> <span class="p">{</span>
+      <span class="nx">commonCharacterString</span> <span class="o">+=</span> <span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nx">i</span><span class="p">];</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">commonCharacterString</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

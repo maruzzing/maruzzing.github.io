@@ -1,0 +1,42 @@
+I",<h3 id="문제">문제</h3>
+
+<p>Write a function that, given two objects, returns whether or not the two are deeply equivalent–meaning the structure of the two objects is the same, and so is the structure of each of their corresponding descendants.</p>
+
+<h3 id="풀이">풀이</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">deepEquals</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">apple</span><span class="p">,</span> <span class="nx">orange</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">isDeepEequals</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="kd">function</span> <span class="nx">compare</span><span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">obj1</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">object</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">obj2</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">object</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">keysOfObj1</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span>
+      <span class="kd">let</span> <span class="nx">keysOfObj2</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj2</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">keysOfObj1</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="nx">keysOfObj2</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">isDeepEequals</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">keysOfObj1</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">keysOfObj1</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">obj2</span><span class="p">[</span><span class="nx">keysOfObj1</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="p">{</span>
+            <span class="nx">compare</span><span class="p">(</span><span class="nx">obj1</span><span class="p">[</span><span class="nx">keysOfObj1</span><span class="p">[</span><span class="nx">i</span><span class="p">]],</span> <span class="nx">obj2</span><span class="p">[</span><span class="nx">keysOfObj1</span><span class="p">[</span><span class="nx">i</span><span class="p">]]);</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">isDeepEequals</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="k">return</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">obj1</span> <span class="o">!==</span> <span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">isDeepEequals</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">compare</span><span class="p">(</span><span class="nx">apple</span><span class="p">,</span> <span class="nx">orange</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">isDeepEequals</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

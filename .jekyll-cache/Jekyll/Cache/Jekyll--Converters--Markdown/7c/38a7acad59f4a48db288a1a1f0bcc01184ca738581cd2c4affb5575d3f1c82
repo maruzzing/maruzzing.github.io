@@ -1,0 +1,48 @@
+I"�<h2 id="-2019년-6월-20일">📅 2019년 6월 20일</h2>
+
+<h3 id="markdown에서-code-태그-내-liquid-문법-쓰기">markdown에서 code 태그 내 liquid 문법 쓰기</h3>
+
+<p>보통 쓰는 것처럼 ``` 을 쓰면서 liquid 문법을 쓰면 실행이 되어버린다.</p>
+
+<p>이 때, 아래와 같이 사용하면 된다!</p>
+
+<p><img src="/images/code_liquid.png" alt="liquid code" title="liquid code" /></p>
+
+<p>위의 코드는 아래와 같이 실행된다.</p>
+
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid"> liquid 문법 </code></pre></figure>
+
+<p><br />
+마크다운.. 재밌구만! 🤩</p>
+
+<h2 id="-2019년-6월-21일">📅 2019년 6월 21일</h2>
+
+<h3 id="todo">Todo</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />checkbox 추가하기</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Google Analytics 적용하기</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />2주, 4주 프로젝트 TIL 옮기기</li>
+</ul>
+
+<h3 id="관련-포스트">관련 포스트</h3>
+
+<ul>
+  <li><a href="/project/blogwithjekyll/Jekyll-체크박스-추가하기/">Jekyll 체크박스 추가하기</a></li>
+  <li><a href="/project/blogwithjekyll/Jekyll-블로그에-Google-Analytics-적용하기/">Jekyll 블로그에 Google Analytics 적용하기</a></li>
+</ul>
+
+<h2 id="-2019년-6월-22일">📅 2019년 6월 22일</h2>
+
+<h3 id="todo-1">Todo</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />comment 추가하기</li>
+</ul>
+
+<h3 id="관련-포스트-1">관련 포스트</h3>
+
+<ul>
+  <li><a href="/project/blogwithjekyll/Jekyll-Now-댓글-기능-추가하기/">Jekyll Now 댓글 기능 추가하기(Dispus)</a></li>
+</ul>
+:ET

@@ -1,0 +1,159 @@
+I"�C<p>TypeScript는 MS에서 개발한 자바스크립트의 슈퍼셋(상위언어)로 Javascript에 타입을 지정(정적 타입 언어)함으로써 더욱 가독성이 높고 안정적인 코드를 짤 수 있도록 도와준다. 또한, 인터프리터 언어인 자바스크립트와 다르게 컴파일 언어이기 때문에 코드를 작성하면서 오류를 줄이고, IDE의 코드 어시스트 기능을 지원받을 수 있는 장점이 있다.</p>
+
+<h3 id="변수-선언">변수 선언</h3>
+
+<p>타입 스크립트에서는 아래와 같이 변수를 선언할 때 타입을 지정하여 선언해 주어야 하며, 선언된 타입과 다른 타입의 값이 할당되는 경우 오류가 발생한다. <code class="highlighter-rouge">undefined</code>와 <code class="highlighter-rouge">null</code>의 타입은 각각 <code class="highlighter-rouge">undefined</code>와 <code class="highlighter-rouge">null</code>이다. 또한, 변수가 일정한 값만 가질 수 있을 때는 <code class="highlighter-rouge">const fontWeight: "thin" | "regular" | "bold"</code> 식으로 지정해 줄 수 있다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">visible</span><span class="p">:</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">numbers</span><span class="p">:</span> <span class="nx">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">time</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">timer</span><span class="p">:</span> <span class="nx">number</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">nullableString</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">fontWeight</span><span class="p">:</span> <span class="dl">"</span><span class="s2">thin</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">regular</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">bold</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">regular</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="함수">함수</h3>
+
+<p>함수의 경우에도, 인자의 타입이 명시되어야 하며, 함수 실행 후 리턴 값의 타입도 명시해 줄 수 있다. return 값이 없는 경우 <code class="highlighter-rouge">void</code>로 설정해 주면 된다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">:</span><span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span><span class="nx">number</span><span class="p">):</span><span class="nx">number</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="p">():</span><span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="na">visible</span><span class="p">:</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">visible</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">reducer</span><span class="p">(</span><span class="nx">numbers</span><span class="p">:</span><span class="nx">number</span><span class="p">[]):</span><span class="nx">number</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">accu</span><span class="p">,</span> <span class="nx">curr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">accu</span><span class="o">+</span><span class="nx">curr</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="interface">interface</h3>
+
+<p>클래스나 객체를 위한 타입선언으로, 클래스가 특정 조건을 만족해야 함을 명시한다. 이는 다른 정적타입 언어에서도 많이 쓰이는 개념이다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Shape</span> <span class="p">{</span>
+  <span class="nx">getArea</span><span class="p">():</span> <span class="nx">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Rect</span> <span class="kr">implements</span> <span class="nx">Shape</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">height</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">width</span> <span class="o">*</span> <span class="nx">height</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">getRecArea</span><span class="p">(</span><span class="nx">rect</span><span class="p">:</span> <span class="nx">Rect</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getArea</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">implements</code> 키워드로 <code class="highlighter-rouge">Rect</code>이라는 클래스가 <code class="highlighter-rouge">Shape</code> 인터페이스를 구현함을 선언하는 것이다.
+class 서언 부분을 좀 더 간단하게 표현하면, 아래와 같으며, <code class="highlighter-rouge">private</code> 혹은 <code class="highlighter-rouge">public</code>으로 선언해주면 된다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Rect</span> <span class="kr">implements</span> <span class="nx">Shape</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">width</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="kr">private</span> <span class="nx">height</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="nx">getArea</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">width</span> <span class="o">*</span> <span class="nx">height</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>인터페이스가 객체를 만들때도 쓰이는데, 아래와 같이 사용할 수 있다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// interface 미사용</span>
+<span class="kd">const</span> <span class="nx">student</span><span class="p">:</span> <span class="p">{</span> <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span> <span class="nl">hobby</span><span class="p">:</span> <span class="nx">string</span> <span class="p">}</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Steve</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">hobby</span><span class="p">:</span> <span class="dl">"</span><span class="s2">soccer</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// interface 사용</span>
+<span class="kr">interface</span> <span class="nx">Student</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nl">hobby</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">student</span><span class="p">:</span> <span class="nx">Student</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Steve</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">hobby</span><span class="p">:</span> <span class="dl">"</span><span class="s2">soccer</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>특정 프로퍼티가 있을 수도 있고, 없을 수도 있다면, 아래와 같이 물음표(?)로 표기할 수 있다. 만약 물음표로 표시하지 않은 상태에서 Student 인터페이스를 구현한 객체에 hobby 값이 없다면 오류가 나타난다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Student</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nx">hobby</span><span class="p">?:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>인터페이스 간의 상속도 가능한데, Student의 모든 속성을 가진 Person이라는 인터페이스를 만든다면, 아래와 같이 표현할 수 있다. 이 경우 Classmate는 name, hobby, 그리고 age 속성을 모두 가지게 된다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Student</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nl">hobby</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Classmate</span> <span class="kd">extends</span> <span class="nx">Student</span> <span class="p">{</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="type-alias">Type Alias</h3>
+
+<p>interface는 새로운 Type을 정의하는데, Type Alias는 실제 Type을 정의하는 것은 아니고, 이미 만들어져 있는 Type의 refer로 정의하는 것이다. 상속을 받을 수는 있지만 상속 할 수는 없다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Student</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nl">hobby</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">type</span> <span class="nx">Classmate</span> <span class="o">=</span> <span class="nx">Student</span> <span class="o">&amp;</span> <span class="p">{</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">type</span> <span class="nx">FontWeight</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">thin</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">regular</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">bold</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="na">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">thin</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="generics">Generics</h3>
+
+<p>제네릭은 어떠한 클래스, 함수, 인터페이스 등에서 사용할 타입을 그 클래스, 함수, 인터페이스를 사용할 때 결정하는 프로그래밍 기법이다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generics 를 쓰지 않을 경우</span>
+<span class="kd">function</span> <span class="nx">wrap</span><span class="p">(</span><span class="nx">param</span><span class="p">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">param</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Generics 를 쓸 경우</span>
+<span class="kd">function</span> <span class="nx">wrap</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">param</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">param</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// 어떤 type을 넣느냐에 따라 type이 결정되고, 이후 type이 지켜진다.</span>
+<span class="kd">const</span> <span class="nx">wrapped</span> <span class="o">=</span> <span class="nx">wrap</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="kr">interface</span> <span class="nx">Itmes</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">list</span><span class="p">:</span> <span class="nx">T</span><span class="p">[];</span>
+  <span class="nl">value</span><span class="p">:</span> <span class="nx">V</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="na">items</span><span class="p">:</span> <span class="nx">Items</span><span class="o">&lt;</span><span class="nx">string</span><span class="p">,</span> <span class="nx">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">list</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">],</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

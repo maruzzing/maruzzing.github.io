@@ -1,0 +1,88 @@
+I"<h2 id="-2019년-5월-15일">📅 2019년 5월 15일</h2>
+
+<p>토큰은 사용자를 인증하는 방법중의 하나 인데, 요청이 왔을 때, 서버에서 발행된 토큰이 맞는지만 확인하여 쓰기 때문에 <strong>stateless하게 인증</strong>을 할 수 있다는 장점이 있다. 인증 헤더 내에서 사용되는 토큰 포맷인 JWT(Json Web Token)을 많이 쓴다. 토큰은 강제로 폐기할 수 없기 때문에 토큰 생성 시, 유효기간을 설정하여 주기적으로 재발급 받아 보안을 강화할 수 있다.</p>
+
+<p>보통 사용자가 로그아웃을 하면 client 단에서는 local storage에 저장해 놓았던 토큰 정보를 삭제하게 되는데, server 단에서는 유효기간이 만료되지 않았다면 토큰을 강제로 폐기시킬 수 없기 때문에 다른 방법을 써야한다.</p>
+
+<p>이 때 쓸 수 있는 방법이 <strong>DB에 tokenblackist를 저장</strong>하여, 요청이 들어올 때마다 blacklist에 등록된 토큰인지 확인하는 것이다.</p>
+
+<p><img src="/images/logoutwithjwt.jpeg" alt="logoutwithjwt" title="logoutwithjwt" /></p>
+
+<h2 id="-2019년-5월-16일">📅 2019년 5월 16일</h2>
+
+<h3 id="리액트에서-modal모달은-어떻게">리액트에서 modal(모달)은 어떻게?</h3>
+
+<ul>
+  <li>
+    <p>리액트 컴포넌트들은 깊게 nesting 되어있기 때문에 modal을 띄우는 것이 어려움</p>
+  </li>
+  <li>React Portals라는 것을 쓰는데, 이것은 <code class="highlighter-rouge">root &lt;div&gt;</code>의 sibling 격인 <code class="highlighter-rouge">모달 &lt;div&gt;</code>를 만드는 것</li>
+  <li><code class="highlighter-rouge">createPortal()</code>은 모든 컴포넌트들이 <code class="highlighter-rouge">&lt;div id=”root”&gt;</code>의 자손이어야 한다는 룰을 깨는 것</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code># index.html
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"root"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="c">&lt;!--modal root 추가 ---&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"modal_root"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<p><br />
+해당 컴포넌트에 아래 내용을 추가한다.</p>
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createPortal</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#modal_root</span><span class="dl">"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="git-협업">git 협업</h3>
+
+<ul>
+  <li>source tree install</li>
+  <li>기능별로 branch를 따는이유? production할 만큼 확신이 되는 코드로 구분하기 위함
+    <ul>
+      <li>branch를 따지 않고 master에서 commit을 하게되면 문제가 생기는 commit이 중간중간 생길 수 있다.</li>
+      <li>master = live = production (실제로 사용자가 사용하는 버전)</li>
+      <li>dev = 실험장</li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="https://www.gitignore.io/](https://www.gitignore.io/)">.gitignore </a></p>
+
+    <ul>
+      <li>개인정보</li>
+      <li>node_modules</li>
+      <li>git rm —cached [file명] : 깃에서만 지움</li>
+      <li>
+        <p>sensitive 정보를 git에 올렸을 때 히스토리까지 지우는 방법</p>
+
+        <ul>
+          <li>우선 git rm —cached로 해당 파일을 지운채로 마지막 커밋을 함</li>
+          <li>아래 명령어 실행</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git filter-branch <span class="nt">--index-filter</span> <span class="s2">"git rm -rf --cached --ignore-unmatch path_to_file"</span> HEAD
+git push origin master <span class="nt">--force</span>
+</code></pre></div></div>
+
+<h3 id="javascript-es6-spread-operator">[Javascript ES6] Spread Operator</h3>
+
+<p>리액트와 리덕스에서 중요한 개념 중 하나인 <strong>불변성(Immutable)</strong>을 지키면서 state를 변경할 때 유용하게 사용할 수 있는 것이, 바로 <strong>Spread Operator</strong> 이다.</p>
+
+<p><img src="/images/spread_operator.png" alt="Spread Operator" title="Spread Operator" /></p>
+
+<p>기존의 numbers 배열은 변경되지 않고, 새로운 array가 생성된다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p><span class="reference">참고자료</span></p>
+
+<ul>
+  <li><a href="https://medium.com/devgorilla/how-to-log-out-when-using-jwt-a8c7823e8a6">How to log out when using JWT</a></li>
+  <li><a href="https://medium.freecodecamp.org/how-to-render-modals-in-react-bbe9685e947e">How to render modals in React</a></li>
+</ul>
+:ET

@@ -1,0 +1,44 @@
+I"�<p>React Navigation의 기본 헤더가 지금 개발하고 있는 앱의 느낌과 맞지 않아 커스텀 헤더를 구현해 보았다. Stack Navigation에서 헤더의 가장 중요한 역할 중 하나가 back button인데, 커스텀 헤더에선 back button의 네비에이션을 어떻게 주어야 할까?</p>
+
+<p><br />
+<code class="highlighter-rouge">this.props.navigation</code>을 콘솔에 찍어보면 익숙한 <code class="highlighter-rouge">navigate()</code>, <code class="highlighter-rouge">getParam()</code> 뿐만 아니라 <code class="highlighter-rouge">goBack()</code> 함수가 존재한다.</p>
+
+<p>또한, <code class="highlighter-rouge">params</code>, <code class="highlighter-rouge">routeName</code> 그리고 <code class="highlighter-rouge">key</code>를 key로 가지는 <code class="highlighter-rouge">state</code> 객체가 존재하고 <code class="highlighter-rouge">Navigation.js</code>에 정의한 <code class="highlighter-rouge">params</code>와 <code class="highlighter-rouge">routeName</code>이 여기에 담겨있고, 숫자와 문자로 이루어진 <code class="highlighter-rouge">key</code>가 부여되어 있다.</p>
+
+<p>이 <code class="highlighter-rouge">key</code>가 이 스크린을 찾아 돌아올 수 있는 열쇠가 된다.</p>
+
+<p><br />
+A 페이지에서 B 페이지로 넘어갈 때, navigation params로 APage의 <code class="highlighter-rouge">this.props.navigation.state.key</code>를 저장해준다.</p>
+
+<p><strong>APage.js</strong></p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">navigate</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">View</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">title=</span><span class="s2">"Go to BPage"</span> <span class="na">onPress=</span><span class="si">{</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">navigate</span><span class="p">(</span><span class="dl">'</span><span class="s1">BPage</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">go_back_key</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">key</span> <span class="p">});</span>
+            <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br />
+BPage에서 back button을 눌렀을 때, <code class="highlighter-rouge">this.props.navigation.goBack</code> 함수의 인자로 가고자 하는 페이지의 <code class="highlighter-rouge">key</code>를 넣어주면 된다.</p>
+
+<p><strong>BPage.js</strong></p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">goBack</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">params</span> <span class="o">||</span> <span class="p">{};</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">View</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">title=</span><span class="s2">"Back to APage"</span> <span class="na">onPress=</span><span class="si">{</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">goBack</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">go_back_key</span><span class="p">);</span>
+            <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET

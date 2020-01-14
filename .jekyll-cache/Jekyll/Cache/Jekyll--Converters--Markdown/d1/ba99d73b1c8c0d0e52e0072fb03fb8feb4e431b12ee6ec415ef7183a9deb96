@@ -1,0 +1,71 @@
+I":<p>점점 블로그의 모습을 갖추고 있는 것 같다. 이쯤에서 필요한 것이 댓글기능 아닐까? 내가 사용한 Jekyll Now는 이미 Front Matter과 /_includes/disqus.html 파일이 준비되어 있기 때문에 Disqus를 이용한 댓글기능을 추가하는것은 아주 간단하다.</p>
+
+<h3 id="1-disqus-가입-및-사이트-생성">1. Disqus 가입 및 사이트 생성</h3>
+
+<p>먼저, <a href="https://disqus.com/">Disqus</a> 서비스에 가입한다.</p>
+
+<p>가입하고 나면, 아래와 같은 화면이 뜨는데, ‘I want to install Disqus on my site’를 선택하고 사이트 정보를 입력하여 disqus 사이트를 생성한다.</p>
+
+<p><img src="/images/disqus.png" alt="disqus" width="400em" /></p>
+
+<h3 id="2-_configyml-discus-shortname-입력">2. _config.yml discus shortname 입력</h3>
+
+<p><code class="highlighter-rouge">_config.yml</code>의 <code class="highlighter-rouge">disqus</code> 부분에 Disqus 홈페이지 admin/settings에서 확인할 수 있는 Shortname을 입력한다.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Enter your Disqus shortname (not your username) to enable commenting on posts</span>
+<span class="c1"># You can find your shortname on the Settings page of your Disqus account</span>
+<span class="na">disqus</span><span class="pi">:</span> <span class="s">Shortname 입력</span>
+</code></pre></div></div>
+
+<p>고맙게도 Jekyll Now에는 나머지 세팅이 되어있기 때문에 3, 4번은 건너뛰어도 된다.</p>
+
+<h3 id="3-_includesdiscushtml-만들기">3. /_includes/discus.html 만들기</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if site.disqus %}
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"comments"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"disqus_thread"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+    <span class="kd">var</span> <span class="nx">disqus_shortname</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">{{ site.disqus }}</span><span class="dl">"</span><span class="p">;</span>
+
+    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">dsq</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">script</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nx">dsq</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">text/javascript</span><span class="dl">"</span><span class="p">;</span>
+      <span class="nx">dsq</span><span class="p">.</span><span class="k">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="nx">dsq</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">//</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">disqus_shortname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">.disqus.com/embed.js</span><span class="dl">"</span><span class="p">;</span>
+      <span class="p">(</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">head</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">dsq</span><span class="p">);</span>
+    <span class="p">})();</span>
+  <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;noscript</span>
+    <span class="nt">&gt;</span>Please enable JavaScript to view the
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://disqus.com/?ref_noscript"</span>
+      <span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a</span>
+    <span class="nt">&gt;&lt;/noscript</span>
+  <span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+{% endif %}
+</code></pre></div></div>
+
+<h3 id="4-_layoutsposthtml에-disqushtml-include-하기">4. /_layouts/post.html에 disqus.html include 하기</h3>
+
+<p>댓글창을 넣을 위치에 아래 내용을 추가한다.</p>
+
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid"><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>disqus.html<span class="w"> </span><span class="p">%}</span></code></pre></figure>
+
+<h3 id="5-front-matter에-comments-true-추가하기">5. Front Matter에 comments: true 추가하기</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comments: true
+</code></pre></div></div>
+
+<p>물론, 코멘트 창이 필요없는 경우, <code class="highlighter-rouge">comments: false</code>를 입력하면 된다.</p>
+
+<p><br />
+👏 <strong>댓글창 구현된 모습</strong></p>
+
+<p><img src="/images/disqus_applied.png" alt="disqus_applied" style="border:1px solid #bcbcbc" />
+<br />
+<br />
+<br /></p>
+:ET
