@@ -4,7 +4,7 @@ title: React Native 파일 시스템을 사용해 이미지 캐싱하기
 date: 2020-03-01
 comments: true
 categories: [Study, rnative]
-tags: [React Native, Cache, Image]
+tags: [React Native, filesystem]
 excerpt: 자주 사용하는 정적 이미지의 경우 접속 시 매번 이미지 서버에서 이미지를 가져오기 보다 이미지를 캐싱해서 사용하면 성능면에서 효율적인 경우가 있다. 그래서 파일 시스템을 이용해서 이미지를 캐싱하는 방법에 대해 알아 보았다. 📂
 ---
 
