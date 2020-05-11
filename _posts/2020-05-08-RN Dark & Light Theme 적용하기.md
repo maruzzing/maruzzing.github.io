@@ -150,9 +150,8 @@ AppRegistry.registerComponent(appName, () => AppConatiner);
 그리고 `/src/App.tsx` 파일에서 Styled-Components의 `ThemeProvider`를 이용하여 앱 전역에 theme을 적용해 준다.
 ```javascript
 import React from 'react';
-import {ColorSchemeName, Appearance} from 'react-native';
+import {Appearance} from 'react-native';
 import styled, {ThemeProvider} from 'styled-components/native';
-import {connect} from 'react-redux';
 import {RootState} from './reducers';
 import {dark, light} from './styles/theme';
 import {setTheme} from './reducers/themeSlice';
@@ -164,11 +163,9 @@ const Container = styled.SafeAreaView`
   background-color: ${(props) => props.theme.color.bg};
 `;
 
-interface Props {
-  theme: ColorSchemeName;
-}
+function App() {
+  const theme = useSelector((state: RootState) => state.theme);
 
-function App({theme}: Props) {
   return (
     <ThemeProvider theme={theme === 'dark' ? dark : light}>
       <Container />
@@ -176,11 +173,8 @@ function App({theme}: Props) {
   );
 }
 
-const mapStateToProps = (state: RootState) => ({
-  theme: state.theme,
-});
 
-export default connect(mapStateToProps, null)(App);
+export default App;
 ```
 
 추가적으로 `Appearance.addChangeListener`를 사용하여 모바일의 컬러 모드가 변경되면 앱의 `theme` 상태도 변경될 수 있도록 한다.
