@@ -34,11 +34,11 @@
 </span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="s">'result'</span><span class="p">]</span>
-<span class="n">inputData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])[</span><span class="s">'inputData'</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="s">'result'</span><span class="p">]</span>
+<span class="n">inputData</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])[</span><span class="s">'inputData'</span><span class="p">]</span>
 
-<span class="o">...</span>
+<span class="p">...</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 </code></pre></div></div>
 :ET

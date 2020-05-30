@@ -14,7 +14,7 @@
     <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s">'end'</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'9 * {} = {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">9</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'9 * {} = {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">9</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
         <span class="n">multi_table_9</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 자기 자신(multi_table_9)을 호출
 </span>
 <span class="c1"># 함수 실행

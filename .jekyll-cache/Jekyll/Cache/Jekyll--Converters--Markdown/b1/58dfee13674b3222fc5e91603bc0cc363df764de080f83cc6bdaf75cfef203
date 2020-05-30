@@ -1,4 +1,4 @@
-I"�<h3 id="문제">문제</h3>
+I"R<h3 id="문제">문제</h3>
 
 <p>대문자와 소문자가 섞여있는 문자열 s가 주어집니다. s에 ‘p’의 개수와 ‘y’의 개수를 비교해 같으면 True, 다르면 False를 return 하는 solution를 완성하세요. ‘p’, ‘y’ 모두 하나도 없는 경우는 항상 True를 리턴합니다. 단, 개수를 비교할 때 대문자와 소문자는 구별하지 않습니다.</p>
 
@@ -8,8 +8,8 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">pCount</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">'p'</span><span class="p">)</span>
-<span class="n">yCount</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">'y'</span><span class="p">)</span>
+<span class="n">pCount</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">lower</span><span class="p">().</span><span class="n">count</span><span class="p">(</span><span class="s">'p'</span><span class="p">)</span>
+<span class="n">yCount</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">lower</span><span class="p">().</span><span class="n">count</span><span class="p">(</span><span class="s">'y'</span><span class="p">)</span>
 <span class="k">if</span><span class="p">(</span><span class="n">pCount</span> <span class="o">!=</span> <span class="n">yCount</span><span class="p">):</span>
 <span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="k">return</span> <span class="n">answer</span>

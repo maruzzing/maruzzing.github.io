@@ -1,16 +1,16 @@
-I"s<p>리액트 네이티브에서 커스텀 폰트를 설정하는 방법을 알아보겠다.</p>
+I"�<p>리액트 네이티브에서 커스텀 폰트를 설정하는 방법을 알아보겠다.</p>
 
 <h2 id="폰트-다운받기">폰트 다운받기</h2>
 
 <p>원하는 폰트의 <code class="highlighter-rouge">.ttf</code> 확장자 파일을 다운받는다.</p>
+
+<h3 id="ios">ios</h3>
 
 <h2 id="프로젝트-디렉토리에-추가">프로젝트 디렉토리에 추가</h2>
 
 <p>프로젝트 디렉토리 내 /assets/fonts 폴더를 생성하고 다운받은 폰트를 추가한다.</p>
 
 <h2 id="프로젝트-내-폰트-연결">프로젝트 내 폰트 연결</h2>
-
-<h3 id="ios">ios</h3>
 
 <p>프로젝트의 <code class="highlighter-rouge">.xcworkspace</code>를 열고, 마우스 우클릭 후 ‘Add Files To…’ 를 선택하여 src/assets/fonts 폴더를 추가한다.</p>
 
@@ -21,6 +21,8 @@
 <p>그리고, <code class="highlighter-rouge">info.plist</code> 파일로 가서 ‘Add Row’를 통해 <strong>Fonts provided by application</strong> 을 추가하고, 아래 폰트의 갯수만큼 추가한다.</p>
 
 <p><img src="/images/rn_addFonts2.png" alt="disqus" /></p>
+
+<h3 id="android">android</h3>
 
 <h2 id="프로젝트에서-활용하기">프로젝트에서 활용하기</h2>
 

@@ -1,0 +1,78 @@
+I"B<p>앱을 사용하는 사용자의 행동 분석이나 푸시알림 등의 서비스를 사용하기 위해서 <a href="https://github.com/invertase/react-native-firebase">React-Native-Firebase</a> 모듈을 사용하여 React Native 앱에 Firebase 서비스를 연결해 사용중이다. 개발을 하다보니 테스트 과정에서의 트래픽이 실제 서비스 통계에 영향을 미칠 수 있기 때문에 dev와 prod 환경에 따른 Firebase 프로젝트도 각각 구성해야할 필요성을 느끼게 되어 그 방법을 알아보았다.</p>
+
+<h2 id="firebase-프로젝트-생성">Firebase 프로젝트 생성</h2>
+
+<p>먼저, Firebase 프로젝트를 생성하는데, dev와 prod 환경에서 사용할 프로젝트를 각각 생성하고,
+각 프로잭트 내 ios, android 앱도 생성한다.
+Firebase의 앱생성 안내에 따라 sdk 설정을 진행하되, Step 2에서 다운받은 <code class="highlighter-rouge">google-service.jon</code> / <code class="highlighter-rouge">GoogleService-info.plist</code> 파일은 프로젝트 폴더에 추가하지 않고 따로 저장해 둔다.</p>
+
+<p><img src="/images/firebase_app.png" alt="Firebase Project" /></p>
+
+<h2 id="ios-구현">ios 구현</h2>
+
+<ol>
+  <li>rootDir/ios/ 폴더 내에 아래와 같이 Dev/Prod 각각에 맞는 GoogleService-info.plist 파일이 있는 Firebase 폴더 생성한다.</li>
+</ol>
+
+<p><img src="/images/firebase_ios.png" alt="Firebase Project ios" /></p>
+
+<ol>
+  <li>Xcode 프로젝트를 열고, root 폴더에 방금 생성한 Firebase 폴더를 추가하는데, 이 때 아래와 같이 target을 지정하지도, reference를 생성하지도 않는다.</li>
+</ol>
+
+<p><img src="/images/firebase_ios_2.png" alt="Firebase Project ios" /></p>
+
+<ol>
+  <li>앱 타겟의 Build Phase에 New Run Script Phase를 추가하고,</li>
+</ol>
+
+<p><img src="/images/firebase_ios_3.png" alt="Firebase Project ios" /></p>
+
+<p>이름을 “Setup Firebase Environment GoogleService-Info.plist”로 수정하고 아래 코드를 추가해 준다.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Name of the resource we're selectively copying</span>
+<span class="nv">GOOGLESERVICE_INFO_PLIST</span><span class="o">=</span>GoogleService-Info.plist
+<span class="c"># Get references to dev and prod versions of the GoogleService-Info.plist</span>
+<span class="c"># NOTE: These should only live on the file system and should NOT be part of the target (since we'll be adding them to the target manually)</span>
+<span class="nv">GOOGLESERVICE_INFO_DEV</span><span class="o">=</span><span class="k">${</span><span class="nv">PROJECT_DIR</span><span class="k">}</span>/Firebase/Dev/<span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PLIST</span><span class="k">}</span>
+<span class="nv">GOOGLESERVICE_INFO_PROD</span><span class="o">=</span><span class="k">${</span><span class="nv">PROJECT_DIR</span><span class="k">}</span>/Firebase/Prod/<span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PLIST</span><span class="k">}</span>
+<span class="c"># Make sure the dev version of GoogleService-Info.plist exists</span>
+<span class="nb">echo</span> <span class="s2">"Looking for </span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PLIST</span><span class="k">}</span><span class="s2"> in </span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_DEV</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-f</span> <span class="nv">$GOOGLESERVICE_INFO_DEV</span> <span class="o">]</span>
+<span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"No Development GoogleService-Info.plist found. Please ensure it's in the proper directory."</span>
+<span class="nb">exit </span>1
+<span class="k">fi</span>
+<span class="c"># Make sure the prod version of GoogleService-Info.plist exists</span>
+<span class="nb">echo</span> <span class="s2">"Looking for </span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PLIST</span><span class="k">}</span><span class="s2"> in </span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PROD</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-f</span> <span class="nv">$GOOGLESERVICE_INFO_PROD</span> <span class="o">]</span>
+<span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"No Production GoogleService-Info.plist found. Please ensure it's in the proper directory."</span>
+<span class="nb">exit </span>1
+<span class="k">fi</span>
+<span class="c"># Get a reference to the destination location for the GoogleService-Info.plist</span>
+<span class="nv">PLIST_DESTINATION</span><span class="o">=</span><span class="k">${</span><span class="nv">BUILT_PRODUCTS_DIR</span><span class="k">}</span>/<span class="k">${</span><span class="nv">PRODUCT_NAME</span><span class="k">}</span>.app
+<span class="nb">echo</span> <span class="s2">"Will copy </span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PLIST</span><span class="k">}</span><span class="s2"> to final destination: </span><span class="k">${</span><span class="nv">PLIST_DESTINATION</span><span class="k">}</span><span class="s2">"</span>
+<span class="c"># Copy over the prod GoogleService-Info.plist for Release builds</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">${</span><span class="nv">CONFIGURATION</span><span class="k">}</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"Release"</span> <span class="o">]</span>
+<span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"Using </span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PROD</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">cp</span> <span class="s2">"</span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_PROD</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">PLIST_DESTINATION</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">else
+</span><span class="nb">echo</span> <span class="s2">"Using </span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_DEV</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">cp</span> <span class="s2">"</span><span class="k">${</span><span class="nv">GOOGLESERVICE_INFO_DEV</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">PLIST_DESTINATION</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>그리고 방금 설정해준 “Setup Firebase Environment GoogleService-Info.plist” 스크립트가 “Link Binary With Libraries” 다음에 위치할 수 있도록 이동해 준다.</p>
+
+<p><img src="/images/firebase_ios_4.png" alt="Firebase Project ios" /></p>
+
+<p>여기까지 하면 빋드 타입(debug/release)에 따라 알맞은 <code class="highlighter-rouge">GoogleService-info.plist</code>로 빌드된다.</p>
+
+<h2 id="android-구현">android 구현</h2>
+
+<p>android는 훨씬 간단한데, <code class="highlighter-rouge">android/app/src/</code> 폴더 내에 debug와 release 폴더를 생성하고 각각 알맞은 <code class="highlighter-rouge">google-services.json</code> 파일을 넣어주면 debug/release 버전으로 각각 빌드될 때 해당 폴더의 파일을 가져다 쓴다.</p>
+
+<p><img src="/images/firebase_android.png" alt="Firebase Project android" /></p>
+:ET

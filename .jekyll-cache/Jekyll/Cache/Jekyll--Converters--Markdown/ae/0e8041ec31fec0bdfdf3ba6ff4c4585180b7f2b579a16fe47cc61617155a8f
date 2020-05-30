@@ -1,0 +1,30 @@
+I"�<p>리액트 네이티브에서 커스텀 폰트를 설정하는 방법을 알아보겠다.</p>
+
+<h1 id="폰트-다운받기">폰트 다운받기</h1>
+
+<p>원하는 폰트의 <code class="highlighter-rouge">.ttf</code> 확장자 파일을 다운받는다.</p>
+
+<h1 id="ios">ios</h1>
+
+<h2 id="프로젝트-디렉토리에-추가">프로젝트 디렉토리에 추가</h2>
+
+<p>프로젝트 디렉토리 내 /assets/fonts 폴더를 생성하고 다운받은 폰트를 추가한다.</p>
+
+<h2 id="프로젝트-내-폰트-연결">프로젝트 내 폰트 연결</h2>
+
+<p>프로젝트의 <code class="highlighter-rouge">.xcworkspace</code>를 열고, 마우스 우클릭 후 ‘Add Files To…’ 를 선택하여 src/assets/fonts 폴더를 추가한다.</p>
+
+<p><img src="/images/rn_addFonts.png" alt="disqus" width="200em" /></p>
+
+<p>자동적으로 폴더 레퍼런스와 프로젝트 타겟이 설정될 것이다.</p>
+
+<p>그리고, <code class="highlighter-rouge">info.plist</code> 파일로 가서 ‘Add Row’를 통해 <strong>Fonts provided by application</strong> 을 추가하고, 아래 폰트의 갯수만큼 추가한다.</p>
+
+<p><img src="/images/rn_addFonts2.png" alt="disqus" /></p>
+
+<h2 id="android">android</h2>
+
+<h1 id="프로젝트에서-활용하기">프로젝트에서 활용하기</h1>
+
+<p>프로젝트 내에서는 <code class="highlighter-rouge">fontFamily:[폰트이름]</code>로 적용하면 된다.</p>
+:ET

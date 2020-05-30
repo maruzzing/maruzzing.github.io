@@ -96,7 +96,7 @@ class 서언 부분을 좀 더 간단하게 표현하면, 아래와 같으며, <
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Student</span> <span class="p">{</span>
   <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
-  <span class="nx">hobby</span><span class="p">?:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nl">hobby</span><span class="p">?:</span> <span class="nx">string</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 

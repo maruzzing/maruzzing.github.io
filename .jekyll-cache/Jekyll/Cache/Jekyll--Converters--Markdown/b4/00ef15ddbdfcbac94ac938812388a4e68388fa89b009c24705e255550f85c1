@@ -1,0 +1,70 @@
+I"7&<p>자주 사용하는 정적 이미지의 경우 접속 시 매번 이미지 서버에서 이미지를 가져오기 보다 이미지를 캐싱해서 사용하면 성능면에서 효율적인 경우가 있다. 그래서 파일 시스템을 이용해서 이미지를 캐싱하는 방법에 대해 알아 보았다. 📂 리액트 네이티브에서 파일을 생성하고 읽는 것을 간단하게 할 수 있도록 도와주는 라이브러리들이 있는데 그 중 <a href="https://github.com/itinance/react-native-fs">react-native-fs</a>를 사용해 보겠다.</p>
+
+<h3 id="1-모듈-설치">1. 모듈 설치</h3>
+
+<p><a href="https://github.com/itinance/react-native-fs">react-native-fs</a> 모듈을 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add react-natve-fs
+<span class="nb">cd </span>ios <span class="o">&amp;&amp;</span> pod <span class="nb">install</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ..
+</code></pre></div></div>
+
+<p>react-native-fs 모듈에서 제공하는 <code class="highlighter-rouge">RNFS.CachesDirectoryPath</code>를 콘솔에 찍어보면 캐시 파일 경로를 확인할 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">import</span> <span class="nx">RNFS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-fs</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">RNFS</span><span class="p">.</span><span class="nx">CachesDirectoryPath</span><span class="p">);</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<h3 id="2-cachedimage-컴포넌트-생성">2. CachedImage 컴포넌트 생성</h3>
+
+<p>자주 사용하는 이미지의 경우 <code class="highlighter-rouge">CachedImage</code>라는 컴포넌트를 만들어 <code class="highlighter-rouge">RNFS.CachesDirectoryPath</code>(캐시 폴더)에 해당 이미지가 있는지 확인하여, 있으면 캐시 폴더에서 이미지를 꺼내서 렌더하고, 없으면 이미지 서버 스토리지 경로로 부터 다운로드하여 캐시 폴더에 저장한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span><span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span><span class="p">}</span>  <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Image</span><span class="p">,</span> <span class="nx">View</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">RNFS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-fs</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">Props</span> <span class="p">{</span>
+  <span class="nl">imageStyle</span><span class="p">:</span> <span class="nx">StyleProp</span><span class="o">&lt;</span><span class="nx">ImageStyle</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">imageSource</span><span class="p">:</span> <span class="p">{</span><span class="nl">id</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span> <span class="nl">storageUri</span><span class="p">:</span> <span class="nx">string</span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">CacheImage</span> <span class="o">=</span> <span class="p">({</span><span class="nx">imageStyle</span><span class="p">,</span> <span class="nx">imageSource</span><span class="p">}:</span> <span class="nx">Props</span><span class="p">)</span> <span class="o">=&gt;</span><span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">source</span><span class="p">,</span> <span class="nx">setSource</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="kc">undefined</span> <span class="o">|</span> <span class="p">{</span><span class="na">uri</span><span class="p">:</span> <span class="nx">string</span><span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">extension</span> <span class="o">=</span> <span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">android</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">file://</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">''</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">extension</span><span class="p">}${</span><span class="nx">RNFS</span><span class="p">.</span><span class="nx">CachesDirectoryPath</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">imageSource</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">.jpg`</span>
+
+  <span class="kd">const</span> <span class="nx">loadFile</span> <span class="o">=</span> <span class="p">(</span><span class="na">path</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSource</span><span class="p">({</span><span class="na">uri</span><span class="p">:</span> <span class="nx">path</span><span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">downloadFile</span> <span class="o">=</span> <span class="p">(</span><span class="na">uri</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="na">path</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">RNFS</span><span class="p">.</span><span class="nx">downloadFile</span><span class="p">({</span>
+      <span class="na">fromUrl</span><span class="p">:</span> <span class="nx">uri</span><span class="p">,</span>
+      <span class="na">toFile</span><span class="p">:</span> <span class="nx">path</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">promise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">loadFile</span><span class="p">(</span><span class="nx">path</span><span class="p">));</span>
+  <span class="p">};</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">RNFS</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">path</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">exists</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">exists</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">loadFile</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">downloadFile</span><span class="p">(</span><span class="nx">imageSource</span><span class="p">.</span><span class="nx">storageUri</span><span class="p">,</span> <span class="nx">path</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">imageStyle</span><span class="p">}</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">source</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span><span class="p">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>안드로이드에서는 파일시스템에 접근하기 위해 파일 경로 앞에 <code class="highlighter-rouge">file://</code>를 붙여야 하며, <a href="https://github.com/itinance/react-native-fs#existsfilepath-string-promiseboolean"><code class="highlighter-rouge">RNFS.exists</code></a>로 파일이 존재하는지 확인하고, <a href="https://github.com/itinance/react-native-fs#downloadfileoptions-downloadfileoptions--jobid-number-promise-promisedownloadresult-"><code class="highlighter-rouge">RNFS.downloadFile</code></a>로 파일을 다운로드 한다.</p>
+
+<p><br /></p>
+
+<p>이 밖에도 <a href="https://github.com/itinance/react-native-fs">react-native-fs</a>를 사용하여 다양하게 파일시스템을 활용할 수 있다.</p>
+:ET

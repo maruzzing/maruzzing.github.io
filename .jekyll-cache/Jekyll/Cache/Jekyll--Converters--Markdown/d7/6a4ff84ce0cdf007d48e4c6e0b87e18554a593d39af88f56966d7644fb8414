@@ -15,10 +15,10 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">phone_book</span><span class="p">):</span>
     <span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">joined</span> <span class="o">=</span> <span class="s">","</span><span class="o">+</span><span class="s">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">phone_book</span><span class="p">)</span>
+    <span class="n">joined</span> <span class="o">=</span> <span class="s">","</span><span class="o">+</span><span class="s">","</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">phone_book</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">phone_book</span><span class="p">:</span>
         <span class="n">compare</span> <span class="o">=</span> <span class="s">","</span> <span class="o">+</span> <span class="n">number</span>
-        <span class="k">if</span> <span class="n">joined</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">compare</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">joined</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">compare</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
             <span class="k">break</span>
     <span class="k">return</span> <span class="n">answer</span>
