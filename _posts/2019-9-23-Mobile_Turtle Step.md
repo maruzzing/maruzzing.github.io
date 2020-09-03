@@ -15,7 +15,7 @@ mainImage: /images/turtle-step-main.png
 <table class='project_detail'>
   <tr class='project_detail row'>
     <td class='project_detail title'>Period</td>
-    <td class='project_detail content'>2019년 7월 20일 ~ 진행중</td>
+    <td class='project_detail content'>2019년 7월 20일 ~ 보류</td>
   </tr>
   <tr class='project_detail row'>
     <td class='project_detail title'>Platform</td>

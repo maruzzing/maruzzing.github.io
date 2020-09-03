@@ -1,10 +1,10 @@
-I"n<p><img src="/images/dfit-title.png" alt="DFIT Title" title="DFIT Title" /></p>
+I"�<p><img src="/images/dfit-title.png" alt="DFIT Title" title="DFIT Title" /></p>
 
 <div class="innerBoxOutlined">
 <table class="project_detail">
   <tr class="project_detail row">
     <td class="project_detail title">Period</td>
-    <td class="project_detail content">2020년 5월 19일 ~ 7월 13일<br />
+    <td class="project_detail content">2020년 7월 15일 ~ 8월 27일<br />
     (출시 후 지속 업데이트 중)</td>
   </tr>
     <tr class="project_detail row">
@@ -20,9 +20,11 @@
     <td class="project_detail content"> React Native와 Node.js 사용, 풀스택 개발<br />
     - TypeScript 사용<br />
 - 상태관리를 위한 Redux (Redux-toolkit) 적용<br />
-- DarkTheme, LightTheme 구현<br />
-- 주간 &amp; 월간 캘린더 구현<br />
-- Universal Links 활용 비밀번호 찾기 구현<br />
+- 사진 첨부 일기 작성, 수정, 삭제 구현<br />
+- 이미지로 Share 기능 구현<br />
+- Scrollable 캘린더 구현<br />
+- 포스팅 순서 변경 구현<br />
+- 사진 갤러리 및 Date Picker 커스텀화<br />
 - 환경 별 환경 변수 설정 및 Code-Push 활용 배포<br />
 - Express.js 프레임워크 활용 서버 구축<br />
 - 관계형 DB, MySQL 사용 DB 구축<br />
@@ -45,8 +47,8 @@
     <img class="stack_logo" src="/images/stack_logo_node.png" alt="nodeJs" /></a>
     <a href="https://expressjs.com/" target="_blank">
     <img class="stack_logo" src="/images/stack_logo_express.png" alt="ExpressJs" /></a>
-        <a href="https://www.mysql.com/" target="_blank">
-    <img class="stack_logo" src="/images/stack_logo_mysql.png" alt="MySQL" /></a>
+    <a href="https://typeorm.io/#/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_typeorm.png" alt="TypeORM" /></a>
     <a href="https://www.mysql.com/" target="_blank">
     <img class="stack_logo" src="/images/stack_logo_mysql.png" alt="MySQL" /></a>
     <a href="https://aws.amazon.com/" target="_blank">
@@ -56,9 +58,9 @@
     <tr class="project_detail row">
     <td class="project_detail title">Download</td>
     <td class="project_detail content">
-    <a href="https://play.google.com/store/apps/details?id=com.dfit&amp;hl=ko" target="_blank">
+    <a href="https://play.google.com/store/apps/details?id=com.bhd" target="_blank">
     <img class="download_button" src="/images/googleplaystore.png" alt="React" /></a>
-    <a href="https://apps.apple.com/kr/app/%EB%94%94%ED%95%8F-%EC%89%BD%EA%B2%8C-%EA%B8%B0%EB%A1%9D-%ED%95%98%EB%8A%94-%EC%9A%B4%EB%8F%99-%EC%9D%BC%EC%A7%80/id1521764155" target="_blank">
+    <a href="https://apps.apple.com/kr/app/%EB%B0%98%ED%95%98%EB%8B%A4-banhada-%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC-%ED%95%98%EB%A3%A8-%EB%8B%A4%EC%9D%B4%EC%96%B4%EB%A6%AC/id1525820188" target="_blank">
     <img class="download_button" src="/images/appstore.png" alt="Redux" /></a>
 </td>
   </tr>
