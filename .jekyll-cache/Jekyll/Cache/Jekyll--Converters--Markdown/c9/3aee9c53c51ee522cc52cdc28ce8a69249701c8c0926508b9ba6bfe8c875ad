@@ -1,0 +1,98 @@
+I"�<p><img src="/images/bhd-title.png" alt="DFIT Title" title="DFIT Title" /></p>
+
+<div class="innerBoxOutlined">
+<table class="project_detail">
+  <tr class="project_detail row">
+    <td class="project_detail title">Period</td>
+    <td class="project_detail content">2020년 7월 15일 ~ 8월 27일<br />
+    (출시 후 지속 업데이트 중)</td>
+  </tr>
+    <tr class="project_detail row">
+    <td class="project_detail title">Team</td>
+    <td class="project_detail content">개발자 2명, 기획자 1명, 디자이너 1명</td>
+  </tr>
+  <tr class="project_detail row">
+    <td class="project_detail title">Platform</td>
+    <td class="project_detail content">iOS &amp; android 모바일 어플리케이션</td>
+  </tr>
+  <tr class="project_detail row">
+    <td class="project_detail title">Role</td>
+    <td class="project_detail content"> React Native와 Node.js 사용, 풀스택 개발<br />
+    - TypeScript 사용<br />
+- 상태관리를 위한 Redux (Redux-toolkit) 적용<br />
+- 일기 작성, 수정, 삭제 관련 CRUD 구현<br />
+- Scrollable 캘린더 및 포스팅 순서 변경 구현<br />
+- 사진 갤러리 및 Date Picker 커스텀화<br />
+- 환경 별 환경 변수 설정 및 Code-Push 활용 배포<br />
+- Express.js 프레임워크 활용 서버 구축<br />
+- Multer, MulterS3를 활용하여 이미지 업로드 구현<br />
+- 관계형 DB, MySQL 사용 DB 구축<br />
+- 제플린을 이용한 디자이너와 협업<br />
+</td>
+  </tr>
+  <tr class="project_detail row">
+    <td class="project_detail title">Tech Stack</td>
+    <td class="project_detail content">
+    <a href="https://reactnative.dev/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_rn.png" alt="ReactNative" /></a>
+    <a href="https://www.typescriptlang.org/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_ts.png" alt="Typescript" /></a>
+    <a href="https://redux.js.org/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_redux.png" alt="Redux" /></a>
+    <a href="https://www.styled-components.com/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_styledComp.png" alt="StyledComponent" /></a>
+    <a href="https://nodejs.org/en/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_node.png" alt="nodeJs" /></a>
+    <a href="https://expressjs.com/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_express.png" alt="ExpressJs" /></a>
+    <a href="https://www.mysql.com/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_mysql.png" alt="MySQL" /></a>
+    <a href="https://aws.amazon.com/" target="_blank">
+    <img class="stack_logo" src="/images/stack_logo_aws.png" alt="AWS" /></a>
+</td>
+  </tr>
+    <tr class="project_detail row">
+    <td class="project_detail title">Download</td>
+    <td class="project_detail content">
+    <a href="https://play.google.com/store/apps/details?id=com.bhd" target="_blank">
+    <img class="download_button" src="/images/googleplaystore.png" alt="React" /></a>
+    <a href="https://apps.apple.com/kr/app/%EB%B0%98%ED%95%98%EB%8B%A4-banhada-%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC-%ED%95%98%EB%A3%A8-%EB%8B%A4%EC%9D%B4%EC%96%B4%EB%A6%AC/id1525820188" target="_blank">
+    <img class="download_button" src="/images/appstore.png" alt="Redux" /></a>
+</td>
+  </tr>
+</table>
+</div>
+<p><br /></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>반려동물과의 소중한 하루를 기억할 수 있는 반려동물 하루 다이어리, 반하다.<br />
+밖에 있는 시간이 많기 때문에 반려동물을 키우지는 못하지만 반려동물 영상을 꼬박 챙겨보는 나에게 이번 프로젝트는 힐링이었다.🤗<br />
+초반에는 반려동물 한 마리에 대한 일기를 작성할 수 있도록 구성했지만, 실제 반려동물을 키우는 사람들의 의견을 반영하여 한 마리 뿐만 아니라 여러마리 반려동물의 일기를 자유롭게 작성할 수 있도록 했다.<br />
+앞으로 추가하고 싶은 기능이 무궁무진한 반려동물 하루 다이어리! 많은 분들이 반려동물과의 소중한 시간을 [반하다]와 함께 추억하길🙏🏻
+<br /><br /></p>
+
+<h2 id="key-features">Key Features</h2>
+
+<h3 id="image-picker-및-date-picker-커스텀화">Image Picker 및 Date Picker 커스텀화</h3>
+<p>귀여운 앱의 톤을 유지하기 위해 이미지 피커와 데이트 피커를 커스텀화 하였다. 라이브러리를 수정하기도 하며 시행착오도 많았지만 뿌듯 뿌듯! 하지만 아직 최적화 하고 싶은 부분이 있어 계속 손 볼 예정이다.</p>
+<div class="simulContainer">
+<img class="simulImg" src="/images/bhd-demo-gif-1.gif" alt="dfit-demo-gif" width="250em" style="margin-right:30px;" />
+<img class="simulImg" src="/images/bhd-demo-gif-2.gif" alt="dfit-demo-gif" width="250em" style="margin-left:30px;" />
+</div>
+
+<h3 id="커서selection-위치에-따라-키보드에-가려지지-않도록-scroll">커서(Selection) 위치에 따라 키보드에 가려지지 않도록 Scroll</h3>
+<p>일기 작성/수정 화면에서 이미지 크기로 인해 텍스트 작성 화면이 좁게 느껴지지 않도록 하기 위해 텍스트 필드가 포커스 되면 텍스트 필드가 top으로 스크롤 되게 하였으며, 또한 커서(selection) 위치에 따라 키보드에 가려지지 않도록 자동으로 스크롤 되도록 구현했다. selection 위치에 따라 자동 스크롤 되는 부분은 ios만 가능하며, 안드로이드는 아직 노력 중이다 😥</p>
+<div class="simulContainer">
+<img class="simulImg" src="/images/bhd-demo-gif-3.gif" alt="dfit-demo-gif" width="250em" style="margin-right:30px;" />
+<img class="simulImg" src="/images/bhd-demo-gif-4.gif" alt="dfit-demo-gif" width="250em" style="margin-left:30px;" />
+</div>
+
+<h3 id="드래그로-일기-순서-이동-구현">드래그로 일기 순서 이동 구현</h3>
+<p>하루에 일기를 여러개를 쓸 수 있도록 해 놓았기 때문에 일기 순서를 사용자가 수정할 수 있도록 하고 싶었다. 일기 쓴 시간을 포스팅 마다 설정하게 할지, 드래그로 순서를 변경하게 할 것인지 고민 끝에 드래그 방법으로 사용자가 더욱 간단하게 접근할 수 있도록 했다.<br />
+db를 최소한으로 수정하기 위해 일기마다 소수점을 가지는 order 값을 부여하여 순서를 이동한 일기의 order 값만 앞/뒤 order 값과 0.001씩 차이나게 했다.</p>
+<div class="simulContainer">
+<img class="simulImg" src="/images/bhd-demo-gif-5.gif" alt="dfit-demo-gif" width="250em" />
+</div>
+
+:ET
