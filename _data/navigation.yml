@@ -9,6 +9,10 @@
       url: /study/javascript
     - title: Node.js
       url: /study/nodejs
+    - title: GraphQL
+      url: /study/graphql
+    - title: Next.js
+      url: /study/nextjs
     - title: React
       url: /study/react
     - title: React Native
@@ -32,7 +36,7 @@
     #   url: /project/fetch
     # - title: 여행일정앱
     #   url: /project/mtn
-- title: TIL
-  url: /til
+# - title: TIL
+#   url: /til
 # - title: Life in Jeju
 #   url: /nomad
