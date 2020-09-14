@@ -149,7 +149,7 @@ const apolloServer = new ApolloServer({
 ...
 ```
 
-이렇게 진행해도 되지만, 이렇게만 진행했을 때 `TepeScript`와 `GraphQL`을 사용하는 것이 생산성이 떨어지는 것 같았다. 그래서 도입하게 된 것이 [`TypeGraphQL`](https://typegraphql.com/)이다. `TypeGraphQL`은 GraphQL의 Query와 Mutation을 Class 형태로 작성할 수 있게 도와준다.
+이렇게 진행해도 되지만, 이렇게만 진행했을 때 `TepeScript`와 `GraphQL`을 사용하는 것이 생산성이 떨어지는 것 같았다. 그래서 도입하게 된 것이 [`TypeGraphQL`](https://typegraphql.com/)이다. `TypeGraphQL`은 TypeScript Class로 부터 GraphQL schema를 생성해 준다.
 
 ### TypeGraphQL 도입하기
 
