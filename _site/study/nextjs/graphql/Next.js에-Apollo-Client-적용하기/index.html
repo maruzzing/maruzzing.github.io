@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs" class="activated">
+        Next.js
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>Next.js에 Apollo Client 적용하기</h1>
+    <div class="date">Written on September  9, 2020</div>
+    <div class="entry">
+      <p>기본적인 웹 구축이 되었으니 GraphQL을 적용해 볼 차례이다. 이를 위해 Apollo라는 라이브러리를 사용할 건데, GraphQL API 콜을 도와줄 뿐만 아니라 캐싱과 상태관리 등 다양한 이점이 있어 🚀 Apollo Client를 적용해 보기로 했다.</p>
+
+<h2 id="모듈-설치">모듈 설치</h2>
+
+<p>Apollo Client를 구축하는데 필요한 거의 모든 기능을 가지고 있는 <a href="https://github.com/apollographql/apollo-client">@apollo/client</a>와 GraphQL 쿼리를 파싱해주는 <a href="https://github.com/graphql/graphql-js">graphql</a>을 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm i @apollo/client graphql
+</code></pre></div></div>
+
+<h2 id="apollo-client-생성하기">Apollo Client 생성하기</h2>
+
+<p>먼저, /src/lib 폴더 내에 <code class="highlighter-rouge">apolloClient.ts</code> 파일을 생성하고, ApolloClient 인스턴스를 생성한다. 이 때 GraphQL 서버 url이 필요하다.  <code class="highlighter-rouge">.env</code> 파일에 <code class="highlighter-rouge">BACKEND_URL</code>을 정의하고 아래와 같이 적용했다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">ApolloClient</span><span class="p">,</span> <span class="nx">InMemoryCache</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@apollo/client</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ApolloClient</span><span class="p">({</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">BACKEND_URL</span><span class="p">,</span>
+  <span class="na">cache</span><span class="p">:</span> <span class="k">new</span> <span class="nx">InMemoryCache</span><span class="p">()</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="apollo-client-연결하기">Apollo Client 연결하기</h2>
+
+<p>프로젝트 전역에서  ApolloClient에 접근할 수 있게 하기 위해 <code class="highlighter-rouge">_app.tsx</code>에 적용해 주겠다. 이전 포스팅에서 만들었던 <code class="highlighter-rouge">_app.tsx</code>의 최상위 컴포넌트를 <code class="highlighter-rouge">ApolloProvider</code>로 감싸고 이전에 만들었던 <code class="highlighter-rouge">client</code>를 <code class="highlighter-rouge">props</code>로 넘겨 주면 된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">ApolloProvider</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@apollo/client</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">client</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/lib/apolloClient</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">...</span>
+
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">App</span><span class="p">({</span><span class="nx">Component</span><span class="p">,</span> <span class="nx">pageProps</span><span class="p">}:</span> <span class="nx">AppProps</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ApolloProvider</span> <span class="nx">client</span><span class="o">=</span><span class="p">{</span><span class="nx">client</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">ThemeProvider</span> <span class="nx">theme</span><span class="o">=</span><span class="p">{</span><span class="nx">theme</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">GlobalStyle</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="nx">pageProps</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/ThemeProvider</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/ApolloProvider</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="graphql-api-호출하기">GraphQL API 호출하기</h2>
+
+<p>이제 간단한 GraphQL API를 호출해 보자. 먼저 src/graphql/query 폴더를 만들고 <code class="highlighter-rouge">index.ts</code> 파일을 생성한다. 생성한 파일 내에 GraphQL 쿼리를 정의 하는데 template literal tag인 <code class="highlighter-rouge">gql</code>을 사용한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">gql</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@apollo/client</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">TEST_QUERY</span> <span class="o">=</span> <span class="nx">gql</span><span class="s2">`
+  {
+    ping
+  }
+`</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="usequery-사용하기">useQuery 사용하기</h3>
+
+<p>@apollo/client에서는 <code class="highlighter-rouge">useQuery</code> 라는 아주 강력하고 간단한 hooks를 제공한다.
+<code class="highlighter-rouge">pages/index.tsx</code> 파일을 아래와 같이 수정하면 GraphQL API가 호출되어 응답값을 받는 것을 확인할 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Link</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/link</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Layout</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/components/Layout</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useQuery</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@apollo/client</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">TEST_QUERY</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/graphql/query</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">IndexPage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">loading</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useQuery</span><span class="p">(</span><span class="nx">TEST_QUERY</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Layout</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">Next</span><span class="p">.</span><span class="nx">js</span> <span class="err">👋</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/Layout</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">IndexPage</span>
+</code></pre></div></div>
+<p><br />
+콘솔로그</p>
+<div style="display: flex; justify-content: left; margin-top:-1em">
+  <img src="/images/apollo-client.png" alt="apollo-client" width="400em" />
+</div>
+
+<h3 id="getstaticprops-사용하기">getStaticProps 사용하기</h3>
+
+<p>정적/사전 렌더링이 필요한 경우, next.js의 <code class="highlighter-rouge">getStaticProps</code> 내에서도 GraphQL API 호출이 가능하다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Link</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/link</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Layout</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/components/Layout</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useQuery</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@apollo/client</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">TEST_QUERY</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/graphql/query</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">client</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/lib/apolloClient</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">IndexPage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">:</span><span class="nx">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="c1">// =&gt;  { ping: '👋 pong! 👋' }</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Layout</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">Next</span><span class="p">.</span><span class="nx">js</span> <span class="err">👋</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/Layout</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">IndexPage</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getStaticProps</span><span class="p">:</span> <span class="nx">GetStaticProps</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span><span class="nx">data</span><span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">query</span><span class="p">({</span>
+    <span class="na">query</span><span class="p">:</span> <span class="nx">TEST_QUERY</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">props</span><span class="p">:</span> <span class="nx">data</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/nextjs/graphql/Next.js%EC%97%90-Apollo-Client-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/',
+    'title': 'Next.js에 Apollo Client 적용하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

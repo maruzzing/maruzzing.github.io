@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>RN Dark & Light Theme 적용하기</h1>
+    <div class="date">Written on May  8, 2020</div>
+    <div class="entry">
+      <p>iOS 13버전 부터 기본 배경색을 검은색으로 사용하는 다크모드 기능이 추가 되면서 다크모드를 지원하는 앱이 많아졌다. 그래서 Styled-Components와 Redux-Toolkit을 사용해 다크모드를 지원하는 방법을 알아보았다.</p>
+
+<h1 id="styled-components-설정하기">Styled-Components 설정하기</h1>
+<h3 id="styled-components-설치">Styled-Components 설치</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn add styled-components
+<span class="nv">$ </span>yarn add <span class="nt">-D</span> @types/styled-components
+<span class="nv">$ </span><span class="nb">cd </span>ios <span class="o">&amp;&amp;</span> pod <span class="nb">install</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ..
+</code></pre></div></div>
+
+<h3 id="theme-정의">Theme 정의</h3>
+
+<p>먼저, 타입스크립트를 쓰고 있기 때문에 <code class="highlighter-rouge">/src/styles/styled.d.ts</code> 파일에 Default Theme의 Type을 정의한다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">styled-components/native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">declare</span> <span class="nx">module</span> <span class="dl">'</span><span class="s1">styled-components/native</span><span class="dl">'</span> <span class="p">{</span>
+  <span class="k">export</span> <span class="kr">interface</span> <span class="nx">DefaultTheme</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nl">main</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+      <span class="nl">white</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+      <span class="nl">bg</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이제 <code class="highlighter-rouge">/src/styles/theme.ts</code> 파일에 <code class="highlighter-rouge">dark</code>와 <code class="highlighter-rouge">light</code> theme의 값을 정의한다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">DefaultTheme</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">styled-components/native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">dark</span><span class="p">:</span> <span class="nx">DefaultTheme</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">color</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">main</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#19dda3</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">white</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ffffff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">bg</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#121212</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">light</span><span class="p">:</span> <span class="nx">DefaultTheme</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">...</span><span class="nx">dark</span><span class="p">,</span>
+  <span class="na">color</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">main</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#00f2ab</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">white</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ffffff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">bg</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ffffff</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span><span class="nx">dark</span><span class="p">,</span> <span class="nx">light</span><span class="p">};</span>
+</code></pre></div></div>
+
+<h1 id="redux-toolkit-설정하기">Redux-Toolkit 설정하기</h1>
+
+<p>모바일의 컬러 모드를 상태값으로 관리하여 변화에 따라 앱 전역에 해당 theme이 적용되도록 하기 위해 redux로 상태값을 관리하려고 한다.
+이전에 redux를 쓰면서 코드량이 많아져 고통스러웠는데(심지어 타입스크립트와 함께 쓰니 그 고통이 두배!😤),
+이번에 리덕스 툴킷을 사용해 보니 정말 간편하고 효율적이어서👍 간단한 예제이지만 여기서도 redux-toolkit을 사용하기로 했다.</p>
+
+<h3 id="redux-toolkit-설치">Redux-Toolkit 설치</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn add @reduxjs/toolkit react-redux @types/react-redux redux-thunk 
+<span class="nv">$ </span><span class="nb">cd </span>ios <span class="o">&amp;&amp;</span> pod <span class="nb">install</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ..
+</code></pre></div></div>
+
+<h3 id="store-생성">store 생성</h3>
+<p><code class="highlighter-rouge">src/reducers/index.ts</code>에 store를 만들어 준다. 
+redux-toolkit에서는 이전과는 완전히 다른 폴더 구조를 제안하고 있지만, 아직 어떤 것이 좋을지 고민하고 있는 단계라
+이 예제 에서는 reducers 폴더에서 리덕스와 관련된 모든 내용을 관리할 예정이다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Action</span><span class="p">,</span> <span class="nx">configureStore</span><span class="p">,</span> <span class="nx">ThunkAction</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@reduxjs/toolkit</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="na">reducer</span><span class="p">:</span> <span class="p">{},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="nx">type</span> <span class="nx">RootState</span> <span class="o">=</span> <span class="nx">ReturnType</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">export</span> <span class="nx">type</span> <span class="nx">AppThunk</span> <span class="o">=</span> <span class="nx">ThunkAction</span><span class="o">&lt;</span><span class="k">void</span><span class="p">,</span> <span class="nx">RootState</span><span class="p">,</span> <span class="nx">unknown</span><span class="p">,</span> <span class="nx">Action</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="themeslice-생성">themeSlice 생성</h3>
+<p>모바일의 컬러 모드에 따라 앱의 theme state를 적용하는 action과 reducer를 <code class="highlighter-rouge">createSlice</code>를 이용하여 아래와 같이 만든다.
+react-native의 <a href="https://reactnative.dev/docs/appearance">Appearance API</a> 사용하면 모바일의 컬러 모드를 확인할 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">createSlice</span><span class="p">,</span> <span class="nx">PayloadAction</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@reduxjs/toolkit</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Appearance</span><span class="p">,</span> <span class="nx">ColorSchemeName</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span><span class="p">:</span> <span class="nx">ColorSchemeName</span> <span class="o">=</span> <span class="nx">Appearance</span><span class="p">.</span><span class="nx">getColorScheme</span><span class="p">()</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">themeSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">theme</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">initialState</span><span class="p">,</span>
+  <span class="na">reducers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">setTheme</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="na">action</span><span class="p">:</span> <span class="nx">PayloadAction</span><span class="o">&lt;</span><span class="nx">ColorSchemeName</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=&gt;</span>
+      <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="p">{</span><span class="nx">actions</span><span class="p">,</span> <span class="nx">reducer</span><span class="p">}</span> <span class="o">=</span> <span class="nx">themeSlice</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="p">{</span><span class="nx">setTheme</span><span class="p">}</span> <span class="o">=</span> <span class="nx">actions</span><span class="p">;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">reducer</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">/src/reducers/index.ts</code> 에 <code class="highlighter-rouge">themeReducer</code> 적용하면 redux 관련 설정은 완료!</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">import</span> <span class="nx">themeReducer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./themeSlice</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="na">reducer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">theme</span><span class="p">:</span> <span class="nx">themeReducer</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<h1 id="앱-전역에-theme-상태값-적용하기">앱 전역에 Theme 상태값 적용하기</h1>
+
+<p>먼저 index.js에서 redux <code class="highlighter-rouge">Provider</code>를 이용해 전체 프로젝트에 store를 적용해 준다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">AppRegistry</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Provider</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-redux</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./src/App</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">name</span> <span class="k">as</span> <span class="nx">appName</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./app.json</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">store</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./src/reducers</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">disableYellowBox</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">AppConatiner</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">Provider</span> <span class="nx">store</span><span class="o">=</span><span class="p">{</span><span class="nx">store</span><span class="p">}</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/Provider</span><span class="err">&gt;
+</span><span class="p">);</span>
+
+<span class="nx">AppRegistry</span><span class="p">.</span><span class="nx">registerComponent</span><span class="p">(</span><span class="nx">appName</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">AppConatiner</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>그리고 <code class="highlighter-rouge">/src/App.tsx</code> 파일에서 Styled-Components의 <code class="highlighter-rouge">ThemeProvider</code>를 이용하여 앱 전역에 theme을 적용해 준다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Appearance</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">styled</span><span class="p">,</span> <span class="p">{</span><span class="nx">ThemeProvider</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">styled-components/native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">RootState</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./reducers</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">dark</span><span class="p">,</span> <span class="nx">light</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./styles/theme</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">setTheme</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./reducers/themeSlice</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Container</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">SafeAreaView</span><span class="s2">`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: </span><span class="p">${(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">props</span><span class="p">.</span><span class="nx">theme</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">bg</span><span class="p">}</span><span class="s2">;
+`</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">theme</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">:</span> <span class="nx">RootState</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">theme</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ThemeProvider</span> <span class="nx">theme</span><span class="o">=</span><span class="p">{</span><span class="nx">theme</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">dark</span> <span class="p">:</span> <span class="nx">light</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Container</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/ThemeProvider</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>추가적으로 <code class="highlighter-rouge">Appearance.addChangeListener</code>를 사용하여 모바일의 컬러 모드가 변경되면 앱의 <code class="highlighter-rouge">theme</code> 상태도 변경될 수 있도록 한다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">App</span><span class="p">({</span><span class="nx">theme</span><span class="p">}:</span> <span class="nx">Props</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">...</span>
+	<span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">();</span>
+	  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	    <span class="kd">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">Appearance</span><span class="p">.</span><span class="nx">addChangeListener</span><span class="p">(({</span><span class="nx">colorScheme</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	      <span class="nx">dispatch</span><span class="p">(</span><span class="nx">setTheme</span><span class="p">(</span><span class="nx">colorScheme</span><span class="p">));</span>
+	    <span class="p">});</span>
+	    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">subscription</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+	  <span class="p">},</span> <span class="p">[</span><span class="nx">dispatch</span><span class="p">]);</span>
+<span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/RN-Dark-&-Light-Theme-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/',
+    'title': 'RN Dark & Light Theme 적용하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

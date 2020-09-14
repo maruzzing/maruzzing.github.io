@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react" class="activated">
+        React
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>구글맵 infowindow에 컴포넌트 띄우기</h1>
+    <div class="date">Written on July 11, 2019</div>
+    <div class="entry">
+      <p>구글맵에서 마커를 클릭했을 때, 팝업창을 띄워 위치 정보를 게시하고 싶다면 Maps JavaScript API에서 제공하는 <a href="https://developers.google.com/maps/documentation/javascript/infowindows">Info Windows</a>를 사용할 수 있다.</p>
+
+<h3 id="구글맵-연동">구글맵 연동</h3>
+
+<p><a href="/study/react/리액트에서-구글맵-연동하기/">리액트에서 구글맵 연동하기</a>에서 구현한 코드를 사용하여 맵을 로딩하고, 여기에 InfoWindow 컴포넌트를 추가해 보겠다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// App.js</span>
+
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nb">Map</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Map</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+<span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">Map</span>
+        <span class="na">id=</span><span class="s2">"myMap"</span>
+        <span class="na">options=</span><span class="si">{</span><span class="p">{</span>
+          <span class="na">center</span><span class="p">:</span> <span class="p">{</span> <span class="na">lat</span><span class="p">:</span> <span class="mf">33.4890</span><span class="p">,</span> <span class="na">lng</span><span class="p">:</span> <span class="mf">126.4983</span> <span class="p">},</span>
+          <span class="na">zoom</span><span class="p">:</span> <span class="mi">15</span>
+        <span class="p">}</span><span class="si">}</span>
+        <span class="na">onMapLoad=</span><span class="si">{</span><span class="nx">map</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">marker</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">Marker</span><span class="p">({</span>
+            <span class="na">position</span><span class="p">:</span> <span class="p">{</span> <span class="na">lat</span><span class="p">:</span> <span class="mf">33.4890</span><span class="p">,</span> <span class="na">lng</span><span class="p">:</span> <span class="mf">126.4983</span> <span class="p">},,</span>
+            <span class="na">map</span><span class="p">:</span> <span class="nx">map</span>
+          <span class="p">});</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<h3 id="marker에-클릭함수-추가하기">marker에 클릭함수 추가하기</h3>
+
+<p><code class="highlighter-rouge">onMapLoad</code> 함수에서 생성한 <code class="highlighter-rouge">marker</code>에 마커를 클릭했을 때 <code class="highlighter-rouge">createInfoWindow()</code> 함수를 실행하여 infowindow를 띄워줄 수 있도록 <code class="highlighter-rouge">addListener</code>를 추가해 준다. <code class="highlighter-rouge">addListener</code>는 Maps JavaScript API에서 제공하는 메서드로, 이외에도 마우스 이벤트 등이 있다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">onMapLoad</span> <span class="o">=</span> <span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">marker</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">Marker</span><span class="p">({</span>
+        <span class="na">position</span><span class="p">:</span> <span class="p">{</span> <span class="na">lat</span><span class="p">:</span> <span class="mf">33.4890</span><span class="p">,</span> <span class="na">lng</span><span class="p">:</span> <span class="mf">126.4983</span> <span class="p">},,</span>
+        <span class="na">map</span><span class="p">:</span> <span class="nx">map</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="nx">marker</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">createInfoWindow</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="createinfowindow-함수-정의하기">createInfoWindow 함수 정의하기</h3>
+
+<p>이제 실질적인 <code class="highlighter-rouge">createInfoWindow</code> 함수를 정의해 주어야 하는데, <code class="highlighter-rouge">new google.maps.InfoWindow()</code>에 <code class="highlighter-rouge">content</code> 옵션에 infowindow에 나타내어질 내용을 정의해주면 되는데 html 형식으로 작성해야 한다. 때문에, <code class="highlighter-rouge">content</code> 옵션에 특정 id를 가진 <code class="highlighter-rouge">div</code> 태그를 작성하고, 그 <code class="highlighter-rouge">div</code>에 접근하여 원하는 컴포넌트를 <code class="highlighter-rouge">react-dom</code>의 <code class="highlighter-rouge">render</code> 함수를 사용하여 렌더해주면 된다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">createInfoWindow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">map</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="kd">const</span> <span class="nx">infoWindow</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">InfoWindow</span><span class="p">({</span>
+      <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;div id="infoWindow" /&gt;</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">position</span><span class="p">:</span> <span class="p">{</span> <span class="na">lat</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">latLng</span><span class="p">.</span><span class="nx">lat</span><span class="p">(),</span> <span class="na">lng</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">latLng</span><span class="p">.</span><span class="nx">lng</span><span class="p">()</span> <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="nx">infoWindow</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">domready</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">render</span><span class="p">(</span>
+          <span class="p">&lt;</span><span class="nc">InfoWindow</span> <span class="p">/&gt;</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">infoWindow</span><span class="dl">'</span><span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">infoWindow</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기까지 하면, 마커 클릭 시, <code class="highlighter-rouge">&lt;InfoWindow /&gt;</code> 에 정의해주는 내용이 지도 내 마커 위치에서 말풍선 처럼 뜨게 될 것이다.</p>
+
+<hr />
+
+<p>추가적으로, 마커 클릭 시,<code class="highlighter-rouge">placeId</code>를 사용하여 placeDetail 정보를 받아 InfoWindow 컴포넌트 내에 렌더하는 방법을 알아보자. 이 부분은 JavaScript API Places Library의 <a href="https://developers.google.com/maps/documentation/javascript/places#place_details">Place Details Requests</a>를 참고하면 된다.</p>
+
+<h3 id="placedetail-요청하기">placeDetail 요청하기</h3>
+
+<p>placeDetail은 아래와 같은 형태로 요청할 수 있으며, <code class="highlighter-rouge">request</code>에 필수적으로 <code class="highlighter-rouge">placeId</code>를 제공해야 한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">places</span><span class="p">.</span><span class="nx">PlacesService</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+<span class="nx">service</span><span class="p">.</span><span class="nx">getDetails</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><br /> 
+여기서는 createInfoWindow 함수의 인자로 placeId를 받아와, <code class="highlighter-rouge">getDetails()</code>로 정보를 요청하고, 정보가 성공적으로 수신되었을 때 결과값(<code class="highlighter-rouge">place</code>)을 <code class="highlighter-rouge">&lt;InfoWindow /&gt;</code> 컴포넌트에 props로 전달하고, infowindow를 렌더하도록 작성하면 된다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">createInfoWindow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">placeId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">setPlaceDetail</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">placeId</span>
+    <span class="p">};</span>
+    <span class="kd">const</span> <span class="nx">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">places</span><span class="p">.</span><span class="nx">PlacesService</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+    <span class="nx">service</span><span class="p">.</span><span class="nx">getDetails</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">place</span><span class="p">,</span> <span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">places</span><span class="p">.</span><span class="nx">PlacesServiceStatus</span><span class="p">.</span><span class="nx">OK</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">infoWindow</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">InfoWindow</span><span class="p">({</span>
+            <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;div id="infoWindow" placeDetail={place}/&gt;</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">position</span><span class="p">:</span> <span class="p">{</span> <span class="na">lat</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">latLng</span><span class="p">.</span><span class="nx">lat</span><span class="p">(),</span> <span class="na">lng</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">latLng</span><span class="p">.</span><span class="nx">lng</span><span class="p">()</span> <span class="p">}</span>
+          <span class="p">});</span>
+      <span class="nx">infoWindow</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">domready</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">render</span><span class="p">(</span>
+          <span class="p">&lt;</span><span class="nc">InfoWindow</span>
+            <span class="na">toReviewDetail=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">toReviewDetail</span><span class="si">}</span>
+            <span class="na">closeInfoWindow=</span><span class="si">{</span><span class="nx">closeInfoWindow</span><span class="si">}</span>
+          <span class="p">/&gt;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">infoWindow</span><span class="dl">'</span><span class="p">)</span>
+        <span class="p">);</span>
+      <span class="p">});</span>
+      <span class="nx">infoWindow</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<hr />
+
+<p><span class="reference">관련 post</span></p>
+
+<p><a href="/study/react/리액트에서-구글맵-연동하기/">리액트에서 구글맵 연동하기</a></p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/react/%EA%B5%AC%EA%B8%80%EB%A7%B5-infowindow%EC%97%90-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%9D%84%EC%9A%B0%EA%B8%B0/',
+    'title': '구글맵 infowindow에 컴포넌트 띄우기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

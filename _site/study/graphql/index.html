@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql" class="activated">
+        GraphQL
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+<div class="container">
+  <div class="post-lists">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nextjs/graphql/Next.js%EC%97%90-Apollo-Client-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">Next.js에 Apollo Client 적용하기</a>
+        </div>
+        <div class="listEntry">
+          기본적인 웹 구축이 되었으니 GraphQL을 적용해 볼 차례이다. 이를 위해 Apollo라는 라이브러리를 사용할 건데, GraphQL API 콜을 도와줄 뿐만 아니라 캐싱과 상태관리 등 다양한 이점이 있어 🚀 Apollo Client를 적용해 보기로 했다.
+        </div>
+        <div class="date">
+          2020-09-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/graphql/Apollo-Server%EC%97%90-TypeORM%EC%9C%BC%EB%A1%9C-MySQL-DB-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B3%A0-GraphQL-API-%EB%A7%8C%EB%93%A4%EA%B8%B0/">Apollo Server에 TypeORM으로 MySQL DB 연결하고 GraphQL API 만들기</a>
+        </div>
+        <div class="listEntry">
+          기본적인 GraphQL API 서버 구축이 되었으니 이제 db을 연결해 볼 차례이다. 여기서는 db는 MySQL을, ORM은 TypeORM을 사용할 예정이다. Sequelize가 더 익숙하지만 TypeGraphQL을 사용하게 되면서 TypeORM을 사용했을 떄 훨씬 생산성이 높아지기 때문에 TypeORM을 사용해 보기로 했다.
+        </div>
+        <div class="date">
+          2020-09-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/graphql/Apollo-Express-GraphQL-API-%EC%84%9C%EB%B2%84-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-(feat.Typescript)/">Apollo Express GraphQL API 서버 도입하기 (feat.Typescript)</a>
+        </div>
+        <div class="listEntry">
+          여태 토이 프로젝트 이건, 회사 프로젝트 이건 Rest API 만 사용했었는데, 지금 사용하고 있는 공유 오피스에서 알게 된 백엔드 개발자가 React와 GraphQL 사용법을 물어와 관련내용을 좀 찾아보니 너무 신세계라👀 이참에 GraphQL을 공부해 보기로 했다.
+        </div>
+        <div class="date">
+          2020-09-08
+        </div>
+      </div>
+    </ul>
+    
+  </div>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/graphql/',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>React Native에서 Lottie 사용하기</h1>
+    <div class="date">Written on August 18, 2019</div>
+    <div class="entry">
+      <p>모바일이나 웹페이지에 애니메이션을 구현하기 위해서 gif를 사용해 왔는데, gif는 용량이 무겁고, 해상도 대응이 어렵다는 단점이 있다. 이에, gif의 훌륭한 대체재로 ‘Lottie’라는 라이브러리가 주목받고 있다고 하여 React Native에서 사용해 보았다.</p>
+
+<p>React Native의 경우, React Native Community에서 <a href="https://github.com/react-native-community/lottie-react-native"><code class="highlighter-rouge">LottieView</code></a> API를 제공하고 있다.</p>
+
+<h3 id="lottie-react-native-설치">lottie-react-native 설치</h3>
+
+<p><strong>react-native 0.6 버전</strong> 기준으로 <code class="highlighter-rouge">lottie-react-native</code>와 <code class="highlighter-rouge">lottie-ios@3.0.3</code> 패키지를 설치하고 <code class="highlighter-rouge">pod install</code>을 해준다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add lottie-react-native
+yarn add lottie-ios@3.0.3
+
+<span class="nb">cd </span>ios
+pod <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>하지만, 이렇게해도 영역만 잡힐 뿐 애니메이션 렌더링이 되지 않는 경우가 있는데, <a href="https://stackoverflow.com/questions/52536380/why-linker-link-static-libraries-with-errors-ios">stackoverflow</a>에 해결방법이 자세히 나와있다!</p>
+
+<p>프로젝트의 <code class="highlighter-rouge">.xcworkspace</code>를 열고 왼편의 네비게이터에 있는 프로젝트 네임에서 우클릭 &gt; New File을 클릭하여 swift파일을 생성한다. 이 때, target으로 앱 이름이 선택되어 있어야 한다.</p>
+
+<p><img src="/images/xocode-newFile.png" alt="xocode-newFile" width="600em" /></p>
+
+<p>그리고, alert창이 뜨면, ‘Create Bridging Header’를 클릭한다. 👍</p>
+
+<h3 id="lottieview-컴포넌트-작성">LottieView 컴포넌트 작성</h3>
+
+<p>이제, <code class="highlighter-rouge">.json</code> 형태의 애니메이션 파일을 불러와서 아래와 같이 간단한 코드로 애니메이션을 구현할 수 있으며, <code class="highlighter-rouge">style</code> props로 크기를 변형해 보면 다양한 크기로 구현해도 해상도가 깨지지 않는 것을 확인할 수 있다. 😎</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">LottieView</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lottie-react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">BasicExample</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nc">LottieView</span> <span class="na">source=</span><span class="si">{</span><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./loading.json</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span> <span class="nt">autoPlay</span> <span class="nt">loop</span> <span class="p">/&gt;;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/images/lottie-ex.gif" alt="lottie-ex" width="300em" style="border:1px solid #bcbcbc" /></p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/React-Native%EC%97%90%EC%84%9C-Lottie-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/',
+    'title': 'React Native에서 Lottie 사용하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

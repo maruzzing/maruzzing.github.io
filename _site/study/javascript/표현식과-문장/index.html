@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript" class="activated">
+        Javascript
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>표현식Expressions & 문장Statements</h1>
+    <div class="date">Written on April 18, 2019</div>
+    <div class="entry">
+      <h2 id="표현식expressions">표현식(Expressions)</h2>
+
+<ol>
+  <li>
+    <p>표현식은 값을 만들어 낸다.
+얼마나 긴 표현식 이던지, 결국은 하나의 값으로 귀결된다는 것이다. 아래의 코드 모두 표현식이며, console.log로 확인해 보면 하나의 값이 반환된다. 따라서, 하나의 값을 예상하는 곳에서 쓰인다.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="mi">20</span><span class="p">))</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span>
+<span class="nx">functionCall</span><span class="p">();</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">history</span> <span class="p">?</span> <span class="nx">useHistory</span><span class="p">()</span> <span class="p">:</span> <span class="nx">noHistoryFallback</span><span class="p">();</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">declaredVariable</span><span class="p">;</span>
+<span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">functionCall</span><span class="p">();</span>
+<span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">declaredVariable</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p>표현식은 항상 상태를 바꾸지는 않는다.
+예를들어,</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">assignedVariable</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//this is a statement, assignedVariable is state</span>
+<span class="nx">assignedVariable</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// expression</span>
+<span class="nx">assignedVariable</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// expression</span>
+<span class="nx">assignedVariable</span> <span class="o">-</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// expression</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">assignedVariable</span><span class="p">);</span> <span class="c1">// 2</span>
+</code></pre></div>    </div>
+
+    <p>여러가지 표현식들이 실행된 후에도 <code class="highlighter-rouge">assignedVariable</code> 값은 여전히 2로 바뀌지 않는다. 하지만, 함수 호출은 표현식이며, 함수는 값을 변화시키는 문장(statement)를 포함할 수 있다.
+아래 함수는 표현식 이지만, 상태를 바꾸는 문장(<code class="highlighter-rouge">assignedVariable = 14</code>)을 포함하고 있어 함수를 호출하면 상태가 바뀌게 된다.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">assignedVariable</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>따라서 위의 함수 표현식과 문장을 더 나은 방법으로 재작성 한다면,</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="k">return</span> <span class="mi">14</span> <span class="c1">//explicit return for readability</span>
+<span class="p">}</span>
+<span class="nx">assignedVariable</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <p>혹은, 아래와 같이 작성할 수 있다. 아래의 코드가 더욱 가독성이 좋고, 구성하기 좋으며, 표현식과 문장이 확연하게 구분되는 방법이다.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="k">return</span> <span class="nx">n</span><span class="c1">//explicit return for readability</span>
+<span class="p">}</span>
+<span class="nx">assignedVariable</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="statements">STATEMENTS</h2>
+
+<p>반면에, 문장(statement)은 값이 예상되는 곳에서는 사용될 수 없으며, 무언가를 수행하는 역할을 한다. 따라서, 함수의 인자로도, 대입 연산의 값으로도,연산자의 피연산자로도 사용될 수 없으며, 반환값으로도 사용할 수 없다.
+아래 리스트는 모두 자바스크립트에서의 문장(statement)이다.</p>
+
+<div class="innerBox">
+ 1. if<br />
+ 2. if-else<br />
+ 3. while<br />
+ 4. do-while<br />
+ 5. for<br />
+ 6. switch<br />
+ 7. for-in<br />
+ 8. with(deprecated)<br />
+ 9. debugger<br />
+10. variable declaration</div>
+
+<p>아래 코드를 브라우저 콘솔에서 쳐보면, 18이 리턴된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="mi">9</span> <span class="o">+</span> <span class="mi">9</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>하지만 이것을 표현식처럼 사용하거나 값이 예상되는 자리에서 쓸수는 없다. 위의 설명에 따라, 문장이 아무것도 반환하지 않을거라고 예상했기 때문에 이 결과는 이상하게 느껴질 것이고, 반환값을 이용할수 없으면 아무런 의미가 없기 때문에 더욱더 이상하게 느껴지겠지만, Well, that’s Javascript for you, weird.</p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/javascript/%ED%91%9C%ED%98%84%EC%8B%9D%EA%B3%BC-%EB%AC%B8%EC%9E%A5/',
+    'title': '표현식Expressions & 문장Statements'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

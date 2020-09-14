@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>KeyboardAvoidingView 적용하기</h1>
+    <div class="date">Written on September 24, 2019</div>
+    <div class="entry">
+      <p>처음 리액트 네이티브로 개발을 하고 디바이스로 테스트 할 때 가장 당황했던 것이 바로 키보드에 관한 것이었다. 시뮬레이터로 뷰를 보면서 개발할 때 하드웨어 키보드를 쓰다 보니 실제 모바일 기기에서 키보드가 올라왔을 때의 상황을 인지하지 못한 것이다. 그렇게 아무런 조치도 해주지 않으면 아래와 같이 키보드가 뷰를 가려버린다. 🤔</p>
+
+<div class="simulContainer">
+<img src="/images/turtle-demo-gif10.gif" alt="turtle-demo-gif10" width="250em" style="border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" />
+</div>
+
+<p>이 문제를 간단히 해결할 수 있는 방법으로 리액트 네이티브에서 제공하는 <a href="https://facebook.github.io/react-native/docs/keyboardavoidingview#docsNav">KeyboardAvoidingView</a> API를 적용하는 것이다.
+<code class="highlighter-rouge">View</code>로 감쌌던 컴포넌트를 <code class="highlighter-rouge">KeyboardAvoidingView</code>로 감싸주고, 몇 가지 props를 넘겨주면 끝!</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">KeyboardAvoidingView</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">&lt;</span><span class="nc">KeyboardAvoidingView</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="si">}</span> <span class="na">behavior=</span><span class="s2">"padding"</span> <span class="nt">enabled</span><span class="p">&gt;</span>
+  ...
+<span class="p">&lt;/</span><span class="nc">KeyboardAvoidingView</span><span class="p">&gt;;</span>
+</code></pre></div></div>
+
+<p>하지만 <code class="highlighter-rouge">ScrollView</code> 내에선 작동하지 않는 단점이 있다. 이 때 사용할 수 있는 것이 <a href="https://github.com/APSL/react-native-keyboard-aware-scroll-view">react native keyboard aware scroll view</a>이다. 이 또한, <code class="highlighter-rouge">ScrollView</code>로 감쌌던 컴포넌트를 <code class="highlighter-rouge">KeyboardAwareScrollView</code>로 감싸주고, 몇 가지 props를 넘겨주면 되는데, 포커스 된 <code class="highlighter-rouge">TextInput</code>에 까지 스크롤 하기 위해 아래 코드를 추가해 주면 된다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">ReactNative</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">KeyboardAwareScrollView</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-keyboard-aware-scroll-view</span><span class="dl">'</span>
+
+<span class="p">...</span>
+
+<span class="nx">_scrollToInput</span> <span class="o">=</span> <span class="p">(</span><span class="nx">reactNode</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">scroll</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">scrollToFocusedInput</span><span class="p">(</span><span class="nx">reactNode</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="nx">render</span><span class="p">(){</span>
+  <span class="k">return</span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">KeyboardAwareScrollView</span>
+      <span class="na">innerRef=</span><span class="si">{</span><span class="nx">ref</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">scroll</span> <span class="o">=</span> <span class="nx">ref</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">View</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">TextInput</span>
+          <span class="na">onFocus=</span><span class="si">{</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_scrollToInput</span><span class="p">(</span><span class="nx">ReactNative</span><span class="p">.</span><span class="nx">findNodeHandle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">))</span>
+          <span class="p">}</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">KeyboardAwareScrollView</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 하면 아래와 같이 포커스 된 <code class="highlighter-rouge">TextInput</code>까지 자동으로 스크롤 되어 키보드가 <code class="highlighter-rouge">TextInput</code>을 가리지 않게 된다.</p>
+
+<div class="simulContainer">
+<img src="/images/turtle-demo-gif11.gif" alt="turtle-demo-gif11" width="250em" style="border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" />
+</div>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/KeyboardAvoidingView-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/',
+    'title': 'KeyboardAvoidingView 적용하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

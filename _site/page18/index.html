@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div class="container">
+  <div class="posts">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <article class="post">
+      <a href="/study/nodejs/module.exports-vs-exports/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            module.exports vs exports
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-24
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#NodeJs"> -->
+                NodeJs
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          Node.js를 사용하다 보면 module의 사용은 필수적이다. 모듈 단위로 파일이 작성되고 독자적인 scope가 생성되기 때문에 A 모듈에서 B 모듈을 사용하려면 보내고 받는 작용이 필요하다. Node.js는 CommonJS를 따르기 때문에 exports 객체를 이용하여 모듈을 정의하고, require 함수를 이용하여 사용한다.
+        </div>
+      </a>
+      <!-- <a href="/study/nodejs/module.exports-vs-exports/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/%EC%9D%B8%EB%9D%BC%EC%9D%B8-%ED%85%8D%EC%8A%A4%ED%8A%B8-%ED%8E%B8%EC%A7%91%EA%B8%B0-%EB%A7%8C%EB%93%A4%EA%B8%B0-(%EC%A1%B0%EA%B1%B4%EB%B6%80-%EB%9E%9C%EB%8D%94%EB%A7%81)/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            인라인 텍스트 편집기 만들기 (조건부 랜더링)
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-22
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React"> -->
+                React
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Conditional Rendering"> -->
+                Conditional Rendering
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          위의 사진과 같이 인라인 텍스트 편집기(inline text editor)는 React로 어떻게 만들 수 있을까? 이 문제는 조건부 랜더링(conditional rendering)으로 간단하게 해결할 수 있다. 조건부 랜더링이란, if문을 사용하여, state에 따라 조건적으로 렌더하는 것이다. 🐶🍯
+        </div>
+      </a>
+      <!-- <a href="/study/react/%EC%9D%B8%EB%9D%BC%EC%9D%B8-%ED%85%8D%EC%8A%A4%ED%8A%B8-%ED%8E%B8%EC%A7%91%EA%B8%B0-%EB%A7%8C%EB%93%A4%EA%B8%B0-(%EC%A1%B0%EA%B1%B4%EB%B6%80-%EB%9E%9C%EB%8D%94%EB%A7%81)/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/State-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0(feat.immutability)/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            State 관리하기(feat.immutability)
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-21
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React"> -->
+                React
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#State"> -->
+                State
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Immutability"> -->
+                Immutability
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          리액트를 다루면서 맞닥뜨리게 되는 중요한 개념 중 하나가 바로 state의 immutability(변경불가성)이다. 프로그래밍에서 immutability란, 객체가 생성된 이후 그 상태를 변경할 수 없는 디자인 패턴을 말한다.
+        </div>
+      </a>
+      <!-- <a href="/study/react/State-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0(feat.immutability)/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/javascript/%ED%91%9C%ED%98%84%EC%8B%9D%EA%B3%BC-%EB%AC%B8%EC%9E%A5/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            표현식Expressions & 문장Statements
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-18
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          표현식은 값을 만들어 낸다. 얼마나 긴 표현식 이던지, 결국은 하나의 값으로 귀결된다는 것이다. 아래의 코드 모두 표현식이며, console.log로 확인해 보면 하나의 값이 반환된다.
+        </div>
+      </a>
+      <!-- <a href="/study/javascript/%ED%91%9C%ED%98%84%EC%8B%9D%EA%B3%BC-%EB%AC%B8%EC%9E%A5/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%8B%A4%EB%A3%A8%EA%B8%B0(This!-again)/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            리액트에서 이벤트 다루기(This! again)
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-18
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React"> -->
+                React
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Props"> -->
+                Props
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Arrow function"> -->
+                Arrow function
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          단방향 데이터 플로우(one-way data flow)는 리액트의 큰 특징 중 하나이다. 위의 그림처럼 상위 컴포넌트는 하위 컴포넌트에게 props의 형태로 data를 전달할 수 있으나, 하위 컴포넌트는 받은 props를 변경할 수도 없을 뿐더러, 상위 컴포넌트로 전달할 수도 없다. 그렇다면, 하위 컴포넌트에서의 변화로 인해 상위 컴포넌트가 변화해야하는 경우엔 어떻게 해야할까?
+        </div>
+      </a>
+      <!-- <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%8B%A4%EB%A3%A8%EA%B8%B0(This!-again)/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/javascript/This-%ED%82%A4%EC%9B%8C%EB%93%9C/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            This 키워드
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-17
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#This"> -->
+                This
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          자바스크립트의 정말 헷갈리는 개념이자 정말 중요한 개념 중 하나인 This 키워드! 한마디로 This를 정의하자면, This는 호출 시점에서 실행함수가 가르키는 객체이다. 다른말로는 실행함수의 호출자. 라고 할 수 있을 것 같다.
+        </div>
+      </a>
+      <!-- <a href="/study/javascript/This-%ED%82%A4%EC%9B%8C%EB%93%9C/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EB%A5%BC-%EC%93%B0%EA%B8%B0%EC%9C%84%ED%95%B4-%EC%95%8C%EC%95%84%EC%95%BC%ED%95%A0-%EA%B0%9C%EB%85%90/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            리액트를 쓰기위해 알아야할 개념
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-16
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React"> -->
+                React
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Component"> -->
+                Component
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Basics"> -->
+                Basics
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          요소는 React 앱의 가장 작은 구성 블록입니다. 리액트 공식문서는 리액트에서의 요소(element)를 위와 같이 정의하고 있다. element를 component와 혼동해선 안된다!
+        </div>
+      </a>
+      <!-- <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EB%A5%BC-%EC%93%B0%EA%B8%B0%EC%9C%84%ED%95%B4-%EC%95%8C%EC%95%84%EC%95%BC%ED%95%A0-%EA%B0%9C%EB%85%90/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/create-react-app/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            create-react-app
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-15
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React"> -->
+                React
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#setting"> -->
+                setting
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          리액트를 쉽게 시작할 수 있는 방법은 페이스북에서 제공하는 create-react-app을 이용하는 것이다. 리액트 앱을 만들수있는 기본 프로젝트 환경이다. 컴퓨터에 npm 5.6버전 이상이 설치되어 있다면, 터미널에서 간단한 코드를 실행하여 프로젝트를 생성할 수 있다.
+        </div>
+      </a>
+      <!-- <a href="/study/react/create-react-app/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/Intro-to-React/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            Intro to React
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-15
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React"> -->
+                React
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          React는 Facebook이 만든 JavaScript 라이브러리다. 그렇다면, JavaScript 라이브러리는 무엇이고, 왜 필요한 것일까?
+        </div>
+      </a>
+      <!-- <a href="/study/react/Intro-to-React/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/computerscience/web-%EA%B8%B0%EB%B3%B8%EA%B0%9C%EB%85%90_HTTP-%ED%86%B5%EC%8B%A0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            web 기본개념_HTTP 통신
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-04-14
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#web"> -->
+                web
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#HTTP"> -->
+                HTTP
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          web의 기본 개념인 http 통신에 대해 알아보자.
+        </div>
+      </a>
+      <!-- <a href="/study/computerscience/web-%EA%B8%B0%EB%B3%B8%EA%B0%9C%EB%85%90_HTTP-%ED%86%B5%EC%8B%A0/" class="read-more">Read More</a> -->
+    </article>
+    
+  </div>
+  <!-- Pagination links -->
+   <div class="pagination">
+   
+  <span class="next">
+    <a href="http://localhost:4000/page17/index.html"><</a>
+  </span>
+     
+  <span class="pageNum unactive">
+    <a href="/page10/">10</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page11/">11</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page12/">12</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page13/">13</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page14/">14</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page15/">15</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page16/">16</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page17/">17</a></span
+  >
+    
+  <span class="pageNum active">
+    <a href="/page18/">18</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page19/">19</a></span
+  >
+  
+  <span>
+    <a class="next" href="http://localhost:4000/page19/index.html">></a>
+  </span>
+  
+</div>
+ 
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/page18/index.html',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

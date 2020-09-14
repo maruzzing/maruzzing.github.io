@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript" class="activated">
+        Javascript
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>주차 구하기</h1>
+    <div class="date">Written on September 16, 2019</div>
+    <div class="entry">
+      <p>일요일을 한 주의 시작으로 주차를 구하는 방법</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">getWeeksInMonth</span> <span class="o">=</span> <span class="nx">inputDate</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">year</span> <span class="o">=</span> <span class="nx">inputDate</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">month</span> <span class="o">=</span> <span class="nx">inputDate</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">firstDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">lastDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">firstWeekDay</span> <span class="o">=</span> <span class="nx">firstDate</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">lastWeekDay</span> <span class="o">=</span> <span class="nx">lastDate</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">weeksInMonth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">((</span><span class="nx">firstWeekDay</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="nx">lastDate</span><span class="p">.</span><span class="nx">getDate</span><span class="p">())</span> <span class="o">/</span> <span class="mi">7</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">lastWeekDay</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">lastWeekDay</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">||</span> <span class="nx">lastWeekDay</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">weeksInMonth</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">weeksInMonth</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">weekNumberBySunday</span> <span class="o">=</span> <span class="nx">inputDate</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">year</span> <span class="o">=</span> <span class="nx">inputDate</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">month</span> <span class="o">=</span> <span class="nx">inputDate</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">date</span> <span class="o">=</span> <span class="nx">inputDate</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">firstDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">lastDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">firstWeekDay</span> <span class="o">=</span> <span class="nx">firstDate</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">lastWeekDay</span> <span class="o">=</span> <span class="nx">lastDate</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">offsetDate</span> <span class="o">=</span> <span class="nx">date</span> <span class="o">+</span> <span class="nx">firstWeekDay</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">weeksInMonth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">((</span><span class="nx">firstWeekDay</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="nx">lastDate</span><span class="p">.</span><span class="nx">getDate</span><span class="p">())</span> <span class="o">/</span> <span class="mi">7</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">lastWeekDay</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">lastWeekDay</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">||</span> <span class="nx">lastWeekDay</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">weeksInMonth</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">firstWeekDay</span> <span class="o">===</span> <span class="mi">4</span> <span class="o">||</span> <span class="nx">firstWeekDay</span> <span class="o">===</span> <span class="mi">5</span> <span class="o">||</span> <span class="nx">firstWeekDay</span> <span class="o">===</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">week</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">offsetDate</span> <span class="o">/</span> <span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="nx">index</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">week</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">week</span> <span class="o">=</span> <span class="nx">getWeeksInMonth</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">month</span><span class="p">:</span> <span class="nx">month</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">week</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">week</span> <span class="o">&lt;=</span> <span class="nx">weeksInMonth</span> <span class="p">?</span> <span class="p">{</span> <span class="nx">month</span><span class="p">,</span> <span class="nx">week</span> <span class="p">}</span> <span class="p">:</span> <span class="p">{</span> <span class="na">month</span><span class="p">:</span> <span class="nx">month</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">week</span> <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>결과 값은 <code class="highlighter-rouge">{ "month": 8, "week": 3 }</code> 형태이다.</p>
+
+<p><br />
+<span class="reference">관련 post</span></p>
+
+<ul>
+  <li><a href="/study/rnative/React-Native-주간-달력-구현하기/">React Native 주간 달력 구현하기</a></li>
+</ul>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/javascript/%EC%A3%BC%EC%B0%A8-%EA%B5%AC%ED%95%98%EA%B8%B0/',
+    'title': '주차 구하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

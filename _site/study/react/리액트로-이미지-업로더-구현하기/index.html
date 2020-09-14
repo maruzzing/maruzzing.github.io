@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react" class="activated">
+        React
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>리액트로 이미지 업로더 구현하기</h1>
+    <div class="date">Written on July  7, 2019</div>
+    <div class="entry">
+      <p>파일 업로드하는걸 구현하기 어렵지 않을까? 라고 생각했었는데 의외로 아주 간단했다. <code class="highlighter-rouge">&lt;input type="file"&gt;</code> 만 있으면 이미 반은 성공한 것!</p>
+
+<h3 id="파일선택-input-만들기">파일선택 input 만들기</h3>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">file</span><span class="dl">"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>여기까지 하면 아래와 같이 데스크탑에서 파일을 선택하여 할 수 있는 버튼이 생성된다.</p>
+
+<p><img src="/images/image_uploader.png" alt="image_uploader" width="600em" style="border:1px solid #bcbcbc" /></p>
+
+<p>지금은 한개 파일만 선택할 수 있는데, <code class="highlighter-rouge">&lt;input&gt;</code> 태그에 <code class="highlighter-rouge">multiple</code> 속성을 추가해 주면 어려개의 파일을 동시에 선택할 수 있게된다.</p>
+
+<h3 id="선택된-파일-읽기">선택된 파일 읽기</h3>
+
+<p>일반적인 <code class="highlighter-rouge">input</code> 태그에 입력된 값을 확인하는 것 처럼 <code class="highlighter-rouge">onChnage</code> 속성에 함수를 작성하여 <code class="highlighter-rouge">event.target.files</code>를 확인할 수 있으며, 이를 서버에 전송하기 위해서 state에 저장한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">selectedFiles</span><span class="p">:</span> <span class="kc">null</span> <span class="p">}</span>
+  <span class="nx">fileChangedHandler</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">files</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">selectedFiles</span><span class="p">:</span> <span class="nx">files</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span> <span class="na">marginTop</span><span class="p">:</span> <span class="dl">"</span><span class="s2">100px</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type=</span><span class="s2">"file"</span> <span class="nt">multiple</span> <span class="na">onChange=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">fileChangedHandler</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>  
+</code></pre></div></div>
+
+<p>1개 파일을 선택하더라도 <code class="highlighter-rouge">event.target.files</code>는 배열(array) 형태이다. 콘솔로그 결과는 아래와 같다.</p>
+
+<p><img src="/images/images_files.png" alt="images_files" style="border:1px solid #bcbcbc" /></p>
+
+<h3 id="파일-전송하기">파일 전송하기</h3>
+
+<p>먼저, 전송을 trigger 할 수 있는 버튼을 만들고, 버튼에 <code class="highlighter-rouge">onClick</code> 함수를 정의해 준다.
+이미지 파일을 보내기 위해서는 <code class="highlighter-rouge">FormData</code> 객체에 <code class="highlighter-rouge">append(key, value)</code> 혹은 <code class="highlighter-rouge">append(key, value, filename)</code>으로 파일값을 추가하여 전송하면 된다. files 뿐만 아니라 여러가지 <code class="highlighter-rouge">key</code>, <code class="highlighter-rouge">value</code> 쌍을 추가할 수 있으며, 전송 시, 헤더에 <code class="highlighter-rouge">content-type</code>을 <code class="highlighter-rouge">multipart/form-data</code>로 명시해주어야 서버에서 적절하게 파싱을 진행할 수 있다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">onClickHandler</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span>
+      <span class="dl">"</span><span class="s2">uploadImages</span><span class="dl">"</span><span class="p">,</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">selectedFiles</span><span class="p">,</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">selectedFiles</span><span class="p">.</span><span class="nx">name</span>
+    <span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">`uploadAPI`</span><span class="p">,</span> <span class="nx">formData</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+  <span class="p">};</span>
+
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onClickHandler</span><span class="si">}</span><span class="p">&gt;</span>저장하기<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>최종 코드는 아래와 같다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">selectedFiles</span><span class="p">:</span> <span class="kc">null</span> <span class="p">};</span>
+  <span class="nx">onClickHandler</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span>
+      <span class="dl">"</span><span class="s2">uploadImages</span><span class="dl">"</span><span class="p">,</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">selectedFiles</span><span class="p">,</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">selectedFiles</span><span class="p">.</span><span class="nx">name</span>
+    <span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">`uploadAPI`</span><span class="p">,</span> <span class="nx">formData</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nx">fileChangedHandler</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">selectedFiles</span><span class="p">:</span> <span class="nx">files</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span> <span class="na">marginTop</span><span class="p">:</span> <span class="dl">"</span><span class="s2">100px</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type=</span><span class="s2">"file"</span> <span class="nt">multiple</span> <span class="na">onChange=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">fileChangedHandler</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onClickHandler</span><span class="si">}</span><span class="p">&gt;</span>저장하기<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<hr />
+
+<p><span class="reference">관련 post</span></p>
+
+<p><a href="/study/nodejs/multer-사용하여-이미지-업로드-구현하기/">multer 사용하여 이미지 업로드 구현하기</a></p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EB%A1%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%8D%94-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/',
+    'title': '리액트로 이미지 업로더 구현하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

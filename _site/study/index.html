@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study" class="activated">
+        개발공부
+      </a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+<div class="container">
+  <div class="post-lists">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nextjs/graphql/Next.js%EC%97%90-Apollo-Client-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">Next.js에 Apollo Client 적용하기</a>
+        </div>
+        <div class="listEntry">
+          기본적인 웹 구축이 되었으니 GraphQL을 적용해 볼 차례이다. 이를 위해 Apollo라는 라이브러리를 사용할 건데, GraphQL API 콜을 도와줄 뿐만 아니라 캐싱과 상태관리 등 다양한 이점이 있어 🚀 Apollo Client를 적용해 보기로 했다.
+        </div>
+        <div class="date">
+          2020-09-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/graphql/Apollo-Server%EC%97%90-TypeORM%EC%9C%BC%EB%A1%9C-MySQL-DB-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B3%A0-GraphQL-API-%EB%A7%8C%EB%93%A4%EA%B8%B0/">Apollo Server에 TypeORM으로 MySQL DB 연결하고 GraphQL API 만들기</a>
+        </div>
+        <div class="listEntry">
+          기본적인 GraphQL API 서버 구축이 되었으니 이제 db을 연결해 볼 차례이다. 여기서는 db는 MySQL을, ORM은 TypeORM을 사용할 예정이다. Sequelize가 더 익숙하지만 TypeGraphQL을 사용하게 되면서 TypeORM을 사용했을 떄 훨씬 생산성이 높아지기 때문에 TypeORM을 사용해 보기로 했다.
+        </div>
+        <div class="date">
+          2020-09-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/graphql/Apollo-Express-GraphQL-API-%EC%84%9C%EB%B2%84-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-(feat.Typescript)/">Apollo Express GraphQL API 서버 도입하기 (feat.Typescript)</a>
+        </div>
+        <div class="listEntry">
+          여태 토이 프로젝트 이건, 회사 프로젝트 이건 Rest API 만 사용했었는데, 지금 사용하고 있는 공유 오피스에서 알게 된 백엔드 개발자가 React와 GraphQL 사용법을 물어와 관련내용을 좀 찾아보니 너무 신세계라👀 이참에 GraphQL을 공부해 보기로 했다.
+        </div>
+        <div class="date">
+          2020-09-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nextjs/Next.js-with-Typescript-+-Styled-Components-%EA%B8%B0%EB%B3%B8-%EC%84%B8%ED%8C%85%ED%95%98%EA%B8%B0/">Next.js with Typescript + Styled-Components 기본 세팅하기</a>
+        </div>
+        <div class="listEntry">
+          만들어 보고 싶은 서비스가 있는데 검색엔진 최적화가 중요해 Next.js를 사용해 보기로 했다. Next.js는 React용 SSR 프레임워크 인데, 공식 문서에서 다양한 예제를 참고할 수 있다. 그 중 with-typescript를 이용해 기본 세팅을 해보았다.
+        </div>
+        <div class="date">
+          2020-09-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/RN-Dark-&-Light-Theme-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">RN Dark & Light Theme 적용하기</a>
+        </div>
+        <div class="listEntry">
+          iOS 13버전 부터 기본 배경색을 검은색으로 사용하는 다크모드 기능이 추가 되면서 다크모드를 지원하는 앱이 많아졌다. 그래서 Styled-Components와 Redux-Toolkit을 사용해 다크모드를 지원하는 방법을 알아보았다.
+        </div>
+        <div class="date">
+          2020-05-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%EC%95%A0%ED%94%8C%EB%A1%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/">React Native 애플로 로그인 구현하기</a>
+        </div>
+        <div class="listEntry">
+          지난해 애플 또한 애플로 로그인 하기 서비스를 시작했는데, 주목할 점은 기존 앱스토어 심사지침 상 서비스 자체 로그인 없이 소셜로그인 만으로 계정 승인이 이루어진 경우 반려 사유가 되었지만, 애플 로그인을 병행하는 경우 서드파티 로그인 만으로도 서비스가 가능하다는 점이다.
+        </div>
+        <div class="date">
+          2020-04-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native%EC%97%90%EC%84%9C-%EC%BF%A0%ED%82%A4-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/">React Native에서 쿠키 사용하기</a>
+        </div>
+        <div class="listEntry">
+          리액트 네이티브에서 쿠키🍪로 인증을 기능을 구현하는 방법을 알아보기로 했다. ios와 android에서 웹처럼 자동으로 쿠키를 저장, 관리하는 방법이 있지만,,,, 네이티브 코드를 만지기엔🤢,,,, React Native에서 asyncStorage를 이용하여 수동으로 저장, 관리할 수 있는 방법으로 구현해 보았다.
+        </div>
+        <div class="date">
+          2020-04-06
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%EC%95%B1-%EC%9D%B4%EB%A6%84-%EB%8B%A4%EA%B5%AD%EC%96%B4-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0/">React Native 앱 이름 다국어 설정하기</a>
+        </div>
+        <div class="listEntry">
+          모바일 기기의 언어 설정에 따라 앱 아이콘 아래에 표시되는 앱 이름도 다국어로 설정할 수 있는데 안드로이드와 ios에서 이를 설정하는 방법을 알아보자.
+        </div>
+        <div class="date">
+          2020-03-02
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%BA%90%EC%8B%B1%ED%95%98%EA%B8%B0/">React Native 파일 시스템을 사용해 이미지 캐싱하기</a>
+        </div>
+        <div class="listEntry">
+          자주 사용하는 정적 이미지의 경우 접속 시 매번 이미지 서버에서 이미지를 가져오기 보다 이미지를 캐싱해서 사용하면 성능면에서 효율적인 경우가 있다. 그래서 파일 시스템을 이용해서 이미지를 캐싱하는 방법에 대해 알아 보았다. 📂
+        </div>
+        <div class="date">
+          2020-03-01
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-Firebase-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0/">React Native Firebase 환경설정하기</a>
+        </div>
+        <div class="listEntry">
+          앱을 사용하는 사용자의 행동 분석이나 푸시알림 등의 서비스를 사용하기 위해서 React-Native-Firebase 모듈을 사용하여 React Native 앱에 Firebase 서비스를 연결해 사용중이다.
+        </div>
+        <div class="date">
+          2020-01-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native%EC%97%90%EC%84%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%95%98%EA%B8%B0/">React Native에서 카카오 소셜로그인 하기</a>
+        </div>
+        <div class="listEntry">
+          네이버와 카카오톡 소셜로그인은 javascript나, ios, android sdk는 제공하지만 react-native를 위한 sdk는 따로 없기 때문에 native module을 사용하거나, (있다면) 관련 라이브러리를 사용해야 한다.
+        </div>
+        <div class="date">
+          2019-10-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/TypeScript%EC%99%80-React-Navigation/">TypeScript와 React Navigation</a>
+        </div>
+        <div class="listEntry">
+          리액트 네이티브 프로젝트에 타입스크립트를 적용해 보기로 했는데 처음으로 맞닥뜨린 문제가 React Navigation의 screen props는 어떻게 타입으로 정의하고, 전달할지 였다. 이 문제의 해결법을 가장 기본적인 사용자 인증 플로우로 정리해 보았다.
+        </div>
+        <div class="date">
+          2019-10-04
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/TypeScript-%EA%B8%B0%EC%B4%88/">TypeScript 기초</a>
+        </div>
+        <div class="listEntry">
+          TypeScript는 MS에서 개발한 자바스크립트의 슈퍼셋(상위언어)로 Javascript에 타입을 지정함으로써 더욱 가독성이 높고 견고한 코드를 짤 수 있도록 도와준다.
+        </div>
+        <div class="date">
+          2019-10-03
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/StopWatch-%EC%98%88%EC%A0%9C-TypeScript%EB%A1%9C-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%ED%95%B4%EB%B3%B4%EA%B8%B0/">StopWatch 예제 TypeScript로 리팩토링 해보기</a>
+        </div>
+        <div class="listEntry">
+          TypeScript와 Unit Test 공부를 위해 React로 간단한 StopWatch를 만들고 TypeScript로 리팩토링 해봤다. 👩‍💻
+        </div>
+        <div class="date">
+          2019-10-03
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-X-TypeScript-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/">React Native X TypeScript 시작하기</a>
+        </div>
+        <div class="listEntry">
+          TypeScript 공부를 시작했으니 이번엔 React Native에 TypeScript를 적용해보자. 먼저 프로젝트 만들기!
+        </div>
+        <div class="date">
+          2019-10-03
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/Toast-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B3%B4%EA%B8%B0/">Toast 만들어 보기</a>
+        </div>
+        <div class="listEntry">
+          모바일에서 사용자에게 어떤 정보를 알려주기 위해 화면위에 잠깐 나타났다가 사라지는 것을 Toast라고 한다. 마치 토스트에서 식빵이 튀어오르는 것처럼 🍞.. Alert 대신 Toast를 써보려고 라이브러리를 설치해 봤는데 Modal 위에 Toast를 띄우려니 자꾸 Toast가 Modal 밑으로 숨어버려 그냥 만들어 보기로 했다.
+        </div>
+        <div class="date">
+          2019-10-02
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/React-Testing-Library%EB%A1%9C-%EC%9C%A0%EB%8B%9B%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%B4%EB%B3%B4%EA%B8%B0/">React Testing Library로 유닛테스트 해보기</a>
+        </div>
+        <div class="listEntry">
+          처음 개발을 배울 때 테스트 주도 개발이 대세라는 이야기를 들었을 때 '코드를 테스트 하기 위해 또 다른 코드를 작성해야 한다고?' 하며 겁먹었던 기억이 난다 ㅎㅎ 그런데 공부를 하다보니 조금 더 깔끔한 코드, 효율적인 코드에 대해 고민하게 되고 이참에 테스트에 대해 공부해 보기로 했다.
+        </div>
+        <div class="date">
+          2019-09-29
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/%EB%A9%94%EC%9D%BC%EB%B0%9C%EC%86%A1%EA%B8%B0%EB%8A%A5-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">메일발송기능 적용하기</a>
+        </div>
+        <div class="listEntry">
+          현재 진행중인 모바일 앱 프로젝트에서 앱 관련 문의사항을 메일로 보낼 수 있는 기능을 추가해 보았다. react-native-mail 모듈을 사용해 모바일에 설치되어 있는 기본 이메일 앱을 연동하는 방법이다.
+        </div>
+        <div class="date">
+          2019-09-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/webView-%EB%82%B4%EB%B6%80%EC%97%90-Lottie%EB%A1%9C-%EC%95%A0%EB%8B%88-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/">webView 내부에 Lottie로 애니 구현하기</a>
+        </div>
+        <div class="listEntry">
+          이전 포스트에서 다루었듯, react native에서 소셜 로그인을 웹뷰를 사용해 구현했다. 기능 구현을 하고나니 마음에 안드는 점을 발견하게 되었는데, 소셜 어카운트로 로그인이 되고 서버에서 회원가입/로그인 작업이 되기 까지 시간이 걸리는데 그 동안 웹뷰엔 빈 화면만 표시되는 것이다.
+        </div>
+        <div class="date">
+          2019-09-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%88%AB%EC%9E%90-%EC%95%BC%EA%B5%AC/">LEVEL2_프로그래머스_숫자 야구</a>
+        </div>
+        <div class="listEntry">
+          숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게 3자리의 숫자를 불러서 결과를 확인합니다. 그리고 그 결과를 토대로 상대가 정한 숫자를 예상한 뒤 맞힙니다.
+        </div>
+        <div class="date">
+          2019-09-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/KeyboardAvoidingView-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">KeyboardAvoidingView 적용하기</a>
+        </div>
+        <div class="listEntry">
+          처음 리액트 네이티브로 개발을 하고 디바이스로 테스트 할 때 가장 당황했던 것이 바로 키보드에 관한 것이었다. 시뮬레이터로 뷰를 보면서 개발할 때 하드웨어 키보드를 쓰다 보니 실제 모바일 기기에서 키보드가 올라왔을 때의 상황을 인지하지 못한 것이다.
+        </div>
+        <div class="date">
+          2019-09-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%83%80%EA%B2%9F-%EB%84%98%EB%B2%84/">LEVEL2_프로그래머스_타겟 넘버</a>
+        </div>
+        <div class="listEntry">
+          트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다.
+        </div>
+        <div class="date">
+          2019-09-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/AWS-SSL-TLS-%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0/">AWS SSL/TLS 등록하기</a>
+        </div>
+        <div class="listEntry">
+          현재 진행하고 있는 프로젝트에서 소셜 로그인을 구현했는데 localhost에서만 테스트 하다가 AWS EC2 인스턴스에 배포된 서버에서 적용하려니 한 가지 문제에 봉착했다. 페이스북의 경우 정책상 리다이렉트 URL의 스킴이 반드시 https를 사용하도록 되어있기 때문이다.
+        </div>
+        <div class="date">
+          2019-09-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%EC%9C%84%EC%9E%A5/">LEVEL2_프로그래머스_위장</a>
+        </div>
+        <div class="listEntry">
+          스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다. 예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.
+        </div>
+        <div class="date">
+          2019-09-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%8B%A4%EB%A6%AC%EB%A5%BC-%EC%A7%80%EB%82%98%EB%8A%94-%ED%8A%B8%EB%9F%AD/">LEVEL2_프로그래머스_다리를 지나는 트럭</a>
+        </div>
+        <div class="listEntry">
+          트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다.
+        </div>
+        <div class="date">
+          2019-09-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/Amazone-Linux%EC%9D%98-TimeZone-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0/">Amazone Linux의 TimeZone 변경하기</a>
+        </div>
+        <div class="listEntry">
+          아마존 EC2 인스턴스는 기본적으로 UTC으로 표시된다. 이것을 KST로 변경하는 방법은 아래와 같다.
+        </div>
+        <div class="date">
+          2019-09-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL4_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%84%A0%EC%9E%85-%EC%84%A0%EC%B6%9C-%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/">LEVEL4_프로그래머스_선입 선출 스케줄링</a>
+        </div>
+        <div class="listEntry">
+          처리해야 할 동일한 작업이 n 개가 있고, 이를 처리하기 위한 CPU가 있습니다.
+        </div>
+        <div class="date">
+          2019-09-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/AWS-RDS-%ED%95%9C%EA%B8%80-%EA%B9%A8%EC%A7%90-%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95/">AWS RDS 한글 깨짐 해결방법</a>
+        </div>
+        <div class="listEntry">
+          오늘은 새로운 앱 서버를 배포하고 있다. 지난 프로젝트 에서는 EC2에 mysql을 설치하여 db를 배포했었는데, 이번엔 AWS의 RDS를 사용해 보기로 했다.
+        </div>
+        <div class="date">
+          2019-09-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL3_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%95%BC%EA%B7%BC-%EC%A7%80%EC%88%98/">LEVEL3_프로그래머스_야근 지수</a>
+        </div>
+        <div class="listEntry">
+          회사원 Demi는 가끔은 야근을 하는데요, 야근을 하면 야근 피로도가 쌓입니다. 야근 피로도는 야근을 시작한 시점에서 남은 일의 작업량을 제곱하여 더한 값입니다.
+        </div>
+        <div class="date">
+          2019-09-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/node.js%EB%A1%9C-%EB%A9%94%EC%9D%BC%EB%B3%B4%EB%82%B4%EA%B8%B0/">node.js로 메일보내기(feat. nodemailer)</a>
+        </div>
+        <div class="listEntry">
+          요즘 많은 앱서비스들이 비밀번호 찾기, 가입 인증 등을 이메일 전송을 활용하여 진행한다. 그래서 진행하는 프로젝트에서 이메일로 임시 비밀번호를 발송하는 걸 시도해 보았다.
+        </div>
+        <div class="date">
+          2019-09-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/javascript/%EC%A3%BC%EC%B0%A8-%EA%B5%AC%ED%95%98%EA%B8%B0/">주차 구하기</a>
+        </div>
+        <div class="listEntry">
+          일요일을 한 주의 시작으로 주차를 구하는 방법
+        </div>
+        <div class="date">
+          2019-09-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/node.js%EC%97%90%EC%84%9C-python-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/">node.js에서 python 사용하기(feat. python-shell)</a>
+        </div>
+        <div class="listEntry">
+          현재 진행중인 프로젝트에서 통계를 구현할 일이 있어 python을 사용해 보았다. 복잡한 수식은 아니지만, 경험해보는 취지로! 🤩
+        </div>
+        <div class="date">
+          2019-09-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%8B%A4%EC%9D%8C-%ED%81%B0-%EC%88%AB%EC%9E%90/">LEVEL2_프로그래머스_다음 큰 숫자</a>
+        </div>
+        <div class="listEntry">
+          자연수 n이 주어졌을 때, n의 다음 큰 숫자는 다음과 같이 정의 합니다.
+        </div>
+        <div class="date">
+          2019-09-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_JadenCase-%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0/">LEVEL2_프로그래머스_JadenCase 문자열 만들기</a>
+        </div>
+        <div class="listEntry">
+          JadenCase란 모든 단어의 첫 문자가 대문자이고, 그 외의 알파벳은 소문자인 문자열입니다. 문자열 s가 주어졌을 때, s를 JadenCase로 바꾼 문자열을 리턴하는 함수, solution을 완성해주세요.
+        </div>
+        <div class="date">
+          2019-09-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98-%EC%88%98/">LEVEL2_프로그래머스_피보나치 수</a>
+        </div>
+        <div class="listEntry">
+          피보나치 수는 F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 가 적용되는 수 입니다.
+        </div>
+        <div class="date">
+          2019-09-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/sequelize-associate%EC%99%80-include-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/">sequelize associate와 include 사용하기</a>
+        </div>
+        <div class="listEntry">
+          관계형 DB를 사용하면서 서로 관계가 있는 테이블의 데이터를 함께 호출하고 싶은 경우가 있다. 이 때 손쉽게 사용할 수 있는 것이 associate와 include 이다.
+        </div>
+        <div class="date">
+          2019-09-11
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/lruCache/">lruCache</a>
+        </div>
+        <div class="listEntry">
+          Design and implement an LRU, or Least Recently Used, cache.
+        </div>
+        <div class="date">
+          2019-09-10
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%EC%A3%BC%EA%B0%84-%EB%8B%AC%EB%A0%A5-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/">React Native 주간 달력 구현하기</a>
+        </div>
+        <div class="listEntry">
+          월간 달력이 아닌, 주간달력을 구현해야 하는데 캘린더 라이브러리는 거의 월간단력을 지원해주고 있었다. 그래서 기초부터 아예 만들어버린 주간달력!
+        </div>
+        <div class="date">
+          2019-09-10
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%EC%BB%A4%EC%8A%A4%ED%85%80-Tab-Bar-%EB%A7%8C%EB%93%A4%EA%B8%B0/">React Native 커스텀 Tab Bar 만들기</a>
+        </div>
+        <div class="listEntry">
+          현재 진행중인 프로젝트에서 상단 탭바 구현이 필요한데, React Navigation에서 제공하는 것 만으로는 디자인적으로 구현이 어려웠다. 그래서 커스텀 Tab Bar 를 적용하는 방법에 대해 알아보았다.
+        </div>
+        <div class="date">
+          2019-09-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/allAnagrams/">allAnagrams</a>
+        </div>
+        <div class="listEntry">
+          Create a hash table with insert(), retrieve(), and remove() methods. Be sure to handle hashing collisions correctly.
+        </div>
+        <div class="date">
+          2019-09-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%EB%A1%9C%EC%BB%AC-%ED%91%B8%EC%8B%9C%EC%95%8C%EB%A6%BC-%EA%B5%AC%ED%98%84/">React Native 로컬 푸시알림 구현</a>
+        </div>
+        <div class="listEntry">
+          현재 진행중인 React Native 앱 프로젝트에 매일 일정한 시간에 푸시알림이 오는 기능이 필요해, React Native Push Notifications 모듈료 로컬 푸시알림을 구현해 보았다.
+        </div>
+        <div class="date">
+          2019-09-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/linkedListCycles/">linkedListCycles</a>
+        </div>
+        <div class="listEntry">
+          Create a hash table with insert(), retrieve(), and remove() methods. Be sure to handle hashing collisions correctly.
+        </div>
+        <div class="date">
+          2019-09-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/hashTableResizing/">hashTableResizing</a>
+        </div>
+        <div class="listEntry">
+          Create a hash table with insert(), retrieve(), and remove() methods. Be sure to handle hashing collisions correctly.
+        </div>
+        <div class="date">
+          2019-09-06
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/eventingLibrary/">eventingLibrary</a>
+        </div>
+        <div class="listEntry">
+          In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation,
+        </div>
+        <div class="date">
+          2019-09-05
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/coinSums/">coinSums</a>
+        </div>
+        <div class="listEntry">
+          In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation,
+        </div>
+        <div class="date">
+          2019-09-04
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/CLI-%EC%BB%A4%EB%A7%A8%EB%93%9C%EB%A1%9C-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%95%B1-AWS-S3%EC%97%90-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0/">CLI 커맨드로 리액트 앱 AWS S3에 배포하기</a>
+        </div>
+        <div class="listEntry">
+          AWS 세계는 알면 알수록 신기하다. 서버 코드는 CodePipeline을 이용해서 Github master 브랜치로 푸시나 머지를 하는 순간 바로 EC2에 배포되도록 구축해 두었다. 그렇다면 S3에 배포한 리액트 앱을 더 간단하게 배포할 순 없을까 하여 시도해 본 CLI 커맨드를 활용한 배포!
+        </div>
+        <div class="date">
+          2019-09-04
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/telephoneWords/">telephoneWords</a>
+        </div>
+        <div class="listEntry">
+          Extend the Number prototype with a new method called `toEnglish`.
+        </div>
+        <div class="date">
+          2019-09-03
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/AWS-CodeDeploy-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EB%B0%B0%ED%8F%AC-%EC%9E%90%EB%8F%99%ED%99%94-%ED%95%98%EA%B8%B0/">AWS CodeDeploy 사용하여 배포 자동화 하기</a>
+        </div>
+        <div class="listEntry">
+          AWS EC2에 서비스를 배포 하는 것 까지 해보았으니, 이제 그 일련의 과정들에 대한 자동화에 도전! 그 첫 시도로 AWS CodeDeploy를 이용한 배포자동화를 구축해 보겠다. AWS CodeDeploy는 특정 코드를 배포해 달라고 요청하면 사전에 정의해 놓은 설정에 따라 EC2에 배포하는 역할을 한다.
+        </div>
+        <div class="date">
+          2019-09-02
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/numberToEnglish/">numberToEnglish</a>
+        </div>
+        <div class="listEntry">
+          Extend the Number prototype with a new method called `toEnglish`.
+        </div>
+        <div class="date">
+          2019-09-02
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/FileReader%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-file%EC%9D%84-DataUrl%EB%A1%9C-%EC%9D%BD%EA%B8%B0/">FileReader를 활용하여 file을 DataUrl로 읽기</a>
+        </div>
+        <div class="listEntry">
+          지난 7월에 만들었던 프로젝트를 리팩토링 중인데, 지금 보니 좀 더 깔끔하게 react의 특성을 살려 구현할 수 있었던 코드들이 있다. 그 중 하나가 이전에 포스팅했던 이미지 업로드 전 미리보기 이다.
+        </div>
+        <div class="date">
+          2019-09-02
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeMap/">treeMap</a>
+        </div>
+        <div class="listEntry">
+          Implement a 'map' method on this Tree class. Map accepts a mapping function as its only argument.
+        </div>
+        <div class="date">
+          2019-08-29
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/sumArray/">sumArray</a>
+        </div>
+        <div class="listEntry">
+          Given an array of numbers, calculate the greatest contiguous(not be off) sum of elements in array. A single array item will count as a contiguous sum.
+        </div>
+        <div class="date">
+          2019-08-28
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/characterFrequency/">characterFrequency</a>
+        </div>
+        <div class="listEntry">
+          Write a function that takes as its input a string and returns an array of arrays as shown below sorted in descending order by frequency and then by ascending order by character.
+        </div>
+        <div class="date">
+          2019-08-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/EC2(%EC%95%84%EB%A7%88%EC%A1%B4-%EB%A6%AC%EB%88%85%EC%8A%A4)%EC%97%90-%EC%84%9C%EB%B2%84%EC%99%80-DB(mysql)-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-3/">EC2(아마존 리눅스)에 서버와 DB(mysql) 배포하기[3]</a>
+        </div>
+        <div class="listEntry">
+          이전 포스팅에서 EC2에 node.js 및 mysql 환경을 세팅하고, mysql db를 이전해 왔다. 이제 git을 이용하여 코드를 배포하는 것이다.
+        </div>
+        <div class="date">
+          2019-08-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/EC2(%EC%95%84%EB%A7%88%EC%A1%B4-%EB%A6%AC%EB%88%85%EC%8A%A4)%EC%97%90-%EC%84%9C%EB%B2%84%EC%99%80-DB(mysql)-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-2/">EC2(아마존 리눅스)에 서버와 DB(mysql) 배포하기[2]</a>
+        </div>
+        <div class="listEntry">
+          이전 포스팅에서 node.js 및 mysql 등 필요한 프로그램 설치가 완료되었으니, MySQL 서버 이전을 해보겠다.
+        </div>
+        <div class="date">
+          2019-08-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/EC2(%EC%95%84%EB%A7%88%EC%A1%B4-%EB%A6%AC%EB%88%85%EC%8A%A4)%EC%97%90-%EC%84%9C%EB%B2%84%EC%99%80-DB(mysql)-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-1/">EC2(아마존 리눅스)에 서버와 DB(mysql) 배포하기[1]</a>
+        </div>
+        <div class="listEntry">
+          Jeju for Nomads 프로젝트 배포를 할 시기가 왔다(너무 늦은 감이 있지만 😂). 프로젝트 크기가 크지 않다보니 DB를 RDS에, 서버를 EC2에 배포하는 것이 좀 오버스러운 것 같아 EC2에 mysql을 설치하여 서버와 DB를 모두 EC2에 배포 해 보기로 했다.
+        </div>
+        <div class="date">
+          2019-08-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/multer-s3%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-AWS-S3-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B8%B0/">multer-s3를 이용하여 AWS S3 이미지 업로드하기</a>
+        </div>
+        <div class="listEntry">
+          이전 'multer 사용하여 이미지 업로드 구현하기' 포스팅 에서는 multer 모듈을 사용하여 클라이언트 쪽에서 보내온 이미지 파일을 서버의 특정 폴더 내에 저장하고, 그 저장 경로를 db에 저장하는 방법을 알아보았다.
+        </div>
+        <div class="date">
+          2019-08-26
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/insertionSort/">insertionSort</a>
+        </div>
+        <div class="listEntry">
+          Insertion sort is a basic sorting algorithm. Insertion sort iterates over an array, growing a sorted array behind the current location. It takes each element from the input and finds the spot, up to the current point, where that element belongs.
+        </div>
+        <div class="date">
+          2019-08-26
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/primeTester/">primeTester</a>
+        </div>
+        <div class="listEntry">
+          A prime number is a whole number that has no other divisors other than itself and 1. Write a function that accepts a number and returns true if it's a prime number, false if it's not.
+        </div>
+        <div class="date">
+          2019-08-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/evenOccurrence/">evenOccurrence</a>
+        </div>
+        <div class="listEntry">
+          Find the first item that occurs an even number of times in an array. Remember to handle multiple even-occurrence items and return the first one. Return null if there are no even-occurrence items.
+        </div>
+        <div class="date">
+          2019-08-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeCountLeaves/">treeCountLeaves</a>
+        </div>
+        <div class="listEntry">
+          Implement the `countLeaves` function in this Tree class. A leaf node is any node in the tree that has no children. `countLeaves` should traverse the tree, and return the number of leaf nodes the tree contains.
+        </div>
+        <div class="date">
+          2019-08-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Navigation-%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%97%A4%EB%8D%94%EC%9D%98-back-button/">React Navigation 커스텀 헤더의 back button</a>
+        </div>
+        <div class="listEntry">
+          React Navigation의 기본 헤더가 지금 개발하고 있는 앱의 느낌과 맞지 않아 커스텀 헤더를 구현해 보았다. Stack Navigation에서 헤더의 가장 중요한 역할 중 하나가 back button인데, 커스텀 헤더에선 back button의 네비에이션을 어떻게 주어야 할까?
+        </div>
+        <div class="date">
+          2019-08-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/NavigationService%EB%A1%9C-%EC%8A%A4%ED%81%AC%EB%A6%B0-%EC%A0%84%ED%99%98%ED%95%98%EA%B8%B0/">NavigationService로 스크린 전환하기</a>
+        </div>
+        <div class="listEntry">
+          React Navigation에서 screen에서 screen 사이를 오가는건 간단하지만 리스트나 컴포넌트에서 바로 스크린으로 넘어가긴 어렵다. 이때 사용할 수 있는 것이 NavigationService이다.
+        </div>
+        <div class="date">
+          2019-08-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/robotPaths/">robotPaths</a>
+        </div>
+        <div class="listEntry">
+          A robot located at the top left corner of a 5x5 grid is trying to reach the bottom right corner. The robot can move either up, down, left, or right, but cannot visit the same spot twice.
+        </div>
+        <div class="date">
+          2019-08-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native%EC%97%90%EC%84%9C-Redux-Saga-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">React Native에서 Redux-Saga 적용하기</a>
+        </div>
+        <div class="listEntry">
+          이전 프로젝트에서는 API 통신과 같은 비동기 처리를 위해 redux-thunk 미들웨어를 사용했었는데, 여기저기서 redux-saga가 좋다, 기회가되면 한 번 써봐라고 해서 도전! 해보았다.
+        </div>
+        <div class="date">
+          2019-08-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/queueStack/">queueStack</a>
+        </div>
+        <div class="listEntry">
+          Write a stack using your preferred instantiation pattern. Avoid using native array methods i.e., push, pop, and length.
+        </div>
+        <div class="date">
+          2019-08-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/linkedList/">linkedList</a>
+        </div>
+        <div class="listEntry">
+          Implement a linked list using the pseudoclassical instantiation pattern. Your linked list should have methods called "addToTail", "removeHead", and "contains."
+        </div>
+        <div class="date">
+          2019-08-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native%EC%97%90%EC%84%9C-Lottie-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/">React Native에서 Lottie 사용하기</a>
+        </div>
+        <div class="listEntry">
+          모바일이나 웹페이지에 애니메이션을 구현하기 위해서 gif를 사용해 왔는데, gif는 용량이 무겁고, 해상도 대응이 어렵다는 단점이 있다. 이에, gif의 훌륭한 대체재로 'Lottie'라는 라이브러리가 주목받고 있다고 하여 React Native에서 사용해 보았다.
+        </div>
+        <div class="date">
+          2019-08-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/%EC%A0%95%EB%A0%AC%EA%B3%BC-%EB%B0%B0%EC%B9%98/">정렬과 배치</a>
+        </div>
+        <div class="listEntry">
+          은근히 헷갈리지만 간단한 flexDirection, justifyContent와 alignItems를 활용한 정렬과 배치에 대해 알아보자.
+        </div>
+        <div class="date">
+          2019-08-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/romanNumeralTranslator/">romanNumeralTranslator</a>
+        </div>
+        <div class="listEntry">
+          Given an array containing a deck of cards, implement a function that shuffles the deck.
+        </div>
+        <div class="date">
+          2019-08-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/shuffleDeck/">shuffleDeck</a>
+        </div>
+        <div class="listEntry">
+          Given an array containing a deck of cards, implement a function that shuffles the deck.
+        </div>
+        <div class="date">
+          2019-08-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-4/">Passport와 JWT를 이용하여 Auth 구현하기[4]</a>
+        </div>
+        <div class="listEntry">
+          이전 포스팅에서 Express.js 환경에서 passport를 사용하여 자체회원 및 소셜회원의 회원가입과 로그인, 그리고 리액트 네이티브에서의 소셜로그인을 구현해 보았다. 이제 남은 것은 로그인 시 발급받은 토큰으로 로그인 상태를 유지하는 미들웨어를 구현하는 것이다.
+        </div>
+        <div class="date">
+          2019-08-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-3/">Passport와 JWT를 이용하여 Auth 구현하기[3]</a>
+        </div>
+        <div class="listEntry">
+          앞선 포스팅을 통해 소셜로그인을 위한 서버쪽 로직은 완성되었다. 이제 클라이언트 쪽(React Native)은 어떻게 구현하는지 알아보자.
+        </div>
+        <div class="date">
+          2019-08-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/rotateMatrix/">rotateMatrix</a>
+        </div>
+        <div class="listEntry">
+          Write a function that rotates a NxN matrix 90 degrees. A matrix, also called a 2-D array, is simply an array of arrays of values.
+        </div>
+        <div class="date">
+          2019-08-14
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/fractionConverter/">fractionConverter</a>
+        </div>
+        <div class="listEntry">
+          Write a function that takes a number as its argument and returns a string that represents that number's simplified fraction.
+        </div>
+        <div class="date">
+          2019-08-13
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/mergeSort/">mergeSort</a>
+        </div>
+        <div class="listEntry">
+          Mergesort uses a divide-and-conquer strategy. It begins by treating the input list of length N as a set of N "sublists" of length 1, which are considered to be sorted. Adjacent sublists are then "merged" into sorted sublists of length 2, which are merged into sorted sublists of length 4, and so on, until only a single sorted list remains.
+        </div>
+        <div class="date">
+          2019-08-12
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/py/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98%EC%99%80-%EC%A7%80%EC%97%AD%EB%B3%80%EC%88%98/">파이썬 전역변수와 지역변수</a>
+        </div>
+        <div class="listEntry">
+          함수 내에서 정의되어 함수가 실행되는 동안 존재, 호출되는 변수를 지역변수(Local Variable)라고 하며, 이는 그 변수가 속한 함수 외부에서는 참조할 수 없다. 반면, 전역에 정의되어 함수 내외부에서 참조할 수 있는 변수를 전역변수(Global Variable)라고 한다.
+        </div>
+        <div class="date">
+          2019-08-11
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/longestRun/">longestRun</a>
+        </div>
+        <div class="listEntry">
+          Write a function that, given a string, Finds the longest run of identical characters and returns an array containing the start and end indices of that run. If there are two runs of equal length, return the first one.
+        </div>
+        <div class="date">
+          2019-08-11
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/asyncMap/">asyncMap</a>
+        </div>
+        <div class="listEntry">
+          Implement the function asyncMap. AsyncMap has two parameters, an array of asynchronous functions (tasks) and a callback.
+        </div>
+        <div class="date">
+          2019-08-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-2/">Passport와 JWT를 이용하여 Auth 구현하기[2]</a>
+        </div>
+        <div class="listEntry">
+          이전 포스팅에서는 passport를 사용하여 자체 회원가입과 로그인을 구현해 보았다. 이제 소셜 로그인을 구현해 보자!
+        </div>
+        <div class="date">
+          2019-08-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL3_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_-%EB%B2%A0%EC%8A%A4%ED%8A%B8%EC%95%A8%EB%B2%94/">LEVEL3_프로그래머스_베스트앨범</a>
+        </div>
+        <div class="listEntry">
+          스트리밍 사이트에서 장르 별로 가장 많이 재생된 노래를 두 개씩 모아 베스트 앨범을 출시하려 합니다. 노래는 고유 번호로 구분하며, 노래를 수록하는 기준은 다음과 같습니다.
+        </div>
+        <div class="date">
+          2019-08-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/balancedParens/">balancedParens</a>
+        </div>
+        <div class="listEntry">
+          Write a function that takes a string of text and returns true if the parentheses are balanced and false otherwise.
+        </div>
+        <div class="date">
+          2019-08-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-1/">Passport와 JWT를 이용하여 Auth 구현하기[1]</a>
+        </div>
+        <div class="listEntry">
+          요즘은 대부분의 서비스가 자체 사이트 회원가입과 로그인 뿐만 아니라 구글, 페이스북 등 기존 유저가 가지고 있던 어카운트를 활용하여 로그인 하는 소셜로그인 서비스를 제공한다.
+        </div>
+        <div class="date">
+          2019-08-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%98%81%EC%96%B4-%EB%81%9D%EB%A7%90%EC%9E%87%EA%B8%B0/">LEVEL2_프로그래머스_영어 끝말잇기</a>
+        </div>
+        <div class="listEntry">
+          1부터 n까지 번호가 붙어있는 n명의 사람이 영어 끝말잇기를 하고 있습니다.
+        </div>
+        <div class="date">
+          2019-08-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/%EB%A6%AC%EC%95%A1%ED%8A%B8-%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C-%ED%8C%9D%EC%97%85-%EB%A7%8C%EB%93%A4%EA%B8%B0/">리액트 네이티브 팝업 만들기</a>
+        </div>
+        <div class="listEntry">
+          리액트 네이티브의 Modal 컴포넌트를 사용하면 간단한 팝업창을 만들 수 있다.
+        </div>
+        <div class="date">
+          2019-08-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/binarySearchArray/">binarySearchArray</a>
+        </div>
+        <div class="listEntry">
+          Given a sorted array, find the index of an element using a binary search algorithm.
+        </div>
+        <div class="date">
+          2019-08-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/composePipe/">composePipe</a>
+        </div>
+        <div class="listEntry">
+          Write Compose and Pipe functions. Compose should return a function that is the composition of a list of functions of arbitrary length. Each function is called on the return value of the function that follows.
+        </div>
+        <div class="date">
+          2019-08-06
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeBFSelect/">treeBFSelect</a>
+        </div>
+        <div class="listEntry">
+          Implement a `BFSelect` method on this Tree class. BFSelect accepts a filter function, calls that function on each of the nodes in Breadth First order, and returns a flat array of node values of the tree for which the filter returns true.
+        </div>
+        <div class="date">
+          2019-08-05
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_124-%EB%82%98%EB%9D%BC%EC%9D%98-%EC%88%AB%EC%9E%90/">LEVEL2_프로그래머스_124 나라의 숫자</a>
+        </div>
+        <div class="listEntry">
+          124 나라가 있습니다. 124 나라에서는 10진법이 아닌 다음과 같은 자신들만의 규칙으로 수를 표현합니다.
+        </div>
+        <div class="date">
+          2019-08-05
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/powerSet/">powerSet</a>
+        </div>
+        <div class="listEntry">
+          Return an array with the power set of a given string. Definition of power set. The set of all possible subsets including the empty set.
+        </div>
+        <div class="date">
+          2019-07-26
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/rotatedArraySearch/">rotatedArraySearch</a>
+        </div>
+        <div class="listEntry">
+          Given a sorted array that has been rotated some number of items right or left, i.e. [0, 1, 2, 3, 4, 5, 6, 7] might become [4, 5, 6, 7, 0, 1, 2, 3]
+        </div>
+        <div class="date">
+          2019-07-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/deepEquality/">deepEquality</a>
+        </div>
+        <div class="listEntry">
+          Write a function that, given two objects, returns whether or not the two are deeply equivalent
+        </div>
+        <div class="date">
+          2019-07-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%B9%B4%ED%8E%AB/">LEVEL2_프로그래머스_카펫</a>
+        </div>
+        <div class="listEntry">
+          Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 빨간색으로 칠해져 있고 모서리는 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.
+        </div>
+        <div class="date">
+          2019-07-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeDFSelect/">treeDFSelect</a>
+        </div>
+        <div class="listEntry">
+          Implement a DFSelect method on this Tree class.
+        </div>
+        <div class="date">
+          2019-07-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/largestProductOfThree/">largestProductOfThree</a>
+        </div>
+        <div class="listEntry">
+          Write a function that finds the largest possible product of any three numbers from an array.
+        </div>
+        <div class="date">
+          2019-07-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/commonCharacters/">commonCharacters</a>
+        </div>
+        <div class="listEntry">
+          Write a function f(a, b) which takes two strings as arguments and returns a string containing the characters found in both strings (without duplication), in the order that they appeared in a.
+        </div>
+        <div class="date">
+          2019-07-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/bubbleSort/">bubbleSort</a>
+        </div>
+        <div class="listEntry">
+          Bubble sort is the most basic sorting algorithm in all of Computer Sciencedom.
+        </div>
+        <div class="date">
+          2019-07-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A3%BC%EC%8B%9D%EA%B0%80%EA%B2%A9/">LEVEL2_프로그래머스_주식가격</a>
+        </div>
+        <div class="listEntry">
+          초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.
+        </div>
+        <div class="date">
+          2019-07-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%AC%B8%EC%9E%90%EC%97%B4%EB%8C%80%EC%86%8C%EB%AC%B8%EC%9E%90/">프로그래머스_문자열대소문자</a>
+        </div>
+        <div class="listEntry">
+          문자열 s는 한 개 이상의 단어로 구성되어 있습니다. 각 단어는 하나 이상의 공백문자로 구분되어 있습니다. 각 단어의 짝수번째 알파벳은 대문자로, 홀수번째 알파벳은 소문자로 바꾼 문자열을 리턴하는 함수, solution을 완성하세요.
+        </div>
+        <div class="date">
+          2019-07-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8/">프로그래머스_개인정보보호</a>
+        </div>
+        <div class="listEntry">
+          프로그래머스 모바일은 개인정보 보호를 위해 고지서를 보낼 때 고객들의 전화번호의 일부를 가립니다. 전화번호가 문자열 phone_number로 주어졌을 때, 전화번호의 뒷 4자리를 제외한 나머지 숫자를 전부 *으로 가린 문자열을 리턴하는 함수, solution을 완성해주세요.
+        </div>
+        <div class="date">
+          2019-07-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/%EB%A6%AC%EC%95%A1%ED%8A%B8-%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C%EC%97%90-%ED%8F%B0%ED%8A%B8-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0/">리액트 네이티브에 폰트 설정하기</a>
+        </div>
+        <div class="listEntry">
+          리액트 네이티브에서 커스텀 폰트를 설정하는 방법을 알아보겠다.
+        </div>
+        <div class="date">
+          2019-07-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/nthFibonacci/">nthFibonacci</a>
+        </div>
+        <div class="listEntry">
+          A Fibonacci sequence is a list of numbers that begins with 0 and 1, and each subsequent number is the sum of the previous two.
+        </div>
+        <div class="date">
+          2019-07-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/py/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EA%B3%BC-%EC%9E%AC%EA%B7%80%EC%9A%A9%EB%B2%95(recursive)/">파이썬과 재귀용법(recursive)</a>
+        </div>
+        <div class="listEntry">
+          프로그램을 짜는 테크닉 중 하나인 재귀용법. 처음 Javascript를 공부하면서 재귀용법을 접했을 때 이해하기가 많이 힘들었던 기억이... 🤡
+        </div>
+        <div class="date">
+          2019-07-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/isSubsetOf/">isSubsetOf</a>
+        </div>
+        <div class="listEntry">
+          Make an array method that can return whether or not a context array is a subset of an input array.
+        </div>
+        <div class="date">
+          2019-07-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%8D%94-%EB%A7%B5%EA%B2%8C/">LEVEL2_프로그래머스_더 맵게</a>
+        </div>
+        <div class="listEntry">
+          매운 것을 좋아하는 Leo는 모든 음식의 스코빌 지수를 K 이상으로 만들고 싶습니다. 모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 Leo는 스코빌 지수가 가장 낮은 두 개의 음식을 아래와 같이 특별한 방법으로 섞어 새로운 음식을 만듭니다.
+        </div>
+        <div class="date">
+          2019-07-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/ToyProblem_02_nonrepeatedCharacter/">ToyProblem_02_nonrepeatedCharacter</a>
+        </div>
+        <div class="listEntry">
+          Given an arbitrary input string, return the first nonrepeated character in the string.
+        </div>
+        <div class="date">
+          2019-07-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8-%EB%AA%A9%EB%A1%9D/">LEVEL2_프로그래머스_전화번호 목록</a>
+        </div>
+        <div class="listEntry">
+          전화번호부에 적힌 전화번호 중, 한 번호가 다른 번호의 접두어인 경우가 있는지 확인하려 합니다.
+        </div>
+        <div class="date">
+          2019-07-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Sequelize%EC%99%80-MySQL-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0/">2019-7-18-Sequelize와 MySQL 연결하기</a>
+        </div>
+        <div class="listEntry">
+          Sequelize는 MySQL의 복잡한 문법을 간단하게 자바스크립트 형식으로 사용할 수 있도록 해주는 라이브러리이다.
+        </div>
+        <div class="date">
+          2019-07-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%83%91/">LEVEL2_프로그래머스_탑</a>
+        </div>
+        <div class="listEntry">
+          수평 직선에 탑 N대를 세웠습니다. 모든 탑의 꼭대기에는 신호를 송/수신하는 장치를 설치했습니다. 발사한 신호는 신호를 보낸 탑보다 높은 탑에서만 수신합니다. 또한, 한 번 수신된 신호는 다른 탑으로 송신되지 않습니다.
+        </div>
+        <div class="date">
+          2019-07-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL1_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%99%EC%9D%80-%EC%88%AB%EC%9E%90%EB%8A%94-%EC%8B%AB%EC%96%B4/">LEVEL1_프로그래머스_같은 숫자는 싫어</a>
+        </div>
+        <div class="listEntry">
+          배열 arr가 주어집니다. 배열 arr의 각 원소는 숫자 0부터 9까지로 이루어져 있습니다. 이때, 배열 arr에서 연속적으로 나타나는 숫자는 하나만 남기고 전부 제거하려고 합니다.
+        </div>
+        <div class="date">
+          2019-07-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/javascript/%EC%BD%9C%EB%B0%B1%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/">콜백함수 사용하기</a>
+        </div>
+        <div class="listEntry">
+          콜백함수란, 다른 함수에 인자로 전달되어진 함수로, 외부함수 내에서 일종이 루틴이나 동작을 완성하게 위해 호출된다. 가장 큰 특징은 특정 시점이 되었을 때 실행되어진다는 것이다.
+        </div>
+        <div class="date">
+          2019-07-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC/">LEVEL2_프로그래머스_문자열 내 p와 y의 개수</a>
+        </div>
+        <div class="listEntry">
+          대문자와 소문자가 섞여있는 문자열 s가 주어집니다. s에 'p'의 개수와 'y'의 개수를 비교해 같으면 True, 다르면 False를 return 하는 solution를 완성하세요. 'p', 'y' 모두 하나도 없는 경우는 항상 True를 리턴합니다.
+        </div>
+        <div class="date">
+          2019-07-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_H-Index/">LEVEL2_프로그래머스_H-Index</a>
+        </div>
+        <div class="listEntry">
+          H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다.
+        </div>
+        <div class="date">
+          2019-07-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/javascript/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98-%ED%8A%B9%EC%A7%95_%EC%8B%B1%EA%B8%80%EC%8A%A4%EB%A0%88%EB%93%9C-&-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%B2%98%EB%A6%AC/">자바스크립트의 특징_싱글스레드 & 비동기 처리</a>
+        </div>
+        <div class="listEntry">
+          어떻게 자바스크립트는 싱글스레드 기반의 언어이면서 비동기 방식으로 동작할까? 🧐
+        </div>
+        <div class="date">
+          2019-07-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%9C%EC%9D%BC-%EC%9E%91%EC%9D%80-%EC%88%98-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0/">LEVEL1_프로그래머스_제일 작은 수 제거하기</a>
+        </div>
+        <div class="listEntry">
+          정수를 저장한 배열, arr 에서 가장 작은 수를 제거한 배열을 리턴하는 함수, solution을 완성해주세요.
+        </div>
+        <div class="date">
+          2019-07-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%98%AC%EB%B0%94%EB%A5%B8-%EA%B4%84%ED%98%B8/">LEVEL2_프로그래머스_올바른 괄호</a>
+        </div>
+        <div class="listEntry">
+          괄호가 바르게 짝지어졌다는 것은 '(' 문자로 열렸으면 반드시 짝지어서 ')' 문자로 닫혀야 한다는 뜻입니다.
+        </div>
+        <div class="date">
+          2019-07-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%94%84%EB%A6%B0%ED%84%B0/">LEVEL2_프로그래머스_프린터</a>
+        </div>
+        <div class="listEntry">
+          일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다.
+        </div>
+        <div class="date">
+          2019-07-14
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/html_css/%EC%8D%B8%EB%84%A4%EC%9D%BC-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A7%8C%EB%93%A4%EA%B8%B0/">썸네일 이미지 만들기</a>
+        </div>
+        <div class="listEntry">
+          이미지 디스플레이를 할 때 직면할 수 있는 문제점은 원본 이미지의 비율이 화면에 보여 주고자 하는 이미지의 비율과 다를 수 있다는 것이다.
+        </div>
+        <div class="date">
+          2019-07-13
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%8A%A4%ED%82%AC%ED%8A%B8%EB%A6%AC/">LEVEL2_프로그래머스_스킬트리</a>
+        </div>
+        <div class="listEntry">
+          선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다. 예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
+        </div>
+        <div class="date">
+          2019-07-13
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL1_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_K%EB%B2%88%EC%A7%B8%EC%88%98/">LEVEL1_프로그래머스_K번째수</a>
+        </div>
+        <div class="listEntry">
+          배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다. 예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면
+        </div>
+        <div class="date">
+          2019-07-12
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/%EA%B5%AC%EA%B8%80%EB%A7%B5-infowindow%EC%97%90-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%9D%84%EC%9A%B0%EA%B8%B0/">구글맵 infowindow에 컴포넌트 띄우기</a>
+        </div>
+        <div class="listEntry">
+          구글맵에서 마커를 클릭했을 때, 팝업창을 띄워 위치 정보를 게시하고 싶다면 Maps JavaScript API에서 제공하는 Info Windows를 사용할 수 있다.
+        </div>
+        <div class="date">
+          2019-07-11
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL1_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%9C-%EC%84%A0%EC%88%98/">LEVEL1_프로그래머스_완주하지 못한 선수</a>
+        </div>
+        <div class="listEntry">
+          수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다. 마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.
+        </div>
+        <div class="date">
+          2019-07-11
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-%EC%A0%84-%EB%AF%B8%EB%A6%AC%EB%B3%B4%EA%B8%B0/">이미지 업로드 전 미리보기</a>
+        </div>
+        <div class="listEntry">
+          이미지를 업로드하기 전에 어떤 이미지를 선택했는지 미리 보여주고, 대표이미지를 설정하거나, 필요없는 파일은 삭제하도록 하는 기능이 필요하다. 이번 포스트에서는 미리보기 기능을 구현하는 방법을 알아보겠다.
+        </div>
+        <div class="date">
+          2019-07-10
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/%EC%9D%B5%EC%8A%A4%ED%94%84%EB%A0%88%EC%8A%A4(Express.js)/">익스프레스(Express.js) 미들웨어 만들기</a>
+        </div>
+        <div class="listEntry">
+          Express.js에서는 미들웨어 패키지를 설치하여 사용할 뿐만 아니라, 각 프로젝트에서 필요한 미들웨어를 생성하여 사용할 수도 있다.
+        </div>
+        <div class="date">
+          2019-07-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/multer-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/">multer 사용하여 이미지 업로드 구현하기</a>
+        </div>
+        <div class="listEntry">
+          이미지 업로드는 보통 multipart/form-data 타입으로 전송되는데, express는 이 타입의 data를 직접 처리하는 기능을 제공하지 않기 때문에 multipart 처리용 모듈을 사용해야 한다. 대표적인 것이 Multer이다.
+        </div>
+        <div class="date">
+          2019-07-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/%EC%9D%B5%EC%8A%A4%ED%94%84%EB%A0%88%EC%8A%A4(Express.js)%EC%9D%98-%EA%B0%9C%EB%85%90/">익스프레스(Express.js)의 개념</a>
+        </div>
+        <div class="listEntry">
+          스프레스(Express.js)는 노드(NodeJS) 상에서 동작하는 웹 개발 프레임워크이다. 익스프레스의 핵심이라고 할 수 있는 미들웨어(Middleware) 덕에 가볍고 유연하게 웹을 구성할 수 있다.
+        </div>
+        <div class="date">
+          2019-07-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EB%A1%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%8D%94-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/">리액트로 이미지 업로더 구현하기</a>
+        </div>
+        <div class="listEntry">
+          파일 업로드하는걸 구현하기 어렵지 않을까? 라고 생각했었는데 의외로 아주 간단했다. input type="file" 만 있으면 이미 반은 성공한 것!
+        </div>
+        <div class="date">
+          2019-07-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80%EB%A7%B5-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0/">리액트에서 구글맵 연동하기</a>
+        </div>
+        <div class="listEntry">
+          기본적인 Google Maps API는 서버에서의 요청을 기본으로 하므로, client-side에서 요청을 보내기 위해서는 Maps JavaScript API를 사용해야 한다.
+        </div>
+        <div class="date">
+          2019-07-05
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/CRA%EC%97%90%EC%84%9C-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0/">CRA에서 환경변수 설정하기</a>
+        </div>
+        <div class="listEntry">
+          CRA로 만든 프로젝트에서는 프로젝트 전체에서 접근할 수 있는 환경변수(Environment Variables)를 루트 디렉토리의 .env 파일에 정의하여 사용할 수 있다.
+        </div>
+        <div class="date">
+          2019-07-04
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/Redux-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/">Redux 이해하기</a>
+        </div>
+        <div class="listEntry">
+          리액트로 앱을 개발하다 보면 자식 컴포넌트 A의 state 변화가 자식 컴포넌트 B에 영향을 줄 때가 있다. 하지만 자식 컴포넌트 A와 B는 직접적으로 state를 공유하지 못하며 반드시 부모를 거쳐서만 state를 전달할 수 있다.
+        </div>
+        <div class="date">
+          2019-07-02
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/Styled-Components-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">Styled Components 적용하기</a>
+        </div>
+        <div class="listEntry">
+          Styled Components는 자바스크립트 파일 안에 CSS 를 작성하는 style 라이브러리이다. CSS 파일을 따로 만들 필요가 없어 더욱 간편하게 쓸 수 있다. 이번 포스트에서는 Styled Components를 활용하여 Global Navigation Bar를 만들어 보겠다.
+        </div>
+        <div class="date">
+          2019-06-30
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/ESLint%EC%99%80-Prettier-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0(VSCode)/">ESLint와 Prettier 설정하기(VSCode)</a>
+        </div>
+        <div class="listEntry">
+          개발자 경험 향상에 유용한 두가지 tool, ESLint와 Prettier. ESLint는 JavaScript 코딩 컨벤션과 에러 체크를 도와주며, Prettier는 말 그대로 코드를 더 이쁘게 만들어 주는 도구로 사전에 설정한 규칙에 따라 코드를 포맷해준다.
+        </div>
+        <div class="date">
+          2019-06-30
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/py/Python-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0/">Python 설치 및 실행하기</a>
+        </div>
+        <div class="listEntry">
+          Life is too short, You need python. (인생은 너무 짧으니 파이썬이 필요해.) 그렇담, 시작해볼까?
+        </div>
+        <div class="date">
+          2019-06-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/html_css/CSS3-%EB%AF%B8%EB%94%94%EC%96%B4-%EC%BF%BC%EB%A6%AC/">CSS3 미디어 쿼리</a>
+        </div>
+        <div class="listEntry">
+          다양한 디바이스의 사용으로 반응형 웹 디자인은 필수적이다. 미디어 쿼리는 다양한 크기의 디바이스에 따라 CSS가 다르게 적용될 수 있도록 하는 기술 중 하나이다.
+        </div>
+        <div class="date">
+          2019-06-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/PropTypes%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-Type-%EC%B2%B4%ED%81%AC%ED%95%98%EA%B8%B0/">PropTypes를 이용해서 Type 체크하기</a>
+        </div>
+        <div class="listEntry">
+          Javascript는 Type에 있어 매우 유연한 언어이다. React로 앱을 개발하면서 Type 체킹을 통해 많은 버그를 잡을 수 있는데, React에서 Type 체킹을 할 수 있는 방법으로는 PropTypes, Flow, Typescrip 등이 있다. 이 중, 컴포넌트의 props Type을 체크할 때 사용할 수 있는 PropTypes를 알아보자.
+        </div>
+        <div class="date">
+          2019-06-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%97%90%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0%EC%97%90-Device-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0/">안드로이드 에뮬레이터에 Device 추가하기</a>
+        </div>
+        <div class="listEntry">
+          기본 안드로이드 애뮬레이터에는 갤럭시 폰 기종이 추가되어 있지 않기 때문에 갤럭시 기종으로 애뮬레이터를 실행하기 위해서는 스펙을 입력하여 Virtual Device를 새로 생성해야 한다.
+        </div>
+        <div class="date">
+          2019-06-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/condition%EC%97%90-%EB%94%B0%EB%9D%BC-style%EC%97%90-%EB%B3%80%ED%99%94%EC%A3%BC%EA%B8%B0/">condition에 따라 style에 변화주기</a>
+        </div>
+        <div class="listEntry">
+          condition/state에 따라 간단하게 style에 변화를 줄 수 있는 방법!
+        </div>
+        <div class="date">
+          2019-06-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/Platform%EC%97%90-%EB%94%B0%EB%A5%B8-Style-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">Platform에 따른 Style 적용하기</a>
+        </div>
+        <div class="listEntry">
+          React Native의 가장 큰 장점은 ios와 android를 동시에 개발 할 수 있다는 것이다. 하지만 각 운영체제별로 다르게 설정해줘야 하는 기능이 있다. 운영체제에 따른 Style을 다르게 적용하려면 어떻게 해야할까?
+        </div>
+        <div class="date">
+          2019-06-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/FCM(Firebase-Cloud-Messaging)%EC%9D%B4%EB%9E%80/">FCM(Firebase Cloud Messaging)이란?</a>
+        </div>
+        <div class="listEntry">
+          현재 진행하고 있는 프로젝트에서 Sendbird라는 솔루션을 사용해 실시간 채팅 기능을 구현하고 있다. 대부분의 실시간 메시징 기능은 SendBird SDK로 구현이 가능하지만, 푸시알람 기능은 FCM(Firebase Cloud Messaging)을 통해서 제공되기 때문에 FCM이 뭔지 알아보았다.
+        </div>
+        <div class="date">
+          2019-06-06
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%EB%84%A4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">React Native 네비게이션 설치하기</a>
+        </div>
+        <div class="listEntry">
+          대부분의 모바일 앱은 한 스크린으로만 이루어져 있지 않기 떄문에 navigator를 사용하여 스크린 간 이동을 해야한다. React Navigation과 React Native Navigation이다.
+        </div>
+        <div class="date">
+          2019-05-31
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/rnative/React-Native-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0(React-Native-CLI)/">React Native 시작하기(React Native CLI)</a>
+        </div>
+        <div class="listEntry">
+          ios와 안드로이드를 한 번에 개발할 수 있는, React를 알면 쉽게(😉) 시작할 수 있는 React Native를 시작해 보자.
+        </div>
+        <div class="date">
+          2019-05-30
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/etc/github%EC%97%90-%EC%9E%98%EB%AA%BB%EC%98%AC%EB%9D%BC%EA%B0%84-%ED%8C%8C%EC%9D%BC-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0/">github에 잘못올라간 파일 삭제하기</a>
+        </div>
+        <div class="listEntry">
+          .gitignore를 사용하여 node_modules나 API Key 등 민감한 정보는 github에 올리지 않을 수 있다.
+        </div>
+        <div class="date">
+          2019-05-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/computerscience/%ED%8A%B8%EB%A6%AC%EC%84%A0%ED%9A%8C-(DFS-&-BFS)/">트리선회 (DFS & BFS)</a>
+        </div>
+        <div class="listEntry">
+          자료구조 중, 트리의 각 노드를 한 번 씩 방문하는 것을 트리 순회(Tree traversal)라고 한다. 아래와 같은 트리 구조에서 방문했던 노드를 재방문 하지 않고 효율적으로 전체 순회를 하기 위해서는 체계적인 알고리즘이 필요하다.
+        </div>
+        <div class="date">
+          2019-04-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/module.exports-vs-exports/">module.exports vs exports</a>
+        </div>
+        <div class="listEntry">
+          Node.js를 사용하다 보면 module의 사용은 필수적이다. 모듈 단위로 파일이 작성되고 독자적인 scope가 생성되기 때문에 A 모듈에서 B 모듈을 사용하려면 보내고 받는 작용이 필요하다. Node.js는 CommonJS를 따르기 때문에 exports 객체를 이용하여 모듈을 정의하고, require 함수를 이용하여 사용한다.
+        </div>
+        <div class="date">
+          2019-04-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/%EC%9D%B8%EB%9D%BC%EC%9D%B8-%ED%85%8D%EC%8A%A4%ED%8A%B8-%ED%8E%B8%EC%A7%91%EA%B8%B0-%EB%A7%8C%EB%93%A4%EA%B8%B0-(%EC%A1%B0%EA%B1%B4%EB%B6%80-%EB%9E%9C%EB%8D%94%EB%A7%81)/">인라인 텍스트 편집기 만들기 (조건부 랜더링)</a>
+        </div>
+        <div class="listEntry">
+          위의 사진과 같이 인라인 텍스트 편집기(inline text editor)는 React로 어떻게 만들 수 있을까? 이 문제는 조건부 랜더링(conditional rendering)으로 간단하게 해결할 수 있다. 조건부 랜더링이란, if문을 사용하여, state에 따라 조건적으로 렌더하는 것이다. 🐶🍯
+        </div>
+        <div class="date">
+          2019-04-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/State-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0(feat.immutability)/">State 관리하기(feat.immutability)</a>
+        </div>
+        <div class="listEntry">
+          리액트를 다루면서 맞닥뜨리게 되는 중요한 개념 중 하나가 바로 state의 immutability(변경불가성)이다. 프로그래밍에서 immutability란, 객체가 생성된 이후 그 상태를 변경할 수 없는 디자인 패턴을 말한다.
+        </div>
+        <div class="date">
+          2019-04-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/javascript/%ED%91%9C%ED%98%84%EC%8B%9D%EA%B3%BC-%EB%AC%B8%EC%9E%A5/">표현식Expressions & 문장Statements</a>
+        </div>
+        <div class="listEntry">
+          표현식은 값을 만들어 낸다. 얼마나 긴 표현식 이던지, 결국은 하나의 값으로 귀결된다는 것이다. 아래의 코드 모두 표현식이며, console.log로 확인해 보면 하나의 값이 반환된다.
+        </div>
+        <div class="date">
+          2019-04-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%8B%A4%EB%A3%A8%EA%B8%B0(This!-again)/">리액트에서 이벤트 다루기(This! again)</a>
+        </div>
+        <div class="listEntry">
+          단방향 데이터 플로우(one-way data flow)는 리액트의 큰 특징 중 하나이다. 위의 그림처럼 상위 컴포넌트는 하위 컴포넌트에게 props의 형태로 data를 전달할 수 있으나, 하위 컴포넌트는 받은 props를 변경할 수도 없을 뿐더러, 상위 컴포넌트로 전달할 수도 없다. 그렇다면, 하위 컴포넌트에서의 변화로 인해 상위 컴포넌트가 변화해야하는 경우엔 어떻게 해야할까?
+        </div>
+        <div class="date">
+          2019-04-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/javascript/This-%ED%82%A4%EC%9B%8C%EB%93%9C/">This 키워드</a>
+        </div>
+        <div class="listEntry">
+          자바스크립트의 정말 헷갈리는 개념이자 정말 중요한 개념 중 하나인 This 키워드! 한마디로 This를 정의하자면, This는 호출 시점에서 실행함수가 가르키는 객체이다. 다른말로는 실행함수의 호출자. 라고 할 수 있을 것 같다.
+        </div>
+        <div class="date">
+          2019-04-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EB%A5%BC-%EC%93%B0%EA%B8%B0%EC%9C%84%ED%95%B4-%EC%95%8C%EC%95%84%EC%95%BC%ED%95%A0-%EA%B0%9C%EB%85%90/">리액트를 쓰기위해 알아야할 개념</a>
+        </div>
+        <div class="listEntry">
+          요소는 React 앱의 가장 작은 구성 블록입니다. 리액트 공식문서는 리액트에서의 요소(element)를 위와 같이 정의하고 있다. element를 component와 혼동해선 안된다!
+        </div>
+        <div class="date">
+          2019-04-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/create-react-app/">create-react-app</a>
+        </div>
+        <div class="listEntry">
+          리액트를 쉽게 시작할 수 있는 방법은 페이스북에서 제공하는 create-react-app을 이용하는 것이다. 리액트 앱을 만들수있는 기본 프로젝트 환경이다. 컴퓨터에 npm 5.6버전 이상이 설치되어 있다면, 터미널에서 간단한 코드를 실행하여 프로젝트를 생성할 수 있다.
+        </div>
+        <div class="date">
+          2019-04-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/react/Intro-to-React/">Intro to React</a>
+        </div>
+        <div class="listEntry">
+          React는 Facebook이 만든 JavaScript 라이브러리다. 그렇다면, JavaScript 라이브러리는 무엇이고, 왜 필요한 것일까?
+        </div>
+        <div class="date">
+          2019-04-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/computerscience/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EC%9D%98-%EA%B0%9C%EC%9A%94-%EB%B0%8F-%EC%A2%85%EB%A5%98/">자료구조의 개요 및 종류</a>
+        </div>
+        <div class="listEntry">
+          리눅스의 아버지, 리누스 토발즈(Linus Tovarlds)가 자료구조에 대해 한 말이다. 평생 Data 관리라면 엑셀시트 셀을 추가해 왔던 나인데…. 좋은 프로그래머 근처에라도 가고싶으면 자료구조에 대해 먼저 알아봐야겠다.
+        </div>
+        <div class="date">
+          2019-04-14
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/computerscience/web-%EA%B8%B0%EB%B3%B8%EA%B0%9C%EB%85%90_HTTP-%ED%86%B5%EC%8B%A0/">web 기본개념_HTTP 통신</a>
+        </div>
+        <div class="listEntry">
+          web의 기본 개념인 http 통신에 대해 알아보자.
+        </div>
+        <div class="date">
+          2019-04-14
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/javascript/Prototype%EA%B3%BC-%EC%83%81%EC%86%8D/">Prototype과 상속</a>
+        </div>
+        <div class="listEntry">
+          JavaScript는 Prototype 기반의 언어라고 불린다. 그만큼 JavaScript를 이해하고 사용하기 위해 Prototype에 대한 이해가 중요하…………지만! 그만큼 어렵고 복잡하다…..😔
+        </div>
+        <div class="date">
+          2019-04-14
+        </div>
+      </div>
+    </ul>
+    
+  </div>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

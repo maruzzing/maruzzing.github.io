@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>React Native에서 카카오 소셜로그인 하기</h1>
+    <div class="date">Written on October 25, 2019</div>
+    <div class="entry">
+      <p>네이버와 카카오톡 소셜로그인은 javascript나, ios, android sdk는 제공하지만 react-native를 위한 sdk는 따로 없기 때문에 <a href="https://facebook.github.io/react-native/docs/native-modules-ios">native module</a>을 사용하거나, (있다면) 해당 라이브러리를 사용해야 한다. 지난 프로젝트에서는 passport 라이브러리를 사용하여 웹뷰로 소셜로그인을 진행했지만 이번엔 React Native Seoul에서 만든 <a href="https://github.com/react-native-seoul/react-native-kakao-login">react-native-kakao-login</a> 라이브러리를 사용해 보기로 했다.</p>
+
+<h2 id="install">install</h2>
+
+<p>먼저, 모듈을 설치하고 추가적으로 ios와 android 설정을 진행한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add @react-native-seoul/kakao-login
+</code></pre></div></div>
+
+<h3 id="kakao-api-사용-등록">kakao API 사용 등록</h3>
+
+<p>kakao 에서 제공하는 API를 사용하기 위해서는 <a href="https://developers.kakao.com">kakao developers</a> 페이지에서 앱 등록을 진행해야 한다. 계정 로그인을 한 후, 앱 만들기 버튼을 통해 앱을 만들면 앱 키를 발급받을 수 있다. 네이티브 SDK를 사용할 예정이기 때문에 네이티브 앱 키가 필요하다.</p>
+
+<h3 id="ios-설정">ios 설정</h3>
+
+<p>먼저, <a href="https://developers.kakao.com">kakao developers</a> 페이지의 앱에 ios 플랫폼을 추가한다. 이때 번들 ID를 필수로 입력해야 하는데, <code class="highlighter-rouge">.xcworkspace</code> General 탭에서 확인할 수 있다.</p>
+
+<p>플랫폼 등록을 마쳤으면, (RN &gt;= 0.60 의 경우) pod install을 해주는데, <code class="highlighter-rouge">./ios/Podfile</code>에 아래 내용을 추가해 준 뒤 pod install을 해주면 된다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>target <span class="s1">'yourApp'</span> <span class="k">do</span>
+...
+pod <span class="s1">'KakaoOpenSDK'</span>, <span class="s1">'~&gt; 1.16.0'</span>
+...
+end
+</code></pre></div></div>
+
+<p>그리고 <a href="https://developers.kakao.com/docs/ios/getting-started#%EA%B0%9C%EB%B0%9C%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%84%A4%EC%A0%95">카카오 공식문서</a>를 참고해서 몇 가지 추가로 설정해 주어야 하는데,</p>
+
+<ol>
+  <li>
+    <p>먼저 <code class="highlighter-rouge">info.plist</code> 파일에 <code class="highlighter-rouge">LSApplicationQueriesSchemes</code>의 키로 <code class="highlighter-rouge">kakao{네이티브 앱 키}</code>와 <code class="highlighter-rouge">kakaokompassauth</code>를 추가한다.</p>
+  </li>
+  <li>
+    <p>그리고 <code class="highlighter-rouge">info</code> 탭에서 URL Types를 추가해 주는데, URL Schemes에 <code class="highlighter-rouge">kakao{네이티브 앱 키}</code>를 등록해 준다.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">AppDelegate.m</code> 파일에 아래 내용을 추가해 준다.</p>
+  </li>
+</ol>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#import &lt;KakaoOpenSDK/KakaoOpenSDK.h&gt;</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">application</span><span class="p">:(</span><span class="kt">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nv">openURL</span><span class="p">:(</span><span class="kt">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">url</span>
+                                      <span class="nv">sourceApplication</span><span class="p">:(</span><span class="kt">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">sourceApplication</span>
+                                              <span class="nv">annotation</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="n">annotation</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">([</span><span class="kt">KOSession</span> <span class="nv">isKakaoAccountLoginCallback</span><span class="p">:</span><span class="n">url</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kt">KOSession</span> <span class="nv">handleOpenURL</span><span class="p">:</span><span class="n">url</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">application</span><span class="p">:(</span><span class="kt">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nv">openURL</span><span class="p">:(</span><span class="kt">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">url</span>
+                                                <span class="nv">options</span><span class="p">:(</span><span class="kt">NSDictionary</span><span class="o">&lt;</span><span class="kt">NSString</span> <span class="o">*</span><span class="p">,</span><span class="n">id</span><span class="o">&gt;</span> <span class="o">*</span><span class="p">)</span><span class="n">options</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">([</span><span class="kt">KOSession</span> <span class="nv">isKakaoAccountLoginCallback</span><span class="p">:</span><span class="n">url</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kt">KOSession</span> <span class="nv">handleOpenURL</span><span class="p">:</span><span class="n">url</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="nv">applicationDidBecomeActive</span><span class="p">:(</span><span class="kt">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="kt">KOSession</span> <span class="n">handleDidBecomeActive</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="android-설정">android 설정</h3>
+
+<p>안드로이드도 , <a href="https://developers.kakao.com">kakao developers</a> 페이지의 플랫폼을 추가해 주어야 한다. 먼저 패키지 명과 마켓 URL을 입력해야 하는데, 패키지 명을 입력하면 마켓 URL은 자동으로 입력된다. 패키지 명은 <code class="highlighter-rouge">./android/app/src/manifests/AndroidMenifest.xml</code> 파일의 <code class="highlighter-rouge">manifest</code> 태그에서 확인할 수 있다.</p>
+
+<ol>
+  <li><code class="highlighter-rouge">bundle.gridle</code> 파일에 아래 내용을 추가해 준다.</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subprojects {
+    repositories {
+        mavenCentral()
+        maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+    }
+}
+</code></pre></div></div>
+
+<ol>
+  <li><code class="highlighter-rouge">./android/app/src/res/values</code> 폴더에 <code class="highlighter-rouge">kakao_strings.xml</code> 파일을 만들고, 아래와 같이 카카오 앱키를 입력한 뒤 저장한다.</li>
+</ol>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">"kakao_app_key"</span><span class="nt">&gt;</span>{kakao_app_key}<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/resources&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="highlighter-rouge">./android/app/src/manifests/AndroidMenifest.xml</code> 파일의 <code class="highlighter-rouge">allowBackup</code>를 <code class="highlighter-rouge">true</code>로 수정해 주고, <code class="highlighter-rouge">application</code> 태그 내부에 아래 내용을 추가해 준다.</li>
+</ol>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+    <span class="nt">&lt;meta-data</span>
+        <span class="na">android:name=</span><span class="s">"com.kakao.sdk.AppKey"</span>
+        <span class="na">android:value=</span><span class="s">"@string/kakao_app_key"</span> <span class="nt">/&gt;</span>
+...
+</code></pre></div></div>
+
+<p>여기까지 하고 카카오 로그인을 진행하면 <code class="highlighter-rouge">Login Failed:E_AUTHORIZATION_FAILED invalid android_key_hash or ios_bundle_id or web_site_url</code>라는 에러 메시지를 받게 되는데, 안드로이드는 키해시를 개발자 콘솔에 입력해주어야 정상적으로 동작하기 때문이다.</p>
+
+<p>키해시는 디버그와 릴리즈 용으로 나뉘는데, 먼저 디버그용 키해시를 얻기 위해 <code class="highlighter-rouge">./android/app/src/java/MainApplication.java</code> 파일의 <code class="highlighter-rouge">onCreate()</code> 함수 내에 아래 내용을 추가하고 빌드하면 키해시를 확인할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">android.content.pm.PackageInfo</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.content.pm.PackageManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.content.pm.Signature</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.util.Base64</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.util.Log</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.security.MessageDigest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.NoSuchAlgorithmException</span><span class="o">;</span>
+
+<span class="o">...</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
+    <span class="nc">SoLoader</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="cm">/* native exopackage */</span> <span class="kc">false</span><span class="o">);</span>
+    <span class="n">initializeFlipper</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// Remove this line if you don't want Flipper enabled</span>
+      <span class="k">try</span> <span class="o">{</span>
+          <span class="nc">PackageInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">getPackageManager</span><span class="o">().</span><span class="na">getPackageInfo</span><span class="o">(</span>
+                  <span class="s">"com.rn_social_login"</span><span class="o">,</span>
+                  <span class="nc">PackageManager</span><span class="o">.</span><span class="na">GET_SIGNATURES</span><span class="o">);</span>
+          <span class="k">for</span> <span class="o">(</span><span class="nc">Signature</span> <span class="n">signature</span> <span class="o">:</span> <span class="n">info</span><span class="o">.</span><span class="na">signatures</span><span class="o">)</span> <span class="o">{</span>
+              <span class="nc">MessageDigest</span> <span class="n">md</span> <span class="o">=</span> <span class="nc">MessageDigest</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"SHA"</span><span class="o">);</span>
+              <span class="n">md</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">signature</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">());</span>
+              <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">"KeyHash:"</span><span class="o">,</span> <span class="nc">Base64</span><span class="o">.</span><span class="na">encodeToString</span><span class="o">(</span><span class="n">md</span><span class="o">.</span><span class="na">digest</span><span class="o">(),</span> <span class="nc">Base64</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">));</span>
+          <span class="o">}</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">PackageManager</span><span class="o">.</span><span class="na">NameNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NoSuchAlgorithmException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/images/kakao_login_keyhash.png" alt="kakao_login_keyhash" title="kakao_login_keyhash" /></p>
+
+<p>이렇게 얻어진 키해시 값을 kakao developers 어플리케이션 안드로이드 플랫폼에 입력해 주면 정상적으로 작동된다.</p>
+
+<h2 id="구현">구현</h2>
+
+<p>구현은 간단한데, <code class="highlighter-rouge">KakaoLogins</code>로 클래스를 호출하고, <code class="highlighter-rouge">login()</code>, <code class="highlighter-rouge">getProfile()</code>, <code class="highlighter-rouge">logout()</code> 등의 API를 사용하면 된다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SafeAreaView</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-native-community/async-storage</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">KakaoLogins</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-native-seoul/kakao-login</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavigationScreenProp</span><span class="p">,</span> <span class="nx">NavigationState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-navigation</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">KakaoLogins</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">KakaoLogins Module is Not Linked</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">type</span> <span class="nx">Navigation</span> <span class="o">=</span> <span class="nx">NavigationScreenProp</span><span class="o">&lt;</span><span class="nx">NavigationState</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">Props</span> <span class="p">{</span>
+  <span class="nl">navigation</span><span class="p">:</span> <span class="nx">Navigation</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nx">SignInScreen</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">Props</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">kakaoLogin</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">KakaoLogins</span><span class="p">.</span><span class="nx">login</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">getProfile</span><span class="p">();</span>
+        <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">userToken</span><span class="dl">"</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">accessToken</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="dl">"</span><span class="s2">App</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Login Finished:</span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">E_CANCELLED_OPERATION</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Login Cancelled:</span><span class="p">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Login Failed:</span><span class="p">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">getProfile</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">KakaoLogins</span><span class="p">.</span><span class="nx">getProfile</span><span class="p">();</span>
+      <span class="k">await</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Get Profile Finished:</span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Get Profile Failed:</span><span class="p">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">SafeAreaView</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">TouchableOpacity</span> <span class="na">onPress=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">kakaoLogin</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Text</span><span class="p">&gt;</span>SignIn with Kakao<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">TouchableOpacity</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">SafeAreaView</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">SignInScreen</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>네이버 로그인도 진행을 해야 하는데, <code class="highlighter-rouge">@react-native-seoul/naver-login</code>에 react native 0.60 이상 버전의 업데이트 내용이 반영이 잘 되어있지 않아 native module을 직접 만들어서 사용해봐야 겠다.</p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/React-Native%EC%97%90%EC%84%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%95%98%EA%B8%B0/',
+    'title': 'React Native에서 카카오 소셜로그인 하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience" class="activated">
+        컴퓨터 공학
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+<div class="container">
+  <div class="post-lists">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/computerscience/%ED%8A%B8%EB%A6%AC%EC%84%A0%ED%9A%8C-(DFS-&-BFS)/">트리선회 (DFS & BFS)</a>
+        </div>
+        <div class="listEntry">
+          자료구조 중, 트리의 각 노드를 한 번 씩 방문하는 것을 트리 순회(Tree traversal)라고 한다. 아래와 같은 트리 구조에서 방문했던 노드를 재방문 하지 않고 효율적으로 전체 순회를 하기 위해서는 체계적인 알고리즘이 필요하다.
+        </div>
+        <div class="date">
+          2019-04-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/computerscience/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EC%9D%98-%EA%B0%9C%EC%9A%94-%EB%B0%8F-%EC%A2%85%EB%A5%98/">자료구조의 개요 및 종류</a>
+        </div>
+        <div class="listEntry">
+          리눅스의 아버지, 리누스 토발즈(Linus Tovarlds)가 자료구조에 대해 한 말이다. 평생 Data 관리라면 엑셀시트 셀을 추가해 왔던 나인데…. 좋은 프로그래머 근처에라도 가고싶으면 자료구조에 대해 먼저 알아봐야겠다.
+        </div>
+        <div class="date">
+          2019-04-14
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/computerscience/web-%EA%B8%B0%EB%B3%B8%EA%B0%9C%EB%85%90_HTTP-%ED%86%B5%EC%8B%A0/">web 기본개념_HTTP 통신</a>
+        </div>
+        <div class="listEntry">
+          web의 기본 개념인 http 통신에 대해 알아보자.
+        </div>
+        <div class="date">
+          2019-04-14
+        </div>
+      </div>
+    </ul>
+    
+  </div>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/computerscience/',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

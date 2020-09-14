@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div class="container">
+  <div class="posts">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <article class="post">
+      <a href="/study/algorithm/romanNumeralTranslator/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            romanNumeralTranslator
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-16
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          Given an array containing a deck of cards, implement a function that shuffles the deck.
+        </div>
+      </a>
+      <!-- <a href="/study/algorithm/romanNumeralTranslator/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/algorithm/shuffleDeck/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            shuffleDeck
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-15
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          Given an array containing a deck of cards, implement a function that shuffles the deck.
+        </div>
+      </a>
+      <!-- <a href="/study/algorithm/shuffleDeck/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-4/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            Passport와 JWT를 이용하여 Auth 구현하기[4]
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-15
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#NodeJs"> -->
+                NodeJs
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Passport"> -->
+                Passport
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#JWT"> -->
+                JWT
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Middleware"> -->
+                Middleware
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          이전 포스팅에서 Express.js 환경에서 passport를 사용하여 자체회원 및 소셜회원의 회원가입과 로그인, 그리고 리액트 네이티브에서의 소셜로그인을 구현해 보았다. 이제 남은 것은 로그인 시 발급받은 토큰으로 로그인 상태를 유지하는 미들웨어를 구현하는 것이다.
+        </div>
+      </a>
+      <!-- <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-4/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/rnative/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-3/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            Passport와 JWT를 이용하여 Auth 구현하기[3]
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-15
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#WebView"> -->
+                WebView
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#ios"> -->
+                ios
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          앞선 포스팅을 통해 소셜로그인을 위한 서버쪽 로직은 완성되었다. 이제 클라이언트 쪽(React Native)은 어떻게 구현하는지 알아보자.
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-3/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/til/2019%EB%85%84-8%EC%9B%94-14%EC%9D%BC-~-15%EC%9D%BC/">
+        <div class="entryCategory">
+          TIL
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            2019년 8월 14일 ~ 15일
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-14
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#dotenv"> -->
+                dotenv
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          
+        </div>
+      </a>
+      <!-- <a href="/til/2019%EB%85%84-8%EC%9B%94-14%EC%9D%BC-~-15%EC%9D%BC/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/algorithm/rotateMatrix/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            rotateMatrix
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-14
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          Write a function that rotates a NxN matrix 90 degrees. A matrix, also called a 2-D array, is simply an array of arrays of values.
+        </div>
+      </a>
+      <!-- <a href="/study/algorithm/rotateMatrix/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/algorithm/fractionConverter/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            fractionConverter
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-13
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          Write a function that takes a number as its argument and returns a string that represents that number's simplified fraction.
+        </div>
+      </a>
+      <!-- <a href="/study/algorithm/fractionConverter/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/algorithm/mergeSort/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            mergeSort
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-12
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          Mergesort uses a divide-and-conquer strategy. It begins by treating the input list of length N as a set of N "sublists" of length 1, which are considered to be sorted. Adjacent sublists are then "merged" into sorted sublists of length 2, which are merged into sorted sublists of length 4, and so on, until only a single sorted list remains.
+        </div>
+      </a>
+      <!-- <a href="/study/algorithm/mergeSort/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/algorithm/longestRun/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            longestRun
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-11
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Javascript"> -->
+                Javascript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          Write a function that, given a string, Finds the longest run of identical characters and returns an array containing the start and end indices of that run. If there are two runs of equal length, return the first one.
+        </div>
+      </a>
+      <!-- <a href="/study/algorithm/longestRun/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/py/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98%EC%99%80-%EC%A7%80%EC%97%AD%EB%B3%80%EC%88%98/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            파이썬 전역변수와 지역변수
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-08-11
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Python"> -->
+                Python
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Global Variable"> -->
+                Global Variable
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Local Variable"> -->
+                Local Variable
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          함수 내에서 정의되어 함수가 실행되는 동안 존재, 호출되는 변수를 지역변수(Local Variable)라고 하며, 이는 그 변수가 속한 함수 외부에서는 참조할 수 없다. 반면, 전역에 정의되어 함수 내외부에서 참조할 수 있는 변수를 전역변수(Global Variable)라고 한다.
+        </div>
+      </a>
+      <!-- <a href="/study/py/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98%EC%99%80-%EC%A7%80%EC%97%AD%EB%B3%80%EC%88%98/" class="read-more">Read More</a> -->
+    </article>
+    
+  </div>
+  <!-- Pagination links -->
+   <div class="pagination">
+   
+  <span class="next">
+    <a href="http://localhost:4000/page8/index.html"><</a>
+  </span>
+     
+  <span class="pageNum unactive">
+    <a href="/">1</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page2/">2</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page3/">3</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page4/">4</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page5/">5</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page6/">6</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page7/">7</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page8/">8</a></span
+  >
+    
+  <span class="pageNum active">
+    <a href="/page9/">9</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page10/">10</a></span
+  >
+  
+  <span>
+    <a class="next" href="http://localhost:4000/page10/index.html">></a>
+  </span>
+  
+</div>
+ 
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/page9/index.html',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

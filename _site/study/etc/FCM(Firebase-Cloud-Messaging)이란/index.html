@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc" class="activated">
+        기타
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>FCM(Firebase Cloud Messaging)이란?</h1>
+    <div class="date">Written on June  6, 2019</div>
+    <div class="entry">
+      <p>현재 진행하고 있는 프로젝트에서 <a href="https://sendbird.com/">Sendbird</a>라는 솔루션을 사용해 실시간 채팅 기능을 구현하고 있다. 대부분의 실시간 메시징 기능은 SendBird SDK로 구현이 가능하지만, 푸시알람 기능은 <strong>FCM(Firebase Cloud Messaging)</strong>을 통해서 제공된다.</p>
+
+<p>즉, socket.io나 SendBird 솔루션에서 실시간으로 메시지를 주고 받는 것은 양쪽 클라이언트가 모두 접속해 있을때 가능하다. 카톡처럼 앱의 다른 페이지에 있거나, 앱이 실행되지 않고 있을 때 푸시알람을 보내기 위해서는 FCM과 같은 Cloud Messaging 서버를 통해 상대방에게 데이터를 전달해야 한다. 그렇다면 FCM(Firebase Cloud Messaging)은 무엇이고 동작원리는 무엇인지 알아보자.</p>
+
+<h2 id="fcmfirebase-cloud-message-이란">FCM(Firebase Cloud Message) 이란</h2>
+
+<p><a href="https://firebase.google.com/docs/cloud-messaging">FCM</a>은 타겟 모바일에 푸시를 보낼 수 있도록 해주는 서비스로, Firebase 콘솔 이나 서버에서 푸시를 보낼 수 있다.</p>
+
+<h2 id="fcmfirebase-cloud-message-동작원리">FCM(Firebase Cloud Message) 동작원리</h2>
+
+<h3 id="앱을-위한-키를-fcm-서버를-통해-얻는-단계">앱을 위한 키를 FCM 서버를 통해 얻는 단계</h3>
+
+<ul>
+  <li>모바일에 앱이 설치되는 순간 Firebase 서버에 키 획득을 위한 요청을 보냄</li>
+  <li>Firebase 서버에서 키를 만들어 모바일에 전달</li>
+  <li>모바일 앱에 전달된 키를 서버에 전송</li>
+  <li>서버는 전달받은 키를 db에 저장하여 타겟 모바일의 identification으로 사용</li>
+</ul>
+
+<div style="display: flex; justify-content: center">
+    <img src="/images/fcm1.jpeg" alt="fcm" width="350em" />
+</div>
+
+<h3 id="서버에서-데이터를-스마트폰에-전달하는-절차">서버에서 데이터를 스마트폰에 전달하는 절차</h3>
+
+<ul>
+  <li>서버에서 데이터를 타겟 모바일에 전달하기 위해 DB에서 키를 획득</li>
+  <li>DB의 키와 전송하고자 하는 데이터를 HTTP 통신으로 Firebase 서버에 전달</li>
+  <li>Firebase 서버에서는 전달받은 키값을 식별해 어떤 모바일의 어떤 앱인지를 식별</li>
+  <li>식별된 모바일의 식별된 앱을 실행하여 데이터 전달 (타겟 모바일의 앱은 백그라운드에 있는 상태에서도 리스너로 이벤트를 감지함)</li>
+</ul>
+
+<div style="display: flex; justify-content: center">
+  <img src="/images/fcm2.jpeg" alt="fcm" width="350em" />
+</div>
+
+<hr />
+
+<p>SendBird의 경우, 앱이 실행될 때 online임을, 앱이 꺼질 때 offline임을 SendBird 서버에 알려줌으로써 특정 기기가 offline일 때 FCM 서버를 통해 푸시알림으로 메시지를 전송할 수 있다.</p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/etc/FCM(Firebase-Cloud-Messaging)%EC%9D%B4%EB%9E%80/',
+    'title': 'FCM(Firebase Cloud Messaging)이란?'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

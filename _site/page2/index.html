@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div class="container">
+  <div class="posts">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <article class="post">
+      <a href="/study/rnative/React-Native-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%BA%90%EC%8B%B1%ED%95%98%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            React Native 파일 시스템을 사용해 이미지 캐싱하기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2020-03-01
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#filesystem"> -->
+                filesystem
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          자주 사용하는 정적 이미지의 경우 접속 시 매번 이미지 서버에서 이미지를 가져오기 보다 이미지를 캐싱해서 사용하면 성능면에서 효율적인 경우가 있다. 그래서 파일 시스템을 이용해서 이미지를 캐싱하는 방법에 대해 알아 보았다. 📂
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/React-Native-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%BA%90%EC%8B%B1%ED%95%98%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/rnative/React-Native-Firebase-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            React Native Firebase 환경설정하기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2020-01-27
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Firebase"> -->
+                Firebase
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Environments"> -->
+                Environments
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          앱을 사용하는 사용자의 행동 분석이나 푸시알림 등의 서비스를 사용하기 위해서 React-Native-Firebase 모듈을 사용하여 React Native 앱에 Firebase 서비스를 연결해 사용중이다.
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/React-Native-Firebase-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/rnative/React-Native%EC%97%90%EC%84%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%95%98%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            React Native에서 카카오 소셜로그인 하기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-10-25
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Auth"> -->
+                Auth
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Social Login"> -->
+                Social Login
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          네이버와 카카오톡 소셜로그인은 javascript나, ios, android sdk는 제공하지만 react-native를 위한 sdk는 따로 없기 때문에 native module을 사용하거나, (있다면) 관련 라이브러리를 사용해야 한다.
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/React-Native%EC%97%90%EC%84%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%95%98%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/rnative/TypeScript%EC%99%80-React-Navigation/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            TypeScript와 React Navigation
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-10-04
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#TypeScript"> -->
+                TypeScript
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Navigation"> -->
+                React Navigation
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          리액트 네이티브 프로젝트에 타입스크립트를 적용해 보기로 했는데 처음으로 맞닥뜨린 문제가 React Navigation의 screen props는 어떻게 타입으로 정의하고, 전달할지 였다. 이 문제의 해결법을 가장 기본적인 사용자 인증 플로우로 정리해 보았다.
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/TypeScript%EC%99%80-React-Navigation/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/TypeScript-%EA%B8%B0%EC%B4%88/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            TypeScript 기초
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-10-03
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Tutorial"> -->
+                Tutorial
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#TypeScript"> -->
+                TypeScript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          TypeScript는 MS에서 개발한 자바스크립트의 슈퍼셋(상위언어)로 Javascript에 타입을 지정함으로써 더욱 가독성이 높고 견고한 코드를 짤 수 있도록 도와준다.
+        </div>
+      </a>
+      <!-- <a href="/study/react/TypeScript-%EA%B8%B0%EC%B4%88/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/StopWatch-%EC%98%88%EC%A0%9C-TypeScript%EB%A1%9C-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%ED%95%B4%EB%B3%B4%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            StopWatch 예제 TypeScript로 리팩토링 해보기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-10-03
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Tutorial"> -->
+                Tutorial
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#TypeScript"> -->
+                TypeScript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          TypeScript와 Unit Test 공부를 위해 React로 간단한 StopWatch를 만들고 TypeScript로 리팩토링 해봤다. 👩‍💻
+        </div>
+      </a>
+      <!-- <a href="/study/react/StopWatch-%EC%98%88%EC%A0%9C-TypeScript%EB%A1%9C-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%ED%95%B4%EB%B3%B4%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/rnative/React-Native-X-TypeScript-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            React Native X TypeScript 시작하기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-10-03
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#TypeScript"> -->
+                TypeScript
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          TypeScript 공부를 시작했으니 이번엔 React Native에 TypeScript를 적용해보자. 먼저 프로젝트 만들기!
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/React-Native-X-TypeScript-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/rnative/Toast-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B3%B4%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            Toast 만들어 보기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-10-02
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#Toast"> -->
+                Toast
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          모바일에서 사용자에게 어떤 정보를 알려주기 위해 화면위에 잠깐 나타났다가 사라지는 것을 Toast라고 한다. 마치 토스트에서 식빵이 튀어오르는 것처럼 🍞.. Alert 대신 Toast를 써보려고 라이브러리를 설치해 봤는데 Modal 위에 Toast를 띄우려니 자꾸 Toast가 Modal 밑으로 숨어버려 그냥 만들어 보기로 했다.
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/Toast-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B3%B4%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/react/React-Testing-Library%EB%A1%9C-%EC%9C%A0%EB%8B%9B%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%B4%EB%B3%B4%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            React Testing Library로 유닛테스트 해보기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-09-29
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Testing Library"> -->
+                React Testing Library
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#unit test"> -->
+                unit test
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          처음 개발을 배울 때 테스트 주도 개발이 대세라는 이야기를 들었을 때 '코드를 테스트 하기 위해 또 다른 코드를 작성해야 한다고?' 하며 겁먹었던 기억이 난다 ㅎㅎ 그런데 공부를 하다보니 조금 더 깔끔한 코드, 효율적인 코드에 대해 고민하게 되고 이참에 테스트에 대해 공부해 보기로 했다.
+        </div>
+      </a>
+      <!-- <a href="/study/react/React-Testing-Library%EB%A1%9C-%EC%9C%A0%EB%8B%9B%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%B4%EB%B3%B4%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+    <article class="post">
+      <a href="/study/rnative/%EB%A9%94%EC%9D%BC%EB%B0%9C%EC%86%A1%EA%B8%B0%EB%8A%A5-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
+        <div class="entryCategory">
+          Study
+        </div>
+        <div class="entryTitleDev">
+          <span class="entryTitle">
+            메일발송기능 적용하기
+          </span>
+          <span class="meta">
+            <!-- <span class="date">
+              2019-09-25
+            </span> -->
+            <ul class="tag">
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#React Native"> -->
+                React Native
+                <!-- </a> -->
+              </li>
+              
+              <li>
+                <!-- <a href="http://localhost:4000/tags#mail"> -->
+                mail
+                <!-- </a> -->
+              </li>
+              
+            </ul>
+          </span>
+        </div>
+
+        <div class="entry">
+          현재 진행중인 모바일 앱 프로젝트에서 앱 관련 문의사항을 메일로 보낼 수 있는 기능을 추가해 보았다. react-native-mail 모듈을 사용해 모바일에 설치되어 있는 기본 이메일 앱을 연동하는 방법이다.
+        </div>
+      </a>
+      <!-- <a href="/study/rnative/%EB%A9%94%EC%9D%BC%EB%B0%9C%EC%86%A1%EA%B8%B0%EB%8A%A5-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/" class="read-more">Read More</a> -->
+    </article>
+    
+  </div>
+  <!-- Pagination links -->
+   <div class="pagination">
+   
+  <span class="next">
+    <a href="http://localhost:4000/index.html"><</a>
+  </span>
+     
+  <span class="pageNum unactive">
+    <a href="/">1</a></span
+  >
+    
+  <span class="pageNum active">
+    <a href="/page2/">2</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page3/">3</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page4/">4</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page5/">5</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page6/">6</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page7/">7</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page8/">8</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page9/">9</a></span
+  >
+    
+  <span class="pageNum unactive">
+    <a href="/page10/">10</a></span
+  >
+  
+  <span>
+    <a class="next" href="http://localhost:4000/page3/index.html">></a>
+  </span>
+  
+</div>
+ 
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/page2/index.html',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

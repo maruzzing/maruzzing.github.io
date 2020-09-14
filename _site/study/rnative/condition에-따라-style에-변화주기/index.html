@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>condition에 따라 style에 변화주기</h1>
+    <div class="date">Written on June 24, 2019</div>
+    <div class="entry">
+      <p>excerpt: condition/state에 따라 간단하게 style에 변화를 줄 수 있는 방법!</p>
+
+<p>바로 style을 배열로 주는 것이다. 공통된 style과, state에 따라 달라지는 style을 조건부로 주어 <code class="highlighter-rouge">isCompleted</code>라는 state가 변할 때 마다 다른 style 효과를 줄 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">View</span>
+  <span class="nx">style</span><span class="o">=</span><span class="p">{[</span>
+    <span class="nx">styles</span><span class="p">.</span><span class="nx">circle</span><span class="p">,</span>
+    <span class="nx">isCompleted</span> <span class="p">?</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">completedCircle</span> <span class="p">:</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">unCompletedCircle</span>
+  <span class="p">]}</span>
+<span class="sr">/</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p><br />
+<strong>전체 컴포넌트 코드</strong></p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">ToDo</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">isCompleted</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">};</span>
+
+  <span class="nx">_toggleComplete</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="nx">prevState</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">isCompleted</span><span class="p">:</span> <span class="o">!</span><span class="nx">prevState</span><span class="p">.</span><span class="nx">isCompleted</span>
+      <span class="p">};</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">isCompleted</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">TouchableOpacity</span> <span class="na">onPress=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_toggleComplete</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">View</span>
+            <span class="na">style=</span><span class="si">{</span><span class="p">[</span>
+              <span class="nx">styles</span><span class="p">.</span><span class="nx">circle</span><span class="p">,</span>
+              <span class="nx">isCompleted</span> <span class="p">?</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">completedCircle</span> <span class="p">:</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">unCompletedCircle</span>
+            <span class="p">]</span><span class="si">}</span>
+          <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">TouchableOpacity</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="nx">width</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="na">borderBottomWidth</span><span class="p">:</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">hairlineWidth</span><span class="p">,</span>
+    <span class="na">borderBottomColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#bbb</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">"</span><span class="s2">row</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">"</span><span class="s2">center</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="na">circle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderWidth</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">marginRight</span><span class="p">:</span> <span class="mi">20</span>
+  <span class="p">},</span>
+  <span class="na">completedCircle</span><span class="p">:</span> <span class="p">{</span> <span class="na">borderColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#bbb</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="na">unCompletedCircle</span><span class="p">:</span> <span class="p">{</span> <span class="na">borderColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#720D5D</span><span class="dl">"</span> <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<p><span class="reference">참고자료</span></p>
+
+<p><a href="https://youtu.be/eGHUDwSI82M">노마드코더 Kawai To Do</a></p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/condition%EC%97%90-%EB%94%B0%EB%9D%BC-style%EC%97%90-%EB%B3%80%ED%99%94%EC%A3%BC%EA%B8%B0/',
+    'title': 'condition에 따라 style에 변화주기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

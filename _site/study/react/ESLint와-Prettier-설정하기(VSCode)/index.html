@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react" class="activated">
+        React
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>ESLint와 Prettier 설정하기(VSCode)</h1>
+    <div class="date">Written on June 30, 2019</div>
+    <div class="entry">
+      <p>개발자 경험 향상에 유용한 두가지 tool, ESLint와 Prettier. ESLint는 JavaScript 코딩 컨벤션과 에러 체크를 도와주며, Prettier는 말 그대로 코드를 더 이쁘게 만들어 주는 도구로 사전에 설정한 규칙에 따라 코드를 포맷해준다.</p>
+
+<p>VSCode Extensions에서 ESLint와 Prettier를 설치하면 기본적으로 설정된 문법 옵션으로 사용할 수 있지만 추가적인 config를 설정할 수 있다.</p>
+
+<p><a href="https://www.npmtrends.com/eslint-config-airbnb-vs-eslint-config-standard">npm trends 통계</a>에 따르면, 많은 개발자들이 airbnb에서 정의한 규칙을 사용하므로, <code class="highlighter-rouge">eslint-config-airbnb</code>로 설정해 보겠다.</p>
+
+<p><img src="/images/eslint-config-stat.png" alt="Eslint Config 통계" title="Eslint Config 통계" /></p>
+
+<h3 id="vscode-extensions에서-eslint와-prettier-설치하기">VSCode Extensions에서 ESLint와 Prettier 설치하기</h3>
+
+<p>아래와 같이 VSCode Extensions에서 ESLint와 Prettier를 검색하여 설치하고,
+<strong>enable</strong>을 꼭 설정해 준다.</p>
+
+<p>ESLint
+<img src="/images/eslint-install.png" alt="Eslint 설치" title="Eslint 설치" /></p>
+
+<p><br />
+Prettier
+<img src="/images/prettier-install.png" alt="Prettier 설치" title="Prettier 설치" /></p>
+
+<h3 id="eslint-config-airbnb-설치-및-적용하기">eslint-config-airbnb 설치 및 적용하기</h3>
+
+<p>먼저, 사전에 설치해야 하는 패키지 정보를 확인한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm info <span class="s2">"eslint-config-airbnb@latest"</span> peerDependencies
+<span class="o">{</span> eslint: <span class="s1">'^4.19.1 || ^5.3.0'</span>,
+  <span class="s1">'eslint-plugin-import'</span>: <span class="s1">'^2.14.0'</span>,
+  <span class="s1">'eslint-plugin-jsx-a11y'</span>: <span class="s1">'^6.1.1'</span>,
+  <span class="s1">'eslint-plugin-react'</span>: <span class="s1">'^7.11.0'</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p><br />
+CRA를 통해 앱을 생성했다면 위의 패키지는 모두 설치되어 있어 설치가 필요하지 않다.
+관련 패키지를 한꺼번에 설치하는 명령어는 아래와 같다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npx install-peerdeps <span class="nt">--dev</span> eslint-config-airbnb
+</code></pre></div></div>
+
+<p><br />
+이제 <code class="highlighter-rouge">eslint-config-airbnb</code>를 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npx install-peerdeps <span class="nt">--dev</span> eslint-config-airbnb
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>설치가 완료되면, package.json파일의 <code class="highlighter-rouge">eslintConfig</code> 부분에 “airbnb”를 추가한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="dl">"</span><span class="s2">eslintConfig</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">extends</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span> <span class="dl">"</span><span class="s2">react-app</span><span class="dl">"</span> <span class="p">,</span> <span class="dl">"</span><span class="s2">airbnb</span><span class="dl">"</span> <span class="p">]</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>여기까지 하고 App.js파일을 열어보면 airbnb rule이 적용되어 에러파티가… 😂</p>
+
+<p><img src="/images/eslint-error.png" alt="Eslint 에러" title="Eslint 에러" /></p>
+
+<p><br />
+위에서 뜬 오류는 아래 두 가지인데, 첫 번째는 사용하지 않을 것이므로 ESLint 설정으로 끌 수 있고,
+두 번째는 Prettier 설정으로 자동으로 수정할 수 있다.</p>
+
+<ol>
+  <li>JSX 코드는 .jsx 확장자로 사용</li>
+  <li>문자열은 single quote로 사용</li>
+</ol>
+
+<h3 id="eslint-rule-수정하기">ESLint rule 수정하기</h3>
+
+<p>JSX 코드는 .jsx 확장자로 사용해야 한다는 에러코드 뒷부분에 보면 rule 이름이 표시되어 있다.
+package.json파일의 <code class="highlighter-rouge">eslintConfig</code> 부분에서 이것을 사용하지 않겠다는 rule을 추가하면 해결된다.
+<code class="highlighter-rouge">0</code>은 사용하지 않겠다는 것이고, <code class="highlighter-rouge">1</code>은 사용하겠다는 것이니, <code class="highlighter-rouge">"react/jsx-filename-extension": 0</code>으로 설정한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="dl">"</span><span class="s2">eslintConfig</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">extends</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">react-app</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">airbnb</span><span class="dl">"</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">rules</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">react/jsx-filename-extension</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>추가적으로, App.test.js 파일을 저장해 보면, 아래와 같은 오류가 발생하는데,</p>
+
+<p><img src="/images/env-error.png" alt="Eslint env 에러" title="Eslint env 에러" /></p>
+
+<p><br />
+<code class="highlighter-rouge">env</code>에 <code class="highlighter-rouge">browser</code>와 <code class="highlighter-rouge">jest</code>를 추가해주면 된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="dl">"</span><span class="s2">eslintConfig</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">extends</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">react-app</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">airbnb</span><span class="dl">"</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">rules</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">react/jsx-filename-extension</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">env</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">jest</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">browser</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="prettier-설정하기">Prettier 설정하기</h3>
+
+<p>프로젝트의 루트 디렉토리에 <code class="highlighter-rouge">.prettierrc</code> 파일을 만들고, 사용하고자하는 옵션을 추가한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">singleQuote</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">//문자열은 single quote 사용</span>
+  <span class="dl">"</span><span class="s2">semi</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">//코드 뒤에 세미콜론(;) 사용</span>
+  <span class="dl">"</span><span class="s2">useTabs</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">//tap키 사용하지 않음</span>
+  <span class="dl">"</span><span class="s2">tabWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">//들여쓰기 2칸 사용</span>
+  <span class="dl">"</span><span class="s2">printWidth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">80</span> <span class="c1">//한 줄은 80칸이 넘지 않도록 함</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br />
+이제 다시 App.js 파일로 돌아가 저장하면 문자열의 double quote가 자동으로 single quote로 바뀌고,
+에러 메시지도 사라짐을 확인할 수 있다.</p>
+
+<h3 id="eslint-config-prettier-적용하기">eslint-config-prettier 적용하기</h3>
+
+<p><a href="https://github.com/prettier/eslint-config-prettier">eslint-config-prettier</a>는 prettier 옵션과 중복되어 필요하지 않은 eslint 규칙을 비활성화 한다. 이 패키지를 사용함으로써 style적인 부분은 prettier가 담당하고, eslint는 문법적인 부분을 담당하여 효율적으로 두가지 툴을 사용할 수 있다.</p>
+
+<p>사용을 위해서는 패키지를 설치하고,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn add eslint-config-prettier
+</code></pre></div></div>
+
+<p><br />
+package.json 파일에 적용한다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="dl">"</span><span class="s2">eslintConfig</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">extends</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">airbnb</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">prettier</span><span class="dl">"</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">rules</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">react/jsx-filename-extension</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">env</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">jest</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">browser</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>이제 깔끔한 코드 작성할 준비 완료 ! 😎</p>
+
+<p><br /></p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/react/ESLint%EC%99%80-Prettier-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0(VSCode)/',
+    'title': 'ESLint와 Prettier 설정하기(VSCode)'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

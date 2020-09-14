@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm" class="activated">
+        Algorithm
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+<div class="container">
+  <div class="post-lists">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%88%AB%EC%9E%90-%EC%95%BC%EA%B5%AC/">LEVEL2_프로그래머스_숫자 야구</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게 3자리의 숫자를 불러서 결과를 확인합니다. 그리고 그 결과를 토대로 상대가 정한 숫자를 예상한 뒤 맞힙니다.
+        </div>
+        <div class="date">
+          2019-09-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%83%80%EA%B2%9F-%EB%84%98%EB%B2%84/">LEVEL2_프로그래머스_타겟 넘버</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다.
+        </div>
+        <div class="date">
+          2019-09-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%EC%9C%84%EC%9E%A5/">LEVEL2_프로그래머스_위장</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다. 예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.
+        </div>
+        <div class="date">
+          2019-09-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%8B%A4%EB%A6%AC%EB%A5%BC-%EC%A7%80%EB%82%98%EB%8A%94-%ED%8A%B8%EB%9F%AD/">LEVEL2_프로그래머스_다리를 지나는 트럭</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다.
+        </div>
+        <div class="date">
+          2019-09-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL4_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%84%A0%EC%9E%85-%EC%84%A0%EC%B6%9C-%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/">LEVEL4_프로그래머스_선입 선출 스케줄링</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          처리해야 할 동일한 작업이 n 개가 있고, 이를 처리하기 위한 CPU가 있습니다.
+        </div>
+        <div class="date">
+          2019-09-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL3_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%95%BC%EA%B7%BC-%EC%A7%80%EC%88%98/">LEVEL3_프로그래머스_야근 지수</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          회사원 Demi는 가끔은 야근을 하는데요, 야근을 하면 야근 피로도가 쌓입니다. 야근 피로도는 야근을 시작한 시점에서 남은 일의 작업량을 제곱하여 더한 값입니다.
+        </div>
+        <div class="date">
+          2019-09-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%8B%A4%EC%9D%8C-%ED%81%B0-%EC%88%AB%EC%9E%90/">LEVEL2_프로그래머스_다음 큰 숫자</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          자연수 n이 주어졌을 때, n의 다음 큰 숫자는 다음과 같이 정의 합니다.
+        </div>
+        <div class="date">
+          2019-09-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_JadenCase-%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0/">LEVEL2_프로그래머스_JadenCase 문자열 만들기</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          JadenCase란 모든 단어의 첫 문자가 대문자이고, 그 외의 알파벳은 소문자인 문자열입니다. 문자열 s가 주어졌을 때, s를 JadenCase로 바꾼 문자열을 리턴하는 함수, solution을 완성해주세요.
+        </div>
+        <div class="date">
+          2019-09-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98-%EC%88%98/">LEVEL2_프로그래머스_피보나치 수</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          피보나치 수는 F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 가 적용되는 수 입니다.
+        </div>
+        <div class="date">
+          2019-09-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/lruCache/">lruCache</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Design and implement an LRU, or Least Recently Used, cache.
+        </div>
+        <div class="date">
+          2019-09-10
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/allAnagrams/">allAnagrams</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Create a hash table with insert(), retrieve(), and remove() methods. Be sure to handle hashing collisions correctly.
+        </div>
+        <div class="date">
+          2019-09-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/linkedListCycles/">linkedListCycles</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Create a hash table with insert(), retrieve(), and remove() methods. Be sure to handle hashing collisions correctly.
+        </div>
+        <div class="date">
+          2019-09-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/hashTableResizing/">hashTableResizing</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Create a hash table with insert(), retrieve(), and remove() methods. Be sure to handle hashing collisions correctly.
+        </div>
+        <div class="date">
+          2019-09-06
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/eventingLibrary/">eventingLibrary</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation,
+        </div>
+        <div class="date">
+          2019-09-05
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/coinSums/">coinSums</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation,
+        </div>
+        <div class="date">
+          2019-09-04
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/telephoneWords/">telephoneWords</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Extend the Number prototype with a new method called `toEnglish`.
+        </div>
+        <div class="date">
+          2019-09-03
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/numberToEnglish/">numberToEnglish</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Extend the Number prototype with a new method called `toEnglish`.
+        </div>
+        <div class="date">
+          2019-09-02
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeMap/">treeMap</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Implement a 'map' method on this Tree class. Map accepts a mapping function as its only argument.
+        </div>
+        <div class="date">
+          2019-08-29
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/sumArray/">sumArray</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Given an array of numbers, calculate the greatest contiguous(not be off) sum of elements in array. A single array item will count as a contiguous sum.
+        </div>
+        <div class="date">
+          2019-08-28
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/characterFrequency/">characterFrequency</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function that takes as its input a string and returns an array of arrays as shown below sorted in descending order by frequency and then by ascending order by character.
+        </div>
+        <div class="date">
+          2019-08-27
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/insertionSort/">insertionSort</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Insertion sort is a basic sorting algorithm. Insertion sort iterates over an array, growing a sorted array behind the current location. It takes each element from the input and finds the spot, up to the current point, where that element belongs.
+        </div>
+        <div class="date">
+          2019-08-26
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/primeTester/">primeTester</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          A prime number is a whole number that has no other divisors other than itself and 1. Write a function that accepts a number and returns true if it's a prime number, false if it's not.
+        </div>
+        <div class="date">
+          2019-08-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/evenOccurrence/">evenOccurrence</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Find the first item that occurs an even number of times in an array. Remember to handle multiple even-occurrence items and return the first one. Return null if there are no even-occurrence items.
+        </div>
+        <div class="date">
+          2019-08-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeCountLeaves/">treeCountLeaves</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Implement the `countLeaves` function in this Tree class. A leaf node is any node in the tree that has no children. `countLeaves` should traverse the tree, and return the number of leaf nodes the tree contains.
+        </div>
+        <div class="date">
+          2019-08-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/robotPaths/">robotPaths</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          A robot located at the top left corner of a 5x5 grid is trying to reach the bottom right corner. The robot can move either up, down, left, or right, but cannot visit the same spot twice.
+        </div>
+        <div class="date">
+          2019-08-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/queueStack/">queueStack</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a stack using your preferred instantiation pattern. Avoid using native array methods i.e., push, pop, and length.
+        </div>
+        <div class="date">
+          2019-08-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/linkedList/">linkedList</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Implement a linked list using the pseudoclassical instantiation pattern. Your linked list should have methods called "addToTail", "removeHead", and "contains."
+        </div>
+        <div class="date">
+          2019-08-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/romanNumeralTranslator/">romanNumeralTranslator</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Given an array containing a deck of cards, implement a function that shuffles the deck.
+        </div>
+        <div class="date">
+          2019-08-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/shuffleDeck/">shuffleDeck</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Given an array containing a deck of cards, implement a function that shuffles the deck.
+        </div>
+        <div class="date">
+          2019-08-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/rotateMatrix/">rotateMatrix</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function that rotates a NxN matrix 90 degrees. A matrix, also called a 2-D array, is simply an array of arrays of values.
+        </div>
+        <div class="date">
+          2019-08-14
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/fractionConverter/">fractionConverter</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function that takes a number as its argument and returns a string that represents that number's simplified fraction.
+        </div>
+        <div class="date">
+          2019-08-13
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/mergeSort/">mergeSort</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Mergesort uses a divide-and-conquer strategy. It begins by treating the input list of length N as a set of N "sublists" of length 1, which are considered to be sorted. Adjacent sublists are then "merged" into sorted sublists of length 2, which are merged into sorted sublists of length 4, and so on, until only a single sorted list remains.
+        </div>
+        <div class="date">
+          2019-08-12
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/longestRun/">longestRun</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function that, given a string, Finds the longest run of identical characters and returns an array containing the start and end indices of that run. If there are two runs of equal length, return the first one.
+        </div>
+        <div class="date">
+          2019-08-11
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/asyncMap/">asyncMap</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Implement the function asyncMap. AsyncMap has two parameters, an array of asynchronous functions (tasks) and a callback.
+        </div>
+        <div class="date">
+          2019-08-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL3_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_-%EB%B2%A0%EC%8A%A4%ED%8A%B8%EC%95%A8%EB%B2%94/">LEVEL3_프로그래머스_베스트앨범</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          스트리밍 사이트에서 장르 별로 가장 많이 재생된 노래를 두 개씩 모아 베스트 앨범을 출시하려 합니다. 노래는 고유 번호로 구분하며, 노래를 수록하는 기준은 다음과 같습니다.
+        </div>
+        <div class="date">
+          2019-08-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/balancedParens/">balancedParens</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function that takes a string of text and returns true if the parentheses are balanced and false otherwise.
+        </div>
+        <div class="date">
+          2019-08-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%98%81%EC%96%B4-%EB%81%9D%EB%A7%90%EC%9E%87%EA%B8%B0/">LEVEL2_프로그래머스_영어 끝말잇기</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          1부터 n까지 번호가 붙어있는 n명의 사람이 영어 끝말잇기를 하고 있습니다.
+        </div>
+        <div class="date">
+          2019-08-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/binarySearchArray/">binarySearchArray</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Given a sorted array, find the index of an element using a binary search algorithm.
+        </div>
+        <div class="date">
+          2019-08-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/composePipe/">composePipe</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write Compose and Pipe functions. Compose should return a function that is the composition of a list of functions of arbitrary length. Each function is called on the return value of the function that follows.
+        </div>
+        <div class="date">
+          2019-08-06
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeBFSelect/">treeBFSelect</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Implement a `BFSelect` method on this Tree class. BFSelect accepts a filter function, calls that function on each of the nodes in Breadth First order, and returns a flat array of node values of the tree for which the filter returns true.
+        </div>
+        <div class="date">
+          2019-08-05
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_124-%EB%82%98%EB%9D%BC%EC%9D%98-%EC%88%AB%EC%9E%90/">LEVEL2_프로그래머스_124 나라의 숫자</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          124 나라가 있습니다. 124 나라에서는 10진법이 아닌 다음과 같은 자신들만의 규칙으로 수를 표현합니다.
+        </div>
+        <div class="date">
+          2019-08-05
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/powerSet/">powerSet</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Return an array with the power set of a given string. Definition of power set. The set of all possible subsets including the empty set.
+        </div>
+        <div class="date">
+          2019-07-26
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/rotatedArraySearch/">rotatedArraySearch</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Given a sorted array that has been rotated some number of items right or left, i.e. [0, 1, 2, 3, 4, 5, 6, 7] might become [4, 5, 6, 7, 0, 1, 2, 3]
+        </div>
+        <div class="date">
+          2019-07-25
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/deepEquality/">deepEquality</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function that, given two objects, returns whether or not the two are deeply equivalent
+        </div>
+        <div class="date">
+          2019-07-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%B9%B4%ED%8E%AB/">LEVEL2_프로그래머스_카펫</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 빨간색으로 칠해져 있고 모서리는 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.
+        </div>
+        <div class="date">
+          2019-07-24
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/treeDFSelect/">treeDFSelect</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Implement a DFSelect method on this Tree class.
+        </div>
+        <div class="date">
+          2019-07-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/largestProductOfThree/">largestProductOfThree</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function that finds the largest possible product of any three numbers from an array.
+        </div>
+        <div class="date">
+          2019-07-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/commonCharacters/">commonCharacters</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Write a function f(a, b) which takes two strings as arguments and returns a string containing the characters found in both strings (without duplication), in the order that they appeared in a.
+        </div>
+        <div class="date">
+          2019-07-23
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/bubbleSort/">bubbleSort</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Bubble sort is the most basic sorting algorithm in all of Computer Sciencedom.
+        </div>
+        <div class="date">
+          2019-07-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A3%BC%EC%8B%9D%EA%B0%80%EA%B2%A9/">LEVEL2_프로그래머스_주식가격</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.
+        </div>
+        <div class="date">
+          2019-07-22
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%AC%B8%EC%9E%90%EC%97%B4%EB%8C%80%EC%86%8C%EB%AC%B8%EC%9E%90/">프로그래머스_문자열대소문자</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          문자열 s는 한 개 이상의 단어로 구성되어 있습니다. 각 단어는 하나 이상의 공백문자로 구분되어 있습니다. 각 단어의 짝수번째 알파벳은 대문자로, 홀수번째 알파벳은 소문자로 바꾼 문자열을 리턴하는 함수, solution을 완성하세요.
+        </div>
+        <div class="date">
+          2019-07-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8/">프로그래머스_개인정보보호</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          프로그래머스 모바일은 개인정보 보호를 위해 고지서를 보낼 때 고객들의 전화번호의 일부를 가립니다. 전화번호가 문자열 phone_number로 주어졌을 때, 전화번호의 뒷 4자리를 제외한 나머지 숫자를 전부 *으로 가린 문자열을 리턴하는 함수, solution을 완성해주세요.
+        </div>
+        <div class="date">
+          2019-07-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/nthFibonacci/">nthFibonacci</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          A Fibonacci sequence is a list of numbers that begins with 0 and 1, and each subsequent number is the sum of the previous two.
+        </div>
+        <div class="date">
+          2019-07-21
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/isSubsetOf/">isSubsetOf</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Make an array method that can return whether or not a context array is a subset of an input array.
+        </div>
+        <div class="date">
+          2019-07-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%8D%94-%EB%A7%B5%EA%B2%8C/">LEVEL2_프로그래머스_더 맵게</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          매운 것을 좋아하는 Leo는 모든 음식의 스코빌 지수를 K 이상으로 만들고 싶습니다. 모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 Leo는 스코빌 지수가 가장 낮은 두 개의 음식을 아래와 같이 특별한 방법으로 섞어 새로운 음식을 만듭니다.
+        </div>
+        <div class="date">
+          2019-07-20
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/ToyProblem_02_nonrepeatedCharacter/">ToyProblem_02_nonrepeatedCharacter</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          Given an arbitrary input string, return the first nonrepeated character in the string.
+        </div>
+        <div class="date">
+          2019-07-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8-%EB%AA%A9%EB%A1%9D/">LEVEL2_프로그래머스_전화번호 목록</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          전화번호부에 적힌 전화번호 중, 한 번호가 다른 번호의 접두어인 경우가 있는지 확인하려 합니다.
+        </div>
+        <div class="date">
+          2019-07-19
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%83%91/">LEVEL2_프로그래머스_탑</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          수평 직선에 탑 N대를 세웠습니다. 모든 탑의 꼭대기에는 신호를 송/수신하는 장치를 설치했습니다. 발사한 신호는 신호를 보낸 탑보다 높은 탑에서만 수신합니다. 또한, 한 번 수신된 신호는 다른 탑으로 송신되지 않습니다.
+        </div>
+        <div class="date">
+          2019-07-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL1_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%99%EC%9D%80-%EC%88%AB%EC%9E%90%EB%8A%94-%EC%8B%AB%EC%96%B4/">LEVEL1_프로그래머스_같은 숫자는 싫어</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          배열 arr가 주어집니다. 배열 arr의 각 원소는 숫자 0부터 9까지로 이루어져 있습니다. 이때, 배열 arr에서 연속적으로 나타나는 숫자는 하나만 남기고 전부 제거하려고 합니다.
+        </div>
+        <div class="date">
+          2019-07-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC/">LEVEL2_프로그래머스_문자열 내 p와 y의 개수</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          대문자와 소문자가 섞여있는 문자열 s가 주어집니다. s에 'p'의 개수와 'y'의 개수를 비교해 같으면 True, 다르면 False를 return 하는 solution를 완성하세요. 'p', 'y' 모두 하나도 없는 경우는 항상 True를 리턴합니다.
+        </div>
+        <div class="date">
+          2019-07-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_H-Index/">LEVEL2_프로그래머스_H-Index</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다.
+        </div>
+        <div class="date">
+          2019-07-17
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%9C%EC%9D%BC-%EC%9E%91%EC%9D%80-%EC%88%98-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0/">LEVEL1_프로그래머스_제일 작은 수 제거하기</a>
+          <ul class="tag">
+            <li>
+              Python
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          정수를 저장한 배열, arr 에서 가장 작은 수를 제거한 배열을 리턴하는 함수, solution을 완성해주세요.
+        </div>
+        <div class="date">
+          2019-07-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%98%AC%EB%B0%94%EB%A5%B8-%EA%B4%84%ED%98%B8/">LEVEL2_프로그래머스_올바른 괄호</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          괄호가 바르게 짝지어졌다는 것은 '(' 문자로 열렸으면 반드시 짝지어서 ')' 문자로 닫혀야 한다는 뜻입니다.
+        </div>
+        <div class="date">
+          2019-07-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%ED%94%84%EB%A6%B0%ED%84%B0/">LEVEL2_프로그래머스_프린터</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다.
+        </div>
+        <div class="date">
+          2019-07-14
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL2_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%8A%A4%ED%82%AC%ED%8A%B8%EB%A6%AC/">LEVEL2_프로그래머스_스킬트리</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다. 예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
+        </div>
+        <div class="date">
+          2019-07-13
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL1_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_K%EB%B2%88%EC%A7%B8%EC%88%98/">LEVEL1_프로그래머스_K번째수</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다. 예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면
+        </div>
+        <div class="date">
+          2019-07-12
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/algorithm/LEVEL1_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%9C-%EC%84%A0%EC%88%98/">LEVEL1_프로그래머스_완주하지 못한 선수</a>
+          <ul class="tag">
+            <li>
+              Javascript
+            </li>
+          </ul>
+        </div>
+        <div class="listEntry">
+          수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다. 마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.
+        </div>
+        <div class="date">
+          2019-07-11
+        </div>
+      </div>
+    </ul>
+    
+  </div>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/algorithm/',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

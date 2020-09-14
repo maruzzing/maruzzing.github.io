@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>Toast 만들어 보기</h1>
+    <div class="date">Written on October  2, 2019</div>
+    <div class="entry">
+      <p>모바일에서 사용자에게 어떤 정보를 알려주기 위해 화면위에 잠깐 나타났다가 사라지는 것을 Toast라고 한다. 마치 토스트에서 식빵이 튀어오르는 것처럼 🍞.. Alert 대신 Toast를 써보려고 라이브러리를 설치해 봤는데 Modal 위에 Toast를 띄우려니 자꾸 Toast가 Modal 밑으로 숨어버려 그냥 만들어 보기로 했다.</p>
+
+<p>React Native의 <code class="highlighter-rouge">Modal</code> API 와 <code class="highlighter-rouge">setTimeout()</code>을 사용해 간단하게 구현할 수 있다.
+React Hooks를 사용해 <code class="highlighter-rouge">Toast</code> 컴포넌트에 전달해줄 boolean 형태의 <code class="highlighter-rouge">visible</code>과 <code class="highlighter-rouge">handlePress()</code>를 만들고, visible 상태를 변경할 trigger 버튼을 만든다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Toast</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Toast</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">visible</span><span class="p">,</span> <span class="nx">setVisible</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">handlePress</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setVisible</span><span class="p">(</span><span class="o">!</span><span class="nx">visible</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">SafeAreaView</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Toast</span> <span class="na">handlePress=</span><span class="si">{</span><span class="nx">handlePress</span><span class="si">}</span> <span class="na">visible=</span><span class="si">{</span><span class="nx">visible</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">TouchableOpacity</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="si">}</span> <span class="na">onPress=</span><span class="si">{</span><span class="nx">handlePress</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="p">&gt;</span>Want some toast?<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">TouchableOpacity</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">SafeAreaView</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>이제 Toast.js 파일에 <code class="highlighter-rouge">Modal</code>을 이용해 <code class="highlighter-rouge">Toast</code>를 만든다.<code class="highlighter-rouge">Modal</code>의 <code class="highlighter-rouge">onShow</code> 함수를 사용해
+모달이 실행되는 시점에 일정 시간 뒤 모달을 다시 닫아주는 함수를 실행하는 <code class="highlighter-rouge">setTimeout</code> 함수를 실행한다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Modal</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Toast</span> <span class="o">=</span> <span class="p">({</span><span class="nx">visible</span><span class="p">,</span> <span class="nx">handlePress</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Modal</span>
+      <span class="na">animationType=</span><span class="s2">"fade"</span>
+      <span class="na">transparent=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span>
+      <span class="na">visible=</span><span class="si">{</span><span class="nx">visible</span><span class="si">}</span>
+      <span class="na">onShow=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span>
+        <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">handlePress</span><span class="p">();</span>
+        <span class="p">},</span> <span class="mi">2000</span><span class="p">)</span>
+      <span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modal</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="p">&gt;</span>2초 뒤에 사라지는 토스트<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Modal</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">modal</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">opacity</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">80%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">44</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">black</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">text</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Toast</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>시연해 보면,</p>
+
+<div class="simulContainer">
+<img src="/images/toast-gif.gif" alt="toast-gif" width="250em" />
+</div>
+
+<p>위치와 시간, 색상 등을 커스터마이징 해서 유용하게 쓸 수 있을 것 같다.</p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/Toast-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B3%B4%EA%B8%B0/',
+    'title': 'Toast 만들어 보기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

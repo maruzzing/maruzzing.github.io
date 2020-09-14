@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+       
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>2019년 6월 1일 ~ 5일</h1>
+    <div class="date">Written on June  1, 2019</div>
+    <div class="entry">
+      <h2 id="-2019년-6월-1일">📅 2019년 6월 1일</h2>
+
+<p>웹에서는 token을 받으면 local storage에 저장하는 것처럼, 모바일 에서는 <strong>AsyncStorage</strong>를 쓸 수 있다.</p>
+
+<p>리액트 네이티브에서 import 해올 수 있는 AsyncStorage는 deprecated되었고, 이제 <a href="https://github.com/react-native-community/async-storage">react-native-community/react-native-async-storage</a>를 써야한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-native-community/async-storage</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>local storage처럼 <code class="highlighter-rouge">setItem</code>, <code class="highlighter-rouge">getItem</code> 등을 사용할 수 있는데, <strong>각 API는 Promise를 반환한다.</strong></p>
+
+<p><code class="highlighter-rouge">key</code>, <code class="highlighter-rouge">value</code> 페어로 저장이 되며, <code class="highlighter-rouge">key</code>와 <code class="highlighter-rouge">value</code>는 <code class="highlighter-rouge">string</code> 형태여야 한다.</p>
+
+<h2 id="-2019년-6월-2일">📅 2019년 6월 2일</h2>
+
+<h3 id="axios">axios</h3>
+
+<p>axios는 <strong>HTTP 통신을 할 수 있는 자바스크립트 라이브러리</strong>로, 브라우저와 node.js 플랫폼에서 모두 사용할 수 있다.
+Promise를 기반으로 async/await 문법을 사용, XHR request를 쉽게 할 수 있다. 무엇보다 JSON 데이터를 자동변환 해주기 때문에 개꿀 🍯</p>
+
+<h3 id="정규표현식">정규표현식</h3>
+
+<p>정규표현식(正規表現式, Regular Expression)은 문자열을 처리하는 방법 중의 하나로 특정한 조건의 문자를 ‘검색’하거나 ‘치환’하는 과정을 매우 간편하게 처리할 수 있도록 하는 수단이다.</p>
+
+<p><strong>이메일주소 확인, 비밀번호 규칙</strong> 등에 활용될 수 있으며,</p>
+
+<p>아래와 같이 쓸 수 있다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">emailPattern</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">([\w</span><span class="sr">-</span><span class="se">]</span><span class="sr">+</span><span class="se">(?:\.[\w</span><span class="sr">-</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">*</span><span class="se">)</span><span class="sr">@</span><span class="se">((?:[\w</span><span class="sr">-</span><span class="se">]</span><span class="sr">+</span><span class="se">\.)</span><span class="sr">*</span><span class="se">\w[\w</span><span class="sr">-</span><span class="se">]{0,66})\.([</span><span class="sr">a-z</span><span class="se">]{2,6}(?:\.[</span><span class="sr">a-z</span><span class="se">]{2})?)</span><span class="sr">$/</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">emailIsValid</span> <span class="o">=</span> <span class="nx">emailPattern</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span> <span class="err">#</span> <span class="nx">boolean</span>
+</code></pre></div></div>
+
+<h2 id="-2019년-6월-5일">📅 2019년 6월 5일</h2>
+
+<h3 id="react-native-webview">React Native WebView</h3>
+
+<p>google social 로그인 시 계정연결을 위해 <strong>Webview</strong> 를 씀</p>
+
+<ul>
+  <li>userAgent를 설정해 주어야 함</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SafeAreaView</span><span class="p">,</span> <span class="nx">Platform</span><span class="p">,</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">WebView</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">userAgent</span> <span class="o">=</span>
+  <span class="dl">"</span><span class="s2">Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/ 604.1.21 (KHTML, like Gecko) Version/ 12.0 Mobile/17A6278a Safari/602.1.26</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">!==</span> <span class="dl">"</span><span class="s2">ios</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">userAgent</span> <span class="o">=</span>
+    <span class="dl">"</span><span class="s2">Mozilla/5.0 (Linux; Android 8.0.0; TA-1053 Build/OPR1.170623.026) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3368.0 Mobile Safari/537.36</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">MyInlineWeb</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">WebView</span>
+          <span class="nx">userAgent</span><span class="o">=</span><span class="p">{</span><span class="nx">userAgent</span><span class="p">}</span>
+          <span class="nx">originWhitelist</span><span class="o">=</span><span class="p">{[</span><span class="dl">"</span><span class="s2">*</span><span class="dl">"</span><span class="p">]}</span>
+          <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span>
+        <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>뿐만아니라, xcode의 AppDelegate.m에도 아래 내용을 추가해 주어야 함</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">NSString</span> <span class="o">*</span><span class="nx">userAgent</span> <span class="o">=</span> <span class="p">@</span><span class="dl">"</span><span class="s2">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">NSDictionary</span> <span class="o">*</span><span class="nx">dictionary</span> <span class="o">=</span> <span class="p">[[</span><span class="nx">NSDictionary</span> <span class="nx">alloc</span><span class="p">]</span> <span class="nx">initWithObjectsAndKeys</span><span class="p">:</span><span class="nx">userAgent</span><span class="p">,</span> <span class="p">@</span><span class="dl">"</span><span class="s2">UserAgent</span><span class="dl">"</span><span class="p">,</span> <span class="nx">nil</span><span class="p">];</span>
+<span class="p">[[</span><span class="nx">NSUserDefaults</span> <span class="nx">standardUserDefaults</span><span class="p">]</span> <span class="nx">registerDefaults</span><span class="p">:</span><span class="nx">dictionary</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<hr />
+
+<p><span class="reference">참고자료</span></p>
+
+<ul>
+  <li><a href="https://facebook.github.io/react-native/docs/asyncstorage.html">React Native AsyncStorage</a></li>
+  <li><a href="https://flaviocopes.com/axios/">HTTP requests using Axios</a></li>
+  <li><a href="https://gocoding.tistory.com/93">자주 쓰이는 정규식</a></li>
+</ul>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/til/2019%EB%85%84-6%EC%9B%94-1%EC%9D%BC-~-5%EC%9D%BC/',
+    'title': '2019년 6월 1일 ~ 5일'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

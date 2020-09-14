@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react" class="activated">
+        React
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>리액트를 쓰기위해 알아야할 개념</h1>
+    <div class="date">Written on April 16, 2019</div>
+    <div class="entry">
+      <h2 id="element">Element</h2>
+
+<blockquote>
+  <p>요소는 React 앱의 가장 작은 구성 블록입니다.</p>
+
+  <p>Elements are the smallest building blocks of React apps.</p>
+</blockquote>
+
+<p>리액트 공식문서는 리액트에서의 요소(element)를 위와 같이 정의하고 있다. <code class="highlighter-rouge">element</code>를 <code class="highlighter-rouge">component</code>와 혼동해선 안된다!</p>
+
+<p>요소를 <code class="highlighter-rouge">root</code>라는 DOM에 렌더링 하고 싶다면 아래와 같이 <code class="highlighter-rouge">ReactDOM.render()</code>코드를 작성하면 된다. 이렇게 하면 앱 상에 “Hello, world”가 표시된다.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*A4MBTOERR81Ih_Ja6nVs3g.png" alt="element" title="element" /></p>
+
+<p>리액트는 변화가 생긴 DOM 부분을 새로운 것으로 갈아치우는 것이다. <strong>따라서, 요소(element)는 특정한 시간대의 UI를 보여줄 뿐, ‘수정’할 수 없다.</strong></p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*05o9ni1K2Is0R999gji3sg.png" alt="ex_element" title="ex_element" /></p>
+
+<p>위의 시계 예제에서, <code class="highlighter-rouge">setInterval()</code>을 통해 1초에 한 번 전체 UI 트리를 생성하는 <code class="highlighter-rouge">tick()</code>함수를 실행하지만, <strong>실제로 변경되는 시간 부분만 DOM에 업데이트 된다.</strong></p>
+
+<h2 id="component">Component</h2>
+
+<p>컴포넌트는 리액트를 구성하는, 재사용이 가능한 UI 조각이다.</p>
+
+<blockquote>
+  <p>개념적으로 컴포넌트는 자바스크립트의 함수와 비슷하다. props라고 부르는 임의의 입력을 받아, 앱상에 어떤것이 표시되어야 할 지 설명하는 React 요소를 반환한다.</p>
+
+  <p>Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.</p>
+</blockquote>
+
+<p>컴포넌트는 함수 혹은 클래스로 생성할 수 있다. 아래의 두 코드는 React의 입장에선 동일한 코드라고 할 수 있다. 컴포넌트 명은 항상 대문자로 표기해야 하며, <code class="highlighter-rouge">&lt;Welcome /&gt;</code>은 컴포넌트를 나타낸다. 즉, 스코프 내에 Welcome 요소가 존재해야 한다.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*N5KG0TCFWBHDqgrCWi_4lw.png" alt="ex_component" title="ex_component" /></p>
+
+<p>컴포넌트의 랜더링은 컴포넌트를 나타내는 요소가 props라는 객체로 전달되어 진행된다.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*xOHVNawyJTnZ4_h24MXOnw.png" alt="ex_props" title="ex_props" /></p>
+
+<p>리액트의 장점을 살리면서 잘 사용하기 위해서는 컴포넌트를 재사용한 작은 단위로 최대한 쪼개는 훈련을 해야한다. ✂️</p>
+
+<h2 id="props">props</h2>
+
+<p>prop은 부모 컴포넌트가 자식 컴포넌트에게 주는 값이며, 자식 컴포넌트는 <strong>prop을 받기만 하고 수정할 수 는 없다(read-only).</strong> props는 컴포넌트를 정의할때 설정하는 것이 아니라, 사용할 때 설정하는 값이다.</p>
+
+<h2 id="state">state</h2>
+
+<p>props와는 다르게 state는 객체의 형태로 컴포넌트 내부에서 선언/관리되며, <strong>동적인 데이터를 다룰때</strong> 쓰인다. 로컬 state는 클래스로 생성한 컴포넌트에서만 사용 가능하다.</p>
+
+<h2 id="plus">plus,</h2>
+
+<p><strong>React Developer Tools</strong>를 사용하면, 개발자 도구에서 코드의 DOM 구조와props, state를 바로 확인하고 업데이트할 수 있다. 💃</p>
+
+<p><br /></p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/react/%EB%A6%AC%EC%95%A1%ED%8A%B8%EB%A5%BC-%EC%93%B0%EA%B8%B0%EC%9C%84%ED%95%B4-%EC%95%8C%EC%95%84%EC%95%BC%ED%95%A0-%EA%B0%9C%EB%85%90/',
+    'title': '리액트를 쓰기위해 알아야할 개념'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

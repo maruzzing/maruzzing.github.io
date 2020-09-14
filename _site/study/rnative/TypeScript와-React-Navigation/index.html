@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>TypeScript와 React Navigation</h1>
+    <div class="date">Written on October  4, 2019</div>
+    <div class="entry">
+      <p>리액트 네이티브 프로젝트에 타입스크립트를 적용해 보기로 했는데 처음으로 맞닥뜨린 문제가 React Navigation의 screen props는 어떻게 타입으로 정의하고, 전달할지 였다. 이 문제의 해결법을 가장 기본적인 사용자 인증 플로우로 정리해 보았다.</p>
+
+<h2 id="navigationtsx">navigation.tsx</h2>
+
+<p>먼저, AuthLoadingScreen에서 asyncStorage에 토큰이 있는지 확인하고, 있으면 HomeScreen으로, 없으면 SignInScreen으로 라우팅 해주는 SwitchNavigator를 AppContainer로 작성해 보자.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">createAppContainer</span><span class="p">,</span> <span class="nx">createSwitchNavigator</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-navigation</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">SignInScreen</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./components/auth/SignInScreen</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AuthLoadingScreen</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./components/auth/AuthLoadingScreen</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">HomeScreen</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./components/home/HomeScreen</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">AuthSwitch</span> <span class="o">=</span> <span class="nx">createSwitchNavigator</span><span class="p">(</span>
+  <span class="p">{</span>
+    <span class="na">AuthLoading</span><span class="p">:</span> <span class="nx">AuthLoadingScreen</span><span class="p">,</span>
+    <span class="na">App</span><span class="p">:</span> <span class="nx">HomeScreen</span><span class="p">,</span>
+    <span class="na">Auth</span><span class="p">:</span> <span class="nx">SignInScreen</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">initialRouteName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">AuthLoading</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+<span class="kd">const</span> <span class="nx">AppContainer</span> <span class="o">=</span> <span class="nx">createAppContainer</span><span class="p">(</span><span class="nx">AuthSwitch</span><span class="p">);</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">AppContainer</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="authloadingscreentsx">AuthLoadingScreen.tsx</h2>
+
+<p>App.tsx에서 AppContainer를 렌더링 해주면 AuthLoadingScreen이 화면에 표시될 것이다. 이제 AuthLoadingScreen을 작성해 보려고 하는데, 다양한 방법으로 가능하다.</p>
+
+<h3 id="react-navigation-hooks와-react의-usecontext-사용하기"><a href="https://github.com/react-navigation/hooks">React Navigation Hooks</a>와 react의 <code class="highlighter-rouge">useContext</code> 사용하기</h3>
+
+<p><code class="highlighter-rouge">React.useContext(NavigationContext)</code>를 사용해서 navigation props를 받아올 수 있다.
+콘솔에 찍어보면, 아래와 같이 screen props가 잘 받아져 온 것을 확인할 수 있다.</p>
+
+<p><img src="/images/navigation.png" alt="navigation" title="navigation" /></p>
+
+<p>이를 <strong>함수형 컴포넌트</strong>로 활용 해 보면,</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SafeAreaView</span><span class="p">,</span> <span class="nx">ActivityIndicator</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-native-community/async-storage</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavigationContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-navigation</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">AuthLoadingScreen</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">navigation</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useContext</span><span class="p">(</span><span class="nx">NavigationContext</span><span class="p">);</span>
+  <span class="nx">React</span><span class="p">.</span><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">_checkAsyncToken</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  <span class="kd">const</span> <span class="nx">_checkAsyncToken</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">userToken</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">userToken</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">navigation</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="nx">userToken</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">App</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Auth</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">SafeAreaView</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">ActivityIndicator</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/SafeAreaView</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">AuthLoadingScreen</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="navigationinjectedprops-사용하기">NavigationInjectedProps 사용하기</h3>
+
+<p>React Navigation의 <code class="highlighter-rouge">NavigationInjectedProps</code>도 사용할 수 있다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SafeAreaView</span><span class="p">,</span> <span class="nx">ActivityIndicator</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-native-community/async-storage</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavigationInjectedProps</span><span class="p">,</span> <span class="nx">withNavigation</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-navigation</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">AuthLoadingScreen</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">NavigationInjectedProps</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">componentDidMount</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_checkAsyncToken</span><span class="p">();</span>
+  <span class="p">};</span>
+  <span class="nx">_checkAsyncToken</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">userToken</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">userToken</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="nx">userToken</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">App</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Auth</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">SafeAreaView</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">ActivityIndicator</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/SafeAreaView</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">withNavigation</span><span class="p">(</span><span class="nx">AuthLoadingScreen</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="params-타입화-하기">Params 타입화 하기</h3>
+
+<p>혹은 타입화된 Params 사용을 위해 <code class="highlighter-rouge">Navigation</code> 타입을 정의해서 사용하는 방법도 있다. 이때 React Navigation의 <code class="highlighter-rouge">NavigationScreenProp</code>과 <code class="highlighter-rouge">NavigationState</code> 는 타입정의에 쓸 수 있다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SafeAreaView</span><span class="p">,</span> <span class="nx">ActivityIndicator</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-native-community/async-storage</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavigationScreenProp</span><span class="p">,</span> <span class="nx">NavigationState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-navigation</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">NavigationParams</span> <span class="p">{</span>
+  <span class="nl">text</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">type</span> <span class="nx">Navigation</span> <span class="o">=</span> <span class="nx">NavigationScreenProp</span><span class="o">&lt;</span><span class="nx">NavigationState</span><span class="p">,</span> <span class="nx">NavigationParams</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">Props</span> <span class="p">{</span>
+  <span class="nl">navigation</span><span class="p">:</span> <span class="nx">Navigation</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nx">AuthLoadingScreen</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">Props</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">componentDidMount</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_checkAsyncToken</span><span class="p">();</span>
+  <span class="p">};</span>
+  <span class="nx">_checkAsyncToken</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">userToken</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">userToken</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="nx">userToken</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">App</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Auth</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">SafeAreaView</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">ActivityIndicator</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/SafeAreaView</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">AuthLoadingScreen</span><span class="p">;</span>
+</code></pre></div></div>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/TypeScript%EC%99%80-React-Navigation/',
+    'title': 'TypeScript와 React Navigation'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

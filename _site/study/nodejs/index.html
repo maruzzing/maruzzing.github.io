@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs" class="activated">
+        Node.js
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative">React Native</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+<div class="container">
+  <div class="post-lists">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+ 
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/node.js%EB%A1%9C-%EB%A9%94%EC%9D%BC%EB%B3%B4%EB%82%B4%EA%B8%B0/">node.js로 메일보내기(feat. nodemailer)</a>
+        </div>
+        <div class="listEntry">
+          요즘 많은 앱서비스들이 비밀번호 찾기, 가입 인증 등을 이메일 전송을 활용하여 진행한다. 그래서 진행하는 프로젝트에서 이메일로 임시 비밀번호를 발송하는 걸 시도해 보았다.
+        </div>
+        <div class="date">
+          2019-09-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/node.js%EC%97%90%EC%84%9C-python-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/">node.js에서 python 사용하기(feat. python-shell)</a>
+        </div>
+        <div class="listEntry">
+          현재 진행중인 프로젝트에서 통계를 구현할 일이 있어 python을 사용해 보았다. 복잡한 수식은 아니지만, 경험해보는 취지로! 🤩
+        </div>
+        <div class="date">
+          2019-09-16
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/sequelize-associate%EC%99%80-include-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/">sequelize associate와 include 사용하기</a>
+        </div>
+        <div class="listEntry">
+          관계형 DB를 사용하면서 서로 관계가 있는 테이블의 데이터를 함께 호출하고 싶은 경우가 있다. 이 때 손쉽게 사용할 수 있는 것이 associate와 include 이다.
+        </div>
+        <div class="date">
+          2019-09-11
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/multer-s3%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-AWS-S3-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B8%B0/">multer-s3를 이용하여 AWS S3 이미지 업로드하기</a>
+        </div>
+        <div class="listEntry">
+          이전 'multer 사용하여 이미지 업로드 구현하기' 포스팅 에서는 multer 모듈을 사용하여 클라이언트 쪽에서 보내온 이미지 파일을 서버의 특정 폴더 내에 저장하고, 그 저장 경로를 db에 저장하는 방법을 알아보았다.
+        </div>
+        <div class="date">
+          2019-08-26
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-4/">Passport와 JWT를 이용하여 Auth 구현하기[4]</a>
+        </div>
+        <div class="listEntry">
+          이전 포스팅에서 Express.js 환경에서 passport를 사용하여 자체회원 및 소셜회원의 회원가입과 로그인, 그리고 리액트 네이티브에서의 소셜로그인을 구현해 보았다. 이제 남은 것은 로그인 시 발급받은 토큰으로 로그인 상태를 유지하는 미들웨어를 구현하는 것이다.
+        </div>
+        <div class="date">
+          2019-08-15
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-2/">Passport와 JWT를 이용하여 Auth 구현하기[2]</a>
+        </div>
+        <div class="listEntry">
+          이전 포스팅에서는 passport를 사용하여 자체 회원가입과 로그인을 구현해 보았다. 이제 소셜 로그인을 구현해 보자!
+        </div>
+        <div class="date">
+          2019-08-09
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Passport%EC%99%80-JWT%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-Auth-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-1/">Passport와 JWT를 이용하여 Auth 구현하기[1]</a>
+        </div>
+        <div class="listEntry">
+          요즘은 대부분의 서비스가 자체 사이트 회원가입과 로그인 뿐만 아니라 구글, 페이스북 등 기존 유저가 가지고 있던 어카운트를 활용하여 로그인 하는 소셜로그인 서비스를 제공한다.
+        </div>
+        <div class="date">
+          2019-08-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/Sequelize%EC%99%80-MySQL-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0/">2019-7-18-Sequelize와 MySQL 연결하기</a>
+        </div>
+        <div class="listEntry">
+          Sequelize는 MySQL의 복잡한 문법을 간단하게 자바스크립트 형식으로 사용할 수 있도록 해주는 라이브러리이다.
+        </div>
+        <div class="date">
+          2019-07-18
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/%EC%9D%B5%EC%8A%A4%ED%94%84%EB%A0%88%EC%8A%A4(Express.js)/">익스프레스(Express.js) 미들웨어 만들기</a>
+        </div>
+        <div class="listEntry">
+          Express.js에서는 미들웨어 패키지를 설치하여 사용할 뿐만 아니라, 각 프로젝트에서 필요한 미들웨어를 생성하여 사용할 수도 있다.
+        </div>
+        <div class="date">
+          2019-07-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/multer-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/">multer 사용하여 이미지 업로드 구현하기</a>
+        </div>
+        <div class="listEntry">
+          이미지 업로드는 보통 multipart/form-data 타입으로 전송되는데, express는 이 타입의 data를 직접 처리하는 기능을 제공하지 않기 때문에 multipart 처리용 모듈을 사용해야 한다. 대표적인 것이 Multer이다.
+        </div>
+        <div class="date">
+          2019-07-08
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/%EC%9D%B5%EC%8A%A4%ED%94%84%EB%A0%88%EC%8A%A4(Express.js)%EC%9D%98-%EA%B0%9C%EB%85%90/">익스프레스(Express.js)의 개념</a>
+        </div>
+        <div class="listEntry">
+          스프레스(Express.js)는 노드(NodeJS) 상에서 동작하는 웹 개발 프레임워크이다. 익스프레스의 핵심이라고 할 수 있는 미들웨어(Middleware) 덕에 가볍고 유연하게 웹을 구성할 수 있다.
+        </div>
+        <div class="date">
+          2019-07-07
+        </div>
+      </div>
+    </ul>
+    
+    <ul class="post-list">
+      <div class="aListBox">
+        <div class="listTitle">
+          <a href="/study/nodejs/module.exports-vs-exports/">module.exports vs exports</a>
+        </div>
+        <div class="listEntry">
+          Node.js를 사용하다 보면 module의 사용은 필수적이다. 모듈 단위로 파일이 작성되고 독자적인 scope가 생성되기 때문에 A 모듈에서 B 모듈을 사용하려면 보내고 받는 작용이 필요하다. Node.js는 CommonJS를 따르기 때문에 exports 객체를 이용하여 모듈을 정의하고, require 함수를 이용하여 사용한다.
+        </div>
+        <div class="date">
+          2019-04-24
+        </div>
+      </div>
+    </ul>
+    
+  </div>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/nodejs/',
+    'title': ''
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>

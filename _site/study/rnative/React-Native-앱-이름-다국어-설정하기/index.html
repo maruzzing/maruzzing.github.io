@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maruzzing's devlog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.css"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="maruzzing's devlog - "
+      href="/feed.xml"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"
+            ><img src="/images/logo.png"
+          /></a>
+
+          <div class="site-info">
+            <p class="site-name">
+              <a href="/">maruzzing's devlog</a>
+            </p>
+          </div>
+          <nav>
+             
+            <span class="active">
+              <a href="/study">개발공부</a>
+            </span>
+             
+            <span class="">
+              <a href="/project">프로젝트</a>
+            </span>
+            
+            <img
+              src="/images/vertical_line.png"
+              class="vertical_line"
+            />
+            <a href="mailto:lidiach217@gmail.com">
+              <img
+                src="/images/email_icon.png"
+                class="email_icon"
+            /></a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      
+<div>
+  <div class="sidebars">
+  
+  <ul>
+    
+    <li class="sidebar">
+      <a href="/study">개발공부</a>
+    </li>
+      
+    <li class="sidebar">
+      <a href="/study/computerscience">컴퓨터 공학</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/javascript">Javascript</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nodejs">Node.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/graphql">GraphQL</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/nextjs">Next.js</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/react">React</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/rnative" class="activated">
+        React Native
+      </a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/py">Python</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/algorithm">Algorithm</a>
+    </li>
+     
+    <li class="sidebar">
+      <a href="/study/etc">기타</a>
+    </li>
+    
+  </ul>
+</div>
+
+</div>
+ 
+<div class="container">
+  <article class="post">
+    <button onclick="topFunction()" id="myBtn" style="display:none">
+  <img
+    id="btn_img"
+    src="/images/back-to-top-icon-png-28.png"
+  />
+</button>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+    // if (
+    //   document.body.scrollBottom < 20 ||
+    //   document.documentElement.scrollBottom < 20
+    // ) {
+    //   mybutton.style.bottom = "160px";
+    // }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+    <h1>React Native 앱 이름 다국어 설정하기</h1>
+    <div class="date">Written on March  2, 2020</div>
+    <div class="entry">
+      <p>모바일 기기의 언어 설정에 따라 앱 아이콘 아래에 표시되는 앱 이름도 다국어로 설정할 수 있는데 안드로이드와 ios에서 이를 설정하는 방법을 알아보자.</p>
+
+<h2 id="ios">ios</h2>
+
+<p>1.xcode &gt; File &gt; New &gt; File에서 [InfoPlist.strings] 이름의 String File을 프로젝트 내 Base.lprj 폴더 내에 만든다.</p>
+
+<p><img src="/images/localize_appname_ios_1.png" alt="Localize Appname ios" title="Localize Appname ios" /></p>
+
+<p><img src="/images/localize_appname_ios_2.png" alt="Localize Appname ios" title="Localize Appname ios" /></p>
+
+<p>2.InfoPlist.strings(base)에 디폴트로 보여졌으면 하는 앱 이름을 입력하고, 타겟의 Display Name도 수정한다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"CFBundleDisplayName" = "Turtle Step";
+"CFBundleName" = "Turtle Step";
+</code></pre></div></div>
+
+<p><img src="/images/localize_appname_ios_6.png" alt="Localize Appname ios" title="Localize Appname ios" /></p>
+
+<p>3.프로젝트 단 Info 탭 Localization에 원하는 언어를 추가한다.</p>
+
+<p><img src="/images/localize_appname_ios_3.png" alt="Localize Appname ios" title="Localize Appname ios" /></p>
+
+<p><img src="/images/localize_appname_ios_4.png" alt="Localize Appname ios" title="Localize Appname ios" /></p>
+
+<p>4.3번에서 추가한 언어의 InfoPlist.strings 파일이 자동으로 생성되는데, 아래와 같이 언어별 Localization 파일을 설정한다.</p>
+
+<p><img src="/images/localize_appname_ios_5.png" alt="Localize Appname ios" title="Localize Appname ios" /></p>
+
+<p>👉 디바이스 언어를 변경하면 잘 적용되었는지 확인할 수 있다.</p>
+
+<p><img src="/images/localize_appname_ios_7.png" alt="Localize Appname ios" title="Localize Appname ios" /></p>
+
+<h2 id="android">android</h2>
+
+<p>1../android/app/src/main/res/values/strings.xml 파일에 기본으로 사용할 앱 이름을 입력한다.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// /values/strings.xml
+<span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">"app_name"</span><span class="nt">&gt;</span>Turtle Step<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/resources&gt;</span>
+</code></pre></div></div>
+
+<p>2../android/app/src/main/res/ 폴더 내에 [values-ko] 이름의 폴더를 만들고 strings.xml 파일을 생성한 후 한국어 환경에서 사용할 이름 입력하는데, 추가 언어는 <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">언어 코드</a>에 따라 생성한다.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// /values-ko/strings.xml
+
+<span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">"app_name"</span><span class="nt">&gt;</span>터틀스텝<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/resources&gt;</span>
+</code></pre></div></div>
+
+<p>👉 디바이스 언어를 변경하면 잘 적용되었는지 확인할 수 있다.</p>
+
+<p><img src="/images/localize_appname_aos_1.png" alt="Localize Appname aos" title="Localize Appname aos" /></p>
+
+    </div>
+    
+ 
+ 
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'maruzzing-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+</div>
+</li>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <span class="footer-name">© maruzzing, 2019</span>
+        </footer>
+      </div>
+    </div>
+    
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", "UA-142529094-1", "auto");
+  ga("send", "pageview", {
+    'page': '/study/rnative/React-Native-%EC%95%B1-%EC%9D%B4%EB%A6%84-%EB%8B%A4%EA%B5%AD%EC%96%B4-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0/',
+    'title': 'React Native 앱 이름 다국어 설정하기'
+  });
+</script>
+<!-- End Google Analytics -->
+
+
+  </body>
+</html>
