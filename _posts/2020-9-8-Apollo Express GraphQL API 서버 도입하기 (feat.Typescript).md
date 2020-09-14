@@ -15,9 +15,10 @@ excerpt: 여태 토이 프로젝트 이건, 회사 프로젝트 이건 Rest API 
 - Node.js + Express.js
 - Typescript
 - GraphQL
+- TypeGraphQL
 - Apollo Server
 - MySQL
-- Sequelize
+- TypeORM
 
 <br>
 먼저 이번 포스팅에서는 간단한 서버 구축을 해보려 한다.
@@ -121,11 +122,9 @@ app.listen(port, (): void =>
 
 ## Apollo Server 적용하기
 
-GraphQL의 쿼리가 가능한 타입 정의(typeDefs)와 쿼리를 요청했을 때 서버가 어떻게 처리할지를 정의한 리졸버(resolvers)를 정의하여 `ApolloServer` 생성자에 넘겨준다. 이후 포스팅에서 typeDefs와 resolvers를 정의하는 폴더를 분기할 예정이다.
+[apollo-server](https://github.com/apollographql/apollo-server#readme) 공식문서에 따르면 GraphQL의 쿼리가 가능한 타입 정의(typeDefs)와 쿼리를 요청했을 때 서버가 어떻게 처리할지를 정의한 리졸버(resolvers)를 정의하여 `ApolloServer` 생성자에 념겨주면 아폴로 서버가 생성된다. 
 
-생성한 `ApolloServer` 인스턴스에 `applyMiddleware` 메서드를 이용해 이전에 생성한 express 서버를 넘겨 준다. 이 때 cors 설정도 추가해 줄 수 있다.
-
-```javascript
+```typescript
 ...
 import { ApolloServer, gql } from 'apollo-server-express';
 ...
@@ -147,6 +146,59 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
 });
+...
+```
+
+이렇게 진행해도 되지만, 이렇게만 진행했을 때 `TepeScript`와 `GraphQL`을 사용하는 것이 생산성이 떨어지는 것 같았다. 그래서 도입하게 된 것이 [`TypeGraphQL`](https://typegraphql.com/)이다. `TypeGraphQL`은 GraphQL의 Query와 Mutation을 Class 형태로 작성할 수 있게 도와준다.
+
+### TypeGraphQL 도입하기
+
+`type-graphql`과 데코레이션 문법을 사용하기 위해 필요한 `reflect-metadata`를 설치해 주고,
+
+```bash
+$ npm i type-graphql reflect-metadata
+```
+
+`tsconfig.json` 파일의 `compilerOptions`에 아래 내용을 추가해 줍니다.
+
+```json
+{
+  "lib": [
+    "dom",
+    "es6",
+    "es2018",
+     "esnext.asynciterable"
+  ],
+  "experimentalDecorators": true,    
+  "emitDecoratorMetadata": true,          
+},
+```
+
+TypeGraphQL에서는 GraphQL schema를 두 가지 방법으로 생성할 수 있는데, [스키마를 빌드](https://typegraphql.com/docs/getting-started.html#building-schema)하는 형식과, [graphql-tools](https://github.com/ardatan/graphql-tools#readme)를 이용하여 [typeDefs와 Resolver map 쌍을 생성](https://typegraphql.com/docs/bootstrap.html)하는 방법이다. 여기서는 첫 번째 방법을 사용했다.
+
+`server.ts` 파일로 돌아와, 최상단에 `import 'reflect-metadata';`를 추가해 주고, 기본적인 리졸버를 작성해 아폴로 서버를 생성해 준다. 생성된 아폴로 서버에 `applyMiddleware`를 이용하여 기존에 생성해 둔 익스프레스 서버를 적용해 주면 기본 서버 생성이 완료된다.
+
+```typescript
+import 'reflect-metadata';
+...
+import { Query, Resolver } from 'type-graphql';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchemaSync } from 'type-graphql';
+...
+
+@Resolver()
+export class TestResolver {
+  @Query(() => String)
+  ping() {
+    return 'pong';
+  }
+}
+
+const schema = buildSchemaSync({
+  resolvers: [TestResolver],
+});
+
+const apolloServer = new ApolloServer({ schema });
 
 apolloServer.applyMiddleware({ app, cors: false });
 ...
