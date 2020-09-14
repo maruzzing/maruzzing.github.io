@@ -81,7 +81,7 @@ sass:
 gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-  - jekyll-paginate-v2
+  - jekyll-paginate
   # - jekyll-maps
 
 # Exclude these files from your production _site
@@ -92,19 +92,19 @@ exclude:
   - README.md
   - CNAME
 
-# paginate: 10 # 한 페이지 당 표시하고자 하는 포스트의 최대 개수
-# paginate_path: "/page:num/" # URL 규칙
+ paginate: 10 # 한 페이지 당 표시하고자 하는 포스트의 최대 개수
+paginate_path: "/page:num/" # URL 규칙
 
 # # Paginate config
-pagination:
-  enabled: true
-  debug: true
-  collection: 'posts'
-  per_page: 10
-  permalink: '/page:num/' # Pages are index.html inside this folder (default)
-  sort_reverse: true
-  title: ":title"
-  category: 'posts'
-  limit: 0
-  sort_field: 'date'
-  indexpage: 'index'
+# pagination:
+#   enabled: true
+#   debug: true
+#   collection: 'posts'
+#   per_page: 10
+#   permalink: '/page:num/' # Pages are index.html inside this folder (default)
+#   sort_reverse: true
+#   title: ":title"
+#   category: 'posts'
+#   limit: 0
+#   sort_field: 'date'
+#   indexpage: 'index'
