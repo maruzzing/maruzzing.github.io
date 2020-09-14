@@ -1,0 +1,806 @@
+---
+---
+
+//
+// IMPORTS
+//
+
+@import "reset";
+@import "variables";
+// Syntax highlighting @import is at the bottom of this file
+
+/**************/
+/* BASE RULES */
+/**************/
+
+html {
+  font-size: 100%;
+}
+
+body {
+  background: $white;
+  font: 18px/1.4 $helvetica;
+  color: $darkGray;
+  height: 100vh;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $Spoqa;
+  color: $darkerGray;
+  font-weight: bold;
+
+  line-height: 1.7;
+  margin: 1em 0 15px;
+  padding: 0;
+
+  @include mobile {
+    line-height: 1.4;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  a {
+    color: inherit;
+  }
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+h4 {
+  font-size: 18px;
+  color: $gray;
+}
+
+p {
+  margin: 15px 0;
+}
+
+a {
+  color: $black;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover,
+  &:active {
+    color: $black;
+  }
+}
+
+ul,
+ol {
+  margin: 10px 0;
+  padding-left: 30px;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ol ul,
+ul ol,
+ul ul,
+ol ol {
+  margin: 0;
+}
+
+ul ul,
+ol ul {
+  list-style-type: circle;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+strong,
+b {
+  font-weight: bold;
+}
+
+img {
+  max-width: 100%;
+}
+
+// Fixes images in popup boxes from Google Translate
+.gmnoprint img {
+  max-width: none;
+}
+
+.date {
+  font-size: 14px;
+  color: $gray;
+}
+
+// Specify the color of the selection
+::-moz-selection {
+  color: $black;
+  background: $lightGray;
+}
+::selection {
+  color: $black;
+  background: $lightGray;
+}
+
+// Nicolas Gallagher's micro clearfix hack
+// http://nicolasgallagher.com/micro-clearfix-hack/
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/*********************/
+/* LAYOUT / SECTIONS */
+/*********************/
+
+//
+// .masthead
+//
+
+.wrapper-masthead {
+  margin-bottom: 50px;
+}
+
+.masthead {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  @include mobile {
+    text-align: center;
+  }
+}
+
+.site-avatar {
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+
+  @include mobile {
+    float: none;
+    display: block;
+    margin: 0 auto;
+  }
+
+  img {
+    border-radius: 5px;
+  }
+}
+.email_icon {
+  width: 25px;
+  margin-bottom: -2px;
+}
+.vertical_line {
+  height: 18px;
+  margin-left: 20px;
+  margin-bottom: -3px;
+}
+.site-info {
+  float: left;
+
+  @include mobile {
+    float: none;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.site-name {
+  margin: 0;
+  color: "#282828";
+  cursor: pointer;
+  font-family: $Spoqa;
+  font-weight: 400;
+  font-size: 19px;
+  letter-spacing: 1px;
+  margin-top: 20px; // @TODO: Vertically middle align
+  a {
+    color: inherit;
+  }
+}
+
+.site-description {
+  margin: -5px 0 0 0;
+  color: $gray;
+  font-size: 16px;
+
+  @include mobile {
+    margin: 3px 0;
+  }
+}
+nav span.active a {
+  font-weight: 550;
+}
+nav {
+  float: right;
+  margin-top: 23px; // @TODO: Vertically middle align
+  font-family: $Spoqa;
+  font-size: 18px;
+
+  @include mobile {
+    float: none;
+    margin-top: 9px;
+    display: block;
+    font-size: 16px;
+    color: "#282828";
+  }
+
+  a {
+    margin-left: 20px;
+    color: $darkGray;
+    text-align: right;
+    font-weight: 300;
+    letter-spacing: 1px;
+
+    @include mobile {
+      margin: 0 10px;
+    }
+  }
+}
+.entry {
+  a {
+    text-decoration: none;
+  }
+}
+//
+// .main
+//
+.sidebars {
+  padding: 1.2em 0.8em 0.4em 1.5em;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  font-family: $Spoqa;
+  margin-left: 20px;
+  color: $darkGray;
+  font-weight: 300;
+  float: left;
+  z-index: 100;
+  position: fixed;
+  // position: relative;
+  left: 5em;
+  display: none;
+
+  ul,
+  li {
+    margin: 0;
+    margin-bottom: 0.8em;
+    padding: 0;
+    list-style-type: none;
+    width: 7em;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: $darkGray;
+    font-weight: 300;
+  }
+  li .activated {
+    color: $lightPurple;
+    font-weight: 500;
+  }
+  @media (min-width: 1320px) {
+    display: inline;
+  }
+}
+.projects {
+  &:hover {
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+  }
+}
+.posts > .post:hover {
+  opacity: 0.5;
+}
+.posts > .post {
+  margin: 1em 0.5em 0;
+  font-family: $Spoqa;
+  padding: 1em 0em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  .entryCategory {
+    font-family: $Spoqa;
+    font-weight: 800;
+    font-size: 16px;
+    color: $lightPurple;
+    margin-bottom: 0.4em;
+  }
+  .entryTitleDev {
+    font-family: $Spoqa;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.2em;
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .entryTitle {
+    font-family: $Spoqa;
+
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0;
+    border: none;
+    margin-bottom: -0.1em;
+  }
+  .meta {
+    font-family: $Spoqa;
+    margin: 0 0 0 0.8em;
+    @include mobile {
+      margin: 0.2em 0 0;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+
+  .entry {
+    font-family: $Spoqa;
+    font-size: 16px;
+    margin-top: 0.5em;
+  }
+}
+.lan-translate {
+  font-family: $Spoqa;
+  font-size: 14px;
+  font-weight: 200;
+}
+.pagination span.active {
+  background-color: $darkPurple;
+  a {
+    color: #fff;
+  }
+}
+
+.pagination {
+  text-align: center;
+  font-family: $Spoqa;
+  margin-top: 3em;
+  align-items: center;
+
+  span {
+    justify-content: center;
+    padding: 0.4em;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    font-size: 14px;
+    margin: 0.2em;
+    a {
+      color: $darkPurple;
+    }
+    // padding: 0.5em 1em;
+  }
+}
+
+.posts > .post:first-child {
+  font-family: $Spoqa;
+  margin-top: 1.5em;
+}
+.posts > .post:last-child {
+  font-family: $Spoqa;
+  border-bottom: none;
+}
+.post {
+  font-family: $Spoqa;
+  line-height: 1.7;
+  color: $primary;
+
+  h1 {
+    font-family: $Spoqa;
+    color: $primary;
+    font-weight: bold;
+
+    line-height: 1.7;
+    margin: 1.2em 0 0.25em;
+    padding: 0;
+  }
+  .date {
+    margin: 0.8em 0 3em;
+  }
+  h2 {
+    font-family: $Spoqa;
+    color: $primary;
+    font-weight: bold;
+
+    line-height: 1.7;
+    margin: 2.5em 0 1em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    padding-bottom: 0.5em;
+  }
+  h3 {
+    font-family: $Spoqa;
+    color: $primary;
+    font-weight: bold;
+
+    line-height: 1.7;
+    margin: 2.5em 0 1em;
+    padding-bottom: 0.5em;
+  }
+  blockquote {
+    line-height: 1.4;
+    margin: 1.8em 0.8em;
+    margin-left: 0px;
+    border-left: 4px solid $mainPurple;
+    padding-left: 0px;
+    padding: 0.5em 2em;
+    color: #7a7a7a;
+    font-size: 20px;
+    font-style: italic;
+    background-color: $bgGray;
+  }
+  a {
+    text-decoration: underline;
+  }
+  hr {
+    border-color: rgba(0, 0, 0, 0.07);
+    margin: 2em 0;
+  }
+  .innerBox {
+    line-height: 1.7;
+    font-size: 17px;
+    margin: 1.8em 0em;
+    margin-left: 0px;
+    padding-left: 0px;
+    padding: 1.5em 2em;
+    background-color: $bgGray;
+  }
+  .innerBoxOutlined {
+    line-height: 1.7;
+    font-size: 17px;
+    margin: 1.8em 0em;
+    margin-left: 0px;
+    padding-left: 0px;
+    padding: 2em 2em;
+    border: 1px solid $lightGray;
+    border-radius: 1em;
+  }
+  .simulContainer {
+    display: flex;
+    justify-content: center;
+    background-color: #f0f1f2;
+    padding: 1.8em 0em;
+    border-radius: 5px;
+  }
+  .simulImg {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.04);
+  }
+  img {
+    margin: 1em 0 0.9em;
+  }
+  li {
+    margin-top: 0.8em;
+  }
+  .comments {
+    padding-top: 30px;
+    margin-top: 30px;
+  }
+
+  .read-more {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  .tag {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left:1em;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    @include mobile{
+      padding-left: 0;
+    }
+    li:before {
+      content: " ";
+    }
+
+    li {
+      display: inline;
+      margin: 0;
+      margin: 0px 8px 2px 0px;
+      padding: 6px 8px;
+      color: #282828;
+      background-color: #e9ecef;
+      border-radius: 5px;
+    }
+  }
+}
+
+ul.til-lists {
+  font-family: $Spoqa;
+  list-style: none; /* Remove default bullets */
+  margin-top: 2em;
+  padding-top: 1em;
+  padding-left: 1em;
+}
+ul.til-lists li::before {
+  font-size: 30px;
+  opacity: 0.8;
+  vertical-align: -4px;
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: $mainPurple; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+}
+ul.til-lists .tag {
+  vertical-align: 2px;
+
+  display: inline;
+  font-weight: 500;
+  font-size: 12px;
+  padding-left: 1.5em;
+  li:before {
+    content: " ";
+  }
+
+  li {
+    display: inline;
+    margin: 0 4px;
+    padding: 4px 8px;
+    color: #282828;
+    background-color: #e9ecef;
+    border-radius: 5px;
+  }
+}
+.til-list {
+  margin: 0.2em 0;
+  a {
+    color: $primary;
+    font-weight: 500;
+    padding-left: 0.3em;
+  }
+}
+
+.post-lists > .post-list {
+  font-family: $Spoqa;
+  color: $primary;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 0;
+  margin: 2em 0.5em 0;
+  .mainImage {
+    margin-bottom: 25px;
+  }
+  .listTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px 0px 1em;
+  }
+  .project_title {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 1em 1em 1em 0px;
+  }
+  .listEntry {
+    font-size: 16px;
+  }
+  .project_entry {
+    font-size: 16px;
+    color: $darkGray;
+    margin-top: 6px;
+  }
+  .date {
+    padding: 1.2em 0 2em;
+    color: $gray;
+  }
+  .title_line {
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+  }
+  .tag {
+    display: inline;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    li:before {
+      content: " ";
+    }
+
+    li {
+      display: inline;
+      margin: 0;
+
+      margin: 0px 4px 2px;
+      padding: 6px 8px;
+      color: #282828;
+      background-color: #e9ecef;
+      border-radius: 5px;
+    }
+  }
+  .projects_tags {
+    padding: 0;
+    display: inline;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    li:before {
+      content: " ";
+    }
+    li {
+      display: inline;
+      padding: 6px;
+      color: #999999;
+    }
+  }
+}
+
+.post-lists > .post-list:last-child {
+  border-bottom: none;
+}
+.post-lists > .post-list.projects {
+  padding: 40px;
+  padding-bottom: 50px;
+  margin-bottom: 2.5em;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
+
+.title {
+  color: $darkGray;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 30px;
+  font-family: $Spoqa;
+  margin-bottom: 40px;
+  margin-left: 10px;
+}
+img.stack_logo {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  height: 40px;
+  margin-right: 10px;
+  margin-top: 4px;
+}
+img.download_button {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  height: 50px;
+  margin-right: 10px;
+  margin-top: 4px;
+}
+tr.row {
+  vertical-align: baseline;
+}
+.project_detail {
+  font-family: $Spoqa;
+  font-size: 18px;
+  background: none;
+  margin: 0 1em;
+  border: none;
+  td {
+    vertical-align: top;
+  }
+  .title {
+    font-weight: 550;
+    color: $darkGray;
+    min-width: 120px;
+  }
+  .content {
+    line-height: 1.6;
+    margin-left: 10px;
+    font-weight: 350;
+    color: #333333;
+  }
+  p.subdetail {
+    font-size: 14px;
+  }
+}
+#myBtn {
+  padding: 0;
+  position: fixed;
+  bottom: 165px;
+  right: auto;
+  margin-left: 780px;
+  z-index: 0;
+  font-size: 18px;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+}
+#btn_img {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+.movie_btn {
+  padding: 10px 30px;
+  background-color: #5bb487;
+  border-radius: 30px;
+  a {
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+  }
+}
+// .post-header {
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   width: 100%;
+//   min-height: 360px;
+// }
+.notice {
+  font-family: $Spoqa;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 2em;
+  font-size: 1.5em;
+  line-height: 1.6;
+  img {
+    width: 100%;
+  }
+}
+.highlighter-rouge {
+  font-family: "IBM Plex Mono", monospace;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+  color: $lightPurple;
+  padding: 4px 8px;
+  margin: 0 2px 0;
+}
+.reference {
+  font-family: $Spoqa;
+  font-size: 16px;
+  padding: 0.2em 0.5em;
+  border-radius: 0.2em;
+  background-color: $lightPurple;
+  opacity: 0.8;
+  color: white;
+}
+.wrapper-footer {
+  text-align: right;
+  margin-top: 6em;
+  padding: 5px 0;
+  // border-top: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
+  background-color: $black;
+  color: $white;
+  font-family: $Spoqa;
+  font-size: 16px;
+}
+
+footer {
+  padding: 20px 5px;
+  height: 62px;
+}
+
+// Settled on moving the import of syntax highlighting to the bottom of the CSS
+// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
+@import "highlights";
+@import "svg-icons";
+@import "custom-styles";

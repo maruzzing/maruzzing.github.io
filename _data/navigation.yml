@@ -1,0 +1,42 @@
+- title: 개발공부
+  url: /study
+  sublinks:
+    - title: 컴퓨터 공학
+      url: /study/computerscience
+    # - title: HTML & CSS
+    #   url: /study/html_css
+    - title: Javascript
+      url: /study/javascript
+    - title: Node.js
+      url: /study/nodejs
+    - title: GraphQL
+      url: /study/graphql
+    - title: Next.js
+      url: /study/nextjs
+    - title: React
+      url: /study/react
+    - title: React Native
+      url: /study/rnative
+    - title: Python
+      url: /study/py
+    - title: Algorithm
+      url: /study/algorithm
+    - title: 기타
+      url: /study/etc
+- title: 프로젝트
+  url: /project
+  sublinks:
+    - title: 블로그 생성기
+      url: /project/blogwithjekyll
+    # - title: 노마드제주
+    #   url: /project/nomadjeju
+    # - title: fetch
+    #   url: /project/fetch
+    # - title: 여행직구앱
+    #   url: /project/fetch
+    # - title: 여행일정앱
+    #   url: /project/mtn
+# - title: TIL
+#   url: /til
+# - title: Life in Jeju
+#   url: /nomad

@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+{% if page.url contains "study" %}
+<div>
+  {% include sidebar_study.html %}
+</div>
+{% endif %} {% if page.url contains "project" %}
+<div>
+  {% include sidebar_project.html %}
+</div>
+{% endif %}
+<div class="container">
+  <article class="post">
+    {% include backToTopButton.html %}
+    <h1>{{ page.title }}</h1>
+    <div class="date">Written on {{ page.date | date: "%B %e, %Y" }}</div>
+    <div class="entry">
+      {{ content }}
+    </div>
+    {% include dailyEnglish.html %} {% include dailyJapanese.html %} {% include
+    disqus.html %}
+  </article>
+</div>
