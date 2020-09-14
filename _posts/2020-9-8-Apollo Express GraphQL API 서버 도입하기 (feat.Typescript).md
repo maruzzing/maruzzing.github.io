@@ -4,7 +4,7 @@ title: Apollo Express GraphQL API 서버 도입하기 (feat.Typescript)
 date: 2020-09-08
 comments: true
 categories: [Study, graphql]
-tags: [Express, Typescript, GraphQL, Apollo Server]
+tags: [Express, Typescript, GraphQL, TypeGraphQL, Apollo Server]
 excerpt: 여태 토이 프로젝트 이건, 회사 프로젝트 이건 Rest API 만 사용했었는데, 지금 사용하고 있는 공유 오피스에서 알게 된 백엔드 개발자가 React와 GraphQL 사용법을 물어와 관련내용을 좀 찾아보니 너무 신세계라👀 이참에 GraphQL을 공부해 보기로 했다.
 
 ---
