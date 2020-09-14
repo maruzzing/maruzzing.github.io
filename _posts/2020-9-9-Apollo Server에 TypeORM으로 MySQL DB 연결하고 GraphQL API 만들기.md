@@ -207,6 +207,19 @@ export default class User extends BaseEntity {
 
 # CRUD 작성하기
 
+먼저 Resolver의 Query와 Mutation에서 Argument는 아래와 같이 작성해 줄 수 있다. 
+
+```typescript
+  @Query(() => User, { nullable: true })
+  async getUser(@Arg('id') id: number) {
+    try {
+      return await User.findOne({ where: { id } });
+    } catch (err) {
+      return err;
+    }
+  }
+```
+
 ### User Resolver
 
 먼저, `src/inputs/userInput.ts` 파일을 생성하고, 아래와 같이 input type을 정의한다. [`class-validator`](https://github.com/typestack/class-validator)를 이용해 타입을 검증해 줄 수 있다. 
