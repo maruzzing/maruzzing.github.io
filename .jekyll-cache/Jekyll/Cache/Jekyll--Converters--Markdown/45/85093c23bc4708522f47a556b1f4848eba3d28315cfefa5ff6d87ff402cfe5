@@ -1,0 +1,284 @@
+I"u<p>기본적인 GraphQL API 서버 구축이 되었으니 이제 db을 연결해 볼 차례이다. 여기서는 db는 MySQL을, ORM은 TypeORM을 사용할 예정이다. Sequelize가 더 익숙하지만 TypeGraphQL을 사용하게 되면서 TypeORM을 사용했을 떄 훨씬 생산성이 높아지기 때문에 TypeORM을 사용해 보기로 했다.</p>
+
+<h1 id="mysql과-typeorm-연결하기">MySQL과 TypeORM 연결하기</h1>
+
+<h3 id="라이브러리-설치">라이브러리 설치</h3>
+
+<p>먼저 필요 모듈을 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm i mysql2 typeorm class-validator
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="db-커넥션-설정">DB 커넥션 설정</h3>
+
+<p>DB 커넥션 설정을 위해 <code class="highlighter-rouge">.env</code> 파일에 아래 내용을 추가해 준다. TypeORM의 DB 커넥션 설정은 <code class="highlighter-rouge">.env</code> 뿐만 아니라, <code class="highlighter-rouge">ormconfig.json</code>, <code class="highlighter-rouge">ormconfig.js</code>, <code class="highlighter-rouge">ormconfig.xml</code> 등 다양한 방법으로 할 수 있다. <a href="https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md">공식문서 참고</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TYPEORM_CONNECTION=mysql
+TYPEORM_HOST= // host
+TYPEORM_USERNAME= // username
+TYPEORM_PASSWORD= // password
+TYPEORM_DATABASE= // db name
+TYPEORM_PORT= // db port
+TYPEORM_SYNCHRONIZE=true
+TYPEORM_LOGGING=true
+TYPEORM_ENTITIES=src/entity/**/*.ts
+</code></pre></div></div>
+
+<h3 id="서버와-연결하기">서버와 연결하기</h3>
+
+<p><code class="highlighter-rouge">server.ts</code> 파일의 <code class="highlighter-rouge">const app = express();</code> 아래 코드를 추가하고 실행시키면, DB가 연결되었음을 확인할 수 있다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createConnection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">typeorm</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">initalize</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nx">createConnection</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">DB Connected!</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">initalize</span><span class="p">();</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<h1 id="entity-추가하기">Entity 추가하기</h1>
+
+<p>이제 Entity를 생성 할 차례인데, 아래와 같이 1:N 관계의 DB를 만들어 볼 생각이다.</p>
+
+<div style="display: flex; justify-content: center;">
+  <img src="/images/graphql-db-structure.png" alt="graphql-db-structure" width="500em" />
+</div>
+
+<h3 id="project-entity">Project Entity</h3>
+
+<p>먼저, src 폴더 내 entity 폴더를 생성하고, Project.ts 파일을 생성해 준다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
+  <span class="nx">Entity</span><span class="p">,</span>
+  <span class="nx">PrimaryGeneratedColumn</span><span class="p">,</span>
+  <span class="nx">Column</span><span class="p">,</span>
+  <span class="nx">BaseEntity</span><span class="p">,</span>
+  <span class="nx">CreateDateColumn</span><span class="p">,</span>
+  <span class="nx">UpdateDateColumn</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">typeorm</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">User</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./User</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Entity</span><span class="p">()</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Project</span> <span class="kd">extends</span> <span class="nx">BaseEntity</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">PrimaryGeneratedColumn</span><span class="p">()</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">()</span>
+  <span class="nx">title</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">({</span> <span class="na">nullable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="nx">content</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">(</span><span class="dl">'</span><span class="s1">timestampz</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">CreateDateColumn</span><span class="p">()</span>
+  <span class="nx">createdAt</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">(</span><span class="dl">'</span><span class="s1">timestampz</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">UpdateDateColumn</span><span class="p">()</span>
+  <span class="nx">updatedAt</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">ManyToOne</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="p">,</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">projects</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">onDelete</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CASCADE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">})</span>
+  <span class="p">@</span><span class="nd">JoinColumn</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ownerId</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 때 프로퍼티가 이니셜라이즈 되지 않았다는 오류가 뜨는데 이를 해결해 주기 위해 <code class="highlighter-rouge">tsconfig.json</code>의 <code class="highlighter-rouge">compilerOptions</code>에 <code class="highlighter-rouge">"strictPropertyInitialization": false</code>를 추가해 주거나 프로퍼티에 <code class="highlighter-rouge">!</code>를 추가해 해결할 수 있다.</p>
+
+<p>여기에 바로 TypeGraphQL의 타입을 함께 정의해 줄 수 있다.</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
+  <span class="nx">Entity</span><span class="p">,</span>
+  <span class="nx">PrimaryGeneratedColumn</span><span class="p">,</span>
+  <span class="nx">Column</span><span class="p">,</span>
+  <span class="nx">BaseEntity</span><span class="p">,</span>
+  <span class="nx">CreateDateColumn</span><span class="p">,</span>
+  <span class="nx">UpdateDateColumn</span><span class="p">,</span>
+  <span class="nx">ManyToOne</span><span class="p">,</span>
+  <span class="nx">JoinColumn</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">typeorm</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Field</span><span class="p">,</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">ObjectType</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">type-graphql</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">User</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./User</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">ObjectType</span><span class="p">()</span>
+<span class="p">@</span><span class="nd">Entity</span><span class="p">()</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Project</span> <span class="kd">extends</span> <span class="nx">BaseEntity</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Field</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">Int</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">PrimaryGeneratedColumn</span><span class="p">()</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Field</span><span class="p">()</span>
+  <span class="p">@</span><span class="nd">Column</span><span class="p">()</span>
+  <span class="nx">title</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Field</span><span class="p">({</span> <span class="na">nullable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="p">@</span><span class="nd">Column</span><span class="p">({</span> <span class="na">nullable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="nx">content</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">(</span><span class="dl">'</span><span class="s1">timestampz</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">CreateDateColumn</span><span class="p">()</span>
+  <span class="nx">createdAt</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">(</span><span class="dl">'</span><span class="s1">timestampz</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">UpdateDateColumn</span><span class="p">()</span>
+  <span class="nx">updatedAt</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">ManyToOne</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="p">,</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">projects</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">onDelete</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CASCADE</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">})</span>
+  <span class="p">@</span><span class="nd">Field</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">JoinColumn</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ownerId</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="user-entity">User Entity</h3>
+
+<p>동일한 방식으로 User entity를 정의한다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
+  <span class="nx">Entity</span><span class="p">,</span>
+  <span class="nx">PrimaryGeneratedColumn</span><span class="p">,</span>
+  <span class="nx">Column</span><span class="p">,</span>
+  <span class="nx">BaseEntity</span><span class="p">,</span>
+  <span class="nx">CreateDateColumn</span><span class="p">,</span>
+  <span class="nx">UpdateDateColumn</span><span class="p">,</span>
+  <span class="nx">OneToMany</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">typeorm</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Field</span><span class="p">,</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">ObjectType</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">type-graphql</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Project</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Project</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">ObjectType</span><span class="p">()</span>
+<span class="p">@</span><span class="nd">Entity</span><span class="p">()</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">User</span> <span class="kd">extends</span> <span class="nx">BaseEntity</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Field</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">Int</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">PrimaryGeneratedColumn</span><span class="p">()</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Field</span><span class="p">()</span>
+  <span class="p">@</span><span class="nd">Column</span><span class="p">({</span> <span class="na">unique</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="nx">email</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Field</span><span class="p">()</span>
+  <span class="p">@</span><span class="nd">Column</span><span class="p">()</span>
+  <span class="nx">password</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">(</span><span class="dl">'</span><span class="s1">timestampz</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">CreateDateColumn</span><span class="p">()</span>
+  <span class="nx">createdAt</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Column</span><span class="p">(</span><span class="dl">'</span><span class="s1">timestampz</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">UpdateDateColumn</span><span class="p">()</span>
+  <span class="nx">updatedAt</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">OneToMany</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">Project</span><span class="p">,</span> <span class="p">(</span><span class="nx">project</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">project</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span>
+  <span class="p">@</span><span class="nd">Field</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">Project</span><span class="p">])</span>
+  <span class="nx">projects</span><span class="p">:</span> <span class="nx">Project</span><span class="p">[];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="crud-작성하기">CRUD 작성하기</h1>
+
+<h3 id="user-resolver">User Resolver</h3>
+
+<p>먼저, <code class="highlighter-rouge">src/inputs/userInput.ts</code> 파일을 생성하고, 아래와 같이 input type을 정의한다. <a href="https://github.com/typestack/class-validator"><code class="highlighter-rouge">class-validator</code></a>를 이용해 타입을 검증해 준다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">InputType</span><span class="p">,</span> <span class="nx">Field</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">type-graphql</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">IsEmail</span><span class="p">,</span> <span class="nx">Length</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">class-validator</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">User</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../entity/User</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">InputType</span><span class="p">()</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserInput</span> <span class="kr">implements</span> <span class="nx">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Field</span><span class="p">()</span>
+  <span class="p">@</span><span class="nd">IsEmail</span><span class="p">()</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">Field</span><span class="p">()</span>
+  <span class="p">@</span><span class="nd">Length</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+  <span class="na">password</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">InputType</span><span class="p">()</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UpdateUserInput</span> <span class="kr">implements</span> <span class="nx">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Field</span><span class="p">()</span>
+  <span class="p">@</span><span class="nd">Length</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+  <span class="na">password</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>src/resolvers/userResolver.ts 파일을 생성하고, 아래와 같이 CRUD를 작성한다.</p>
+
+<h3 id="project-resolver">Project Resolver</h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Query</span><span class="p">,</span> <span class="nx">Resolver</span><span class="p">,</span> <span class="nx">Mutation</span><span class="p">,</span> <span class="nx">Arg</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">type-graphql</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">User</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../entity/User</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserInput</span><span class="p">,</span> <span class="nx">UpdateUserInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../inputs/userInput</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Resolver</span><span class="p">()</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserResolver</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Query</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">User</span><span class="p">])</span>
+  <span class="k">async</span> <span class="nx">getAllUsers</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="p">@</span><span class="nd">Query</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="p">,</span> <span class="p">{</span> <span class="na">nullable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(@</span><span class="nd">Arg</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)</span> <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">where</span><span class="p">:</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="p">@</span><span class="nd">Mutation</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="p">,</span> <span class="p">{</span> <span class="na">nullable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="k">async</span> <span class="nx">createUser</span><span class="p">(@</span><span class="nd">Arg</span><span class="p">(</span><span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">)</span> <span class="na">data</span><span class="p">:</span> <span class="nx">UserInput</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="p">@</span><span class="nd">Mutation</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="p">,</span> <span class="p">{</span> <span class="na">nullable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="k">async</span> <span class="nx">updateUser</span><span class="p">(@</span><span class="nd">Arg</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)</span> <span class="na">id</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="p">@</span><span class="nd">Arg</span><span class="p">(</span><span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">)</span> <span class="na">data</span><span class="p">:</span> <span class="nx">UpdateUserInput</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">where</span><span class="p">:</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="p">});</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`The user with id: </span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2"> does not exist!`</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+      <span class="k">await</span> <span class="nx">user</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="p">@</span><span class="nd">Mutation</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nb">Boolean</span><span class="p">)</span>
+  <span class="k">async</span> <span class="nx">deleteUser</span><span class="p">(@</span><span class="nd">Arg</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)</span> <span class="na">id</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">where</span><span class="p">:</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="p">});</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`The user with id: </span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2"> does not exist!`</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">await</span> <span class="nx">user</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+:ET

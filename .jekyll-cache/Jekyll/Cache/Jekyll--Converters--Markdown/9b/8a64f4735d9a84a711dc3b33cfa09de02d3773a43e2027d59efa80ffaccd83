@@ -1,0 +1,47 @@
+I"�<p>기본적인 GraphQL API 서버 구축이 되었으니 이제 db을 연결해 볼 차례이다. 여기서는 db는 MySQL을, ORM은 TypeORM을 사용할 예정이다. Sequelize가 더 익숙하지만 TypeGraphQL을 사용하게 되면서 TypeORM을 사용했을 떄 훨씬 생산성이 높아지기 때문에 TypeORM을 사용해 보기로 했다.</p>
+
+<h1 id="mysql과-typeorm-연결하기">MySQL과 TypeORM 연결하기</h1>
+
+<h3 id="라이브러리-설치">라이브러리 설치</h3>
+
+<p>먼저 필요 모듈을 설치한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm i mysql2 typeorm
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="db-커넥션-설정">DB 커넥션 설정</h3>
+
+<p>DB 커넥션 설정을 위해 <code class="highlighter-rouge">.env</code> 파일에 아래 내용을 추가해 준다. TypeORM의 DB 커넥션 설정은 <code class="highlighter-rouge">.env</code> 뿐만 아니라, <code class="highlighter-rouge">ormconfig.json</code>, <code class="highlighter-rouge">ormconfig.js</code>, <code class="highlighter-rouge">ormconfig.xml</code> 등 다양한 방법으로 할 수 있다. <a href="https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md">공식문서 참고</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TYPEORM_CONNECTION=mysql
+TYPEORM_HOST=127.0.0.1
+TYPEORM_USERNAME=username
+TYPEORM_PASSWORD=password
+TYPEORM_DATABASE=db name
+TYPEORM_PORT=db port
+TYPEORM_SYNCHRONIZE=true
+TYPEORM_LOGGING=true
+TYPEORM_ENTITIES=src/entity/**/*.ts
+</code></pre></div></div>
+
+<h3 id="서버와-연결하기">서버와 연결하기</h3>
+
+<p><code class="highlighter-rouge">server.ts</code> 파일에 아래 코드를 추가하고 실행시키면, DB가 연결되었음을 확인할 수 있다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createConnection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">typeorm</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">initalize</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nx">createConnection</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">DB Connected!</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">initalize</span><span class="p">();</span>
+
+</code></pre></div></div>
+:ET
