@@ -222,7 +222,7 @@ export default class User extends BaseEntity {
 
 ### User Resolver
 
-먼저, `src/inputs/userInput.ts` 파일을 생성하고, 아래와 같이 input type을 정의한다. [`class-validator`](https://github.com/typestack/class-validator)를 이용해 타입을 검증해 줄 수 있다. 
+먼저, `src/types/userInput.ts` 파일을 생성하고, 아래와 같이 input type을 정의한다. [`class-validator`](https://github.com/typestack/class-validator)를 이용해 타입을 검증해 줄 수 있다. 
 
 ```typescript
 import { InputType, Field } from 'type-graphql';
@@ -253,7 +253,7 @@ export class UpdateUserInput implements Partial<User> {
 ```typescript
 import { Query, Resolver, Mutation, Arg } from 'type-graphql';
 import User from '../entity/User';
-import { UserInput, UpdateUserInput } from '../inputs/userInput';
+import { UserInput, UpdateUserInput } from '../types/userInput';
 
 @Resolver()
 export class UserResolver {
@@ -271,11 +271,12 @@ export class UserResolver {
     }
   }
 
-  @Mutation(() => User, { nullable: true })
+  @Mutation(() => Boolean)
   async createUser(@Arg('data') data: UserInput) {
     try {
       const { email, password } = data;
-      return await User.insert({ email, password });
+      await User.insert({ email, password });
+      return true
     } catch (err) {
       return err;
     }
@@ -314,7 +315,7 @@ export class UserResolver {
 
 ### Project Resolver
 
-먼저, `src/inputs/projectInput.ts` 파일을 생성하고, type을 정의해 준다.
+먼저, `src/types/projectInput.ts` 파일을 생성하고, type을 정의해 준다.
 
 ```typescript
 import { InputType, Field } from 'type-graphql';
@@ -345,7 +346,7 @@ export class UpdateProjectInput implements Partial<Project> {
 import { Query, Resolver, Mutation, Arg } from 'type-graphql';
 import User from '../entity/User';
 import Project from '../entity/Project';
-import { ProjectInput, UpdateProjectInput } from '../inputs/projectInput';
+import { ProjectInput, UpdateProjectInput } from '../types/projectInput';
 
 @Resolver()
 export class ProjectResolver {
@@ -417,4 +418,22 @@ export class ProjectResolver {
 }
 ```
 
+마지막으로 `server.ts` 파일의 schema 정의 부분에 작성한 Resolver를 넘겨준다.
 
+```typescript
+...
+import { UserResolver } from './resolvers/UserResolver';
+import { ProjectResolver } from './resolvers/ProjectResolver';
+...
+
+const schema = buildSchemaSync({
+  resolvers: [UserResolver, ProjectResolver],
+});
+...
+```
+
+<br>
+<span class="reference">관련 post</span>
+
+- [Apollo Server에 TypeORM으로 MySQL DB 연결하고 GraphQL API 만들기](/study/graphql/Apollo-Server에-TypeORM으로-MySQL-DB-연결하고-GraphQL-API-만들기)
+- [Apollo Server에 인증 적용하기](/study/graphql/Apollo-Server에-인증-적용하기)

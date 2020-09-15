@@ -215,6 +215,12 @@ $ curl -X POST "http://localhost:8000/graphql" -H "content-type: application/jso
 ```
 <br>
 
+`localhost:8000/graphql`을 연결하면 playground로 확인할 수 있다.
 
-아래 그림과 같이 postman을 활용해서도 확인할 수 있다.
-![express-graphql-simple-setup-test](/images/express-graphql-simple-setup-test.png "express-graphql-simple-setup-test")
+
+
+<br>
+<span class="reference">관련 post</span>
+
+- [Apollo Server에 TypeORM으로 MySQL DB 연결하고 GraphQL API 만들기](/study/graphql/Apollo-Server에-TypeORM으로-MySQL-DB-연결하고-GraphQL-API-만들기)
+- [Apollo Server에 인증 적용하기](/study/graphql/Apollo-Server에-인증-적용하기)
