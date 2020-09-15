@@ -333,17 +333,13 @@ nav {
   .entryTitleDev {
     font-family: $Spoqa;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     padding-bottom: 0.2em;
-    @include mobile {
-      flex-direction: column;
-      align-items: flex-start;
-    }
   }
 
   .entryTitle {
     font-family: $Spoqa;
-
     font-size: 20px;
     font-weight: bold;
     padding: 0;
@@ -352,10 +348,7 @@ nav {
   }
   .meta {
     font-family: $Spoqa;
-    margin: 0 0 0 0.8em;
-    @include mobile {
-      margin: 0.2em 0 0;
-    }
+    margin: 0.2em 0 0;
   }
   a {
     text-decoration: none;
@@ -365,6 +358,12 @@ nav {
     font-family: $Spoqa;
     font-size: 16px;
     margin-top: 0.5em;
+    @include mobile {
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      word-wrap:normal;
+      overflow:hidden;
+    }
   }
 }
 .lan-translate {
@@ -513,24 +512,24 @@ nav {
     display: flex;
     flex-wrap: wrap;
     padding-left:1em;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 12px;
     text-align: center;
-    @include mobile{
-      padding-left: 0;
-    }
+    padding-left: 0;
     li:before {
       content: " ";
     }
 
     li {
       display: inline;
-      margin: 0;
       margin: 0px 8px 2px 0px;
       padding: 6px 8px;
       color: #282828;
       background-color: #e9ecef;
       border-radius: 5px;
+      @include mobile {
+        padding: 3px 6px;
+      }
     }
   }
 }
