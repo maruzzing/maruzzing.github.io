@@ -103,23 +103,23 @@ async register(@Arg('data') data: LoginInput): Promise<Boolean> {
 
 @Mutation(() => LoginResponse)
 async login( @Arg('data') data: LoginInput ): Promise<LoginResponse> {
-try {
-    const { email, password } = data;
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-        throw new Error(`The user with email: ${email} does not exist!`);
-    }
-    // 비밀번호 확인
-    const valid = await compare(password, user.password);
-    if (!valid) {
-        throw new Error(`Password not mached!`);
-    }
-    // accessToken 발급
-    return { accessToken: generateAccessToken(user.id) };
+    try {
+        const { email, password } = data;
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            throw new Error(`The user with email: ${email} does not exist!`);
+        }
+        // 비밀번호 확인
+        const valid = await compare(password, user.password);
+        if (!valid) {
+            throw new Error(`Password not mached!`);
+        }
+        // accessToken 발급
+        return { accessToken: generateAccessToken(user.id) };
     } catch (err) {
       return err;
     }
-  }
+}
 ```
 
 ## isAuth 미들웨어 작성
@@ -178,6 +178,183 @@ async getUser(@Ctx() { payload }: Context) {
     } catch (err) {
         return err;
     }
+}
+```
+
+## refreshToken 발급
+
+위에서 만들어 준 accessToken의 유효기간을 15분으로 정의해 줬었는데, 유저는 15분이 지나면 다시 로그인을 해야하는 불편함이 생긴다. 이 때 사용할 수 있는 것이 refreshToken인데, accessToken이 만료되었을 때 유효한 refreshToken이 있으면 accessToken을 새로 발급해 주는 것이다. 이 경우 유저는 refreshToken이 유효한 기간동안은 끊김 없이 서비스를 이용할 수 있다.
+<br>
+
+refreshToken은 쿠키에 담아 client에 전달해 줄 것이며, refreshToken 또한 만료기간이 다가오면 재발급 해 주어 계속 로그인되어 있을 수 있게 구현해 볼 것이다.
+
+먼저 이전에 작성했던 login 에 refreshToken 발급 로직을 추가해 준다. 이를 위해 `src/lib/jwt.ts` 파일에 `generateRefreshToken`와 `verifyRefreshToken`를 추가해 준다. secret은 accessToken의 secret를 함께 사용해도 되지만 여기선 `JWT_SECRET_REFRESH`를 따로 정의해 주었다. 또한, refreshToken이 유효한 버전인지 확인하기 위해 User entity에 `refreshToken` 컬럼을 추가해 줄 수도 있지만 여기서는 `tokenVersion`을 추가해 사용한다.
+
+```typescript
+// src/entity/User.ts
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+} from 'typeorm';
+import { Field, Int, ObjectType } from 'type-graphql';
+import Project from './Project';
+
+@ObjectType()
+@Entity()
+export default class User extends BaseEntity {
+  @Field(() => Int)
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Field()
+  @Column({ unique: true })
+  email: string;
+
+  @Field()
+  @Column()
+  password: string;
+
+  @OneToMany(() => Project, (project) => project.user, { eager: true })
+  @Field(() => [Project])
+  projects: Project[];
+
+  @Column('int', { default: 0 })
+  tokenVersion: number;
+
+  @Column('timestampz')
+  @CreateDateColumn()
+  createdAt: string;
+
+  @Column('timestampz')
+  @UpdateDateColumn()
+  updatedAt: string;
+}
+
+// src/lib/jwt.ts
+...
+export function generateRefreshToken(id: number, tokenVersion: number) {
+  return sign({ userId: id, tokenVersion }, process.env.JWT_SECRET_REFRESH!, {
+    expiresIn: '7d',
+  });
+}
+
+export function verifyRefreshToken(token: string) {
+  return verify(token, process.env.JWT_SECRET_REFRESH!);
+}
+```
+
+이제 위에서 만들어 준 `login`에 refreshToken 발급 로직을 추가해 주면 로그인 시 response body로 accessToken이, cookie 내에 refreshToken이 발급되어 client에 전달된다.
+
+```typescript
+...
+@Mutation(() => LoginResponse)
+async login( 
+@Arg('data') data: LoginInput,
+@Ctx() { res }: Context,
+): Promise<LoginResponse> {
+    try {
+        const { email, password } = data;
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            throw new Error(`The user with email: ${email} does not exist!`);
+        }
+        // 비밀번호 확인
+        const valid = await compare(password, user.password);
+        if (!valid) {
+            throw new Error(`Password not mached!`);
+        }
+        // refreshToken 발급
+        res.cookie(
+          'jid',
+          generateRefreshToken(user.id, user.tokenVersion),
+          {
+            httpOnly: true,
+          },
+        );
+        // accessToken 발급
+        return { accessToken: generateAccessToken(user.id) };
+    } catch (err) {
+      return err;
+    }
+}
+```
+
+## token 재발급
+
+이제 token을 재발급 하는 로직을 추가할 차례이다. refreshToken을 쿠키로 발급했으므로, cookie-parser를 설치한다. 그러면 `req.cookies`로 쿠키를 확인할 수 있다.
+
+```bash
+$ npm i cookie-parser
+```
+
+`src/server.ts` 파일에 적용해 준다.
+
+```typescript
+...
+app.use(cookieParser());
+...
+```
+
+토큰을 리프레시 하는 요청은 GraphQL API로 구현하지 않고 `/refresh-token` 엔드포인트로 분기한다.
+
+```typescript
+/// src/server.ts
+import { refreshToken } from './refreshToken';
+...
+app.post('/refresh-token', refreshToken);
+```
+
+이제 `/refresh-token`로 들어온 요청을 처리해 줄 차례이다. `refreshToken.ts` 파일을 생성하고, 아래와 같이 accessToken 재발급 로직을 추가한다. 만약 refreshToken의 유효기간이 1day 이내로 남았다면 refreshToken도 재발급 해주는 로직을 추가했다. 
+
+```typescript
+import { Request, Response } from 'express';
+import {
+  verifyRefreshToken,
+  generateRefreshToken,
+  generateAccessToken,
+} from './lib/jwt';
+import User from './entity/User';
+
+export async function refreshToken(req: Request, res: Response) {
+  const token = req.cookies.jid;
+  if (!token) {
+    return res.send({ ok: false, accessToken: '' });
+  }
+  let payload: any = null;
+  try {
+    payload = verifyRefreshToken(token);
+  } catch (err) {
+    return res.send({ ok: false, accessToken: '' });
+  }
+  const { userId, exp, tokenVersion } = payload;
+
+  // user와 tokenVersion 유효성 검사
+  const user = await User.findOne({ where: { id: userId } });
+  if (!user || user.tokenVersion !== tokenVersion) {
+    return res.send({ ok: false, accessToken: '' });
+  }
+
+  // refreshToken 재발급
+  const afterOneDay = Math.floor(Date.now() / 1000) + 60 * 60 * 24;
+  if (exp < afterOneDay) {
+    const newTokenVersion = user.tokenVersion + 1;
+    res.cookie('jid', generateRefreshToken(user.id, newTokenVersion), {
+      httpOnly: true,
+    });
+    Object.assign(user, { tokenVersion: newTokenVersion });
+    await user.save();
+  }
+
+  // accessToken 재발급
+  return res.send({
+    ok: true,
+    accessToken: generateAccessToken(userId),
+  });
 }
 ```
 
