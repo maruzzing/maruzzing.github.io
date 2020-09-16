@@ -57,8 +57,10 @@ Jekyll Now를 사용하면, 이미 아래와 같이 `/_includes/analytics.html` 
 `default.html` 파일의 body 태그 끝자락에 `analytics.html`을 include한다.
 
 ```html
-    </div>
-   {%raw%}{% include analytics.html %}{%endraw%}
+  </div>
+   {%raw%}{% if jekyll.environment == 'production' %}
+      {% include analytics.html %}
+   {% endif %}{%endraw%}
   </body>
 ```
 
