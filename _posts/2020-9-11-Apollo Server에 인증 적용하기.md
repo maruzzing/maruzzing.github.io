@@ -286,16 +286,17 @@ async login(
 
 ## token 재발급
 
-이제 token을 재발급 하는 로직을 추가할 차례이다. refreshToken을 쿠키로 발급했으므로, cookie-parser를 설치한다. 그러면 `req.cookies`로 쿠키를 확인할 수 있다.
+이제 token을 재발급 하는 로직을 추가할 차례이다. refreshToken을 쿠키로 발급했으므로, cookie-parser를 설치하고, cors 설정을 위해 cors도 설치해 준다. 그러면 `req.cookies`로 쿠키를 확인할 수 있다.
 
 ```bash
-$ npm i cookie-parser
+$ npm i cookie-parser cors
 ```
 
 `src/server.ts` 파일에 적용해 준다.
 
 ```typescript
 ...
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 ...
 ```
