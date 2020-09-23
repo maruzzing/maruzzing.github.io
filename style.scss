@@ -745,7 +745,9 @@ tr.row {
     text-decoration: none;
   }
 }
-
+.table-wrapper {
+  overflow-x: scroll;
+}
 
 // .post-header {
 //   background-position: center;
