@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2019-7-18-Sequelize와 MySQL 연결하기
+title: Sequelize와 MySQL 연결하기
 date: 2019-07-18
 comments: true
 categories: [Study, nodejs]
