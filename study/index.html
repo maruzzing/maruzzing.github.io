@@ -8,6 +8,7 @@ layout: default
 <div class="container">
   <div class="post-lists">
     {% include backToTopButton.html %} {% for post in site.categories.Study %}
+    {% if post.categories[1] != "algorithm" %}
     <ul class="post-list">
       <div class="aListBox">
         <div class="listTitle">
@@ -21,6 +22,7 @@ layout: default
         </div>
       </div>
     </ul>
+    {% endif %}
     {% endfor %}
   </div>
 </div>
