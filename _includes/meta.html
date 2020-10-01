@@ -29,5 +29,5 @@
   <meta content="website" property="og:type">
 {% endif %}
 {% if page.url %}
-  <meta content="{{ site.url }}{{ page.url }}" property="og:url">
+  <meta content="{{ site.url | replace: 'http://', '' }}{{ page.url }}" property="og:url">
 {% endif %}
