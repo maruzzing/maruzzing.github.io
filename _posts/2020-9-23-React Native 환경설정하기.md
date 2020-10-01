@@ -6,6 +6,7 @@ comments: true
 categories: [Study, rnative]
 tags: [React Native, Environment Variable]
 excerpt: Dev 레벨에서만 개발하면 상관 없겠지만 앱을 배포하고 관리하기 위해서는 Dev, Staging, Production 등으로 개발 환경을 구분해서 운영하게 된다.
+featured-image: images/ev_ios_scheme3.png
 ---
 
 Dev 레벨에서만 개발하면 상관 없겠지만 앱을 배포하고 관리하기 위해서는 Dev, Staging, Production 등으로 개발 환경을 구분해서 운영하게 된다. React Native에서는 개발 환경을 어떻게 설정할 수 있는지 알아보자.
