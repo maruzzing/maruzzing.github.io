@@ -108,3 +108,10 @@ const parseHtml = (html: string) => {
     return meta;
 }
 ```
+
+위의 코드에서 얻은 meta data를 활용하여 원하는 대로 미리보기 ui 뷰를 그려줄 수 있다.
+
+<div style='display: flex; justify-content: center;'>
+  <img src="/images/link_preview_ios.png" alt="link_preview_ios" width="250em" style='margin-right:15px; border: 1px solid #e0e0e0;'>
+  <img src="/images/link_preview_aos.png" alt="link_preview_aos" width="250em" style='margin-left:15px; border: 1px solid #e0e0e0;'>
+</div>
