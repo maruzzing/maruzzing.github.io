@@ -186,7 +186,9 @@ type Route = {
   params?: object | undefined;
 };
 
-const Container = styled.View``;
+const Container = styled.View`
+  margin-top: 16px;
+`;
 
 const TabWrapper = styled.View`
   flex-direction: row;
@@ -403,5 +405,6 @@ export default function Tab({
 Sliding Tab Bar 까지 적용된 모습이다. 
 
 <div style='display: flex; justify-content: center;'>
-<img class='simulImg' src="/images/custom_top_tab_bar_3.gif" alt="dfit-demo-gif" width="250em" style='border-radius:35px;' />
+<img class='simulImg' src="/images/custom_top_tab_bar_3.gif" alt="dfit-demo-gif" width="250em" style='border-radius:35px; margin-right:15px;' />
+<img class='simulImg' src="/images/custom_top_tab_bar_4.gif" alt="dfit-demo-gif" width="250em" style='border-radius:35px;margin-left:15px;' />
 </div>
