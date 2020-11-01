@@ -7,7 +7,7 @@ pagination:
 <div class="container">
   <div class="posts">
     {% include backToTopButton.html %} {% for post in paginator.posts %}
-    {% if post.categories[0] != "TIL" and post.categories[1] != "algorithm" %}
+    {% if post.categories[0] != "TIL" %}
     <article class="post">
       <a href="{{ site.baseurl }}{{ post.url }}">
         <div class="entryCategory">
