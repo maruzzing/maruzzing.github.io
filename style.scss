@@ -423,7 +423,9 @@ nav {
     padding: 0;
   }
   .date {
+    display: flex;
     margin: 0.8em 0 3em;
+    justify-content: space-between;
   }
   h2 {
     font-family: $Spoqa;
