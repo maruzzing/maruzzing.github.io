@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Write a function that takes a string of text and returns true if the parentheses are balanced and false otherwise.
+hidden: true
 ---
 
 ### 문제

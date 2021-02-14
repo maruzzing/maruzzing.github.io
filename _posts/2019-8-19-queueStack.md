@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Write a stack using your preferred instantiation pattern. Avoid using native array methods i.e., push, pop, and length.
+hidden: true
 ---
 
 ### 문제

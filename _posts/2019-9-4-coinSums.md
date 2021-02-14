@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation,
+hidden: true
 ---
 
 ### 문제

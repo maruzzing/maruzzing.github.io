@@ -7,7 +7,6 @@ pagination:
 <div class="container">
   <div class="posts">
     {% include backToTopButton.html %} {% for post in paginator.posts %}
-    {% if post.categories[0] != "TIL" %}
     <article class="post">
       <a href="{{ site.baseurl }}{{ post.url }}">
         <div class="entryCategory">
@@ -39,7 +38,6 @@ pagination:
       </a>
       <!-- <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a> -->
     </article>
-    {% endif %}
     {% endfor %}
   </div>
   <!-- Pagination links -->

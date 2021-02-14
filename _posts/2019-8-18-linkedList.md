@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Implement a linked list using the pseudoclassical instantiation pattern. Your linked list should have methods called "addToTail", "removeHead", and "contains."
+hidden: true
 ---
 
 ### 문제

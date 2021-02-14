@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Implement a DFSelect method on this Tree class.
+hidden: true
 ---
 
 ### 문제

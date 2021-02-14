@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Given an array containing a deck of cards, implement a function that shuffles the deck.
+hidden: true
 ---
 
 ### 문제

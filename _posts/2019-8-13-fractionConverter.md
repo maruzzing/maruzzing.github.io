@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Write a function that takes a number as its argument and returns a string that represents that number's simplified fraction.
+hidden: true
 ---
 
 ### 문제

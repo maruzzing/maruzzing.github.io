@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Design and implement an LRU, or Least Recently Used, cache.
+hidden: true
 ---
 
 ### 문제

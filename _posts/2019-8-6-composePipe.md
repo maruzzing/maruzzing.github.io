@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Write Compose and Pipe functions. Compose should return a function that is the composition of a list of functions of arbitrary length. Each function is called on the return value of the function that follows.
+hidden: true
 ---
 
 ### 문제

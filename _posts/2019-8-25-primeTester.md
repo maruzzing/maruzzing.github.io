@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: A prime number is a whole number that has no other divisors other than itself and 1. Write a function that accepts a number and returns true if it's a prime number, false if it's not.
+hidden: true
 ---
 
 ### 문제

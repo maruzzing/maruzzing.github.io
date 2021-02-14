@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Extend the Number prototype with a new method called `toEnglish`.
+hidden: true
 ---
 
 ### 문제

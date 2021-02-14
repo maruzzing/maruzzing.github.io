@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Make an array method that can return whether or not a context array is a subset of an input array.
+hidden: true
 ---
 
 ### 문제

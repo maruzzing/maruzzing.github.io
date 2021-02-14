@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Implement a `BFSelect` method on this Tree class. BFSelect accepts a filter function, calls that function on each of the nodes in Breadth First order, and returns a flat array of node values of the tree for which the filter returns true.
+hidden: true
 ---
 
 ### 문제

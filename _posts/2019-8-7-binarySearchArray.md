@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Given a sorted array, find the index of an element using a binary search algorithm.
+hidden: true
 ---
 
 ### 문제

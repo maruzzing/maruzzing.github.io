@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Create a hash table with insert(), retrieve(), and remove() methods. Be sure to handle hashing collisions correctly.
+hidden: true
 ---
 
 ### 문제

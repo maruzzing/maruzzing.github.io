@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Implement the `countLeaves` function in this Tree class. A leaf node is any node in the tree that has no children. `countLeaves` should traverse the tree, and return the number of leaf nodes the tree contains.
+hidden: true
 ---
 
 ### 문제

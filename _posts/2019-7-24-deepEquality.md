@@ -6,6 +6,7 @@ comments: true
 categories: [Study, algorithm]
 tags: [Javascript]
 excerpt: Write a function that, given two objects, returns whether or not the two are deeply equivalent
+hidden: true
 ---
 
 ### 문제
